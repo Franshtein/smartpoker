@@ -28,15 +28,7 @@ public class MainController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username=auth.getName();
         model.put("name", username);
-        StatsParse statsParse = new StatsParse();
-        if(statsParse.getStats()!=null)
-        {
-        if(playerRepo.findByNickname(statsParse.getStats().getNickname())==null)
-        {
-            playerRepo.save(statsParse.getStats());
-        }
-        else System.out.println("That player excists in the DataBase");
-}
+
         return "greeting";
     }
 
@@ -80,11 +72,27 @@ public class MainController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username=auth.getName();
         model.put("name", username);
-        StatsParse statsParse = new StatsParse();
-        // stats.getText();
-        // stats.getWiki();
-        //  stats.getStats();
-       // stats.getStatsLocal();
         return "login";
+    }
+
+    @GetMapping("/search")
+    public String searchPlayer(Map<String, Object> model) {
+        Iterable<Message> messages = messageRepo.findAll();
+        model.put("mesages", messages);
+        return "search";
+    }
+
+    @PostMapping("/search")
+    public String addPlayer(@RequestParam String addFile, Map<String, Object> model) {
+        String nick=addFile;
+        StatsParse statsParse = new StatsParse(addFile);
+        if(statsParse.getStats()!=null) {
+            if (playerRepo.findByNickname(statsParse.searchNickname()) == null) {
+                playerRepo.save(statsParse.getStats());
+            }
+            else System.out.println("That player excists in the DataBase");
+        }
+
+        return "search";
     }
 }

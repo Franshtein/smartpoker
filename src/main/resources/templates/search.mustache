@@ -1,0 +1,21 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<body>
+    <div>
+        <form action="/logout" method="post">
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+            <input type="submit" value="Sign Out"/>
+
+        </form>
+    </div>
+
+<div>
+    <h1>Set Player for parsing</h1>
+    <form method="post">
+        <p><input type="file" name="addFile"></p>
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+        <button type="submit">Add</button>
+    </form>
+</div>
+</body>
+</html>

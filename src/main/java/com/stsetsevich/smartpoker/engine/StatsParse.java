@@ -8,9 +8,32 @@ import org.jsoup.select.Elements;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.sql.SQLOutput;
 
 public class StatsParse {
 
+    File file;
+    Document doc;
+    Player player;
+    public StatsParse(String filepath)
+    {
+
+        // Document doc = Jsoup.connect("E:/test2.html").get();
+        try {
+            this.file = new File("E:/poker_nicks/"+filepath);
+            this.doc = Jsoup.parse(file, StandardCharsets.UTF_8.name());
+            this.player = new Player(searchNickname());
+        }
+        catch (Exception exception){
+            System.out.println("Ошибка при создании экземпляра класса");
+        }
+
+
+
+        //Достаем и присваиваем ник игрока
+        System.out.println("1");
+        Player player = new Player(searchNickname());
+    }
     private String text;
 
     public void setText(String text) {
@@ -54,30 +77,26 @@ public class StatsParse {
     public Player getStats() {
 
         try {
-            File file = new File("E:/poker_nicks/Franshtein.html");
-            // Document doc = Jsoup.connect("E:/test2.html").get();
-            Document doc = Jsoup.parse(file, StandardCharsets.UTF_8.name());
 
 
             //Достаем и присваиваем ник игрока
             System.out.println("1");
-            Player player = new Player(searchNickname(doc));
             //Достаем и присваиваем базовые статы
             System.out.println("2");
-            searchBaseStats(doc, player);
+            searchBaseStats();
             //Достаем и присваиваем статы по лимитам
             System.out.println("3");
-            searchStatsPerLimit(doc, player);
+            searchStatsPerLimit();
             System.out.println("4");
-           searchMainStats(doc, player);
+           searchMainStats();
             System.out.println("5");
-            search6MaxStats(doc, player);
+            search6MaxStats();
             System.out.println("6");
-            searchPostflopStats(doc, player);
+            searchPostflopStats();
             System.out.println("7");
-            search35betFoldStats(doc, player);
+            search35betFoldStats();
             System.out.println("8");
-            search3betPvP(doc, player);
+            search3betPvP();
             System.out.println("9");
             return player;
 
@@ -89,7 +108,7 @@ public class StatsParse {
         return null;
     }
 
-    private String searchNickname(Document doc) {
+    public String searchNickname() {
         Elements listNews = doc.select("a#userName.nav-create-btn");
         String username = listNews.select("a").text();
         username = username.split("Онлайн")[0];
@@ -97,13 +116,8 @@ public class StatsParse {
         return username;
     }
 
-    private void searchBaseStats(Document doc, Player player) {
+    private void searchBaseStats() {
         Elements list = doc.select("#page-stats");
-        //  System.out.println(doc.text());
-        //   for (Element element : list.select("span b")) {
-
-        //       System.out.println(element.text());
-        //    }
 
 
         for (int i = 0; i < list.select("span span").size(); i++) {
@@ -121,7 +135,7 @@ public class StatsParse {
         }
     }
 
-    private void searchStatsPerLimit(Document doc, Player player) {
+    private void searchStatsPerLimit() {
         Elements list = doc.select("#page-stats");
         String text;
         for (Element element : list.select("div.stat-left-side tbody tr")) {
@@ -158,7 +172,7 @@ public class StatsParse {
         }
     }
 
-    private void searchMainStats(Document doc, Player player) {
+    private void searchMainStats() {
             Elements list = doc.select("#page-stats");
             String text;
             int i=0;
@@ -278,7 +292,7 @@ public class StatsParse {
 
         }
 
-    private void search6MaxStats(Document doc, Player player) {
+    private void search6MaxStats() {
         Elements list = doc.select("#page-stats");
         String text;
         int i=0;
@@ -431,7 +445,7 @@ public class StatsParse {
         }
     }
 
-    private void searchPostflopStats(Document doc, Player player)
+    private void searchPostflopStats()
     {
         Elements list = doc.select("#page-stats");
         String text;
@@ -520,7 +534,7 @@ public class StatsParse {
         }
     }
 
-    private void search35betFoldStats(Document doc, Player player)
+    private void search35betFoldStats()
     {
         Elements list = doc.select("#page-stats");
         String text;
@@ -634,7 +648,7 @@ public class StatsParse {
         }
     }
 
-    private void search3betPvP(Document doc, Player player)
+    private void search3betPvP()
     {
         Elements list = doc.select("#page-stats");
         String text;
@@ -686,15 +700,16 @@ public class StatsParse {
         private String replaceChar (String text)
         {
             double value;
+            if (text.contains("$")) {
+                text = text.replace("$", "");
+            }
             if (text.contains("k")) {
                 text = text.split("k")[0];
                 value = Double.parseDouble(text);
                 value = value * 1000;
                 text = Double.toString(value);
             }
-            if (text.contains("$")) {
-                text = text.replace("$", "");
-            }
+
             return text;
         }
 
