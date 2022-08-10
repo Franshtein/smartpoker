@@ -102,6 +102,8 @@ public class Stats {
             System.out.println("5");
             search6MaxStats(doc, player);
             System.out.println("6");
+            searchPostflopStats(doc, player);
+            System.out.println("7");
                         //  playerRepo.save(player);
             return player;
 
@@ -320,24 +322,244 @@ public class Stats {
     public void search6MaxStats(Document doc, Player player) {
         Elements list = doc.select("#page-stats");
         String text;
-        List<String> list1 = new ArrayList<>();
         int i=0;
         for (Element element : list.select("div.hud-table.ui-resizable.ui-resizable-disabled")) {
 
+            if(i==1) {
+                //УДАЛЯЕМ ВСЕ ЭЛЕМЕНТЫ <small>, так как они прикреплялись к тексту и портили значения
+                element.select("small").remove();
 
-            //УДАЛЯЕМ ВСЕ ЭЛЕМЕНТЫ <small>, так как они прикреплялись к тексту и портили значения
-            element.select("small").remove();
-
-                  list1.add(element.getElementsByAttributeValue("tabindex", "18").text());
-            System.out.println(list1 + " " +i);
+                player.setPfrEp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "10").text()));
+                player.setPfrMp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "11").text()));
+                player.setPfrCo(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "12").text()));
+                player.setPfrBu(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "13").text()));
+                player.setPfrSb(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "14").text()));
+                //-----------------------------------------------------------------
+                player.setTotalIsoraise(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "17").text()));
+                player.setIsoraiseEp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "18").text()));
+                player.setIsoraiseMp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "19").text()));
+                player.setIsoraiseCo(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "20").text()));
+                player.setIsoraisBu(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "21").text()));
+                player.setIsoraiseSb(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "22").text()));
+                player.setIsoraiseBb(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "23").text()));
+                //-----------------------------------------------------------------
+                player.setTotalCallOpenraise(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "25").text()));
+                player.setCallOpenraiseMp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "27").text()));
+                player.setCallOpenraiseCo(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "28").text()));
+                player.setCallOpenraiseBu(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "29").text()));
+                player.setCallOpenraiseSb(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "30").text()));
+                player.setCallOpenraiseBb(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "31").text()));
+                //-----------------------------------------------------------------
+                player.setFoldTo3betTotalOop(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "41").text()));
+                player.setFoldTo3betOopEp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "42").text()));
+                player.setFoldTo3betOopMp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "43").text()));
+                player.setFoldTo3betOopCo(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "44").text()));
+                player.setFoldTo3betOopSb(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "46").text()));
+                player.setFoldTo3betOopBb(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "47").text()));
+                //-----------------------------------------------------------------
+                player.setFoldTo3betTotalIp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "49").text()));
+                player.setFoldTo3betIpEp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "50").text()));
+                player.setFoldTo3betIpMp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "51").text()));
+                player.setFoldTo3betIpCo(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "52").text()));
+                player.setFoldTo3betIpBu(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "53").text()));
+                player.setFoldTo3betIpBb(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "55").text()));
+                //-----------------------------------------------------------------
+                player.setFoldTo3betTotal(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "57").text()));
+                player.setFoldTo3betTotalEp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "58").text()));
+                player.setFoldTo3betTotalMp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "59").text()));
+                player.setFoldTo3betTotalCo(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "60").text()));
+                player.setFoldTo3betTotalBu(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "61").text()));
+                player.setFoldTo3betTotalSb(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "62").text()));
+                player.setFoldTo3betTotalBb(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "63").text()));
+                //-----------------------------------------------------------------
+                player.setTotal3betEp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "66").text()));
+                player.setTotal3betMp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "67").text()));
+                player.setTotal3betCo(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "68").text()));
+                player.setTotal3betBu(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "69").text()));
+                player.setTotal3betSb(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "70").text()));
+                player.setTotal3betBb(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "71").text()));
+                //-----------------------------------------------------------------
+                player.setOpen4betTotal(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "73").text()));
+                player.setOpen4betCo(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "76").text()));
+                player.setOpen4betBu(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "77").text()));
+                player.setOpen4betSb(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "78").text()));
+                player.setOpen4betBb(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "79").text()));
+                //-----------------------------------------------------------------
+                player.setSqueezeTotal(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "81").text()));
+                player.setSqueezeCo(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "84").text()));
+                player.setSqueezeBu(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "85").text()));
+                player.setSqueezeSb(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "86").text()));
+                player.setSqueezeBb(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "87").text()));
+                //-----------------------------------------------------------------
+                player.setFoldToSqueezeTotal(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "89").text()));
+                player.setFoldToSqueezeEp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "90").text()));
+                player.setFoldToSqueezeMp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "91").text()));
+                player.setFoldToSqueezeCo(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "92").text()));
+                player.setFoldToSqueezeBu(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "93").text()));
+                //-----------------------------------------------------------------
+                player.setLimpTotal(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "97").text()));
+                player.setLimpEp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "98").text()));
+                player.setLimpMp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "99").text()));
+                player.setLimpCo(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "100").text()));
+                player.setLimpBu(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "101").text()));
+                player.setLimpSb(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "102").text()));
+            }
             i++;
-
-         //   player.setStealTotal(Double.parseDouble(
-         //           element.getElementsByAttributeValue("tabindex", "18").text()));
         }
-        System.out.println(list1);
     }
 
+    public void searchPostflopStats(Document doc, Player player)
+    {
+        Elements list = doc.select("#page-stats");
+        String text;
+        int i=0;
+        for (Element element : list.select("div.hud-table.ui-resizable.ui-resizable-disabled")) {
+
+            if (i == 3) {
+                //УДАЛЯЕМ ВСЕ ЭЛЕМЕНТЫ <small>, так как они прикреплялись к тексту и портили значения
+                element.select("small").remove();
+
+                player.setBetToMissCbetFlopTotal(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "5").text()));
+                player.setBetToMissCbetTurnTotal(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "6").text()));
+                player.setBetToMissCbetRiverTotal(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "7").text()));
+                //----------------------------------------------
+                player.setBetToMissCbetFlopIp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "9").text()));
+                player.setBetToMissCbetTurnIp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "10").text()));
+                player.setBetToMissCbetRiverIp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "11").text()));
+                //----------------------------------------------
+                player.setBetToMissCbetTurnOop(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "14").text()));
+                player.setBetToMissCbetRiverOop(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "15").text()));
+                //----------------------------------------------
+                player.setRaiseToCbetFlopTotal(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "17").text()));
+                player.setRaiseToCbetTurnTotal(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "18").text()));
+                player.setRaiseToCbetRiverTotal(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "19").text()));
+                //----------------------------------------------
+                player.setRaiseToCbetFlopIp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "21").text()));
+                player.setRaiseToCbetTurnIp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "22").text()));
+                player.setRaiseToCbetRiverIp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "23").text()));
+                //----------------------------------------------
+                player.setRaiseToCbetFlopOop(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "25").text()));
+                player.setRaiseToCbetTurnOop(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "26").text()));
+                player.setRaiseToCbetRiverOop(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "27").text()));
+                //----------------------------------------------
+                player.setSkippedCbetFoldFlopTotal(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "29").text()));
+                player.setSkippedCbetFoldTurnTotal(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "30").text()));
+                player.setSkippedCbetFoldRiverTotal(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "31").text()));
+                //----------------------------------------------
+                player.setSkippedCbetFoldTurnIp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "34").text()));
+                player.setSkippedCbetFoldRiverIp(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "35").text()));
+                //----------------------------------------------
+                player.setSkippedCbetFoldFlopOop(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "37").text()));
+                player.setSkippedCbetFoldTurnOop(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "38").text()));
+                player.setSkippedCbetFoldRiverOop(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "39").text()));
+                //----------------------------------------------
+                player.setAggFactorFlop(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "41").text()));
+                player.setAggFactorTurn(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "42").text()));
+                player.setAggFactorRiver(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "43").text()));
+                //----------------------------------------------
+                player.setWonAfterRaiseFlop(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "45").text()));
+                player.setWonAfterRaiseTurn(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "46").text()));
+                player.setWonAfterRaiseRiver(Double.parseDouble(
+                        element.getElementsByAttributeValue("tabindex", "47").text()));
+                //----------------------------------------------
+            }
+            i++;
+        }
+    }
         private String replaceChar (String text)
         {
             double value;

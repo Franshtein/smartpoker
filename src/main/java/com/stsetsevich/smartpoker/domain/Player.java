@@ -76,6 +76,7 @@ public class Player {
     private double pfrBu;
     private double pfrSb;
     private double totalIsoraise;
+    private double isoraiseEp;
     private double isoraiseMp;
     private double isoraiseCo;
     private double isoraisBu;
@@ -293,6 +294,14 @@ public class Player {
 
     public void setNl10Hands(double nl10Hands) {
         this.nl10Hands = nl10Hands;
+    }
+
+    public double getIsoraiseEp() {
+        return isoraiseEp;
+    }
+
+    public void setIsoraiseEp(double isoraiseEp) {
+        this.isoraiseEp = isoraiseEp;
     }
 
     public double getNl25Hands() {
