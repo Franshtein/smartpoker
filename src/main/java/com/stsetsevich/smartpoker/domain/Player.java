@@ -174,7 +174,13 @@ public class Player {
 
     //-------------------Tab 3bet-5bet/Folds-------------------------------------
     private double total3betIp;
+    private double total3betIpMp;
+    private double total3betIpCo;
+    private double total3betIpBu;
+    private double total3betIpBb;
     private double total3betOop;
+    private double total3betOopSb;
+    private double total3betOopBb;
     private double foldTo4betTotal;
     private double foldTo4betMp;
     private double foldTo4betCo;
@@ -207,6 +213,7 @@ public class Player {
     private double total5betBu;
     private double total5betSb;
     private double total5betBb;
+    private double foldTo5betTotal;
     private double foldTo5betEp;
     private double foldTo5betMp;
     private double foldTo5betCo;
@@ -258,6 +265,62 @@ public class Player {
 
     public void setTotal3betOop(double total3betOop) {
         this.total3betOop = total3betOop;
+    }
+
+    public double getTotal3betIpMp() {
+        return total3betIpMp;
+    }
+
+    public void setTotal3betIpMp(double total3betIpMp) {
+        this.total3betIpMp = total3betIpMp;
+    }
+
+    public double getTotal3betIpCo() {
+        return total3betIpCo;
+    }
+
+    public void setTotal3betIpCo(double total3betIpCo) {
+        this.total3betIpCo = total3betIpCo;
+    }
+
+    public double getTotal3betIpBu() {
+        return total3betIpBu;
+    }
+
+    public void setTotal3betIpBu(double total3betIpBu) {
+        this.total3betIpBu = total3betIpBu;
+    }
+
+    public double getTotal3betIpBb() {
+        return total3betIpBb;
+    }
+
+    public void setTotal3betIpBb(double total3betIpBb) {
+        this.total3betIpBb = total3betIpBb;
+    }
+
+    public double getTotal3betOopSb() {
+        return total3betOopSb;
+    }
+
+    public double getFoldTo5betTotal() {
+        return foldTo5betTotal;
+    }
+
+    public void setFoldTo5betTotal(double foldTo5betTotal) {
+        this.foldTo5betTotal = foldTo5betTotal;
+    }
+
+    public void setTotal3betOopSb(double total3betOopSb) {
+        this.total3betOopSb = total3betOopSb;
+    }
+
+    public double getTotal3betOopBb() {
+        return total3betOopBb;
+    }
+
+    public void setTotal3betOopBb(double total3betOopBb) {
+        this.total3betOopBb = total3betOopBb;
     }
 
     public double getTotal4betIp() {
