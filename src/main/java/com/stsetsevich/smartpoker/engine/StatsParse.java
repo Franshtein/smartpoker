@@ -1,5 +1,6 @@
-package com.stsetsevich.smartpoker.domain;
+package com.stsetsevich.smartpoker.engine;
 
+import com.stsetsevich.smartpoker.domain.Player;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -7,10 +8,8 @@ import org.jsoup.select.Elements;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Stats {
+public class StatsParse {
 
     private String text;
 
@@ -52,34 +51,7 @@ public class Stats {
     }
 
 
-    public void getStats() {
-
-        try {
-            File file = new File("E:/test2.html");
-            Document doc = Jsoup.parse(file, StandardCharsets.UTF_8.name());
-            //    Elements listNews = doc.select("div#tabnews_newsc.content-tabs__items.content-tabs__items_active_true");
-            System.out.println("Chet idet");
-
-            //   System.out.println(doc.title());
-
-            Elements listNews = doc.select("#page-stats");
-            System.out.println(doc.text());
-            for (Element element : listNews.select("span b")) {
-
-                System.out.println(element.text());
-                //  System.out.println("A chto vivodit?");
-            }
-            System.out.println(listNews.select("span b").get(1).text());
-            System.out.println(listNews.select("span span").get(1).text());
-
-
-        } catch (Exception exception) {
-            System.out.println("WTF");
-        }
-        System.out.println("Working?");
-    }
-
-    public Player getStats2() {
+    public Player getStats() {
 
         try {
             File file = new File("E:/poker_nicks/Franshtein.html");
@@ -96,7 +68,6 @@ public class Stats {
             //Достаем и присваиваем статы по лимитам
             System.out.println("3");
             searchStatsPerLimit(doc, player);
-            //   player.setNickname(username);
             System.out.println("4");
            searchMainStats(doc, player);
             System.out.println("5");
@@ -108,7 +79,6 @@ public class Stats {
             System.out.println("8");
             search3betPvP(doc, player);
             System.out.println("9");
-
             return player;
 
         } catch (Exception exception) {
@@ -187,24 +157,8 @@ public class Stats {
             }
         }
     }
-        //    for (int i=0; i<list.select("td").size(); i++)
-        //   {
-        //       String text=list.select("td").get(i).text();
-        //      text=replaceChar(text);
-        //       System.out.println(text);
-        //  if (i==0) player.setTotalHands(Double.parseDouble(text));
-        // if (i==1) player.setWinnings(Double.parseDouble(text));
-        //  if (i==2) player.setVpip(Double.parseDouble(text));
-        // if (i==3) player.setHome(text);
-        // if (i==4) player.setAvgBb100(Double.parseDouble(text));
-        //  if (i==5) player.setTotalPfr(Double.parseDouble(text));
-        //  if (i==6) player.setWwsf(Double.parseDouble(text));
-        //  if (i==7) player.setEv(Double.parseDouble(text));
-        //  if (i==8) player.setTotal3bet(Double.parseDouble(text));
-        //  }
 
-
-        public void searchMainStats(Document doc, Player player) {
+    private void searchMainStats(Document doc, Player player) {
             Elements list = doc.select("#page-stats");
             String text;
             int i=0;
@@ -324,7 +278,7 @@ public class Stats {
 
         }
 
-    public void search6MaxStats(Document doc, Player player) {
+    private void search6MaxStats(Document doc, Player player) {
         Elements list = doc.select("#page-stats");
         String text;
         int i=0;
@@ -477,7 +431,7 @@ public class Stats {
         }
     }
 
-    public void searchPostflopStats(Document doc, Player player)
+    private void searchPostflopStats(Document doc, Player player)
     {
         Elements list = doc.select("#page-stats");
         String text;
@@ -566,7 +520,7 @@ public class Stats {
         }
     }
 
-    public void search35betFoldStats(Document doc, Player player)
+    private void search35betFoldStats(Document doc, Player player)
     {
         Elements list = doc.select("#page-stats");
         String text;
@@ -680,7 +634,7 @@ public class Stats {
         }
     }
 
-    public void search3betPvP(Document doc, Player player)
+    private void search3betPvP(Document doc, Player player)
     {
         Elements list = doc.select("#page-stats");
         String text;

@@ -1,11 +1,9 @@
 package com.stsetsevich.smartpoker.controller;
 
 import com.stsetsevich.smartpoker.domain.Message;
-import com.stsetsevich.smartpoker.domain.Stats;
-import com.stsetsevich.smartpoker.domain.User;
+import com.stsetsevich.smartpoker.engine.StatsParse;
 import com.stsetsevich.smartpoker.repos.MessageRepo;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
-import com.stsetsevich.smartpoker.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.websocket.Session;
 import java.util.Map;
 
 @Controller
@@ -31,12 +28,12 @@ public class MainController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username=auth.getName();
         model.put("name", username);
-        Stats stats = new Stats();
-        if(stats.getStats2()!=null)
+        StatsParse statsParse = new StatsParse();
+        if(statsParse.getStats()!=null)
         {
-        if(playerRepo.findByNickname(stats.getStats2().getNickname())==null)
+        if(playerRepo.findByNickname(statsParse.getStats().getNickname())==null)
         {
-            playerRepo.save(stats.getStats2());
+            playerRepo.save(statsParse.getStats());
         }
         else System.out.println("That player excists in the DataBase");
 }
@@ -83,7 +80,7 @@ public class MainController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username=auth.getName();
         model.put("name", username);
-        Stats stats = new Stats();
+        StatsParse statsParse = new StatsParse();
         // stats.getText();
         // stats.getWiki();
         //  stats.getStats();
