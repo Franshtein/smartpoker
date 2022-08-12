@@ -111,7 +111,7 @@ public class StatsParse {
     public String searchNickname() {
         Elements listNews = doc.select("a#userName.nav-create-btn");
         String username = listNews.select("a").text();
-        username = username.split("Онлайн")[0];
+        username = username.split(" Онлайн")[0];
 
         return username;
     }

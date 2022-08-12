@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<body>
+    <div>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+
+<div>
+    <form th:action="@{main}" method="post">
+        <input type="text" name="text" placeholder="Vvedite message">
+        <input type="text" name="tag" placeholder="Tag">
+        <button type="submit">Add</button>
+    </form>
+    <form th:action="@{filter}" method="post">
+        <input type="text" name="filter">
+        <button type="submit">Search</button>
+
+    </form>
+</div>
+<div>Messages list</div>
+        <h2>Counts List</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+    <tr th:each="msg : ${messages}">
+        <td th:text="${msg.tag}"></td>
+        <td th:text="${msg.text}"></td>
+    </tr>
+        </table>
+
+
+
+</body>
+</html>

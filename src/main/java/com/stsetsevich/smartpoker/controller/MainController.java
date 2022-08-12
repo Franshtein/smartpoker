@@ -8,11 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 
 @Controller
 public class MainController {
@@ -34,25 +39,25 @@ public class MainController {
 
 
     @GetMapping("/main")
-    public String main(Map<String, Object> model) {
+    public String main(Model model1) {
         Iterable<Message> messages = messageRepo.findAll();
-        model.put("mesages", messages);
+        model1.addAttribute("messages", messages);
         return "main";
     }
 
     @PostMapping("/main")
-    public String add(@RequestParam String text, @RequestParam String tag, Map<String, Object> model) {
+    public String add(@RequestParam String text, @RequestParam String tag, Model model1) {
         Message message = new Message(text, tag);
         messageRepo.save(message);
 
         Iterable<Message> messages = messageRepo.findAll();
-        model.put("messages", messages);
+        model1.addAttribute("messages", messages);
 
         return "main";
     }
 
     @PostMapping("filter")
-    public String filter(@RequestParam String filter, Map<String, Object> model) {
+    public String filter(@RequestParam String filter, Model model1) {
         //можно только одной строкой, вот так, только будет фильтровать и при пустом поле
       //  List<Message> messages = messageRepo.findByTag(filter);
 
@@ -63,7 +68,7 @@ public class MainController {
             messages = messageRepo.findAll();
         }
         else messages = messageRepo.findByTag(filter);
-        model.put("messages", messages);
+        model1.addAttribute("messages", messages);
         return "main";
 
     }
@@ -75,24 +80,4 @@ public class MainController {
         return "login";
     }
 
-    @GetMapping("/search")
-    public String searchPlayer(Map<String, Object> model) {
-        Iterable<Message> messages = messageRepo.findAll();
-        model.put("mesages", messages);
-        return "search";
-    }
-
-    @PostMapping("/search")
-    public String addPlayer(@RequestParam String addFile, Map<String, Object> model) {
-        String nick=addFile;
-        StatsParse statsParse = new StatsParse(addFile);
-        if(statsParse.getStats()!=null) {
-            if (playerRepo.findByNickname(statsParse.searchNickname()) == null) {
-                playerRepo.save(statsParse.getStats());
-            }
-            else System.out.println("That player excists in the DataBase");
-        }
-
-        return "search";
-    }
 }
