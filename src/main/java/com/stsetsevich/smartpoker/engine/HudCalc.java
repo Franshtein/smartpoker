@@ -24,4 +24,9 @@ public class HudCalc {
        stats.add(Double.toString(player.getFoldTo3betTotal()));
        return stats;
     }
+
+    public ArrayList<Player> getAllPlayerStats(String p1, String p2,String p3,String p4,String p5,String p6)
+    {
+        return null;
+    }
 }

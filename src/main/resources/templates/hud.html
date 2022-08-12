@@ -25,6 +25,12 @@
         <button type="submit">Search</button>
 
     </form>
+    <form th:action="@{addPlayer2}" method="post">
+        <input type="hidden" th:value="${player.nickname}" name="addPlayer">
+        <input type="text" name="addPlayer2">
+        <button type="submit">Search</button>
+
+    </form>
 
 <div>Players list</div>
     <div th:each="plr : ${players}">
@@ -63,6 +69,21 @@
             <td th:text="${player.totalPfr}"></td>
             <td th:text="${player.total3bet}"></td>
             <td th:text="${player.foldTo3betTotal}"></td>
+        </tr>
+    </table>
+    <table class="table table-striped">
+
+        <tr>
+            <td th:text="${player2.nickname}"></td>
+            <td th:text="${player2.totalPfr}"></td>
+            <td th:text="${player2.total3bet}"></td>
+            <td th:text="${player2.foldTo3betTotal}"></td>
+        </tr>
+        <tr>
+            <td th:text="${player2.vpip}"></td>
+            <td th:text="${player2.totalPfr}"></td>
+            <td th:text="${player2.total3bet}"></td>
+            <td th:text="${player2.foldTo3betTotal}"></td>
         </tr>
     </table>
 
