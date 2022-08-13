@@ -7,11 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class HudCalc {
-    @Autowired
-    PlayerRepo playerRepo;
 
     public ArrayList<String> getPlayerStats(PlayerRepo playerRepo, String nickname)
     {
@@ -25,8 +24,45 @@ public class HudCalc {
        return stats;
     }
 
-    public ArrayList<Player> getAllPlayerStats(String p1, String p2,String p3,String p4,String p5,String p6)
+    public ArrayList<Player> getAllPlayerStats(PlayerRepo playerRepo, String p1, String p2,String p3,String p4,String p5)
     {
-        return null;
+        Player player=playerRepo.findByNickname(p1);
+            if (player == null) {
+                System.out.println("Игрок не найден, установлено значение по умолчанию");
+                player = playerRepo.findByNickname("Franshtik (PS)");
+            }
+            Player player2 = playerRepo.findByNickname(p2);
+
+            if (player2 == null) {
+                System.out.println("Игрок не найден, установлено значение по умолчанию");
+                player2 = playerRepo.findByNickname("Franshtik (PS)");
+            }
+            Player player3 = playerRepo.findByNickname(p3);
+
+            if (player3 == null) {
+                System.out.println("Игрок не найден, установлено значение по умолчанию");
+                player3 = playerRepo.findByNickname("Franshtik (PS)");
+            }
+            Player player4 = playerRepo.findByNickname(p4);
+
+            if (player4 == null) {
+                System.out.println("Игрок не найден, установлено значение по умолчанию");
+                player4 = playerRepo.findByNickname("Franshtik (PS)");
+            }
+            Player player5 = playerRepo.findByNickname(p5);
+
+            if (player5 == null) {
+                System.out.println("Игрок не найден, установлено значение по умолчанию");
+                player5 = playerRepo.findByNickname("Franshtik (PS)");
+            }
+
+        ArrayList<Player> players = new ArrayList<>();
+            players.add(player);
+            players.add(player2);
+            players.add(player3);
+            players.add(player4);
+            players.add(player5);
+;
+        return players;
     }
 }

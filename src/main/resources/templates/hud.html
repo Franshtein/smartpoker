@@ -19,15 +19,49 @@
             </form>
         </div>
 
-<div>
+
     <form th:action="@{addPlayer}" method="post">
+        <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
+        <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
+        <input type="hidden" th:value="${player4.nickname}" name="addPlayer4">
+        <input type="hidden" th:value="${player5.nickname}" name="addPlayer5">
         <input type="text" name="addPlayer">
         <button type="submit">Search</button>
 
     </form>
     <form th:action="@{addPlayer2}" method="post">
         <input type="hidden" th:value="${player.nickname}" name="addPlayer">
+        <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
+        <input type="hidden" th:value="${player4.nickname}" name="addPlayer4">
+        <input type="hidden" th:value="${player5.nickname}" name="addPlayer5">
         <input type="text" name="addPlayer2">
+        <button type="submit">Search</button>
+
+    </form>
+    <form th:action="@{addPlayer3}" method="post">
+        <input type="hidden" th:value="${player.nickname}" name="addPlayer">
+        <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
+        <input type="hidden" th:value="${player4.nickname}" name="addPlayer4">
+        <input type="hidden" th:value="${player5.nickname}" name="addPlayer5">
+        <input type="text" name="addPlayer3">
+        <button type="submit">Search</button>
+
+    </form>
+    <form th:action="@{addPlayer4}" method="post">
+        <input type="hidden" th:value="${player.nickname}" name="addPlayer">
+        <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
+        <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
+        <input type="hidden" th:value="${player5.nickname}" name="addPlayer5">
+        <input type="text" name="addPlayer4">
+        <button type="submit">Search</button>
+
+    </form>
+    <form th:action="@{addPlayer5}" method="post">
+        <input type="hidden" th:value="${player.nickname}" name="addPlayer">
+        <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
+        <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
+        <input type="hidden" th:value="${player4.nickname}" name="addPlayer4">
+        <input type="text" name="addPlayer5">
         <button type="submit">Search</button>
 
     </form>
@@ -64,12 +98,6 @@
             <td th:text="${player.total3bet}"></td>
             <td th:text="${player.foldTo3betTotal}"></td>
         </tr>
-        <tr>
-            <td th:text="${player.vpip}"></td>
-            <td th:text="${player.totalPfr}"></td>
-            <td th:text="${player.total3bet}"></td>
-            <td th:text="${player.foldTo3betTotal}"></td>
-        </tr>
     </table>
     <table class="table table-striped">
 
@@ -79,11 +107,29 @@
             <td th:text="${player2.total3bet}"></td>
             <td th:text="${player2.foldTo3betTotal}"></td>
         </tr>
+    </table>
+    <table class="table table-striped">
         <tr>
-            <td th:text="${player2.vpip}"></td>
-            <td th:text="${player2.totalPfr}"></td>
-            <td th:text="${player2.total3bet}"></td>
-            <td th:text="${player2.foldTo3betTotal}"></td>
+            <td th:text="${player3.nickname}"></td>
+            <td th:text="${player3.totalPfr}"></td>
+            <td th:text="${player3.total3bet}"></td>
+            <td th:text="${player3.foldTo3betTotal}"></td>
+        </tr>
+    </table>
+    <table class="table table-striped">
+        <tr>
+            <td th:text="${player4.nickname}"></td>
+            <td th:text="${player4.totalPfr}"></td>
+            <td th:text="${player4.total3bet}"></td>
+            <td th:text="${player4.foldTo3betTotal}"></td>
+        </tr>
+    </table>
+    <table class="table table-striped">
+        <tr>
+            <td th:text="${player5.nickname}"></td>
+            <td th:text="${player5.totalPfr}"></td>
+            <td th:text="${player5.total3bet}"></td>
+            <td th:text="${player5.foldTo3betTotal}"></td>
         </tr>
     </table>
 

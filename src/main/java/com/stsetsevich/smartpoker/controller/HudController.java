@@ -23,7 +23,8 @@ public class HudController {
     PlayerRepo playerRepo;
 
     @GetMapping("/hud")
-    public String hud(String nickname, Map<String, Object> model) {
+    public String hud(String nickname, Map<String, Object> model, String addPlayer, String addPlayer2, String addPlayer3
+            , String addPlayer4, String addPlayer5) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username=auth.getName();
         model.put("name", username);
@@ -33,32 +34,21 @@ public class HudController {
 
         Iterable<Player> players = playerRepo.findAll();
         model.put("players", players);
-        Player player=new Player();
-        if (nickname==null)
-        {
-            player=playerRepo.findByNickname("Franshtik (PS)");
-            model.put("player", player);
-        }
-        else {
-            player=player=playerRepo.findByNickname(nickname);
-            model.put("player", player);
-        }
-        Player player2=new Player();
-        if (nickname==null)
-        {
-            player2=playerRepo.findByNickname("szkeg (PS)");
-            model.put("player2", player2);
-        }
-        else {
-            player=player=playerRepo.findByNickname(nickname);
-            model.put("player2", player2);
-        }
+        ArrayList<Player> pl = hudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        model.put("players", players);
+
+        model.put("player", pl.get(0));
+        model.put("player2", pl.get(1));
+        model.put("player3", pl.get(2));
+        model.put("player4", pl.get(3));
+        model.put("player5", pl.get(4));
         return "hud";
     }
 
 
     @PostMapping("/hud")
-    public String addHud(Map<String, Object> model) {
+    public String addHud(Map<String, Object> model, String addPlayer, String addPlayer2, String addPlayer3
+            , String addPlayer4, String addPlayer5) {
 
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -66,7 +56,16 @@ public class HudController {
         model.put("name", username);
 
         Iterable<Player> players = playerRepo.findAll();
+
+        HudCalc hudCalc = new HudCalc();
+        ArrayList<Player> pl = hudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
         model.put("players", players);
+
+        model.put("player", pl.get(0));
+        model.put("player2", pl.get(1));
+        model.put("player3", pl.get(2));
+        model.put("player4", pl.get(3));
+        model.put("player5", pl.get(4));
 
 
         return "hud";
@@ -74,7 +73,7 @@ public class HudController {
 
     @PostMapping("addPlayer")
     public String addPlayer(@RequestParam String addPlayer, String addPlayer2, String addPlayer3
-            , String addPlayer4, String addPlayer5, String addPlayer6, Map<String, Object> model) {
+            , String addPlayer4, String addPlayer5, Map<String, Object> model) {
         //можно только одной строкой, вот так, только будет фильтровать и при пустом поле
         //  List<Message> messages = messageRepo.findByTag(filter);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -82,33 +81,25 @@ public class HudController {
         model.put("name", username);
 
         HudCalc hudCalc = new HudCalc();
-        hudCalc.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5, addPlayer6);
+        ArrayList<Player> pl = hudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
         Iterable<Player> players = playerRepo.findAll();
         model.put("players", players);
-        Player player=playerRepo.findByNickname(addPlayer);
-        if(!addPlayer.isEmpty() && addPlayer !=null) {
-                if(player==null) {
-                    System.out.println("Игрок не найден, установлено значение по умолчанию");
-                    player = player = playerRepo.findByNickname("Franshtik (PS)");
-                }
-            Player player2 = playerRepo.findByNickname(addPlayer2);
-
-                if (player2 == null) {
-                    System.out.println("Игрок не найден, установлено значение по умолчанию");
-                    player2 = playerRepo.findByNickname("Franshtik (PS)");
-                }
 
 
 
 
-            model.put("player", player);
-            model.put("player2", player2);
-        }
+            model.put("player", pl.get(0));
+            model.put("player2", pl.get(1));
+            model.put("player3", pl.get(2));
+            model.put("player4", pl.get(3));
+            model.put("player5", pl.get(4));
+
         return "hud";
 
     }
     @PostMapping("addPlayer2")
-    public String addPlayer2(@RequestParam String addPlayer2, String addPlayer, Map<String, Object> model) {
+    public String addPlayer2(@RequestParam String addPlayer2, String addPlayer, String addPlayer3
+            , String addPlayer4, String addPlayer5, Map<String, Object> model) {
         //можно только одной строкой, вот так, только будет фильтровать и при пустом поле
         //  List<Message> messages = messageRepo.findByTag(filter);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -117,24 +108,98 @@ public class HudController {
         model.put("name", username);
         Iterable<Player> players = playerRepo.findAll();
         model.put("players", players);
-        Player player=playerRepo.findByNickname(addPlayer);
 
-            if (player == null) {
-                System.out.println("Игрок не найден, установлено значение по умолчанию");
-                player = playerRepo.findByNickname("Franshtik (PS)");
-            }
-            Player player2 = playerRepo.findByNickname(addPlayer2);
-            if (!addPlayer2.isEmpty() && addPlayer2 != null) {
-                if (player2 == null) {
-                    System.out.println("Игрок не найден, установлено значение по умолчанию");
-                    player2 = playerRepo.findByNickname("Franshtik (PS)");
-                }
-
-            }
-                model.put("player", player);
-                model.put("player2", player2);
+        HudCalc hudCalc = new HudCalc();
+        ArrayList<Player> pl = hudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        model.put("player", pl.get(0));
+        model.put("player2", pl.get(1));
+        model.put("player3", pl.get(2));
+        model.put("player4", pl.get(3));
+        model.put("player5", pl.get(4));
 
             return "hud";
 
         }
+    @PostMapping("addPlayer3")
+    public String addPlayer3(@RequestParam String addPlayer3, String addPlayer2, String addPlayer
+            , String addPlayer4, String addPlayer5, Map<String, Object> model) {
+        //можно только одной строкой, вот так, только будет фильтровать и при пустом поле
+        //  List<Message> messages = messageRepo.findByTag(filter);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username=auth.getName();
+        model.put("name", username);
+
+        System.out.println(addPlayer);
+        System.out.println(addPlayer2);
+        System.out.println(addPlayer3 + "+++++++++++++++");
+
+        HudCalc hudCalc = new HudCalc();
+        ArrayList<Player> pl = hudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        Iterable<Player> players = playerRepo.findAll();
+        model.put("players", players);
+
+
+
+
+        model.put("player", pl.get(0));
+        model.put("player2", pl.get(1));
+        model.put("player3", pl.get(2));
+        model.put("player4", pl.get(3));
+        model.put("player5", pl.get(4));
+
+        return "hud";
+
+    }
+    @PostMapping("addPlayer4")
+    public String addPlayer4(@RequestParam String addPlayer4, String addPlayer2, String addPlayer3
+            , String addPlayer, String addPlayer5, Map<String, Object> model) {
+        //можно только одной строкой, вот так, только будет фильтровать и при пустом поле
+        //  List<Message> messages = messageRepo.findByTag(filter);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username=auth.getName();
+        model.put("name", username);
+
+        HudCalc hudCalc = new HudCalc();
+        ArrayList<Player> pl = hudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        Iterable<Player> players = playerRepo.findAll();
+        model.put("players", players);
+
+
+
+
+        model.put("player", pl.get(0));
+        model.put("player2", pl.get(1));
+        model.put("player3", pl.get(2));
+        model.put("player4", pl.get(3));
+        model.put("player5", pl.get(4));
+
+        return "hud";
+
+    }
+    @PostMapping("addPlayer5")
+    public String addPlayer5(@RequestParam String addPlayer5, String addPlayer2, String addPlayer3
+            , String addPlayer, String addPlayer4,  Map<String, Object> model) {
+        //можно только одной строкой, вот так, только будет фильтровать и при пустом поле
+        //  List<Message> messages = messageRepo.findByTag(filter);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username=auth.getName();
+        model.put("name", username);
+
+        HudCalc hudCalc = new HudCalc();
+        ArrayList<Player> pl = hudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        Iterable<Player> players = playerRepo.findAll();
+        model.put("players", players);
+
+
+
+
+        model.put("player", pl.get(0));
+        model.put("player2", pl.get(1));
+        model.put("player3", pl.get(2));
+        model.put("player4", pl.get(3));
+        model.put("player5", pl.get(4));
+
+        return "hud";
+
+    }
 }
