@@ -12,7 +12,16 @@ import java.util.List;
 @Service
 public class HudCalc {
 
-    public ArrayList<String> getPlayerStats(PlayerRepo playerRepo, String nickname)
+    public static Player checkPlayer (PlayerRepo playerRepo, String player)
+    {
+        Player playerNick = playerRepo.findByNickname(player);
+        if (playerNick == null) {
+            System.out.println("Игрок не найден, установлено значение по умолчанию");
+            playerNick = playerRepo.findByNickname("Franshtik (PS)");
+        }
+        return playerNick;
+    }
+    public static ArrayList<String> getPlayerStats(PlayerRepo playerRepo, String nickname)
     {
        Player player =  playerRepo.findByNickname(nickname);
        ArrayList<String> stats = new ArrayList<>();
@@ -24,7 +33,7 @@ public class HudCalc {
        return stats;
     }
 
-    public ArrayList<Player> getAllPlayerStats(PlayerRepo playerRepo, String p1, String p2,String p3,String p4,String p5)
+    public static ArrayList<Player> getAllPlayerStats(PlayerRepo playerRepo, String p1, String p2,String p3,String p4,String p5)
     {
         Player player=playerRepo.findByNickname(p1);
             if (player == null) {

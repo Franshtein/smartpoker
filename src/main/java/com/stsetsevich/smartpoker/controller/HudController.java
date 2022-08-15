@@ -28,13 +28,12 @@ public class HudController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username=auth.getName();
         model.put("name", username);
-        HudCalc hudCalc = new HudCalc();
-        ArrayList<String> playerStats = hudCalc.getPlayerStats(playerRepo, "Franshtik (PS)");
+        ArrayList<String> playerStats = HudCalc.getPlayerStats(playerRepo, "Franshtik (PS)");
         model.put("playerstats", playerStats);
 
         Iterable<Player> players = playerRepo.findAll();
         model.put("players", players);
-        ArrayList<Player> pl = hudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        ArrayList<Player> pl = HudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
         model.put("players", players);
 
         model.put("player", pl.get(0));
@@ -57,8 +56,7 @@ public class HudController {
 
         Iterable<Player> players = playerRepo.findAll();
 
-        HudCalc hudCalc = new HudCalc();
-        ArrayList<Player> pl = hudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        ArrayList<Player> pl = HudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
         model.put("players", players);
 
         model.put("player", pl.get(0));
@@ -80,8 +78,8 @@ public class HudController {
         String username=auth.getName();
         model.put("name", username);
 
-        HudCalc hudCalc = new HudCalc();
-        ArrayList<Player> pl = hudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+
+        ArrayList<Player> pl = HudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
         Iterable<Player> players = playerRepo.findAll();
         model.put("players", players);
 
@@ -109,8 +107,8 @@ public class HudController {
         Iterable<Player> players = playerRepo.findAll();
         model.put("players", players);
 
-        HudCalc hudCalc = new HudCalc();
-        ArrayList<Player> pl = hudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+
+        ArrayList<Player> pl = HudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
         model.put("player", pl.get(0));
         model.put("player2", pl.get(1));
         model.put("player3", pl.get(2));
@@ -133,8 +131,7 @@ public class HudController {
         System.out.println(addPlayer2);
         System.out.println(addPlayer3 + "+++++++++++++++");
 
-        HudCalc hudCalc = new HudCalc();
-        ArrayList<Player> pl = hudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        ArrayList<Player> pl = HudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
         Iterable<Player> players = playerRepo.findAll();
         model.put("players", players);
 
@@ -159,8 +156,7 @@ public class HudController {
         String username=auth.getName();
         model.put("name", username);
 
-        HudCalc hudCalc = new HudCalc();
-        ArrayList<Player> pl = hudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        ArrayList<Player> pl = HudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
         Iterable<Player> players = playerRepo.findAll();
         model.put("players", players);
 
@@ -185,8 +181,7 @@ public class HudController {
         String username=auth.getName();
         model.put("name", username);
 
-        HudCalc hudCalc = new HudCalc();
-        ArrayList<Player> pl = hudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        ArrayList<Player> pl = HudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
         Iterable<Player> players = playerRepo.findAll();
         model.put("players", players);
 
