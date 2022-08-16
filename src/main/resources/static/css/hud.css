@@ -5,3 +5,30 @@
 .colorgreen {
     color: green; /* Красный цвет выделения */
 }
+.colorblue {
+    color: blue; /* Красный цвет выделения */
+}
+.row {
+    height: 400px;
+}
+
+table.table-striped{
+    border-color: red;
+}
+table.table-striped-green{
+    border-color: green;
+    background-color: darkseagreen;
+    font-size: large;
+    font-weight: bold;
+}
+.table-green{
+    border-color: green;
+}
+
+body{
+    background-image: url("/img/bg-image-hud.png") !important;
+    background-color: grey !important;
+    background-position: center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+}
