@@ -3,10 +3,23 @@
     color: red; /* Красный цвет выделения */
 }
 .colorgreen {
-    color: green; /* Красный цвет выделения */
+    color: green;
 }
 .colorblue {
-    color: blue; /* Красный цвет выделения */
+    color: blue;
+}
+.colorpink {
+    color: deeppink;
+}
+.coloryellow {
+    color: yellow;
+}
+
+label.btn-outline-primary{
+    background-color: cadetblue;
+}
+label.btn-outline-primary:hover{
+    background-color: cornflowerblue;
 }
 .row {
     height: 400px;
@@ -20,15 +33,38 @@ table.table-striped-green{
     background-color: darkseagreen;
     font-size: large;
     font-weight: bold;
+  /*  transform: scale(0.5); */
 }
 .table-green{
     border-color: green;
 }
-
-body{
+div.container{
+    position: relative;
+   /* zoom: 0.5; показывает правильно при минимальном р-ре экрана, но коряво н среднем */
+}
+div.players-table{
     background-image: url("/img/bg-image-hud.png") !important;
+    background-position: center;
+    background-size: 70%;
+    width: auto;
+    background-repeat: no-repeat;
+}
+div.input-group
+{
+
+}
+button.btn{
+    background-color: blue;
+}
+/*
+button.btn:hover{
+    background-color: red;
+}
+цвет кнопки при наведении
+*/
+body{
+
     background-color: grey !important;
     background-position: center;
-    background-size: 50%;
     background-repeat: no-repeat;
 }

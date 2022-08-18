@@ -74,4 +74,54 @@ public class HudCalc {
 ;
         return players;
     }
+    public static ArrayList<StatValue> extraStatsCalc(Player player, int statId)
+    {
+        ArrayList <StatValue> stats = new ArrayList<>();
+        switch (statId)
+        {
+            case (0):
+                getThreeBetStats(player, stats);
+                return stats;
+            case (1):
+                System.out.println("not method exsist");
+                break;
+            case (2):
+                System.out.println("not method exsist");
+                break;
+            case (3):
+                System.out.println("not method exsist");
+                break;
+
+        }
+
+        return null;
+    }
+    private static ArrayList<StatValue> getThreeBetStats(Player pl, ArrayList<StatValue> stats)
+    {
+        StatValue statValue;
+
+        statValue=new StatValue(Double.toString(pl.getTotal3bet()), checkDiap(pl.getTotal3bet(), 5, 7, 9, 11));
+        stats.add(statValue);
+        statValue=new StatValue(Double.toString(pl.getTotal3betEp()), checkDiap(pl.getTotal3betEp(), 5, 7, 9, 11));
+        stats.add(statValue);
+        statValue=new StatValue(Double.toString(pl.getTotal3betMp()), checkDiap(pl.getTotal3betMp(), 5, 7, 9, 11));
+        stats.add(statValue);
+        statValue=new StatValue(Double.toString(pl.getTotal3betCo()), checkDiap(pl.getTotal3betCo(), 5, 7, 9, 11));
+        stats.add(statValue);
+        statValue=new StatValue(Double.toString(pl.getTotal3betBu()), checkDiap(pl.getTotal3betBu(), 5, 7, 9, 11));
+        stats.add(statValue);
+        statValue=new StatValue(Double.toString(pl.getTotal3betSb()), checkDiap(pl.getTotal3betSb(), 5, 7, 9, 11));
+        stats.add(statValue);
+        statValue=new StatValue(Double.toString(pl.getTotal3betBb()), checkDiap(pl.getTotal3betBb(), 5, 7, 9, 11));
+        stats.add(statValue);
+        return stats;
+    }
+    private static int checkDiap(double stat, double point1, double point2,double point3,double point4)
+    {
+        if (stat<=point1) return 0;
+        if (stat<=point2) return 1;
+        if (stat<=point3) return 2;
+        if (stat<=point4) return 3;
+        return 4;
+    }
 }

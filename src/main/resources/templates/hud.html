@@ -11,17 +11,19 @@
 <script  th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js}" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
 <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js}" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
 
+
+
 <div th:text="'Hello, '+ ${name}"></div>
         <div>
             <form th:action="@{/logout}" method="post">
                 <input type="submit" value="Sign Out"/>
             </form>
         </div>
-
-<div class="container text-center">
+<div class="players-table">
+<div class="container-fluid text-center" th:classappend="container">
     <div class="row">
         <div class="col align-self-end">
-            <a th:href="'3bet?player='+${player.nickname}" target="_blank" th:unless="${player.vpip > 50}" th:class="colorgreen" th:text="${player.nickname}"></a>
+            <a th:href="'extrastats?player='+${player.nickname}+'&stat=0'" target="_blank" th:unless="${player.vpip > 50}" th:class="colorgreen" th:text="${player.nickname}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
             <form th:action="@{addPlayer}" method="post">
                 <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
                 <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
@@ -31,10 +33,10 @@
                 <button type="submit">Search</button>
 
             </form>
-            <table th:object="${player}" class="table table-striped" border="3" th:unless="*{vpip > 50}" th:classappend="table-striped-green">
+            <table th:object="${player}" class="table table-striped" border="3" th:unless="*{vpip > 50}" th:classappend="table-striped-green"  id="wow">
 
                 <tr>
-                    <td th:text="*{nickname}"></td>
+                    <td th:text="*{vpip}"></td>
                     <td>
                         <div th:if="*{totalPfr>0 and totalPfr<=20}" th:text="*{totalPfr}"  th:class="colorblue"></div>
                         <div th:if="*{totalPfr>20 and totalPfr<=30}" th:text="*{totalPfr}"  th:class="colorred"></div>
@@ -63,6 +65,7 @@
                     <td th:text="*{totalHands}"></td>
                 </tr>
             </table>
+
         </div>
         <div class="col  align-self-start">
             <a th:href="'3bet?player='+${player2.nickname}" target="_blank" th:unless="${player2.vpip > 50}" th:class="colorgreen" th:text="${player2.nickname}"></a>
@@ -78,7 +81,7 @@
             <table th:object="${player2}" class="table table-striped" border="3" th:unless="*{vpip > 50}" th:classappend="table-striped-green">
 
                 <tr>
-                    <td th:text="*{nickname}"></td>
+                    <td th:text="*{vpip}"></td>
                     <td>
                         <div th:if="*{totalPfr>0 and totalPfr<=20}" th:text="*{totalPfr}"  th:class="colorblue"></div>
                         <div th:if="*{totalPfr>20 and totalPfr<=30}" th:text="*{totalPfr}"  th:class="colorred"></div>
@@ -122,7 +125,7 @@
             <table th:object="${player3}" class="table table-striped" border="3" th:unless="*{vpip > 50}" th:classappend="table-striped-green">
 
                 <tr>
-                    <td th:text="*{nickname}"></td>
+                    <td th:text="*{vpip}"></td>
                     <td>
                         <div th:if="*{totalPfr>0 and totalPfr<=20}" th:text="*{totalPfr}"  th:class="colorblue"></div>
                         <div th:if="*{totalPfr>20 and totalPfr<=30}" th:text="*{totalPfr}"  th:class="colorred"></div>
@@ -158,6 +161,7 @@
 <div class="container text-center">
     <div class="row justify-content-evenly">
         <div class="col-4">
+            <a th:href="'extrastats?player='+${player4.nickname}+'&stat=0'" target="_blank" th:unless="${player.vpip > 50}" th:class="colorgreen" th:text="${player4.nickname}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
             <form th:action="@{addPlayer4}" method="post">
                 <input type="hidden" th:value="${player.nickname}" name="addPlayer">
                 <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
@@ -170,13 +174,13 @@
             <table th:object="${player4}" class="table table-striped" border="3" th:unless="*{vpip > 50}" th:classappend="table-striped-green">
 
                 <tr>
-                    <td th:text="*{nickname}"></td>
+                    <td th:text="*{vpip}"></td>
                     <td>
                         <div th:if="*{totalPfr>0 and totalPfr<=20}" th:text="*{totalPfr}"  th:class="colorblue"></div>
                         <div th:if="*{totalPfr>20 and totalPfr<=30}" th:text="*{totalPfr}"  th:class="colorred"></div>
                         <div th:if="*{totalPfr>30}" th:text="*{totalPfr}"  th:class="colorgreen"></div>
                     </td>
-                    <td th:text="*{total3bet}"></td>
+                    <td><div th:unless="*{vpip > 50}" th:class="coloryellow" th:text="*{total3bet}"></div></td>
                     <td><div th:unless="*{vpip > 50}" th:class="colorred" th:text="*{foldTo3betTotal}"></div></td>
 
                 </tr>
@@ -202,6 +206,7 @@
         </div>
 
         <div class="col-4">
+            <a th:href="'extrastats?player='+${player5.nickname}+'&stat=0'" target="_blank" th:unless="${player.vpip > 50}" th:class="colorgreen" th:text="${player5.nickname}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
             <form th:action="@{addPlayer5}" method="post">
                 <input type="hidden" th:value="${player.nickname}" name="addPlayer">
                 <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
@@ -214,7 +219,7 @@
             <table th:object="${player5}" class="table table-striped" border="3" th:unless="*{vpip > 50}" th:classappend="table-striped-green">
 
                 <tr>
-                    <td th:text="*{nickname}"></td>
+                    <td th:text="*{vpip}"></td>
                     <td>
                         <div th:if="*{totalPfr>0 and totalPfr<=20}" th:text="*{totalPfr}"  th:class="colorblue"></div>
                         <div th:if="*{totalPfr>20 and totalPfr<=30}" th:text="*{totalPfr}"  th:class="colorred"></div>
@@ -246,5 +251,45 @@
         </div>
     </div>
 </div>
+</div>
+<div class="input-group mb-3">
+    <button class="btn btn-outline-secondary" type="button">Preflop</button>
+    <button class="btn btn-outline-secondary" type="button">Flop</button>
+    <button class="btn btn-outline-secondary" type="button">Turn</button>
+    <button class="btn btn-outline-secondary" type="button">River</button>
+</div>
+<button type="button" class="btn btn-primary" id="liveToastBtn">Показать лайв тосты</button>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Bootstrap</strong>
+            <small>11 мин назад</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Закрыть"></button>
+        </div>
+        <div class="toast-body">
+
+                <div th:each="ti : ${tableinfo}">
+                    <div th:text="${ti.stat}"></div>
+                </div>
+            </td>
+        </div>
+    </div>
+</div>
+<p class="muted">Текст-заполнитель для демонстрации некоторых <a href="#" data-bs-toggle="tooltipdata-bs-titleТултип по умолчанию">встроенных ссылок</a> с подсказками. Теперь это просто наполнитель, а не убийца. Содержание размещено здесь только для имитации присутствия <a href="#" data-bs-toggle="tooltip" data-bs-title="Другой тултип">настоящего текста</a>. И все это просто для того, чтобы дать Вам представление о том, как всплывающие подсказки будут выглядеть при использовании в реальных ситуациях. Надеюсь, Вы теперь увидели, как <a href="#" data-bs-toggle="tooltip" data-bs-title="Еще один здесь тоже">эти всплывающие подсказки по ссылкам</a> могут работать на практике, если Вы их используете на <a href="#" data-bs-toggle="tooltip" data-bs-title="The last tip!">Вашем собственном </a> сайте или проекте. </p>
+<script type="text/javascript">
+    const toastTrigger = document.getElementById('liveToastBtn')
+    const toastLiveExample = document.getElementById('liveToast')
+    if (toastTrigger) {
+        toastTrigger.addEventListener('click', () => {
+            const toast = new bootstrap.Toast(toastLiveExample)
+
+            toast.show()
+        })
+    }
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
+<a class="btn btn-primary" data-bs-toggle="collapse" href="#wow" role="button" aria-expanded="false" aria-controls="wow">Переключить первый элемент</a>
 </body>
 </html>

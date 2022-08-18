@@ -3,6 +3,7 @@ package com.stsetsevich.smartpoker.controller;
 import com.stsetsevich.smartpoker.domain.Message;
 import com.stsetsevich.smartpoker.domain.Player;
 import com.stsetsevich.smartpoker.engine.HudCalc;
+import com.stsetsevich.smartpoker.engine.TableInfoCalc;
 import com.stsetsevich.smartpoker.repos.MessageRepo;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class HudController {
         model.put("players", players);
         ArrayList<Player> pl = HudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
         model.put("players", players);
-
+        model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
         model.put("player", pl.get(0));
         model.put("player2", pl.get(1));
         model.put("player3", pl.get(2));
@@ -57,6 +58,8 @@ public class HudController {
         Iterable<Player> players = playerRepo.findAll();
 
         ArrayList<Player> pl = HudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+
+        model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
         model.put("players", players);
 
         model.put("player", pl.get(0));
@@ -82,7 +85,7 @@ public class HudController {
         ArrayList<Player> pl = HudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
         Iterable<Player> players = playerRepo.findAll();
         model.put("players", players);
-
+        model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
 
 
 
@@ -114,7 +117,7 @@ public class HudController {
         model.put("player3", pl.get(2));
         model.put("player4", pl.get(3));
         model.put("player5", pl.get(4));
-
+        model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
             return "hud";
 
         }
@@ -134,7 +137,7 @@ public class HudController {
         ArrayList<Player> pl = HudCalc.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
         Iterable<Player> players = playerRepo.findAll();
         model.put("players", players);
-
+        model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
 
 
 
@@ -161,7 +164,7 @@ public class HudController {
         model.put("players", players);
 
 
-
+        model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
 
         model.put("player", pl.get(0));
         model.put("player2", pl.get(1));
@@ -186,7 +189,7 @@ public class HudController {
         model.put("players", players);
 
 
-
+        model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
 
         model.put("player", pl.get(0));
         model.put("player2", pl.get(1));
