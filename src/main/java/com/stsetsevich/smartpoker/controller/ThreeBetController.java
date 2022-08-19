@@ -2,6 +2,7 @@ package com.stsetsevich.smartpoker.controller;
 
 import com.stsetsevich.smartpoker.domain.Player;
 import com.stsetsevich.smartpoker.engine.HudCalc;
+import com.stsetsevich.smartpoker.engine.SetPlayersAtTable;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -29,7 +30,7 @@ public class ThreeBetController {
 
             System.out.println(stat);
 
-            Player playerNick=HudCalc.checkPlayer(playerRepo, player);
+            Player playerNick=SetPlayersAtTable.checkPlayer(playerRepo, player);
             model.put("test", playerNick);
             model.put("player", playerNick);
 
@@ -45,7 +46,7 @@ public class ThreeBetController {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             String username=auth.getName();
             model.put("name", username);
-            Player playerNick=HudCalc.checkPlayer(playerRepo, player);
+            Player playerNick=SetPlayersAtTable.checkPlayer(playerRepo, player);
             model.put("test", playerNick);
             model.put("player", playerNick);
             System.out.println(stat);
@@ -61,7 +62,7 @@ public class ThreeBetController {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             String username=auth.getName();
             model.put("name", username);
-            Player playerNick=HudCalc.checkPlayer(playerRepo, player);
+            Player playerNick= SetPlayersAtTable.checkPlayer(playerRepo, player);
             System.out.println(stat);
             model.put("test", playerNick);
             model.put("player", playerNick);

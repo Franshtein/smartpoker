@@ -1,5 +1,7 @@
 package com.stsetsevich.smartpoker.domain;
 
+import com.stsetsevich.smartpoker.repos.PlayerRepo;
+
 import javax.persistence.*;
 
 @Entity
@@ -1949,5 +1951,6 @@ public class Player {
     public void setNl16EvBb100(double nl16EvBb100) {
         this.nl16EvBb100 = nl16EvBb100;
     }
+
 
 }

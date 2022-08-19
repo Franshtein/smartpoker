@@ -28,12 +28,40 @@ label.btn-outline-primary:hover{
 table.table-striped{
     border-color: red;
 }
+table.table-striped-red{
+    border-color: red;
+    background-color: indianred;
+    font-size: large;
+    font-weight: bold;
+    /*  transform: scale(0.5); */
+}
 table.table-striped-green{
     border-color: green;
     background-color: darkseagreen;
     font-size: large;
     font-weight: bold;
   /*  transform: scale(0.5); */
+}
+table.table-striped-blue{
+    border-color: blue;
+    background-color: cornflowerblue;
+    font-size: large;
+    font-weight: bold;
+    /*  transform: scale(0.5); */
+}
+table.table-striped-pink{
+    border-color: deeppink;
+    background-color: hotpink;
+    font-size: large;
+    font-weight: bold;
+    /*  transform: scale(0.5); */
+}
+table.table-striped-yellow{
+    border-color: yellow;
+    background-color: lightyellow;
+    font-size: large;
+    font-weight: bold;
+    /*  transform: scale(0.5); */
 }
 .table-green{
     border-color: green;

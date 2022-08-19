@@ -1,9 +1,11 @@
 package com.stsetsevich.smartpoker.controller;
 
 import com.stsetsevich.smartpoker.domain.Message;
+import com.stsetsevich.smartpoker.domain.Stat;
 import com.stsetsevich.smartpoker.engine.StatsParse;
 import com.stsetsevich.smartpoker.repos.MessageRepo;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
+import com.stsetsevich.smartpoker.repos.StatRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,10 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
 
 
 @Controller
@@ -26,6 +27,8 @@ public class MainController {
     private MessageRepo messageRepo;
     @Autowired
     private PlayerRepo playerRepo;
+    @Autowired
+    private StatRepo statRepo;
 
 
     @GetMapping("/")
@@ -49,6 +52,10 @@ public class MainController {
     public String add(@RequestParam String text, @RequestParam String tag, Model model1) {
         Message message = new Message(text, tag);
         messageRepo.save(message);
+
+
+
+
 
         Iterable<Message> messages = messageRepo.findAll();
         model1.addAttribute("messages", messages);

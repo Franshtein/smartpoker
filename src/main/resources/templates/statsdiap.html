@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+<link href="../static/css/hud.css" th:href="@{/css/hud.css}" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+
+
+<h2>Stats List</h2>
+    <table class="table table-striped">
+            <tr>
+                <th>Stat</th>
+                <th>Point1</th>
+                <th>Point2</th>
+                <th>Point3</th>
+                <th>Point4</th>
+                <th></th>
+                <th><div class="colorblue">Point1 edit</div></th>
+                <th><div class="coloryellow">Point2 edit</div></th>
+                <th><div class="colorred">Point3 edit</div></th>
+                <th><div class="colorgreen">Point4 edit</div></th>
+            </tr>
+             <tr th:each="stat : ${stats}">
+                 <td th:text="${stat.statname}"></td>
+                 <td th:text="${stat.point1}"></td>
+                 <td th:text="${stat.point2}"></td>
+                 <td th:text="${stat.point3}"></td>
+                 <td th:text="${stat.point4}"></td>
+        <form th:action="@{statsdiap}" method="post">
+                 <td>
+                     <input type="hidden" th:name="statname" th:value="${stat.statname}">
+                 </td>
+                 <td>
+                        <input type="number" size="3" name="num" min="-30000000" max="30000000" step="0.01" th:name="point1" th:value="${stat.point1}">
+                 </td>
+                 <td>
+                       <input type="number" size="3" name="num" min="-30000000" max="30000000" step="0.01" th:name="point2" th:value="${stat.point2}">
+                 </td>
+                <td>
+                       <input type="number" size="3" name="num" min="-30000000" max="30000000" step="0.01" th:name="point3" th:value="${stat.point3}">
+                </td>
+                <td>
+                       <input type="number" size="3" name="num" min="-30000000" max="30000000" step="0.01" th:name="point4"  th:value="${stat.point4}">
+                </td>
+                <td>
+                       <button type="submit">Add</button>
+               </td>
+        </form>
+
+            </tr>
+    </table>
+
+
+
+
+</body>
+</html>
