@@ -104,33 +104,56 @@
             <table th:object="${player2}" class="table table-striped" border="3"  th:classappend="${seats.get(1)}">
 
                 <tr>
-                    <td th:text="*{vpip}"></td>
-                    <td>
-                        <div th:if="*{totalPfr>0 and totalPfr<=20}" th:text="*{totalPfr}"  th:class="colorblue"></div>
-                        <div th:if="*{totalPfr>20 and totalPfr<=30}" th:text="*{totalPfr}"  th:class="colorred"></div>
-                        <div th:if="*{totalPfr>30}" th:text="*{totalPfr}"  th:class="colorgreen"></div>
+                    <td th:each="stat : ${plStatsLine1.get(1)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.getValue()}">
+                                <div th:case="'0'" th:class="colorblue" th:text="${stat2.stat}"></div>
+                                <div th:case="'1'" th:class="coloryellow" th:text="${stat2.stat}"></div>
+                                <div th:case="'2'" th:class="colorred" th:text="${stat2.stat}"></div>
+                                <div th:case="'3'" th:class="colorpink" th:text="${stat2.stat}"></div>
+                                <div th:case="*" th:class="colorgreen" th:text="${stat2.stat}"></div>
+                            </div>
+                        </div>
                     </td>
-                    <td th:text="*{total3bet}"></td>
-                    <td><div th:unless="*{vpip > 50}" th:class="colorred" th:text="*{foldTo3betTotal}"></div></td>
-
                 </tr>
                 <tr>
-                    <td th:text="*{cBetFlopTotal}"></td>
-                    <td th:text="*{cBetTurnTotal}"></td>
-                    <td th:text="*{skippedCbetFoldFlopTotal}"></td>
-                    <td th:text="*{skippedCbetFoldTurnTotal}"></td>
+                    <td th:each="stat : ${plStatsLine2.get(1)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.getValue()}">
+                                <div th:case="'0'" th:class="colorblue" th:text="${stat2.stat}"></div>
+                                <div th:case="'1'" th:class="coloryellow" th:text="${stat2.stat}"></div>
+                                <div th:case="'2'" th:class="colorred" th:text="${stat2.stat}"></div>
+                                <div th:case="'3'" th:class="colorpink" th:text="${stat2.stat}"></div>
+                                <div th:case="*" th:class="colorgreen" th:text="${stat2.stat}"></div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
-                    <td th:text="*{squeezeTotal}"></td>
-                    <td th:text="*{foldToSqueezeTotal}"></td>
-                    <td th:text="*{wtsd}"></td>
-                    <td th:text="*{wwsf}"></td>
+                    <td th:each="stat : ${plStatsLine3.get(1)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.value}">
+                                <div th:case="'0'" th:class="colorblue" th:text="${stat2.stat}"></div>
+                                <div th:case="'1'" th:class="coloryellow" th:text="${stat2.stat}"></div>
+                                <div th:case="'2'" th:class="colorred" th:text="${stat2.stat}"></div>
+                                <div th:case="'3'" th:class="colorpink" th:text="${stat2.stat}"></div>
+                                <div th:case="*" th:class="colorgreen" th:text="${stat2.stat}"></div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
-                    <td th:text="*{aggFactorFlop}"></td>
-                    <td th:text="*{aggFactorTurn}"></td>
-                    <td th:text="*{aggFactorRiver}"></td>
-                    <td th:text="*{totalHands}"></td>
+                    <td th:each="stat : ${plStatsLine4.get(1)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.value}">
+                                <div th:case="'0'" th:class="colorblue" th:text="${stat2.stat}"></div>
+                                <div th:case="'1'" th:class="coloryellow" th:text="${stat2.stat}"></div>
+                                <div th:case="'2'" th:class="colorred" th:text="${stat2.stat}"></div>
+                                <div th:case="'3'" th:class="colorpink" th:text="${stat2.stat}"></div>
+                                <div th:case="*" th:class="colorgreen" th:text="${stat2.stat}"></div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -146,35 +169,57 @@
 
             </form>
             <table th:object="${player3}" class="table table-striped" border="3"  th:classappend="${seats.get(2)}">
-
                 <tr>
-                    <td th:text="*{vpip}"></td>
-                    <td>
-                        <div th:if="*{totalPfr>0 and totalPfr<=20}" th:text="*{totalPfr}"  th:class="colorblue"></div>
-                        <div th:if="*{totalPfr>20 and totalPfr<=30}" th:text="*{totalPfr}"  th:class="colorred"></div>
-                        <div th:if="*{totalPfr>30}" th:text="*{totalPfr}"  th:class="colorgreen"></div>
+                    <td th:each="stat : ${plStatsLine1.get(2)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.getValue()}">
+                                <div th:case="'0'" th:class="colorblue" th:text="${stat2.stat}"></div>
+                                <div th:case="'1'" th:class="coloryellow" th:text="${stat2.stat}"></div>
+                                <div th:case="'2'" th:class="colorred" th:text="${stat2.stat}"></div>
+                                <div th:case="'3'" th:class="colorpink" th:text="${stat2.stat}"></div>
+                                <div th:case="*" th:class="colorgreen" th:text="${stat2.stat}"></div>
+                            </div>
+                        </div>
                     </td>
-                    <td th:text="*{total3bet}"></td>
-                    <td><div th:unless="*{vpip > 50}" th:class="colorred" th:text="*{foldTo3betTotal}"></div></td>
-
                 </tr>
                 <tr>
-                    <td th:text="*{cBetFlopTotal}"></td>
-                    <td th:text="*{cBetTurnTotal}"></td>
-                    <td th:text="*{skippedCbetFoldFlopTotal}"></td>
-                    <td th:text="*{skippedCbetFoldTurnTotal}"></td>
+                    <td th:each="stat : ${plStatsLine2.get(2)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.getValue()}">
+                                <div th:case="'0'" th:class="colorblue" th:text="${stat2.stat}"></div>
+                                <div th:case="'1'" th:class="coloryellow" th:text="${stat2.stat}"></div>
+                                <div th:case="'2'" th:class="colorred" th:text="${stat2.stat}"></div>
+                                <div th:case="'3'" th:class="colorpink" th:text="${stat2.stat}"></div>
+                                <div th:case="*" th:class="colorgreen" th:text="${stat2.stat}"></div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
-                    <td th:text="*{squeezeTotal}"></td>
-                    <td th:text="*{foldToSqueezeTotal}"></td>
-                    <td th:text="*{wtsd}"></td>
-                    <td th:text="*{wwsf}"></td>
+                    <td th:each="stat : ${plStatsLine3.get(2)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.value}">
+                                <div th:case="'0'" th:class="colorblue" th:text="${stat2.stat}"></div>
+                                <div th:case="'1'" th:class="coloryellow" th:text="${stat2.stat}"></div>
+                                <div th:case="'2'" th:class="colorred" th:text="${stat2.stat}"></div>
+                                <div th:case="'3'" th:class="colorpink" th:text="${stat2.stat}"></div>
+                                <div th:case="*" th:class="colorgreen" th:text="${stat2.stat}"></div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
-                    <td th:text="*{aggFactorFlop}"></td>
-                    <td th:text="*{aggFactorTurn}"></td>
-                    <td th:text="*{aggFactorRiver}"></td>
-                    <td th:text="*{totalHands}"></td>
+                    <td th:each="stat : ${plStatsLine4.get(2)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.value}">
+                                <div th:case="'0'" th:class="colorblue" th:text="${stat2.stat}"></div>
+                                <div th:case="'1'" th:class="coloryellow" th:text="${stat2.stat}"></div>
+                                <div th:case="'2'" th:class="colorred" th:text="${stat2.stat}"></div>
+                                <div th:case="'3'" th:class="colorpink" th:text="${stat2.stat}"></div>
+                                <div th:case="*" th:class="colorgreen" th:text="${stat2.stat}"></div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -197,33 +242,56 @@
             <table th:object="${player4}" class="table table-striped" border="3"  th:classappend="${seats.get(3)}">
 
                 <tr>
-                    <td th:text="*{vpip}"></td>
-                    <td>
-                        <div th:if="*{totalPfr>0 and totalPfr<=20}" th:text="*{totalPfr}"  th:class="colorblue"></div>
-                        <div th:if="*{totalPfr>20 and totalPfr<=30}" th:text="*{totalPfr}"  th:class="colorred"></div>
-                        <div th:if="*{totalPfr>30}" th:text="*{totalPfr}"  th:class="colorgreen"></div>
+                    <td th:each="stat : ${plStatsLine1.get(3)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.getValue()}">
+                                <div th:case="'0'" th:class="colorblue" th:text="${stat2.stat}"></div>
+                                <div th:case="'1'" th:class="coloryellow" th:text="${stat2.stat}"></div>
+                                <div th:case="'2'" th:class="colorred" th:text="${stat2.stat}"></div>
+                                <div th:case="'3'" th:class="colorpink" th:text="${stat2.stat}"></div>
+                                <div th:case="*" th:class="colorgreen" th:text="${stat2.stat}"></div>
+                            </div>
+                        </div>
                     </td>
-                    <td><div th:unless="*{vpip > 50}" th:class="coloryellow" th:text="*{total3bet}"></div></td>
-                    <td><div th:unless="*{vpip > 50}" th:class="colorred" th:text="*{foldTo3betTotal}"></div></td>
-
                 </tr>
                 <tr>
-                    <td th:text="*{cBetFlopTotal}"></td>
-                    <td th:text="*{cBetTurnTotal}"></td>
-                    <td th:text="*{skippedCbetFoldFlopTotal}"></td>
-                    <td th:text="*{skippedCbetFoldTurnTotal}"></td>
+                    <td th:each="stat : ${plStatsLine2.get(3)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.getValue()}">
+                                <div th:case="'0'" th:class="colorblue" th:text="${stat2.stat}"></div>
+                                <div th:case="'1'" th:class="coloryellow" th:text="${stat2.stat}"></div>
+                                <div th:case="'2'" th:class="colorred" th:text="${stat2.stat}"></div>
+                                <div th:case="'3'" th:class="colorpink" th:text="${stat2.stat}"></div>
+                                <div th:case="*" th:class="colorgreen" th:text="${stat2.stat}"></div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
-                    <td th:text="*{squeezeTotal}"></td>
-                    <td th:text="*{foldToSqueezeTotal}"></td>
-                    <td th:text="*{wtsd}"></td>
-                    <td th:text="*{wwsf}"></td>
+                    <td th:each="stat : ${plStatsLine3.get(3)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.value}">
+                                <div th:case="'0'" th:class="colorblue" th:text="${stat2.stat}"></div>
+                                <div th:case="'1'" th:class="coloryellow" th:text="${stat2.stat}"></div>
+                                <div th:case="'2'" th:class="colorred" th:text="${stat2.stat}"></div>
+                                <div th:case="'3'" th:class="colorpink" th:text="${stat2.stat}"></div>
+                                <div th:case="*" th:class="colorgreen" th:text="${stat2.stat}"></div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
-                    <td th:text="*{aggFactorFlop}"></td>
-                    <td th:text="*{aggFactorTurn}"></td>
-                    <td th:text="*{aggFactorRiver}"></td>
-                    <td th:text="*{totalHands}"></td>
+                    <td th:each="stat : ${plStatsLine4.get(3)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.value}">
+                                <div th:case="'0'" th:class="colorblue" th:text="${stat2.stat}"></div>
+                                <div th:case="'1'" th:class="coloryellow" th:text="${stat2.stat}"></div>
+                                <div th:case="'2'" th:class="colorred" th:text="${stat2.stat}"></div>
+                                <div th:case="'3'" th:class="colorpink" th:text="${stat2.stat}"></div>
+                                <div th:case="*" th:class="colorgreen" th:text="${stat2.stat}"></div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -242,33 +310,56 @@
             <table th:object="${player5}" class="table table-striped" border="3"  th:classappend="${seats.get(4)}">
 
                 <tr>
-                    <td th:text="*{vpip}"></td>
-                    <td>
-                        <div th:if="*{totalPfr>0 and totalPfr<=20}" th:text="*{totalPfr}"  th:class="colorblue"></div>
-                        <div th:if="*{totalPfr>20 and totalPfr<=30}" th:text="*{totalPfr}"  th:class="colorred"></div>
-                        <div th:if="*{totalPfr>30}" th:text="*{totalPfr}"  th:class="colorgreen"></div>
+                    <td th:each="stat : ${plStatsLine1.get(4)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.getValue()}">
+                                <div th:case="'0'" th:class="colorblue" th:text="${stat2.stat}"></div>
+                                <div th:case="'1'" th:class="coloryellow" th:text="${stat2.stat}"></div>
+                                <div th:case="'2'" th:class="colorred" th:text="${stat2.stat}"></div>
+                                <div th:case="'3'" th:class="colorpink" th:text="${stat2.stat}"></div>
+                                <div th:case="*" th:class="colorgreen" th:text="${stat2.stat}"></div>
+                            </div>
+                        </div>
                     </td>
-                    <td th:text="*{total3bet}"></td>
-                    <td><div th:unless="*{vpip > 50}" th:class="colorred" th:text="*{foldTo3betTotal}"></div></td>
-
                 </tr>
                 <tr>
-                    <td th:text="*{cBetFlopTotal}"></td>
-                    <td th:text="*{cBetTurnTotal}"></td>
-                    <td th:text="*{skippedCbetFoldFlopTotal}"></td>
-                    <td th:text="*{skippedCbetFoldTurnTotal}"></td>
+                    <td th:each="stat : ${plStatsLine2.get(4)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.getValue()}">
+                                <div th:case="'0'" th:class="colorblue" th:text="${stat2.stat}"></div>
+                                <div th:case="'1'" th:class="coloryellow" th:text="${stat2.stat}"></div>
+                                <div th:case="'2'" th:class="colorred" th:text="${stat2.stat}"></div>
+                                <div th:case="'3'" th:class="colorpink" th:text="${stat2.stat}"></div>
+                                <div th:case="*" th:class="colorgreen" th:text="${stat2.stat}"></div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
-                    <td th:text="*{squeezeTotal}"></td>
-                    <td th:text="*{foldToSqueezeTotal}"></td>
-                    <td th:text="*{wtsd}"></td>
-                    <td th:text="*{wwsf}"></td>
+                    <td th:each="stat : ${plStatsLine3.get(4)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.value}">
+                                <div th:case="'0'" th:class="colorblue" th:text="${stat2.stat}"></div>
+                                <div th:case="'1'" th:class="coloryellow" th:text="${stat2.stat}"></div>
+                                <div th:case="'2'" th:class="colorred" th:text="${stat2.stat}"></div>
+                                <div th:case="'3'" th:class="colorpink" th:text="${stat2.stat}"></div>
+                                <div th:case="*" th:class="colorgreen" th:text="${stat2.stat}"></div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
-                    <td th:text="*{aggFactorFlop}"></td>
-                    <td th:text="*{aggFactorTurn}"></td>
-                    <td th:text="*{aggFactorRiver}"></td>
-                    <td th:text="*{totalHands}"></td>
+                    <td th:each="stat : ${plStatsLine4.get(4)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.value}">
+                                <div th:case="'0'" th:class="colorblue" th:text="${stat2.stat}"></div>
+                                <div th:case="'1'" th:class="coloryellow" th:text="${stat2.stat}"></div>
+                                <div th:case="'2'" th:class="colorred" th:text="${stat2.stat}"></div>
+                                <div th:case="'3'" th:class="colorpink" th:text="${stat2.stat}"></div>
+                                <div th:case="*" th:class="colorgreen" th:text="${stat2.stat}"></div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>

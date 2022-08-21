@@ -30,7 +30,7 @@ table.table-striped{
 }
 table.table-striped-red{
     border-color: red;
-    background-color: indianred;
+    background-color: darksalmon;
     font-size: large;
     font-weight: bold;
     /*  transform: scale(0.5); */
