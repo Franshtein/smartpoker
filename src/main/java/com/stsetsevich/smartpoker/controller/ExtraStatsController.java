@@ -1,8 +1,8 @@
 package com.stsetsevich.smartpoker.controller;
 
 import com.stsetsevich.smartpoker.domain.Player;
-import com.stsetsevich.smartpoker.domain.Stat;
-import com.stsetsevich.smartpoker.engine.HudCalc;
+import com.stsetsevich.smartpoker.engine.ExtraStatsCalc;
+import com.stsetsevich.smartpoker.engine.PreflopStatsCalc;
 import com.stsetsevich.smartpoker.engine.SetPlayersAtTable;
 import com.stsetsevich.smartpoker.engine.StatValue;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
@@ -24,6 +24,8 @@ public class ExtraStatsController {
         PlayerRepo playerRepo;
         @Autowired
         StatRepo statRepo;
+        @Autowired
+        ExtraStatsCalc extraStatsCalc;
 
         @GetMapping("/extrastats")
         public String threeBet(Map<String, Object> model, String player, int stat) {
@@ -32,7 +34,7 @@ public class ExtraStatsController {
             model.put("name", username);
 
             Player playerNick= SetPlayersAtTable.checkPlayer(playerRepo, player);
-            ArrayList <StatValue> statValues =HudCalc.extraStatsCalc(playerNick, stat, statRepo);
+            ArrayList <StatValue> statValues = extraStatsCalc.extraStatsCalc(playerNick, stat, statRepo);
             model.put("statValues", statValues);
 
             return "extrastats";
@@ -47,7 +49,7 @@ public class ExtraStatsController {
             String username=auth.getName();
             model.put("name", username);
             Player playerNick=SetPlayersAtTable.checkPlayer(playerRepo, player);
-            ArrayList <StatValue> statValues =HudCalc.extraStatsCalc(playerNick, stat, statRepo);
+            ArrayList <StatValue> statValues = extraStatsCalc.extraStatsCalc(playerNick, stat, statRepo);
             model.put("statValues", statValues);
 
             return "extrastats";

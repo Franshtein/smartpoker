@@ -1,12 +1,10 @@
 package com.stsetsevich.smartpoker.controller;
 
-import com.stsetsevich.smartpoker.domain.Message;
 import com.stsetsevich.smartpoker.domain.Player;
-import com.stsetsevich.smartpoker.engine.HudCalc;
+import com.stsetsevich.smartpoker.engine.PreflopStatsCalc;
 import com.stsetsevich.smartpoker.engine.SetPlayersAtTable;
 import com.stsetsevich.smartpoker.engine.StatValue;
 import com.stsetsevich.smartpoker.engine.TableInfoCalc;
-import com.stsetsevich.smartpoker.repos.MessageRepo;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +26,8 @@ public class HudController {
     PlayerRepo playerRepo;
     @Autowired
     StatRepo statRepo;
+    @Autowired
+    PreflopStatsCalc preflopStatsCalc;
 
     @GetMapping("/hud")
     public String hud(String nickname, Map<String, Object> model, String addPlayer, String addPlayer2, String addPlayer3
@@ -52,12 +52,12 @@ public class HudController {
             }
         }
 */
-        model.put("plStatsLine1", HudCalc.hudStatsCalcLine1(pl, statRepo));
-        model.put("plStatsLine2", HudCalc.hudStatsCalcLine2(pl, statRepo));
-        model.put("plStatsLine3", HudCalc.hudStatsCalcLine3(pl, statRepo));
-        model.put("plStatsLine4", HudCalc.hudStatsCalcLine4(pl, statRepo));
+        model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, statRepo));
+        model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl, statRepo));
+        model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl, statRepo));
+        model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl, statRepo));
 
-        model.put("seats", HudCalc.hudSeatsColor(pl, statRepo));
+        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
         model.put("players", players);
         model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
         model.put("player", pl.get(0));
@@ -82,13 +82,13 @@ public class HudController {
 
         ArrayList<Player> pl = SetPlayersAtTable.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
 
-        model.put("plStatsLine1", HudCalc.hudStatsCalcLine1(pl, statRepo));
-        model.put("plStatsLine2", HudCalc.hudStatsCalcLine2(pl, statRepo));
-        model.put("plStatsLine3", HudCalc.hudStatsCalcLine3(pl, statRepo));
-        model.put("plStatsLine4", HudCalc.hudStatsCalcLine4(pl, statRepo));
+        model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, statRepo));
+        model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl, statRepo));
+        model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl, statRepo));
+        model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl, statRepo));
         model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
         model.put("players", players);
-        model.put("seats", HudCalc.hudSeatsColor(pl, statRepo));
+        model.put("seats", PreflopStatsCalc.hudSeatsColor(pl, statRepo));
         model.put("player", pl.get(0));
         model.put("player2", pl.get(1));
         model.put("player3", pl.get(2));
@@ -114,12 +114,12 @@ public class HudController {
         model.put("players", players);
         model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
 
-        model.put("seats", HudCalc.hudSeatsColor(pl, statRepo));
+        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
 
-        model.put("plStatsLine1", HudCalc.hudStatsCalcLine1(pl, statRepo));
-        model.put("plStatsLine2", HudCalc.hudStatsCalcLine2(pl, statRepo));
-        model.put("plStatsLine3", HudCalc.hudStatsCalcLine3(pl, statRepo));
-        model.put("plStatsLine4", HudCalc.hudStatsCalcLine4(pl, statRepo));
+        model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, statRepo));
+        model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl, statRepo));
+        model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl, statRepo));
+        model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl, statRepo));
             model.put("player", pl.get(0));
             model.put("player2", pl.get(1));
             model.put("player3", pl.get(2));
@@ -144,7 +144,7 @@ public class HudController {
 
         ArrayList<Player> pl = SetPlayersAtTable.getAllPlayerStats(playerRepo,addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
 
-        HashMap<Integer, ArrayList<StatValue>> sv = HudCalc.hudStatsCalcLine1(pl, statRepo);
+        HashMap<Integer, ArrayList<StatValue>> sv = preflopStatsCalc.hudStatsCalcLine1(pl, statRepo);
 
         for(ArrayList<StatValue> sAl : sv.values())
         {
@@ -154,11 +154,11 @@ public class HudController {
             }
         }
 
-        model.put("plStatsLine1", HudCalc.hudStatsCalcLine1(pl, statRepo));
-        model.put("plStatsLine2", HudCalc.hudStatsCalcLine2(pl, statRepo));
-        model.put("plStatsLine3", HudCalc.hudStatsCalcLine3(pl, statRepo));
-        model.put("plStatsLine4", HudCalc.hudStatsCalcLine4(pl, statRepo));
-        model.put("seats", HudCalc.hudSeatsColor(pl, statRepo));
+        model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, statRepo));
+        model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl, statRepo));
+        model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl, statRepo));
+        model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl, statRepo));
+        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
         model.put("player", pl.get(0));
         model.put("player2", pl.get(1));
         model.put("player3", pl.get(2));
@@ -186,11 +186,11 @@ public class HudController {
         model.put("players", players);
         model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
 
-        model.put("seats", HudCalc.hudSeatsColor(pl, statRepo));
-        model.put("plStatsLine1", HudCalc.hudStatsCalcLine1(pl, statRepo));
-        model.put("plStatsLine2", HudCalc.hudStatsCalcLine2(pl, statRepo));
-        model.put("plStatsLine3", HudCalc.hudStatsCalcLine3(pl, statRepo));
-        model.put("plStatsLine4", HudCalc.hudStatsCalcLine4(pl, statRepo));
+        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
+        model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, statRepo));
+        model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl, statRepo));
+        model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl, statRepo));
+        model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl, statRepo));
         model.put("player", pl.get(0));
         model.put("player2", pl.get(1));
         model.put("player3", pl.get(2));
@@ -213,12 +213,12 @@ public class HudController {
         Iterable<Player> players = playerRepo.findAll();
         model.put("players", players);
 
-        model.put("seats", HudCalc.hudSeatsColor(pl, statRepo));
+        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
         model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
-        model.put("plStatsLine1", HudCalc.hudStatsCalcLine1(pl, statRepo));
-        model.put("plStatsLine2", HudCalc.hudStatsCalcLine2(pl, statRepo));
-        model.put("plStatsLine3", HudCalc.hudStatsCalcLine3(pl, statRepo));
-        model.put("plStatsLine4", HudCalc.hudStatsCalcLine4(pl, statRepo));
+        model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, statRepo));
+        model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl, statRepo));
+        model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl, statRepo));
+        model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl, statRepo));
         model.put("player", pl.get(0));
         model.put("player2", pl.get(1));
         model.put("player3", pl.get(2));
@@ -241,12 +241,12 @@ public class HudController {
         Iterable<Player> players = playerRepo.findAll();
         model.put("players", players);
 
-        model.put("seats", HudCalc.hudSeatsColor(pl, statRepo));
+        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
         model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
-        model.put("plStatsLine1", HudCalc.hudStatsCalcLine1(pl, statRepo));
-        model.put("plStatsLine2", HudCalc.hudStatsCalcLine2(pl, statRepo));
-        model.put("plStatsLine3", HudCalc.hudStatsCalcLine3(pl, statRepo));
-        model.put("plStatsLine4", HudCalc.hudStatsCalcLine4(pl, statRepo));
+        model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, statRepo));
+        model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl, statRepo));
+        model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl, statRepo));
+        model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl, statRepo));
         model.put("player", pl.get(0));
         model.put("player2", pl.get(1));
         model.put("player3", pl.get(2));
