@@ -22,6 +22,9 @@ label.btn-outline-primary:hover{
     background-color: cornflowerblue;
 }
 .row {
+
+}
+.row-height-400 {
     height: 400px;
 }
 
@@ -68,6 +71,7 @@ table.table-striped-yellow{
 }
 div.container{
     position: relative;
+
    /* zoom: 0.5; показывает правильно при минимальном р-ре экрана, но коряво н среднем */
 }
 div.players-table{
@@ -77,10 +81,10 @@ div.players-table{
     width: auto;
     background-repeat: no-repeat;
 }
-div.input-group
-{
+.container.text-center{
 
 }
+
 button.btn{
     background-color: blue;
 }

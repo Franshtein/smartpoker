@@ -6,8 +6,7 @@ import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import java.util.ArrayList;
 
 public class SetPlayersAtTable {
-    public static Player checkPlayer (PlayerRepo playerRepo, String player)
-    {
+    public static Player checkPlayer(PlayerRepo playerRepo, String player) {
         Player playerNick = playerRepo.findByNickname(player);
         if (playerNick == null) {
             System.out.println("Игрок не найден, установлено значение по умолчанию");
@@ -15,9 +14,9 @@ public class SetPlayersAtTable {
         }
         return playerNick;
     }
-    public static ArrayList<String> getPlayerStats(PlayerRepo playerRepo, String nickname)
-    {
-        Player player =  playerRepo.findByNickname(nickname);
+
+    public static ArrayList<String> getPlayerStats(PlayerRepo playerRepo, String nickname) {
+        Player player = playerRepo.findByNickname(nickname);
         ArrayList<String> stats = new ArrayList<>();
         stats.add(player.getNickname());
         stats.add(Double.toString(player.getVpip()));
@@ -27,9 +26,8 @@ public class SetPlayersAtTable {
         return stats;
     }
 
-    public static ArrayList<Player> getAllPlayerStats(PlayerRepo playerRepo, String p1, String p2,String p3,String p4,String p5)
-    {
-        Player player=playerRepo.findByNickname(p1);
+    public static ArrayList<Player> getAllPlayerStats(PlayerRepo playerRepo, String p1, String p2, String p3, String p4, String p5) {
+        Player player = playerRepo.findByNickname(p1);
         if (player == null) {
             System.out.println("Игрок не найден, установлено значение по умолчанию");
             player = playerRepo.findByNickname("Franshtik (PS)");

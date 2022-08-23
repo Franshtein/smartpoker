@@ -20,39 +20,39 @@ import java.util.Map;
 @Controller
 public class ExtraStatsController {
 
-        @Autowired
-        PlayerRepo playerRepo;
-        @Autowired
-        StatRepo statRepo;
-        @Autowired
-        ExtraStatsCalc extraStatsCalc;
+    @Autowired
+    PlayerRepo playerRepo;
+    @Autowired
+    StatRepo statRepo;
+    @Autowired
+    ExtraStatsCalc extraStatsCalc;
 
-        @GetMapping("/extrastats")
-        public String threeBet(Map<String, Object> model, String player, int stat) {
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            String username=auth.getName();
-            model.put("name", username);
+    @GetMapping("/extrastats")
+    public String threeBet(Map<String, Object> model, String player, String stat) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        model.put("name", username);
 
-            Player playerNick= SetPlayersAtTable.checkPlayer(playerRepo, player);
-            ArrayList <StatValue> statValues = extraStatsCalc.extraStatsCalc(playerNick, stat, statRepo);
-            model.put("statValues", statValues);
+        Player playerNick = SetPlayersAtTable.checkPlayer(playerRepo, player);
+        ArrayList<StatValue> statValues = extraStatsCalc.extraStatsCalc(playerNick, stat, statRepo);
+        model.put("statValues", statValues);
 
-            return "extrastats";
-        }
-
-
-        @PostMapping("/extrastats")
-        public String addThreeBet(Map<String, Object> model, String player, int stat) {
+        return "extrastats";
+    }
 
 
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            String username=auth.getName();
-            model.put("name", username);
-            Player playerNick=SetPlayersAtTable.checkPlayer(playerRepo, player);
-            ArrayList <StatValue> statValues = extraStatsCalc.extraStatsCalc(playerNick, stat, statRepo);
-            model.put("statValues", statValues);
+    @PostMapping("/extrastats")
+    public String addThreeBet(Map<String, Object> model, String player, String stat) {
 
-            return "extrastats";
-        }
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        model.put("name", username);
+        Player playerNick = SetPlayersAtTable.checkPlayer(playerRepo, player);
+        ArrayList<StatValue> statValues = extraStatsCalc.extraStatsCalc(playerNick, stat, statRepo);
+        model.put("statValues", statValues);
+
+        return "extrastats";
+    }
 
 }

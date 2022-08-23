@@ -7,15 +7,15 @@ import java.util.stream.DoubleStream;
 
 public class TableInfoCalc {
 
-    public static ArrayList<StatValue> extraStatsCalc(ArrayList <Player> players) {
+    public static ArrayList<StatValue> extraStatsCalc(ArrayList<Player> players) {
         ArrayList<StatValue> stats = new ArrayList<>();
-        StatValue statValue= new StatValue(Double.toString(calcAvgEvBb100(players)), 0);
+        StatValue statValue = new StatValue(Double.toString(calcAvgEvBb100(players)), 0, "avgEvBb100");
         stats.add(statValue);
 
         return stats;
     }
 
-    private static double calcAvgEvBb100 (ArrayList<Player> players){
+    private static double calcAvgEvBb100(ArrayList<Player> players) {
 
      /*  double avg=0;
         for (Player player : players) {

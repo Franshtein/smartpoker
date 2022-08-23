@@ -151,5 +151,52 @@
     <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">2</div>
     <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">3</div>
 </div>
+
+<div class="input-group mb-3">
+    <button class="btn btn-outline-secondary" type="button">Preflop</button>
+    <button class="btn btn-outline-secondary" type="button">Flop</button>
+    <button class="btn btn-outline-secondary" type="button">Turn</button>
+    <button class="btn btn-outline-secondary" type="button">River</button>
+</div>
+
+<ul class="list-group list-group-horizontal">
+    <li class="list-group-item">Элемент</li>
+    <li class="list-group-item">Второй элемент</li>
+    <li class="list-group-item">Третий элемент</li>
+</ul>
+
+
+<div class="row">
+    <div class="col-4">
+        <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">Главная</a>
+            <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">Профиль</a>
+            <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">Сообщения</a>
+            <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">Настройки</a>
+        </div>
+    </div>
+    <div class="col-8">
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">1</div>
+            <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">2</div>
+            <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">3</div>
+            <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list"> <table class="table table-striped">
+
+                <tr>
+                    <td th:each="stat : ${statValues}">
+                        <div th:switch="${stat.value}">
+                            <div th:case="'0'" th:class="colorblue" th:text="${stat.stat}"></div>
+                            <div th:case="'1'" th:class="coloryellow" th:text="${stat.stat}"></div>
+                            <div th:case="'2'" th:class="colorred" th:text="${stat.stat}"></div>
+                            <div th:case="'3'" th:class="colorpink" th:text="${stat.stat}"></div>
+                            <div th:case="*" th:class="colorgreen" th:text="${stat.stat}"></div>
+                        </div>
+                    </td>
+
+                </tr>
+            </table></div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

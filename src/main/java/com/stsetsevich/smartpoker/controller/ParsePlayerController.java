@@ -28,7 +28,7 @@ public class ParsePlayerController {
 
     @PostMapping("/search")
     public String addPlayer(@RequestParam String addFile, Map<String, Object> model) {
-        if (addFile !="") {
+        if (addFile != "") {
             StatsParse statsParse = new StatsParse(addFile);
             if (statsParse.getStats() != null) {
                 if (playerRepo.findByNickname(statsParse.searchNickname()) == null) {

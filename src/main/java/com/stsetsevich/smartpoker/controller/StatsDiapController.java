@@ -18,16 +18,16 @@ public class StatsDiapController {
     @GetMapping("/statsdiap")
     public String main(Model model1) {
 
-     //  Iterable<Stat> stats = statRepo.findAll();
+        //  Iterable<Stat> stats = statRepo.findAll();
         ArrayList<Stat> stats = statRepo.findAllByStatnameIsNotNullOrderById();
         model1.addAttribute("stats", stats);
         return "statsdiap";
     }
 
     @PostMapping("/statsdiap")
-    public String add(String statname, double point1, double point2,double point3,double point4, Model model1) {
+    public String add(String statname, double point1, double point2, double point3, double point4, Model model1) {
 
-        System.out.println(statname+point1+point2+point3+point4);
+        System.out.println(statname + point1 + point2 + point3 + point4);
 
         statRepo.findStatByStatname(statname);
         System.out.println(statRepo.findStatByStatname(statname).getId());
@@ -37,7 +37,7 @@ public class StatsDiapController {
         stat.setPoint3(point3);
         stat.setPoint4(point4);
         statRepo.save(stat);
-       // Iterable<Stat> stats = statRepo.findAll();
+        // Iterable<Stat> stats = statRepo.findAll();
         ArrayList<Stat> stats = statRepo.findAllByStatnameIsNotNullOrderById();
         model1.addAttribute("stats", stats);
 
