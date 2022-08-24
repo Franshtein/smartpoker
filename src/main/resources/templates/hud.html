@@ -31,7 +31,8 @@
                     <div class="col align-self-end">
                         <a th:href="'extrastats?player='+${player.nickname}+'&stat=0'" target="_blank"
                            th:unless="${player.vpip > 50}" th:class="colorgreen" th:text="${player.nickname}"
-                           data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
+                           data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"
+                           id="liveToastBtn4"></a>
                         <form th:action="@{addPlayer}" method="post">
                             <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
                             <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
@@ -69,15 +70,36 @@
                                             </div>
                                             <div th:case="*">
                                                 <div th:switch="${stat2.getValue()}">
+                                                    <form id="statForm" th:action="@{addStat}" method="post">
+                                                        <input type="hidden" th:value="${stat2.statName}"
+                                                               name="addStat">
+                                                        <input type="hidden" th:value="${player.nickname}"
+                                                               name="player">
+                                                        <input type="hidden" th:value="${player.nickname}"
+                                                               name="addPlayer">
+                                                        <input type="hidden" th:value="${player2.nickname}"
+                                                               name="addPlayer2">
+                                                        <input type="hidden" th:value="${player3.nickname}"
+                                                               name="addPlayer3">
+                                                        <input type="hidden" th:value="${player4.nickname}"
+                                                               name="addPlayer4">
+                                                        <input type="hidden" th:value="${player5.nickname}"
+                                                               name="addPlayer5">
+                                                        <button type="submit" hidden>Search</button>
+                                                    </form>
                                                     <div th:case="'0'"><a
+                                                            onclick="document.getElementById('statForm').submit(); return false;"
                                                             th:href="${stat2.address}" th:text="${stat2.stat}"
                                                             th:title="${stat2.statName}" th:class="colorblue"
                                                             target="_blank"></a></div>
                                                     <div th:case="'1'"><a
+                                                            onclick="document.getElementById('statForm').submit(); return false;"
                                                             th:href="${stat2.address}" th:text="${stat2.stat}"
                                                             th:title="${stat2.statName}" th:class="coloryellow"
-                                                            target="_blank"></a></div>
+                                                            target="_blank">
+                                                    </a></div>
                                                     <div th:case="'2'"><a
+                                                            onclick="document.getElementById('statForm').submit(); return false;"
                                                             th:href="${stat2.address}" th:text="${stat2.stat}"
                                                             th:title="${stat2.statName}" th:class="colorred"
                                                             target="_blank"></a></div>
@@ -86,6 +108,7 @@
                                                             th:title="${stat2.statName}" th:class="colorpink"
                                                             target="_blank"></a></div>
                                                     <div th:case="*"><a
+                                                            onclick="document.getElementById('statForm').submit(); return false;"
                                                             th:href="${stat2.address}" th:text="${stat2.stat}"
                                                             th:title="${stat2.statName}" th:class="colorgreen"
                                                             target="_blank"></a></div>
@@ -932,9 +955,10 @@
     <button class="btn btn-outline-secondary" type="button">River</button>
 </div>
 <button type="button" class="btn btn-primary" id="liveToastBtn">Показать лайв тосты</button>
+<button type="button" class="btn btn-primary" id="liveToastBtn2">Показать лайв тосты 2</button>
 
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div id="liveToast" class="toast" role="status" aria-live="polite" aria-atomic="true" data-bs-delay="40000">
         <div class="toast-header">
             <strong class="me-auto">Bootstrap</strong>
             <small>11 мин назад</small>
@@ -942,12 +966,247 @@
         </div>
         <div class="toast-body">
 
-            <div th:each="ti : ${tableinfo}">
-                <div th:text="${ti.stat}"></div>
-            </div>
-            </td>
+            <table th:object="${player}" class="table table-striped" border="3"
+                   th:classappend="${seats.get(0)}">
+                <tr>
+                    <td th:each="stat : ${plStatsLine1.get(0)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.address}">
+                                <div th:case="'#'">
+                                    <div th:switch="${stat2.getValue()}">
+                                        <div th:case="'0'" th:class="colorblue"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                        <div th:case="'1'" th:class="coloryellow"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                        <div th:case="'2'" th:class="colorred"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                        <div th:case="'3'" th:class="colorpink"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                        <div th:case="*" th:class="colorgreen"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                    </div>
+                                </div>
+                                <div th:case="*">
+                                    <div th:switch="${stat2.getValue()}">
+                                        <div th:case="'0'"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="colorblue"
+                                                target="_blank"></a></div>
+                                        <div th:case="'1'"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="coloryellow"
+                                                target="_blank"></a></div>
+                                        <div th:case="'2'"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="colorred"
+                                                target="_blank"></a></div>
+                                        <div th:case="'3'"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="colorpink"
+                                                target="_blank"></a></div>
+                                        <div th:case="*"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="colorgreen"
+                                                target="_blank"></a></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td th:each="stat : ${plStatsLine2.get(0)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.address}">
+                                <div th:case="'#'">
+                                    <div th:switch="${stat2.getValue()}">
+                                        <div th:case="'0'" th:class="colorblue"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                        <div th:case="'1'" th:class="coloryellow"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                        <div th:case="'2'" th:class="colorred"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                        <div th:case="'3'" th:class="colorpink"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                        <div th:case="*" th:class="colorgreen"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                    </div>
+                                </div>
+                                <div th:case="*">
+                                    <div th:switch="${stat2.getValue()}">
+                                        <div th:case="'0'"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="colorblue"
+                                                target="_blank"></a></div>
+                                        <div th:case="'1'"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="coloryellow"
+                                                target="_blank"></a></div>
+                                        <div th:case="'2'"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="colorred"
+                                                target="_blank"></a></div>
+                                        <div th:case="'3'"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="colorpink"
+                                                target="_blank"></a></div>
+                                        <div th:case="*"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="colorgreen"
+                                                target="_blank"></a></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td th:each="stat : ${plStatsLine3.get(0)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.address}">
+                                <div th:case="'#'">
+                                    <div th:switch="${stat2.getValue()}">
+                                        <div th:case="'0'" th:class="colorblue"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                        <div th:case="'1'" th:class="coloryellow"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                        <div th:case="'2'" th:class="colorred"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                        <div th:case="'3'" th:class="colorpink"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                        <div th:case="*" th:class="colorgreen"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                    </div>
+                                </div>
+                                <div th:case="*">
+                                    <div th:switch="${stat2.getValue()}">
+                                        <div th:case="'0'"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="colorblue"
+                                                target="_blank"></a></div>
+                                        <div th:case="'1'"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="coloryellow"
+                                                target="_blank"></a></div>
+                                        <div th:case="'2'"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="colorred"
+                                                target="_blank"></a></div>
+                                        <div th:case="'3'"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="colorpink"
+                                                target="_blank"></a></div>
+                                        <div th:case="*"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="colorgreen"
+                                                target="_blank"></a></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td th:each="stat : ${plStatsLine4.get(0)}">
+                        <div th:each="stat2 : ${stat}">
+                            <div th:switch="${stat2.address}">
+                                <div th:case="'#'">
+                                    <div th:switch="${stat2.getValue()}">
+                                        <div th:case="'0'" th:class="colorblue"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                        <div th:case="'1'" th:class="coloryellow"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                        <div th:case="'2'" th:class="colorred"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                        <div th:case="'3'" th:class="colorpink"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                        <div th:case="*" th:class="colorgreen"
+                                             th:text="${stat2.stat}"
+                                             th:title="${stat2.statName}"></div>
+                                    </div>
+                                </div>
+                                <div th:case="*">
+                                    <div th:switch="${stat2.getValue()}">
+                                        <div th:case="'0'"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="colorblue"
+                                                target="_blank"></a></div>
+                                        <div th:case="'1'"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="coloryellow"
+                                                target="_blank"></a></div>
+                                        <div th:case="'2'"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="colorred"
+                                                target="_blank"></a></div>
+                                        <div th:case="'3'"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="colorpink"
+                                                target="_blank"></a></div>
+                                        <div th:case="*"><a
+                                                th:href="${stat2.address}" th:text="${stat2.stat}"
+                                                th:title="${stat2.statName}" th:class="colorgreen"
+                                                target="_blank"></a></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
+</div>
+<div class="toast-container position-fixed top-50 start-50 translate-middle">
+    <div id="liveToast2" class="toast" role="status" aria-live="polite" aria-atomic="true" data-bs-delay="40000">
+        <div class="toast-header">
+            <strong class="me-auto">Bootstrap</strong>
+            <small>15 мин назад</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Закрыть"></button>
+        </div>
+        <div class="toast-body">
+
+            <table class="table table-striped">
+
+                <tr>
+                    <td th:each="stat : ${statValues}" id="wow">
+                        <div th:switch="${stat.value}">
+                            <div th:case="'0'" th:class="colorblue" th:text="${stat.stat}"></div>
+                            <div th:case="'1'" th:class="coloryellow" th:text="${stat.stat}"></div>
+                            <div th:case="'2'" th:class="colorred" th:text="${stat.stat}"></div>
+                            <div th:case="'3'" th:class="colorpink" th:text="${stat.stat}"></div>
+                            <div th:case="*" th:class="colorgreen" th:text="${stat.stat}"></div>
+                        </div>
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
 </div>
 <p class="muted">Текст-заполнитель для демонстрации некоторых <a href="#"
                                                                  data-bs-toggle="tooltipdata-bs-titleТултип по умолчанию">встроенных
@@ -960,17 +1219,47 @@
                                                                                 data-bs-title="The last tip!">Вашем
         собственном </a> сайте или проекте. </p>
 <script type="text/javascript">
-    const toastTrigger = document.getElementById('liveToastBtn')
+    const toastTrigger = document.getElementById('liveToastBtn3')
     const toastLiveExample = document.getElementById('liveToast')
+    const toastTrigger2 = document.getElementById('liveToastBtn2')
+    const toastLiveExample2 = document.getElementById('liveToast2')
     if (toastTrigger) {
         toastTrigger.addEventListener('click', () => {
             const toast = new bootstrap.Toast(toastLiveExample)
 
             toast.show()
         })
+
+    }
+    if (toastTrigger2) {
+        toastTrigger2.addEventListener('click', () => {
+            const toast = new bootstrap.Toast(toastLiveExample2)
+
+            toast.show()
+        })
+
     }
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+    function ready() {
+        alert('DOM готов');
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+            const m = document.getElementById('wow');
+            if (m === null) {
+
+            }
+            else {
+
+                const toast = new bootstrap.Toast(toastLiveExample2)
+                toast.show();
+            }
+
+
+    })
 </script>
 <a class="btn btn-primary" data-bs-toggle="collapse" href="#wow" role="button" aria-expanded="false"
    aria-controls="wow">Переключить первый элемент</a>

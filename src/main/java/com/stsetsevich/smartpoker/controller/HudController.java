@@ -1,10 +1,7 @@
 package com.stsetsevich.smartpoker.controller;
 
 import com.stsetsevich.smartpoker.domain.Player;
-import com.stsetsevich.smartpoker.engine.PreflopStatsCalc;
-import com.stsetsevich.smartpoker.engine.SetPlayersAtTable;
-import com.stsetsevich.smartpoker.engine.StatValue;
-import com.stsetsevich.smartpoker.engine.TableInfoCalc;
+import com.stsetsevich.smartpoker.engine.*;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +26,8 @@ public class HudController {
     StatRepo statRepo;
     @Autowired
     PreflopStatsCalc preflopStatsCalc;
+    @Autowired
+    ExtraStatsCalc extraStatsCalc;
 
     @GetMapping("/hud")
     public String hud(String nickname, Map<String, Object> model, String addPlayer, String addPlayer2, String addPlayer3
@@ -245,6 +245,40 @@ public class HudController {
 
         model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
         model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
+        model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, statRepo));
+        model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl, statRepo));
+        model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl, statRepo));
+        model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl, statRepo));
+        model.put("player", pl.get(0));
+        model.put("player2", pl.get(1));
+        model.put("player3", pl.get(2));
+        model.put("player4", pl.get(3));
+        model.put("player5", pl.get(4));
+
+        return "hud";
+
+    }
+    @PostMapping("addStat")
+    public String addStat(@RequestParam String addPlayer, String addPlayer2, String addPlayer3
+            , String addPlayer4, String addPlayer5, String addStat, String player, Map<String, Object> model) {
+        //можно только одной строкой, вот так, только будет фильтровать и при пустом поле
+        //  List<Message> messages = messageRepo.findByTag(filter);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        model.put("name", username);
+
+        System.out.println(addStat);
+        System.out.println(player);
+        ArrayList<Player> pl = SetPlayersAtTable.getAllPlayerStats(playerRepo, addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        Iterable<Player> players = playerRepo.findAll();
+        model.put("players", players);
+        model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
+
+        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
+
+        Player playerNick = SetPlayersAtTable.checkPlayer(playerRepo, player);
+        ArrayList<StatValue> statValues = extraStatsCalc.extraStatsCalc(playerNick, addStat, statRepo);
+        model.put("statValues", statValues);
         model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, statRepo));
         model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl, statRepo));
         model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl, statRepo));
