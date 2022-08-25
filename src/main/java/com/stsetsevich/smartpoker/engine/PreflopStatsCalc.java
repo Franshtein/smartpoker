@@ -27,7 +27,7 @@ public class PreflopStatsCalc extends StatsCalc {
 
             statname = "totalPfr";
             statValue = new StatValue(Double.toString(pl.getTotalPfr()), checkDiap(pl.getTotalPfr(),
-                    getPoints(statname, statRepo), Variant.ONE), statname);
+                    getPoints(statname, statRepo), Variant.ONE), true, statname, pl);
             stats.add(statValue);
 
             statname = "total3bet";

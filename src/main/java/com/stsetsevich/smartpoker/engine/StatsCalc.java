@@ -6,7 +6,9 @@ import com.stsetsevich.smartpoker.repos.StatRepo;
 import java.util.ArrayList;
 
 public class StatsCalc {
-
+    protected enum Variant {
+        ONE, TWO, THREE;
+    }
     //Проверка, в какой диапазон попадает значение стата игрока, чтобы определить каким цветом его закрашивать
     //Три разных варианта, в зависимости от типа стата, т.к. некоторые нужно инвертировать и т.п.
     protected static int checkDiap(double stat, double points[], Variant variant) {
@@ -61,7 +63,5 @@ public class StatsCalc {
     }
 
     //Варианты вычисления диапазона для стата
-    protected enum Variant {
-        ONE, TWO, THREE;
-    }
+
 }

@@ -9,11 +9,11 @@ import java.util.ArrayList;
 @Service
 public class ExtraStatsCalc extends StatsCalc {
     //По инстансу игрока и id стата вычисляем, какими статами нужно заполнить таблицу и заполняем её.
-    public static ArrayList<StatValue> extraStatsCalc(Player player, String statId, StatRepo statRepo) {
+    public static ArrayList<StatValue> extraStatsCalc(Player player, String statName, StatRepo statRepo) {
         ArrayList<StatValue> stats = new ArrayList<>();
-        switch (statId) {
-            case ("0"):
-                getThreeBetStats(player, stats, statRepo);
+        switch (statName) {
+            case ("totalPfr"):
+                getPfrStats(player, stats, statRepo);
                 return stats;
             case ("total3bet"):
                 getThreeBetStats(player, stats, statRepo);
@@ -64,6 +64,40 @@ public class ExtraStatsCalc extends StatsCalc {
 
         statname = "total3betBb";
         statValue = new StatValue(Double.toString(pl.getTotal3betBb()), checkDiap(pl.getTotal3betBb(),
+                getPoints(statname, statRepo), Variant.ONE), statname);
+        stats.add(statValue);
+
+        return stats;
+    }
+    private static ArrayList<StatValue> getPfrStats(Player pl, ArrayList<StatValue> stats, StatRepo statRepo) {
+        StatValue statValue;
+        String statname = "totalPfr";
+        statValue = new StatValue(Double.toString(pl.getTotalPfr()), checkDiap(pl.getTotalPfr(),
+                getPoints(statname, statRepo), Variant.ONE), statname);
+        stats.add(statValue);
+
+        statname = "pfrEp";
+        statValue = new StatValue(Double.toString(pl.getPfrEp()), checkDiap(pl.getPfrEp(),
+                getPoints(statname, statRepo), Variant.ONE), statname);
+        stats.add(statValue);
+
+        statname = "pfrMp";
+        statValue = new StatValue(Double.toString(pl.getPfrMp()), checkDiap(pl.getPfrMp(),
+                getPoints(statname, statRepo), Variant.ONE), statname);
+        stats.add(statValue);
+
+        statname = "pfrCo";
+        statValue = new StatValue(Double.toString(pl.getPfrCo()), checkDiap(pl.getPfrCo(),
+                getPoints(statname, statRepo), Variant.ONE), statname);
+        stats.add(statValue);
+
+        statname = "pfrBu";
+        statValue = new StatValue(Double.toString(pl.getPfrBu()), checkDiap(pl.getPfrBu(),
+                getPoints(statname, statRepo), Variant.ONE), statname);
+        stats.add(statValue);
+
+        statname = "pfrSb";
+        statValue = new StatValue(Double.toString(pl.getPfrSb()), checkDiap(pl.getPfrSb(),
                 getPoints(statname, statRepo), Variant.ONE), statname);
         stats.add(statValue);
 

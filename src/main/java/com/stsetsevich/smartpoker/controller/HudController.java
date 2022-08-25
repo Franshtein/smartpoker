@@ -36,30 +36,22 @@ public class HudController {
         String username = auth.getName();
         model.put("name", username);
         ArrayList<String> playerStats = SetPlayersAtTable.getPlayerStats(playerRepo, "Franshtik (PS)");
-        model.put("playerstats", playerStats);
 
-        Iterable<Player> players = playerRepo.findAll();
-        model.put("players", players);
         ArrayList<Player> pl = SetPlayersAtTable.getAllPlayerStats(playerRepo, addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        //Основная информация о столе на основе игоков за столом
+        model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
 
-      /*  HashMap<Integer, ArrayList<StatValue>> sv = HudCalc.hudStatsCalcLine1(pl, statRepo);
+        //Информация о цвете таблиц
+        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
 
-        for(ArrayList<StatValue> sAl : sv.values())
-        {
-            for (StatValue s : sAl)
-            {
-                System.out.println(s.getStat());
-            }
-        }
-*/
+
+        //Информация о префлопе для таблиц со статами
         model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, statRepo));
         model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl, statRepo));
         model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl, statRepo));
         model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl, statRepo));
 
-        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
-        model.put("players", players);
-        model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
+        //Информация об игроках за столом
         model.put("player", pl.get(0));
         model.put("player2", pl.get(1));
         model.put("player3", pl.get(2));
@@ -78,22 +70,29 @@ public class HudController {
         String username = auth.getName();
         model.put("name", username);
 
-        Iterable<Player> players = playerRepo.findAll();
+
 
         ArrayList<Player> pl = SetPlayersAtTable.getAllPlayerStats(playerRepo, addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        //Основная информация о столе на основе игоков за столом
+        model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
 
+        //Информация о цвете таблиц
+        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
+
+
+        //Информация о префлопе для таблиц со статами
         model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, statRepo));
         model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl, statRepo));
         model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl, statRepo));
         model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl, statRepo));
-        model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
-        model.put("players", players);
-        model.put("seats", PreflopStatsCalc.hudSeatsColor(pl, statRepo));
+
+        //Информация об игроках за столом
         model.put("player", pl.get(0));
         model.put("player2", pl.get(1));
         model.put("player3", pl.get(2));
         model.put("player4", pl.get(3));
         model.put("player5", pl.get(4));
+
 
 
         return "hud";
@@ -110,16 +109,20 @@ public class HudController {
 
 
         ArrayList<Player> pl = SetPlayersAtTable.getAllPlayerStats(playerRepo, addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
-        Iterable<Player> players = playerRepo.findAll();
-        model.put("players", players);
+
+        //Основная информация о столе на основе игоков за столом
         model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
 
+        //Информация о цвете таблиц
         model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
 
+        //Информация о префлопе для таблиц со статами
         model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, statRepo));
         model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl, statRepo));
         model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl, statRepo));
         model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl, statRepo));
+
+        //Информация об игроках за столом
         model.put("player", pl.get(0));
         model.put("player2", pl.get(1));
         model.put("player3", pl.get(2));
@@ -139,31 +142,28 @@ public class HudController {
         String username = auth.getName();
         System.out.println(addPlayer);
         model.put("name", username);
-        Iterable<Player> players = playerRepo.findAll();
-        model.put("players", players);
-
 
         ArrayList<Player> pl = SetPlayersAtTable.getAllPlayerStats(playerRepo, addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
 
-        HashMap<Integer, ArrayList<StatValue>> sv = preflopStatsCalc.hudStatsCalcLine1(pl, statRepo);
+        //Основная информация о столе на основе игоков за столом
+        model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
 
-        for (ArrayList<StatValue> sAl : sv.values()) {
-            for (StatValue s : sAl) {
-                System.out.println(s.getStat());
-            }
-        }
+        //Информация о цвете таблиц
+        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
 
+        //Информация о префлопе для таблиц со статами
         model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, statRepo));
         model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl, statRepo));
         model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl, statRepo));
         model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl, statRepo));
-        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
+
+        //Информация об игроках за столом
         model.put("player", pl.get(0));
         model.put("player2", pl.get(1));
         model.put("player3", pl.get(2));
         model.put("player4", pl.get(3));
         model.put("player5", pl.get(4));
-        model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
+
         return "hud";
 
     }
@@ -177,20 +177,21 @@ public class HudController {
         String username = auth.getName();
         model.put("name", username);
 
-        System.out.println(addPlayer);
-        System.out.println(addPlayer2);
-        System.out.println(addPlayer3 + "+++++++++++++++");
-
         ArrayList<Player> pl = SetPlayersAtTable.getAllPlayerStats(playerRepo, addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
-        Iterable<Player> players = playerRepo.findAll();
-        model.put("players", players);
+        //Основная информация о столе на основе игоков за столом
         model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
 
+        //Информация о цвете таблиц
         model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
+
+
+        //Информация о префлопе для таблиц со статами
         model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, statRepo));
         model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl, statRepo));
         model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl, statRepo));
         model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl, statRepo));
+
+        //Информация об игроках за столом
         model.put("player", pl.get(0));
         model.put("player2", pl.get(1));
         model.put("player3", pl.get(2));
@@ -211,15 +212,20 @@ public class HudController {
         model.put("name", username);
 
         ArrayList<Player> pl = SetPlayersAtTable.getAllPlayerStats(playerRepo, addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
-        Iterable<Player> players = playerRepo.findAll();
-        model.put("players", players);
 
-        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
+        //Основная информация о столе на основе игоков за столом
         model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
+
+        //Информация о цвете таблиц
+        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
+
+        //Информация о префлопе для таблиц со статами
         model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, statRepo));
         model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl, statRepo));
         model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl, statRepo));
         model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl, statRepo));
+
+        //Информация об игроках за столом
         model.put("player", pl.get(0));
         model.put("player2", pl.get(1));
         model.put("player3", pl.get(2));
@@ -240,20 +246,25 @@ public class HudController {
         model.put("name", username);
 
         ArrayList<Player> pl = SetPlayersAtTable.getAllPlayerStats(playerRepo, addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
-        Iterable<Player> players = playerRepo.findAll();
-        model.put("players", players);
-
-        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
+        //Основная информация о столе на основе игоков за столом
         model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
+
+        //Информация о цвете таблиц
+        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
+
+        //Информация о префлопе для таблиц со статами
         model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, statRepo));
         model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl, statRepo));
         model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl, statRepo));
         model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl, statRepo));
+
+        //Информация об игроках за столом
         model.put("player", pl.get(0));
         model.put("player2", pl.get(1));
         model.put("player3", pl.get(2));
         model.put("player4", pl.get(3));
         model.put("player5", pl.get(4));
+
 
         return "hud";
 
@@ -267,22 +278,31 @@ public class HudController {
         String username = auth.getName();
         model.put("name", username);
 
-        System.out.println(addStat);
-        System.out.println(player);
         ArrayList<Player> pl = SetPlayersAtTable.getAllPlayerStats(playerRepo, addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
-        Iterable<Player> players = playerRepo.findAll();
-        model.put("players", players);
-        model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
 
-        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
 
         Player playerNick = SetPlayersAtTable.checkPlayer(playerRepo, player);
         ArrayList<StatValue> statValues = extraStatsCalc.extraStatsCalc(playerNick, addStat, statRepo);
+
+
+        //Основная информация о столе на основе игоков за столом
+        model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
+
+        //Информация о цвете таблиц
+        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
+
+        //Информация для всплывающих сообщений с доп. статами
+        model.put("statExtra", addStat);
+        model.put("statPlayer", player);
         model.put("statValues", statValues);
+
+        //Информация о префлопе для таблиц со статами
         model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, statRepo));
         model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl, statRepo));
         model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl, statRepo));
         model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl, statRepo));
+
+        //Информация об игроках за столом
         model.put("player", pl.get(0));
         model.put("player2", pl.get(1));
         model.put("player3", pl.get(2));
