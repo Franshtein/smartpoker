@@ -3,6 +3,10 @@ package com.stsetsevich.smartpoker.domain;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 @Entity
 @Table(name="player")
@@ -241,6 +245,7 @@ public class Player {
     private double bbVsBu3bet;
     private double bbVsSb3bet;
 
+    private Date dateUpdate;
     public Player()
     {
     }
@@ -248,7 +253,17 @@ public class Player {
     public Player(String nickname)
     {
         this.nickname=nickname;
+        this.dateUpdate= new Date(System.currentTimeMillis());
     }
+
+    public Date getDateUpdate() {
+        return dateUpdate;
+    }
+
+    public void setDateUpdate(Date dateUpdate) {
+        this.dateUpdate = dateUpdate;
+    }
+
     public String getNickname() {
         return nickname;
     }

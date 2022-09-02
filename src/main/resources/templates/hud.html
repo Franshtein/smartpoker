@@ -32,7 +32,7 @@
                 <div class="row row-height-400">
                     <div class="col align-self-end">
                         <a th:href="'extrastats?player='+${player.nickname}+'&stat=0'" target="_blank"
-                           th:unless="${player.vpip > 50}" th:class="colorgreen" th:text="${player.nickname}"
+                            th:class="colorgreen" th:text="${player.nickname}"
                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"
                            id="liveToastBtn4"></a>
                         <form th:action="@{addPlayer}" method="post">
@@ -144,7 +144,7 @@
 
                     </div>
                     <div class="col  align-self-start">
-                        <a th:href="'3bet?player='+${player2.nickname}" target="_blank" th:unless="${player2.vpip > 50}"
+                        <a th:href="'3bet?player='+${player2.nickname}" target="_blank"
                            th:class="colorgreen" th:text="${player2.nickname}"></a>
                         <form th:action="@{addPlayer2}" method="post">
                             <input type="hidden" th:value="${player.nickname}" name="addPlayer">
@@ -257,7 +257,7 @@
                         </table>
                     </div>
                     <div class="col  align-self-end">
-                        <a th:href="'3bet?player='+${player3.nickname}" target="_blank" th:unless="${player3.vpip > 50}"
+                        <a th:href="'3bet?player='+${player3.nickname}" target="_blank"
                            th:class="colorgreen" th:text="${player3.nickname}"></a>
                         <form th:action="@{addPlayer3}" method="post">
                             <input type="hidden" th:value="${player.nickname}" name="addPlayer">
@@ -375,7 +375,7 @@
                 <div class="row justify-content-evenly">
                     <div class="col-4">
                         <a th:href="'extrastats?player='+${player4.nickname}+'&stat=0'" target="_blank"
-                           th:unless="${player.vpip > 50}" th:class="colorgreen" th:text="${player4.nickname}"
+                            th:class="colorgreen" th:text="${player4.nickname}"
                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
                         <form th:action="@{addPlayer4}" method="post">
                             <input type="hidden" th:value="${player.nickname}" name="addPlayer">
@@ -490,7 +490,7 @@
 
                     <div class="col-4">
                         <a th:href="'extrastats?player='+${player5.nickname}+'&stat=0'" target="_blank"
-                           th:unless="${player.vpip > 50}" th:class="colorgreen" th:text="${player5.nickname}"
+                            th:class="colorgreen" th:text="${player5.nickname}"
                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
                         <form th:action="@{addPlayer5}" method="post">
                             <input type="hidden" th:value="${player.nickname}" name="addPlayer">
@@ -615,7 +615,7 @@
                 <div class="row row-height-400">
                     <div class="col align-self-end">
                         <a th:href="'extrastats?player='+${player.nickname}+'&stat=0'" target="_blank"
-                           th:unless="${player.vpip > 50}" th:class="colorgreen" th:text="${player.nickname}"
+                            th:class="colorgreen" th:text="${player.nickname}"
                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"
                            id="liveToastBtn4"></a>
                         <form th:action="@{addPlayer}" method="post">
@@ -727,7 +727,7 @@
 
                     </div>
                     <div class="col  align-self-start">
-                        <a th:href="'3bet?player='+${player2.nickname}" target="_blank" th:unless="${player2.vpip > 50}"
+                        <a th:href="'3bet?player='+${player2.nickname}" target="_blank"
                            th:class="colorgreen" th:text="${player2.nickname}"></a>
                         <form th:action="@{addPlayer2}" method="post">
                             <input type="hidden" th:value="${player.nickname}" name="addPlayer">
@@ -840,7 +840,7 @@
                         </table>
                     </div>
                     <div class="col  align-self-end">
-                        <a th:href="'3bet?player='+${player3.nickname}" target="_blank" th:unless="${player3.vpip > 50}"
+                        <a th:href="'3bet?player='+${player3.nickname}" target="_blank"
                            th:class="colorgreen" th:text="${player3.nickname}"></a>
                         <form th:action="@{addPlayer3}" method="post">
                             <input type="hidden" th:value="${player.nickname}" name="addPlayer">
@@ -958,7 +958,7 @@
                 <div class="row justify-content-evenly">
                     <div class="col-4">
                         <a th:href="'extrastats?player='+${player4.nickname}+'&stat=0'" target="_blank"
-                           th:unless="${player.vpip > 50}" th:class="colorgreen" th:text="${player4.nickname}"
+                           th:class="colorgreen" th:text="${player4.nickname}"
                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
                         <form th:action="@{addPlayer4}" method="post">
                             <input type="hidden" th:value="${player.nickname}" name="addPlayer">
@@ -1073,7 +1073,7 @@
 
                     <div class="col-4">
                         <a th:href="'extrastats?player='+${player5.nickname}+'&stat=0'" target="_blank"
-                           th:unless="${player.vpip > 50}" th:class="colorgreen" th:text="${player5.nickname}"
+                            th:class="colorgreen" th:text="${player5.nickname}"
                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
                         <form th:action="@{addPlayer5}" method="post">
                             <input type="hidden" th:value="${player.nickname}" name="addPlayer">

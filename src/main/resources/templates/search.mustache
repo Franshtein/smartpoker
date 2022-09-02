@@ -11,8 +11,13 @@
 
 <div>
     <h1>Set Player for parsing</h1>
-    <form method="post">
+    <form method="post" action="addFile">
         <p><input type="file" name="addFile"></p>
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+        <button type="submit">Add</button>
+    </form>
+    <form method="post" action="addFile2">
+        <p><input type="text" name="addFile2"></p>
         <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
         <button type="submit">Add</button>
     </form>
