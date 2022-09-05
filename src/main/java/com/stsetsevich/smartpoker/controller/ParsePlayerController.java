@@ -28,6 +28,8 @@ public class ParsePlayerController {
     UserRepo userRepo;
     @Autowired
     UserSmarthandAccountAndCookiesRepo userSmarthandAccountAndCookiesRepo;
+    @Autowired
+    SetPlayersAtTable setPlayersAtTable;
 
     @GetMapping("/search")
     public String searchPlayer(Map<String, Object> model) {
@@ -49,21 +51,8 @@ public class ParsePlayerController {
             while (scanner.hasNext()) {
 
                 string = scanner.nextLine();
-                try {
-                    System.out.println(string);
-                    Document document = ParsePlayer.parsePlayer(string, userRepo, userSmarthandAccountAndCookiesRepo);
-                    if (document != null) {
-                        StatsParse statsParse = new StatsParse(document);
-                        if (statsParse.getStats() != null) {
-                            if (playerRepo.findByNickname(statsParse.searchNickname()) == null) {
-                                playerRepo.save(statsParse.getStats());
-                            } else System.out.println("That player excists in the DataBase");
-                        }
-                    } else System.out.println("There is no data on player " + string);
+                setPlayersAtTable.tryAddNewPlayer(string);
 
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
             }
 
 

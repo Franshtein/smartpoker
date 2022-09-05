@@ -33,6 +33,8 @@ public class HudController {
     UserRepo userRepo;
     @Autowired
     UserSmarthandAccountAndCookiesRepo userSmarthandAccountAndCookiesRepo;
+    @Autowired
+    SetPlayersAtTable setPlayersAtTable;
 
     @GetMapping("/hud")
     public String hud(String nickname, Map<String, Object> model, String addPlayer, String addPlayer2, String addPlayer3
@@ -44,7 +46,7 @@ public class HudController {
         addPlayer3 = "Franshtik (PS)";
         addPlayer4 = "Franshtik (PS)";
         addPlayer5 = "Franshtik (PS)";
-        ArrayList<Player> pl = SetPlayersAtTable.getAllPlayerStats(playerRepo, userRepo, userSmarthandAccountAndCookiesRepo, addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
         modelPutGeneralInfo(model, pl, statRepo, preflopStatsCalc);
         return "hud";
     }
@@ -55,7 +57,7 @@ public class HudController {
             , String addPlayer4, String addPlayer5) {
 
 
-        ArrayList<Player> pl = SetPlayersAtTable.getAllPlayerStats(playerRepo, userRepo, userSmarthandAccountAndCookiesRepo, addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
 
         modelPutGeneralInfo(model, pl, statRepo, preflopStatsCalc);
 
@@ -67,7 +69,7 @@ public class HudController {
             , String addPlayer4, String addPlayer5, Map<String, Object> model) {
 
 
-        ArrayList<Player> pl = SetPlayersAtTable.getAllPlayerStats(playerRepo, userRepo, userSmarthandAccountAndCookiesRepo, addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
 
         modelPutGeneralInfo(model, pl, statRepo, preflopStatsCalc);
 
@@ -80,7 +82,7 @@ public class HudController {
             , String addPlayer4, String addPlayer5, Map<String, Object> model) {
 
 
-        ArrayList<Player> pl = SetPlayersAtTable.getAllPlayerStats(playerRepo, userRepo, userSmarthandAccountAndCookiesRepo, addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
 
         modelPutGeneralInfo(model, pl, statRepo, preflopStatsCalc);
 
@@ -93,7 +95,7 @@ public class HudController {
             , String addPlayer4, String addPlayer5, Map<String, Object> model) {
 
 
-        ArrayList<Player> pl = SetPlayersAtTable.getAllPlayerStats(playerRepo, userRepo, userSmarthandAccountAndCookiesRepo, addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
 
         modelPutGeneralInfo(model, pl, statRepo, preflopStatsCalc);
 
@@ -106,7 +108,7 @@ public class HudController {
             , String addPlayer, String addPlayer5, Map<String, Object> model) {
 
 
-        ArrayList<Player> pl = SetPlayersAtTable.getAllPlayerStats(playerRepo, userRepo, userSmarthandAccountAndCookiesRepo, addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
 
         //Основная информация о столе на основе игоков за столом
         modelPutGeneralInfo(model, pl, statRepo, preflopStatsCalc);
@@ -120,7 +122,7 @@ public class HudController {
             , String addPlayer, String addPlayer4, Map<String, Object> model) {
 
 
-        ArrayList<Player> pl = SetPlayersAtTable.getAllPlayerStats(playerRepo, userRepo, userSmarthandAccountAndCookiesRepo, addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
 
         modelPutGeneralInfo(model, pl, statRepo, preflopStatsCalc);
 
@@ -136,7 +138,7 @@ public class HudController {
         //  List<Message> messages = messageRepo.findByTag(filter);
 
 
-        ArrayList<Player> pl = SetPlayersAtTable.getAllPlayerStats(playerRepo, userRepo, userSmarthandAccountAndCookiesRepo, addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
 
 
         Player playerNick = SetPlayersAtTable.checkPlayer(playerRepo, player);
