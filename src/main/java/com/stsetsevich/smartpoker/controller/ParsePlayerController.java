@@ -30,6 +30,7 @@ public class ParsePlayerController {
     UserSmarthandAccountAndCookiesRepo userSmarthandAccountAndCookiesRepo;
     @Autowired
     SetPlayersAtTable setPlayersAtTable;
+    @Autowired ParsePlayer parsePlayer;
 
     @GetMapping("/search")
     public String searchPlayer(Map<String, Object> model) {
@@ -78,7 +79,7 @@ public class ParsePlayerController {
     */
         try {
 
-            Document document = ParsePlayer.parsePlayer(addFile2, userRepo, userSmarthandAccountAndCookiesRepo);
+            Document document = parsePlayer.parsePlayer(addFile2);
             if (document != null) {
                 StatsParse statsParse = new StatsParse(document);
                 if (statsParse.getStats() != null) {

@@ -23,14 +23,19 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.Map;
 
+@Service
 public class ParsePlayer {
+    @Autowired
+    UserRepo userRepo;
+    @Autowired
+    UserSmarthandAccountAndCookiesRepo userSmarthandAccountAndCookiesRepo;
     private static Connection.Response response;
     private static Map<String, String> cookie;
 
 
 
 
-    private static void setCookies(UserRepo userRepo, UserSmarthandAccountAndCookiesRepo userSmarthandRepo) throws IOException {
+    private void setCookies() throws IOException {
         response = Jsoup
                 .connect("https://smarthand.pro/handler")
                 .method(Connection.Method.POST)
@@ -53,32 +58,32 @@ public class ParsePlayer {
         smarthandAccount.setSessionId(cookie.get("PHPSESSID"));
        try {
            System.out.println("1");
-           userSmarthandRepo.save(smarthandAccount);
+           userSmarthandAccountAndCookiesRepo.save(smarthandAccount);
            System.out.println("2");
        }
         catch (Exception exception)
         {
             System.out.println("3");
-            userSmarthandRepo.deleteById(user.getId());
+            userSmarthandAccountAndCookiesRepo.deleteById(user.getId());
             System.out.println("4");
-            userSmarthandRepo.save(smarthandAccount);
+            userSmarthandAccountAndCookiesRepo.save(smarthandAccount);
             System.out.println("5");
         }
       //  System.out.println(response.body());
     }
-    private static void getCookies(WebClient webClient, UserRepo userRepo, UserSmarthandAccountAndCookiesRepo userSmarthandRepo) throws IOException {
+    private void getCookies(WebClient webClient) throws IOException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         System.out.println("001");
-        UserSmarthandAccountAndCookies smarthandAccountAndCookies = userSmarthandRepo.findByUser(userRepo.findByUsername(username));
+        UserSmarthandAccountAndCookies smarthandAccountAndCookies = userSmarthandAccountAndCookiesRepo.findByUser(userRepo.findByUsername(username));
         System.out.println("002");
      //   System.out.println(smarthandAccountAndCookies.getSessionId());
         if(smarthandAccountAndCookies==null || smarthandAccountAndCookies.getSessionId()==null || smarthandAccountAndCookies.getSessionId()=="")
         {
             System.out.println("003");
-            setCookies(userRepo, userSmarthandRepo);
+            setCookies();
             System.out.println("004");
-            smarthandAccountAndCookies = userSmarthandRepo.findByUser(userRepo.findByUsername(username));
+            smarthandAccountAndCookies = userSmarthandAccountAndCookiesRepo.findByUser(userRepo.findByUsername(username));
             System.out.println("005");
             Cookie cookie1 = new Cookie("smarthand.pro", "lang", "en");
             Cookie cookie2 = new Cookie("smarthand.pro", "template", "default");
@@ -101,7 +106,7 @@ public class ParsePlayer {
     }
 
 
-    public static Document parsePlayer(String nickname, UserRepo userRepo, UserSmarthandAccountAndCookiesRepo userSmarthandAccountAndCookiesRepo) throws IOException {
+    public Document parsePlayer(String nickname) throws IOException {
         String url = "https://smarthand.pro/ps/#"+nickname;
 
         final WebClient webClient = new WebClient(BrowserVersion.BEST_SUPPORTED);
@@ -114,7 +119,7 @@ public class ParsePlayer {
 
         System.out.println(cookieManager.getCookies().toString());
         cookieManager.clearCookies();
-        getCookies(webClient, userRepo, userSmarthandAccountAndCookiesRepo);
+        getCookies(webClient);
 
 
 
@@ -142,8 +147,8 @@ public class ParsePlayer {
         //Создаем новые куки
         catch (Exception e)
         {
-            setCookies(userRepo, userSmarthandAccountAndCookiesRepo);
-            getCookies(webClient, userRepo, userSmarthandAccountAndCookiesRepo);
+            setCookies();
+            getCookies(webClient);
             element  = htmlPage.getElementById("table_1");
             htmlPage = element.click();
         }

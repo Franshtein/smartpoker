@@ -28,6 +28,8 @@ public class SetPlayersAtTable {
     UserSmarthandAccountAndCookies userSmarthandAccountAndCookies;
     @Autowired
     UserSmarthandAccountAndCookiesRepo userSmarthandAccountAndCookiesRepo;
+    @Autowired
+    ParsePlayer parsePlayer;
 
     public static Player checkPlayer(PlayerRepo playerRepo, String player) {
         Player playerNick = playerRepo.findByNickname(player);
@@ -115,7 +117,7 @@ public class SetPlayersAtTable {
     public void tryAddNewPlayer(String playerName)
     {
         try {
-            Document document = ParsePlayer.parsePlayer(playerName, userRepo, userSmarthandAccountAndCookiesRepo);
+            Document document = parsePlayer.parsePlayer(playerName);
             if (document != null) {
                 StatsParse statsParse = new StatsParse(document);
                 if (statsParse.getStats() != null) {
