@@ -24,12 +24,14 @@ public class SetPlayersAtTable {
 
     PlayerRepo playerRepo;
     @Autowired
-     UserRepo userRepo;
+    UserRepo userRepo;
     UserSmarthandAccountAndCookies userSmarthandAccountAndCookies;
     @Autowired
     UserSmarthandAccountAndCookiesRepo userSmarthandAccountAndCookiesRepo;
     @Autowired
     ParsePlayer parsePlayer;
+    @Autowired
+    AddOrUpdatePlayer addOrUpdatePlayer;
 
     public static Player checkPlayer(PlayerRepo playerRepo, String player) {
         Player playerNick = playerRepo.findByNickname(player);
@@ -59,99 +61,34 @@ public class SetPlayersAtTable {
         playerName.add(p4);
         playerName.add(p5);
         ArrayList<Player> players = new ArrayList<>();
-        for (String pn : playerName)
-        {
+        for (String pn : playerName) {
             Player player = playerRepo.findByNickname(pn);
+            if (player == null) player = playerRepo.findByNickname(pn+" (PS)");
             players.add(player);
         }
 
         int i = 0;
         for (Player pl : players) {
-            Player pl2 = playerRepo.findByNickname(playerName.get(i) + " (PS)");
-            if (pl2 == null) {
-                if (pl == null) {
-                  tryAddNewPlayer(playerName.get(i));
-                    pl = playerRepo.findByNickname(playerName.get(i)+ " (PS)");
-                    if (pl == null) {
-                        System.out.println("Игрок не найден, установлено значение по умолчанию");
-                        pl = playerRepo.findByNickname("Franshtik (PS)");
+            if (pl == null) {
 
-                    }
+                    //tryAddNewPlayer(playerName.get(i));
+                    addOrUpdatePlayer.tryAddNewPlayer(playerName.get(i));
 
-                }
-            } else {
+            } else addOrUpdatePlayer.updatePlayerIfNeed(pl);
 
-                java.util.Date lastUpdate = pl2.getDateUpdate();
-                java.util.Date today = new Date(System.currentTimeMillis());
-                double totalHands = pl2.getTotalHands();
-
-                long updateOld = -1;
-                try {
-                    updateOld = (today.getTime() - lastUpdate.getTime()) / (24 * 60 * 60 * 1000);
-                } catch (Exception exception) {
-
-                }
-
-                if (updateOld < 0 ||
-                        (updateOld >= 1 && totalHands <=5000) ||
-                        (updateOld >= 5 && totalHands <=15000) ||
-                        (updateOld >= 14 && totalHands <=50000) ||
-                        (updateOld >= 30)){
-                    playerRepo.delete(pl2);
-                    tryAddNewPlayer(playerName.get(i));
-                    pl = playerRepo.findByNickname(playerName.get(i)+ " (PS)");
-                    if (pl == null) {
-                        System.out.println("Игрок не найден, установлено значение по умолчанию");
-                        pl = playerRepo.findByNickname("Franshtik (PS)");
-
-                    }
-                } else pl = pl2;
-
+            pl = playerRepo.findByNickname(playerName.get(i));
+            if(pl==null) pl = playerRepo.findByNickname(playerName.get(i)+" (PS)");
+            if (pl == null) {
+                System.out.println("Игрок не найден, установлено значение по умолчанию");
+                pl = playerRepo.findByNickname("Franshtik (PS)");
             }
+
+
             players.set(i, pl);
             i++;
 
         }
         return players;
     }
-    public void tryAddNewPlayer(String playerName)
-    {
-        try {
-            Document document = parsePlayer.parsePlayer(playerName);
-            if (document != null) {
-                StatsParse statsParse = new StatsParse(document);
-                if (statsParse.getStats() != null) {
-                    if (playerRepo.findByNickname(statsParse.searchNickname()) == null) {
-                        playerRepo.save(statsParse.getStats());
 
-                    } else System.out.println("That player excists in the DataBase");
-                }
-            } else System.out.println("There is no data on player " + playerName);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-
-    }
-    private void updatePlayerIfNeed(Player player) {
-        java.util.Date lastUpdate = player.getDateUpdate();
-        java.util.Date today = new Date(System.currentTimeMillis());
-        double totalHands = player.getTotalHands();
-
-        long updateOld = -1;
-        try {
-            updateOld = (today.getTime() - lastUpdate.getTime()) / (24 * 60 * 60 * 1000);
-        } catch (Exception exception) {
-
-        }
-
-        if (updateOld < 0 ||
-                (updateOld >= 1 && totalHands <= 5000) ||
-                (updateOld >= 5 && totalHands <= 15000) ||
-                (updateOld >= 14 && totalHands <= 50000) ||
-                (updateOld >= 30)) {
-            playerRepo.delete(player);
-        }
-    }
 }

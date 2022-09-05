@@ -31,6 +31,7 @@ public class ParsePlayerController {
     @Autowired
     SetPlayersAtTable setPlayersAtTable;
     @Autowired ParsePlayer parsePlayer;
+    @Autowired AddOrUpdatePlayer addOrUpdatePlayer;
 
     @GetMapping("/search")
     public String searchPlayer(Map<String, Object> model) {
@@ -52,7 +53,7 @@ public class ParsePlayerController {
             while (scanner.hasNext()) {
 
                 string = scanner.nextLine();
-                setPlayersAtTable.tryAddNewPlayer(string);
+                addOrUpdatePlayer.tryAddNewPlayer(string);
 
             }
 

@@ -4,15 +4,17 @@ import com.stsetsevich.smartpoker.domain.Player;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.sql.Date;
-
+@Service
 public class AddOrUpdatePlayer {
     @Autowired
     ParsePlayer parsePlayer;
     @Autowired
     PlayerRepo playerRepo;
+
 
     public void tryAddNewPlayer(String playerName)
     {
@@ -39,7 +41,7 @@ public class AddOrUpdatePlayer {
 
 
     }
-    private void updatePlayerIfNeed(Player player) {
+    public void updatePlayerIfNeed(Player player) {
         java.util.Date lastUpdate = player.getDateUpdate();
         java.util.Date today = new Date(System.currentTimeMillis());
         double totalHands = player.getTotalHands();
