@@ -46,14 +46,14 @@ public class AddOrUpdatePlayer {
         java.util.Date today = new Date(System.currentTimeMillis());
         double totalHands = player.getTotalHands();
 
-        long updateOld = -1;
+        long updateOld = -100;
         try {
             updateOld = (today.getTime() - lastUpdate.getTime()) / (24 * 60 * 60 * 1000);
         } catch (Exception exception) {
 
         }
 
-        if (updateOld < 0 ||
+        if (updateOld < -99 ||
                 (updateOld >= 1 && totalHands <= 5000) ||
                 (updateOld >= 5 && totalHands <= 15000) ||
                 (updateOld >= 14 && totalHands <= 50000) ||

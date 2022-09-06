@@ -8,8 +8,10 @@ import java.util.stream.DoubleStream;
 public class TableInfoCalc {
 
     public static ArrayList<StatValue> extraStatsCalc(ArrayList<Player> players) {
+        ArrayList<Player> subPlayers = new ArrayList<>(players);
+        subPlayers.removeIf(n -> (n.getNickname().equals("Empty Seat")));
         ArrayList<StatValue> stats = new ArrayList<>();
-        StatValue statValue = new StatValue(Double.toString(calcAvgEvBb100(players)), 0, "avgEvBb100");
+        StatValue statValue = new StatValue(Double.toString(calcAvgEvBb100(subPlayers)), 0, "avgEvBb100");
         stats.add(statValue);
 
         return stats;

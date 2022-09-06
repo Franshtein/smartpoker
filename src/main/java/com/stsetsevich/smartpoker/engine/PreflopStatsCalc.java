@@ -20,27 +20,36 @@ public class PreflopStatsCalc extends StatsCalc {
         for (Player pl : players) {
             ArrayList<StatValue> stats = new ArrayList<>();
             StatValue statValue;
-            String statname = "vpip";
-            statValue = new StatValue(Double.toString(pl.getVpip()), checkDiap(pl.getVpip(),
-                    getPoints(statname, statRepo), Variant.ONE), statname);
-            stats.add(statValue);
+            try {
 
-            statname = "totalPfr";
-            statValue = new StatValue(Double.toString(pl.getTotalPfr()), checkDiap(pl.getTotalPfr(),
-                    getPoints(statname, statRepo), Variant.ONE), true, statname, pl);
-            stats.add(statValue);
 
-            statname = "total3bet";
-            statValue = new StatValue(Double.toString(pl.getTotal3bet()), checkDiap(pl.getTotal3bet(),
-                    getPoints(statname, statRepo), Variant.ONE), true, statname, pl);
-            stats.add(statValue);
+                String statname = "vpip";
+                statValue = new StatValue(Double.toString(pl.getVpip()), checkDiap(pl.getVpip(),
+                        getPoints(statname, statRepo), Variant.ONE), statname);
+                stats.add(statValue);
 
-            statname = "foldTo3betTotal";
-            statValue = new StatValue(Double.toString(pl.getFoldTo3betTotal()), checkDiap(pl.getFoldTo3betTotal(),
-                    getPoints(statname, statRepo), Variant.THREE), statname);
-            stats.add(statValue);
-            playerStat.put(i, stats);
-            i++;
+                statname = "totalPfr";
+                statValue = new StatValue(Double.toString(pl.getTotalPfr()), checkDiap(pl.getTotalPfr(),
+                        getPoints(statname, statRepo), Variant.ONE), true, statname, pl);
+                stats.add(statValue);
+
+                statname = "total3bet";
+                statValue = new StatValue(Double.toString(pl.getTotal3bet()), checkDiap(pl.getTotal3bet(),
+                        getPoints(statname, statRepo), Variant.ONE), true, statname, pl);
+                stats.add(statValue);
+
+                statname = "foldTo3betTotal";
+                statValue = new StatValue(Double.toString(pl.getFoldTo3betTotal()), checkDiap(pl.getFoldTo3betTotal(),
+                        getPoints(statname, statRepo), Variant.THREE), statname);
+                stats.add(statValue);
+            }
+            finally {
+                playerStat.put(i, stats);
+                i++;
+            }
+
+
+
         }
         return playerStat;
     }
@@ -51,9 +60,12 @@ public class PreflopStatsCalc extends StatsCalc {
         HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
         int i = 0;
         for (Player pl : players) {
+
             ArrayList<StatValue> stats = new ArrayList<>();
             StatValue statValue;
-            String statname = "cBetFlopTotal";
+            try {
+
+                String statname = "cBetFlopTotal";
             statValue = new StatValue(Double.toString(pl.getcBetFlopTotal()), checkDiap(pl.getcBetFlopTotal(),
                     getPoints(statname, statRepo), Variant.ONE), statname);
             stats.add(statValue);
@@ -72,8 +84,11 @@ public class PreflopStatsCalc extends StatsCalc {
             statValue = new StatValue(Double.toString(pl.getSkippedCbetFoldTurnTotal()), checkDiap(pl.getSkippedCbetFoldTurnTotal(),
                     getPoints(statname, statRepo), Variant.ONE), statname);
             stats.add(statValue);
-            playerStat.put(i, stats);
-            i++;
+            }
+            finally {
+                playerStat.put(i, stats);
+                i++;
+            }
         }
         return playerStat;
     }
@@ -86,6 +101,8 @@ public class PreflopStatsCalc extends StatsCalc {
         for (Player pl : players) {
             ArrayList<StatValue> stats = new ArrayList<>();
             StatValue statValue;
+            try {
+
             String statname = "squeezeTotal";
             statValue = new StatValue(Double.toString(pl.getSqueezeTotal()), checkDiap(pl.getSqueezeTotal(),
                     getPoints(statname, statRepo), Variant.ONE), statname);
@@ -105,8 +122,11 @@ public class PreflopStatsCalc extends StatsCalc {
             statValue = new StatValue(Double.toString(pl.getWwsf()), checkDiap(pl.getWwsf(),
                     getPoints(statname, statRepo), Variant.ONE), statname);
             stats.add(statValue);
-            playerStat.put(i, stats);
-            i++;
+            }
+            finally {
+                playerStat.put(i, stats);
+                i++;
+            }
         }
         return playerStat;
     }
@@ -119,6 +139,8 @@ public class PreflopStatsCalc extends StatsCalc {
         for (Player pl : players) {
             ArrayList<StatValue> stats = new ArrayList<>();
             StatValue statValue;
+            try {
+
             String statname = "aggFactorFlop";
             statValue = new StatValue(Double.toString(pl.getAggFactorFlop()), checkDiap(pl.getAggFactorFlop(),
                     getPoints(statname, statRepo), Variant.ONE), statname);
@@ -138,8 +160,11 @@ public class PreflopStatsCalc extends StatsCalc {
             statValue = new StatValue(Double.toString(pl.getTotalHands()), checkDiap(pl.getTotalHands(),
                     getPoints(statname, statRepo), Variant.TWO), statname);
             stats.add(statValue);
-            playerStat.put(i, stats);
-            i++;
+            }
+            finally {
+                playerStat.put(i, stats);
+                i++;
+            }
         }
         return playerStat;
     }

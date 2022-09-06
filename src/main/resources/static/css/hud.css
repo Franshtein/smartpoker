@@ -45,6 +45,14 @@ table.table-striped-green{
     font-weight: bold;
   /*  transform: scale(0.5); */
 }
+table.table-striped-empty{
+    border-color: black;
+    background-color: slategray;
+    font-size: large;
+    font-weight: bold;
+    opacity: 70%;
+    /*  transform: scale(0.5); */
+}
 table.table-striped-blue{
     border-color: blue;
     background-color: cornflowerblue;

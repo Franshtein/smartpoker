@@ -21,6 +21,7 @@ public class StatValue {
     private String address;
     private String statName;
     private String statColor;
+    private String dependOnStatName;
 
     public StatValue(String stat, int value, String statName) {
         this.stat = stat;
@@ -33,6 +34,26 @@ public class StatValue {
         this.stat = stat;
         this.value = value;
         this.statName=statName;
+        if(needHref == true)
+        {
+            this.address="extrastats?player="+player.getNickname()+"&stat="+statName;
+        }
+        else this.address="#";
+        setStatColor(value);
+    }
+    public StatValue(String stat, int value, String statName, String dependOnStatName) {
+        this.stat = stat;
+        this.value = value;
+        this.statName=statName;
+        this.dependOnStatName=dependOnStatName;
+        this.address="#";
+        setStatColor(value);
+    }
+    public StatValue(String stat, int value, boolean needHref, String statName, String dependOnStatName, Player player) {
+        this.stat = stat;
+        this.value = value;
+        this.statName=statName;
+        this.dependOnStatName=dependOnStatName;
         if(needHref == true)
         {
             this.address="extrastats?player="+player.getNickname()+"&stat="+statName;

@@ -40,12 +40,12 @@ public class HudController {
     public String hud(String nickname, Map<String, Object> model, String addPlayer, String addPlayer2, String addPlayer3
             , String addPlayer4, String addPlayer5) {
 
-        ArrayList<String> playerStats = SetPlayersAtTable.getPlayerStats(playerRepo, "Franshtik (PS)");
-        addPlayer = "Franshtik (PS)";
-        addPlayer2 = "Franshtik (PS)";
-        addPlayer3 = "Franshtik (PS)";
-        addPlayer4 = "Franshtik (PS)";
-        addPlayer5 = "Franshtik (PS)";
+      //  ArrayList<String> playerStats = SetPlayersAtTable.getPlayerStats(playerRepo, "Franshtik (PS)");
+        addPlayer = "Franshtik";
+        addPlayer2 = "Franshtik";
+        addPlayer3 = "Franshtik";
+        addPlayer4 = "Franshtik";
+        addPlayer5 = "Franshtik";
         ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
         modelPutGeneralInfo(model, pl, statRepo, preflopStatsCalc);
         return "hud";
@@ -77,59 +77,7 @@ public class HudController {
 
     }
 
-    @PostMapping("addPlayer2")
-    public String addPlayer2(@RequestParam String addPlayer2, String addPlayer, String addPlayer3
-            , String addPlayer4, String addPlayer5, Map<String, Object> model) {
 
-
-        ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
-
-        modelPutGeneralInfo(model, pl, statRepo, preflopStatsCalc);
-
-        return "hud";
-
-    }
-
-    @PostMapping("addPlayer3")
-    public String addPlayer3(@RequestParam String addPlayer3, String addPlayer2, String addPlayer
-            , String addPlayer4, String addPlayer5, Map<String, Object> model) {
-
-
-        ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
-
-        modelPutGeneralInfo(model, pl, statRepo, preflopStatsCalc);
-
-        return "hud";
-
-    }
-
-    @PostMapping("addPlayer4")
-    public String addPlayer4(@RequestParam String addPlayer4, String addPlayer2, String addPlayer3
-            , String addPlayer, String addPlayer5, Map<String, Object> model) {
-
-
-        ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
-
-        //Основная информация о столе на основе игоков за столом
-        modelPutGeneralInfo(model, pl, statRepo, preflopStatsCalc);
-
-        return "hud";
-
-    }
-
-    @PostMapping("addPlayer5")
-    public String addPlayer5(@RequestParam String addPlayer5, String addPlayer2, String addPlayer3
-            , String addPlayer, String addPlayer4, Map<String, Object> model) {
-
-
-        ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
-
-        modelPutGeneralInfo(model, pl, statRepo, preflopStatsCalc);
-
-
-        return "hud";
-
-    }
 
     @PostMapping("addStat")
     public String addStat(@RequestParam String addPlayer, String addPlayer2, String addPlayer3
@@ -172,6 +120,8 @@ public class HudController {
         model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl, statRepo));
 
         //Информация об игроках за столом
+        //if (pl.get(0).getNickname().equals("Franshtik (PS)")) pl.get(0).setNickname("Empty Seat");
+
         model.put("player", pl.get(0));
         model.put("player2", pl.get(1));
         model.put("player3", pl.get(2));

@@ -44,8 +44,22 @@
                             <button type="submit">Search</button>
 
                         </form>
-
-                        <table th:object="${player}" class="table table-striped" border="3"
+                        <div th:switch="${player.nickname}"><table th:case="'Empty Seat'" class="table table-striped" border="3"
+                                                                   th:classappend="${seats.get(0)}">
+                            <tr>
+                            <td th:each="stat : ${plStatsLine1.get(0)}">-</td>
+                            </tr>
+                            <tr>
+                                <td th:each="stat : ${plStatsLine1.get(1)}">-</td>
+                            </tr>
+                            <tr>
+                                <td th:each="stat : ${plStatsLine1.get(2)}">-</td>
+                            </tr>
+                            <tr>
+                                <td th:each="stat : ${plStatsLine1.get(3)}">-</td>
+                            </tr>
+                        </table>
+                        <table th:case="*" th:object="${player}" class="table table-striped" border="3"
                                th:classappend="${seats.get(0)}">
                             <tr>
                                 <td th:each="stat : ${plStatsLine1.get(0)}">
@@ -141,12 +155,12 @@
                                 </td>
                             </tr>
                         </table>
-
+                        </div>
                     </div>
                     <div class="col  align-self-start">
                         <a th:href="'3bet?player='+${player2.nickname}" target="_blank"
                            th:class="colorgreen" th:text="${player2.nickname}"></a>
-                        <form th:action="@{addPlayer2}" method="post">
+                        <form th:action="@{addPlayer}" method="post">
                             <input type="hidden" th:value="${player.nickname}" name="addPlayer">
                             <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
                             <input type="hidden" th:value="${player4.nickname}" name="addPlayer4">
@@ -259,7 +273,7 @@
                     <div class="col  align-self-end">
                         <a th:href="'3bet?player='+${player3.nickname}" target="_blank"
                            th:class="colorgreen" th:text="${player3.nickname}"></a>
-                        <form th:action="@{addPlayer3}" method="post">
+                        <form th:action="@{addPlayer}" method="post">
                             <input type="hidden" th:value="${player.nickname}" name="addPlayer">
                             <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
                             <input type="hidden" th:value="${player4.nickname}" name="addPlayer4">
@@ -377,7 +391,7 @@
                         <a th:href="'extrastats?player='+${player4.nickname}+'&stat=0'" target="_blank"
                             th:class="colorgreen" th:text="${player4.nickname}"
                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
-                        <form th:action="@{addPlayer4}" method="post">
+                        <form th:action="@{addPlayer}" method="post">
                             <input type="hidden" th:value="${player.nickname}" name="addPlayer">
                             <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
                             <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
@@ -492,7 +506,7 @@
                         <a th:href="'extrastats?player='+${player5.nickname}+'&stat=0'" target="_blank"
                             th:class="colorgreen" th:text="${player5.nickname}"
                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
-                        <form th:action="@{addPlayer5}" method="post">
+                        <form th:action="@{addPlayer}" method="post">
                             <input type="hidden" th:value="${player.nickname}" name="addPlayer">
                             <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
                             <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
@@ -1468,6 +1482,11 @@
         по ссылкам</a> могут работать на практике, если Вы их используете на <a href="#" data-bs-toggle="tooltip"
                                                                                 data-bs-title="The last tip!">Вашем
         собственном </a> сайте или проекте. </p>
+
+<div th:each="ti : ${tableinfo}">
+    <p th:text="${ti.statName}"></p>
+    <p th:text="${ti.stat}"></p>
+</div>
 
 <form id="setStat" th:action="@{addStat}" method="post">
     <input type="hidden" id="stat" value=""

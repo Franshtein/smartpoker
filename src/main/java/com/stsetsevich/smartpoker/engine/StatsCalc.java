@@ -51,17 +51,19 @@ public class StatsCalc {
         ArrayList<String> seats = new ArrayList<>();
         String seat;
         for (Player pl : players) {
-            int i = checkDiap(pl.getAvgBb100(), getPoints("avgBb100", statRepo), Variant.TWO);
-            seat = "table-striped-green";
-            if (i == 0) seat = "table-striped-blue";
-            if (i == 1) seat = "table-striped-yellow";
-            if (i == 2) seat = "table-striped-red";
-            if (i == 3) seat = "table-striped-pink";
+            if (!pl.getNickname().equals("Empty Seat")) {
+                int i = checkDiap(pl.getAvgBb100(), getPoints("avgBb100", statRepo), Variant.TWO);
+                seat = "table-striped-green";
+                if (i == 0) seat = "table-striped-blue";
+                if (i == 1) seat = "table-striped-yellow";
+                if (i == 2) seat = "table-striped-red";
+                if (i == 3) seat = "table-striped-pink";
+            }
+            else seat = "table-striped-empty";
             seats.add(seat);
         }
         return seats;
     }
 
-    //Варианты вычисления диапазона для стата
 
 }

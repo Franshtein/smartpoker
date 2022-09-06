@@ -63,7 +63,11 @@ public class SetPlayersAtTable {
         ArrayList<Player> players = new ArrayList<>();
         for (String pn : playerName) {
             Player player = playerRepo.findByNickname(pn);
-            if (player == null) player = playerRepo.findByNickname(pn+" (PS)");
+            if (!pn.equals("Empty Seat")) {
+                if (player == null) {
+                    player = playerRepo.findByNickname(pn + " (PS)");
+                }
+            }
             players.add(player);
         }
 
@@ -71,16 +75,16 @@ public class SetPlayersAtTable {
         for (Player pl : players) {
             if (pl == null) {
 
-                    //tryAddNewPlayer(playerName.get(i));
-                    addOrUpdatePlayer.tryAddNewPlayer(playerName.get(i));
+                //tryAddNewPlayer(playerName.get(i));
+                addOrUpdatePlayer.tryAddNewPlayer(playerName.get(i));
 
             } else addOrUpdatePlayer.updatePlayerIfNeed(pl);
 
             pl = playerRepo.findByNickname(playerName.get(i));
-            if(pl==null) pl = playerRepo.findByNickname(playerName.get(i)+" (PS)");
+            if (pl == null) pl = playerRepo.findByNickname(playerName.get(i) + " (PS)");
             if (pl == null) {
                 System.out.println("Игрок не найден, установлено значение по умолчанию");
-                pl = playerRepo.findByNickname("Franshtik (PS)");
+              //  pl = playerRepo.findByNickname("Franshtik (PS)");
             }
 
 
