@@ -31,7 +31,7 @@ public class PreflopStatsCalc extends StatsCalc {
 
                 statname = "totalPfr";
                 statValue = new StatValue(Double.toString(pl.getTotalPfr()), checkDiap(pl.getTotalPfr(),
-                        getPoints(statname, statRepo), Variant.ONE), true, statname, pl);
+                        getPoints(statname, statRepo), Variant.ONE), true, statname, pl.getVpip(), pl);
                 stats.add(statValue);
 
                 statname = "total3bet";
@@ -42,6 +42,11 @@ public class PreflopStatsCalc extends StatsCalc {
                 statname = "foldTo3betTotal";
                 statValue = new StatValue(Double.toString(pl.getFoldTo3betTotal()), checkDiap(pl.getFoldTo3betTotal(),
                         getPoints(statname, statRepo), Variant.THREE), statname);
+                stats.add(statValue);
+
+                statname = "total4bet";
+                statValue = new StatValue(Double.toString(pl.getTotal4bet()), checkDiap(pl.getTotal4bet(),
+                        getPoints(statname, statRepo), Variant.ONE), true, statname, pl);
                 stats.add(statValue);
             }
             finally {

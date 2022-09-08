@@ -16,11 +16,13 @@ public class ExtraStatsCalc extends StatsCalc {
                 getPfrStats(player, stats, statRepo);
                 return stats;
             case ("total3bet"):
+                System.out.println("3bet work");
                 getThreeBetStats(player, stats, statRepo);
                 return stats;
-            case ("2"):
-                System.out.println("not method exsist");
-                break;
+            case ("total4bet"):
+                System.out.println("4bet work");
+                getFourBetStats(player, stats, statRepo);
+                return stats;
             case ("3"):
                 System.out.println("not method exsist");
                 break;
@@ -64,6 +66,45 @@ public class ExtraStatsCalc extends StatsCalc {
 
         statname = "total3betBb";
         statValue = new StatValue(Double.toString(pl.getTotal3betBb()), checkDiap(pl.getTotal3betBb(),
+                getPoints(statname, statRepo), Variant.ONE), statname);
+        stats.add(statValue);
+
+        return stats;
+    }
+    private static ArrayList<StatValue> getFourBetStats(Player pl, ArrayList<StatValue> stats, StatRepo statRepo) {
+        StatValue statValue;
+        String statname = "total4bet";
+        statValue = new StatValue(Double.toString(pl.getTotal4bet()), checkDiap(pl.getTotal4bet(),
+                getPoints(statname, statRepo), Variant.ONE), statname);
+        stats.add(statValue);
+
+        statname = "total4betEp";
+        statValue = new StatValue(Double.toString(pl.getTotal4betEp()), checkDiap(pl.getTotal4betEp(),
+                getPoints(statname, statRepo), Variant.ONE), statname);
+        stats.add(statValue);
+
+        statname = "total4betMp";
+        statValue = new StatValue(Double.toString(pl.getTotal4betMp()), checkDiap(pl.getTotal4betMp(),
+                getPoints(statname, statRepo), Variant.ONE), statname);
+        stats.add(statValue);
+
+        statname = "total4betCo";
+        statValue = new StatValue(Double.toString(pl.getTotal4betCo()), checkDiap(pl.getTotal4betCo(),
+                getPoints(statname, statRepo), Variant.ONE), statname);
+        stats.add(statValue);
+
+        statname = "total4betBu";
+        statValue = new StatValue(Double.toString(pl.getTotal4betBu()), checkDiap(pl.getTotal4betBu(),
+                getPoints(statname, statRepo), Variant.ONE), statname);
+        stats.add(statValue);
+
+        statname = "total4betSb";
+        statValue = new StatValue(Double.toString(pl.getTotal4betSb()), checkDiap(pl.getTotal4betSb(),
+                getPoints(statname, statRepo), Variant.ONE), statname);
+        stats.add(statValue);
+
+        statname = "total4betBb";
+        statValue = new StatValue(Double.toString(pl.getTotal4betBb()), checkDiap(pl.getTotal4betBb(),
                 getPoints(statname, statRepo), Variant.ONE), statname);
         stats.add(statValue);
 

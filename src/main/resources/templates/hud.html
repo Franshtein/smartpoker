@@ -35,49 +35,25 @@
                            th:class="colorgreen" th:text="${player.nickname}"
                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"
                            id="liveToastBtn4"></a>
-                        <form th:action="@{addPlayer}" method="post">
-                            <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
-                            <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
-                            <input type="hidden" th:value="${player4.nickname}" name="addPlayer4">
-                            <input type="hidden" th:value="${player5.nickname}" name="addPlayer5">
-                            <input type="text" name="addPlayer">
-                            <button type="submit">Search</button>
-
-                        </form>
+                        <div th:replace="player-form::frag (1,${player},${player2},${player3},${player4},${player5})">
+                        </div>
                         <div th:replace="player-table::frag (${player},${plStatsLine1.get(0)},${plStatsLine2.get(0)},${plStatsLine3.get(0)},${plStatsLine4.get(0)},${seats.get(0)})">
-                            ...
                         </div>
                     </div>
                     <div class="col  align-self-start">
                         <a th:href="'3bet?player='+${player2.nickname}" target="_blank"
                            th:class="colorgreen" th:text="${player2.nickname}"></a>
-                        <form th:action="@{addPlayer}" method="post">
-                            <input type="hidden" th:value="${player.nickname}" name="addPlayer">
-                            <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
-                            <input type="hidden" th:value="${player4.nickname}" name="addPlayer4">
-                            <input type="hidden" th:value="${player5.nickname}" name="addPlayer5">
-                            <input type="text" name="addPlayer2">
-                            <button type="submit">Search</button>
-
-                        </form>
+                        <div th:replace="player-form::frag (2,${player},${player2},${player3},${player4},${player5})">
+                        </div>
                         <div th:replace="player-table::frag (${player2},${plStatsLine1.get(1)},${plStatsLine2.get(1)},${plStatsLine3.get(1)},${plStatsLine4.get(1)},${seats.get(1)})">
-                            ...
                         </div>
                     </div>
                     <div class="col  align-self-end">
                         <a th:href="'3bet?player='+${player3.nickname}" target="_blank"
                            th:class="colorgreen" th:text="${player3.nickname}"></a>
-                        <form th:action="@{addPlayer}" method="post">
-                            <input type="hidden" th:value="${player.nickname}" name="addPlayer">
-                            <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
-                            <input type="hidden" th:value="${player4.nickname}" name="addPlayer4">
-                            <input type="hidden" th:value="${player5.nickname}" name="addPlayer5">
-                            <input type="text" name="addPlayer3">
-                            <button type="submit">Search</button>
-
-                        </form>
+                        <div th:replace="player-form::frag (3,${player},${player2},${player3},${player4},${player5})">
+                        </div>
                         <div th:replace="player-table::frag (${player3},${plStatsLine1.get(2)},${plStatsLine2.get(2)},${plStatsLine3.get(2)},${plStatsLine4.get(2)},${seats.get(2)})">
-                            ...
                         </div>
                     </div>
                 </div>
@@ -89,17 +65,9 @@
                         <a th:href="'extrastats?player='+${player4.nickname}+'&stat=0'" target="_blank"
                            th:class="colorgreen" th:text="${player4.nickname}"
                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
-                        <form th:action="@{addPlayer}" method="post">
-                            <input type="hidden" th:value="${player.nickname}" name="addPlayer">
-                            <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
-                            <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
-                            <input type="hidden" th:value="${player5.nickname}" name="addPlayer5">
-                            <input type="text" name="addPlayer4">
-                            <button type="submit">Search</button>
-
-                        </form>
+                        <div th:replace="player-form::frag (4,${player},${player2},${player3},${player4},${player5})">
+                        </div>
                         <div th:replace="player-table::frag (${player4},${plStatsLine1.get(3)},${plStatsLine2.get(3)},${plStatsLine3.get(3)},${plStatsLine4.get(3)},${seats.get(3)})">
-                            ...
                         </div>
                     </div>
 
@@ -107,17 +75,9 @@
                         <a th:href="'extrastats?player='+${player5.nickname}+'&stat=0'" target="_blank"
                            th:class="colorgreen" th:text="${player5.nickname}"
                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
-                        <form th:action="@{addPlayer}" method="post">
-                            <input type="hidden" th:value="${player.nickname}" name="addPlayer">
-                            <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
-                            <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
-                            <input type="hidden" th:value="${player4.nickname}" name="addPlayer4">
-                            <input type="text" name="addPlayer5">
-                            <button type="submit">Search</button>
-
-                        </form>
+                        <div th:replace="player-form::frag (5,${player},${player2},${player3},${player4},${player5})">
+                        </div>
                         <div th:replace="player-table::frag (${player5},${plStatsLine1.get(4)},${plStatsLine2.get(4)},${plStatsLine3.get(4)},${plStatsLine4.get(4)},${seats.get(4)})">
-                            ...
                         </div>
                     </div>
                 </div>

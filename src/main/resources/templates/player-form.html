@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<div th:fragment="frag (variant, player, player2, player3, player4, player5)">
+    <div th:switch="${variant}">
+        <form th:case="1" th:action="@{addPlayer}" method="post">
+            <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
+            <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
+            <input type="hidden" th:value="${player4.nickname}" name="addPlayer4">
+            <input type="hidden" th:value="${player5.nickname}" name="addPlayer5">
+            <input type="text" name="addPlayer">
+            <button type="submit">Search</button>
+        </form>
+        <form th:case="2" th:action="@{addPlayer}" method="post">
+            <input type="hidden" th:value="${player.nickname}" name="addPlayer">
+            <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
+            <input type="hidden" th:value="${player4.nickname}" name="addPlayer4">
+            <input type="hidden" th:value="${player5.nickname}" name="addPlayer5">
+            <input type="text" name="addPlayer2">
+            <button type="submit">Search</button>
+        </form>
+        <form th:case="3" th:action="@{addPlayer}" method="post">
+            <input type="hidden" th:value="${player.nickname}" name="addPlayer">
+            <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
+            <input type="hidden" th:value="${player4.nickname}" name="addPlayer4">
+            <input type="hidden" th:value="${player5.nickname}" name="addPlayer5">
+            <input type="text" name="addPlayer3">
+            <button type="submit">Search</button>
+
+        </form>
+        <form th:case="4" th:action="@{addPlayer}" method="post">
+            <input type="hidden" th:value="${player.nickname}" name="addPlayer">
+            <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
+            <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
+            <input type="hidden" th:value="${player5.nickname}" name="addPlayer5">
+            <input type="text" name="addPlayer4">
+            <button type="submit">Search</button>
+
+        </form>
+        <form th:case="5" th:action="@{addPlayer}" method="post">
+            <input type="hidden" th:value="${player.nickname}" name="addPlayer">
+            <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
+            <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
+            <input type="hidden" th:value="${player4.nickname}" name="addPlayer4">
+            <input type="text" name="addPlayer5">
+            <button type="submit">Search</button>
+
+        </form>
+    </div>
+</div>
+</html>

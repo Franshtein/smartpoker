@@ -23,8 +23,9 @@ public class StatValue {
     private String address;
     private String statName;
     private String statColor;
-    private String dependOnStatName;
+    private double dependOnStat=0;
     private String picture;
+
 
     public StatValue(String stat, int value, String statName) {
         this.stat = stat;
@@ -46,20 +47,20 @@ public class StatValue {
         setStatColor(value);
         setPicture();
     }
-    public StatValue(String stat, int value, String statName, String dependOnStatName) {
+    public StatValue(String stat, int value, String statName, Double dependOnStat) {
         this.stat = stat;
         this.value = value;
         this.statName=statName;
-        this.dependOnStatName=dependOnStatName;
+        this.dependOnStat=dependOnStat;
         this.address="#";
         setStatColor(value);
         setPicture();
     }
-    public StatValue(String stat, int value, boolean needHref, String statName, String dependOnStatName, Player player) {
+    public StatValue(String stat, int value, boolean needHref, String statName, Double dependOnStat, Player player) {
         this.stat = stat;
         this.value = value;
         this.statName=statName;
-        this.dependOnStatName=dependOnStatName;
+        this.dependOnStat=dependOnStat;
         if(needHref == true)
         {
             this.address="extrastats?player="+player.getNickname()+"&stat="+statName;
@@ -105,17 +106,35 @@ public class StatValue {
         return statColor;
     }
 
+    public double getDependOnStat() {
+        return dependOnStat;
+    }
+
+    public void setDependOnStat(double dependOnStat) {
+        this.dependOnStat = dependOnStat;
+    }
+
     public String getPicture() {
         return picture;
     }
 
     public void setPicture() {
         String picture;
-        double dstat = Double.parseDouble(this.stat);
-        int istat = (int) dstat;
-       // System.out.println(istat);
-        picture="/img/"+statName+"/"+istat+".png";
-       // System.out.println(picture);
+        if (getDependOnStat()==0) {
+            double dstat = Double.parseDouble(this.stat);
+            int istat = (int) dstat;
+            // System.out.println(istat);
+            picture = "/img/" + statName + "/" + istat + ".png";
+            // System.out.println(picture);
+        }
+        else {
+            double dstat = Double.parseDouble(this.stat);
+            int istat = (int) dstat;
+            int depIStat = (int) getDependOnStat();
+            // System.out.println(istat);
+            picture = "/img/" + statName + "/"+depIStat+ "-" + istat + ".png";
+            // System.out.println(picture);
+        }
         File f = new File("E:/idea_projects/smartpoker/src/main/resources/static"+picture);
         if(f.exists() && !f.isDirectory()) {
             System.out.println("FILE EXSIST");
