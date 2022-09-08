@@ -113,9 +113,9 @@ public class StatValue {
         String picture;
         double dstat = Double.parseDouble(this.stat);
         int istat = (int) dstat;
-        System.out.println(istat);
+       // System.out.println(istat);
         picture="/img/"+statName+"/"+istat+".png";
-        System.out.println(picture);
+       // System.out.println(picture);
         File f = new File("E:/idea_projects/smartpoker/src/main/resources/static"+picture);
         if(f.exists() && !f.isDirectory()) {
             System.out.println("FILE EXSIST");

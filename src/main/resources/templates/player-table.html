@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<div th:fragment="frag (player, plStatsLine1, plStatsLine2,plStatsLine3,plStatsLine4, seats)">
+    <div th:switch="${player.nickname}">
+        <table th:case="'Empty Seat'" class="table table-striped" border="3"
+               th:classappend="${seats}">
+            <tr>
+                <td th:each="stat : ${plStatsLine1}">-</td>
+            </tr>
+            <tr>
+                <td th:each="stat : ${plStatsLine1}">-</td>
+            </tr>
+            <tr>
+                <td th:each="stat : ${plStatsLine1}">-</td>
+            </tr>
+            <tr>
+                <td th:each="stat : ${plStatsLine1}">-</td>
+            </tr>
+        </table>
+        <table th:case="*" th:object="${player}" class="table table-striped" border="3"
+               th:classappend="${seats}">
+            <tr>
+                <td th:each="stat : ${plStatsLine1}">
+                    <div th:each="stat2 : ${stat}">
+                        <div th:switch="${stat2.address}">
+                            <div class="tooltipvlad" th:case="'#'">
+                                <div th:class="${stat2.statColor}"
+                                     th:text="${stat2.stat}"
+                                     th:title="${stat2.statName}">
+                                </div>
+                                <span><img th:if="${stat2.picture}"
+                                           th:src="${stat2.picture}" src="/img/vpip20.png"/></span>
+                            </div>
+                            <div th:case="*">
+                                <div class="tooltipvlad"><a
+                                        th:onclick="getStatId([[${stat2.statName}]],[[${player.nickname}]])"
+                                        th:text="${stat2.stat}"
+                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
+                                        href="#"></a>
+                                    <span><img th:if="${stat2.picture}"
+                                               th:src="${stat2.picture}" src="/img/vpip20.png"/></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td th:each="stat : ${plStatsLine2}">
+                    <div th:each="stat2 : ${stat}">
+                        <div th:switch="${stat2.address}">
+                            <div th:case="'#'">
+                                <div th:class="${stat2.statColor}"
+                                     th:text="${stat2.stat}"
+                                     th:title="${stat2.statName}">
+                                </div>
+                            </div>
+                            <div th:case="*">
+                                <div><a
+
+                                        th:onclick="getStatId([[${stat2.statName}]],[[${player.nickname}]])"
+                                        th:text="${stat2.stat}"
+                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
+                                        href="#"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td th:each="stat : ${plStatsLine3}">
+                    <div th:each="stat2 : ${stat}">
+                        <div th:switch="${stat2.address}">
+                            <div th:case="'#'">
+                                <div th:class="${stat2.statColor}"
+                                     th:text="${stat2.stat}"
+                                     th:title="${stat2.statName}">
+                                </div>
+                            </div>
+                            <div th:case="*">
+                                <div><a
+
+                                        th:onclick="getStatId([[${stat2.statName}]],[[${player.nickname}]])"
+                                        th:text="${stat2.stat}"
+                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
+                                        href="#"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td th:each="stat : ${plStatsLine4}">
+                    <div th:each="stat2 : ${stat}">
+                        <div th:switch="${stat2.address}">
+                            <div th:case="'#'">
+                                <div th:class="${stat2.statColor}"
+                                     th:text="${stat2.stat}"
+                                     th:title="${stat2.statName}">
+                                </div>
+                            </div>
+                            <div th:case="*">
+
+                                <div><a
+
+                                        th:onclick="getStatId([[${stat2.statName}]],[[${player.nickname}]])"
+                                        th:text="${stat2.stat}"
+                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
+                                        href="#"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</html>
