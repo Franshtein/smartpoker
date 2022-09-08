@@ -35,6 +35,36 @@ public class StatsCalc {
         }
         return 0;
     }
+    protected static int checkDiap(double stat, double points[], Variant variant, double primaryStat, String statName, StatRepo statRepo) {
+        int primaryValue = checkDiap(primaryStat, getPoints(statName, statRepo), Variant.ONE);
+        double weight=1;
+        if(primaryValue==4) weight=1.4;
+        if(primaryValue==3) weight=1.2;
+        if(primaryValue==1) weight=0.8;
+        if(primaryValue==0) weight=0.6;
+        if (variant == Variant.ONE) {
+            if (stat <= points[0] * weight) return 0;
+            if (stat <= points[1] * weight) return 1;
+            if (stat <= points[2] * weight) return 2;
+            if (stat <= points[3] * weight) return 3;
+            return 4;
+        }
+        if (variant == Variant.TWO) {
+            if (stat <= points[0] * weight) return 0;
+            if (stat <= points[1] * weight) return 1;
+            if (stat <= points[2] * weight) return 3;
+            if (stat <= points[3] * weight) return 2;
+            return 2;
+        }
+        if (variant == Variant.THREE) {
+            if (stat >= points[3] * weight) return 0;
+            if (stat >= points[2] * weight) return 1;
+            if (stat >= points[1] * weight) return 2;
+            if (stat >= points[0] * weight) return 3;
+            return 4;
+        }
+        return 0;
+    }
 
     //Получаем массив точек для будущей проверки, в какой диапазон попадает значение стата игрока.
     protected static double[] getPoints(String statname, StatRepo statRepo) {

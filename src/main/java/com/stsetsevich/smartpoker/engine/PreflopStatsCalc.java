@@ -2,6 +2,7 @@ package com.stsetsevich.smartpoker.engine;
 
 
 import com.stsetsevich.smartpoker.domain.Player;
+import com.stsetsevich.smartpoker.domain.Stat;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import org.springframework.stereotype.Service;
 
@@ -160,6 +161,11 @@ public class PreflopStatsCalc extends StatsCalc {
             statValue = new StatValue(Double.toString(pl.getTotalHands()), checkDiap(pl.getTotalHands(),
                     getPoints(statname, statRepo), Variant.TWO), statname);
             stats.add(statValue);
+
+                statname = "checkRaiseFlop";
+                statValue = new StatValue(Double.toString(pl.getCheckRaiseFlop()), checkDiap(pl.getCheckRaiseFlop(),
+                        getPoints(statname, statRepo), Variant.ONE, pl.getVpip(), "vpip", statRepo), statname);
+                stats.add(statValue);
             }
             finally {
                 playerStat.put(i, stats);

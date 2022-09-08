@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -127,6 +128,19 @@ public class HudController {
         model.put("player3", pl.get(2));
         model.put("player4", pl.get(3));
         model.put("player5", pl.get(4));
+
+       /* String picture;
+        if(pl.get(0).getVpip()<=20) picture="/img/vpip/20.png";
+        else if (pl.get(0).getVpip()<=30) picture="/img/vpip/30.png";
+        else  picture="/img/vpip/35.png";
+        File f = new File("E:/idea_projects/smartpoker/src/main/resources/static"+picture);
+        if(f.exists() && !f.isDirectory()) {
+            System.out.println("FILE EXSIST");
+        }
+        else picture=null;
+        model.put("picture", picture);
+
+        */
     }
 
 

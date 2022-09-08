@@ -2,6 +2,8 @@ package com.stsetsevich.smartpoker.engine;
 
 import com.stsetsevich.smartpoker.domain.Player;
 
+import java.io.File;
+
 public class StatValue {
     enum StatColor
     {
@@ -22,6 +24,7 @@ public class StatValue {
     private String statName;
     private String statColor;
     private String dependOnStatName;
+    private String picture;
 
     public StatValue(String stat, int value, String statName) {
         this.stat = stat;
@@ -29,6 +32,7 @@ public class StatValue {
         this.statName=statName;
         this.address="#";
         setStatColor(value);
+        setPicture();
     }
     public StatValue(String stat, int value, boolean needHref, String statName, Player player) {
         this.stat = stat;
@@ -40,6 +44,7 @@ public class StatValue {
         }
         else this.address="#";
         setStatColor(value);
+        setPicture();
     }
     public StatValue(String stat, int value, String statName, String dependOnStatName) {
         this.stat = stat;
@@ -48,6 +53,7 @@ public class StatValue {
         this.dependOnStatName=dependOnStatName;
         this.address="#";
         setStatColor(value);
+        setPicture();
     }
     public StatValue(String stat, int value, boolean needHref, String statName, String dependOnStatName, Player player) {
         this.stat = stat;
@@ -60,6 +66,7 @@ public class StatValue {
         }
         else this.address="#";
         setStatColor(value);
+        setPicture();
     }
 
     public String getStat() {
@@ -98,6 +105,25 @@ public class StatValue {
         return statColor;
     }
 
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture() {
+        String picture;
+        double dstat = Double.parseDouble(this.stat);
+        int istat = (int) dstat;
+        System.out.println(istat);
+        picture="/img/"+statName+"/"+istat+".png";
+        System.out.println(picture);
+        File f = new File("E:/idea_projects/smartpoker/src/main/resources/static"+picture);
+        if(f.exists() && !f.isDirectory()) {
+            System.out.println("FILE EXSIST");
+        }
+        else picture=null;
+        this.picture = picture;
+    }
+
     public void setStatColor(int value) {
         if(value==0) this.statColor=StatColor.INFINITY_TO_POINT1.getColor();
         else if(value==1) this.statColor=StatColor.POINT1_TO_POINT2.getColor();
@@ -106,6 +132,8 @@ public class StatValue {
         else this.statColor=StatColor.POINT4_TO_INFINITY.getColor();
 
     }
+
+
 
 }
 

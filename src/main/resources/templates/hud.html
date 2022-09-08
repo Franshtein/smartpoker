@@ -65,19 +65,22 @@
                                 <td th:each="stat : ${plStatsLine1.get(0)}">
                                     <div th:each="stat2 : ${stat}">
                                         <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
+                                            <div class="tooltipvlad" th:case="'#'">
                                                 <div th:class="${stat2.statColor}"
                                                      th:text="${stat2.stat}"
                                                      th:title="${stat2.statName}">
                                                 </div>
+                                                <span><img th:if="${stat2.picture}"
+                                                           th:src="${stat2.picture}" src="/img/vpip20.png"/></span>
                                             </div>
                                             <div th:case="*">
-                                                <div><a
-
+                                                <div class="tooltipvlad"><a
                                                         th:onclick="getStatId([[${stat2.statName}]],[[${player.nickname}]])"
                                                         th:text="${stat2.stat}"
                                                         th:title="${stat2.statName}" th:class="${stat2.statColor}"
                                                         href="#"></a>
+                                                    <span><img th:if="${stat2.picture}"
+                                                            th:src="${stat2.picture}" src="/img/vpip20.png"/></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -1468,6 +1471,7 @@
 
                 </tr>
             </table>
+            <img src="/img/vpip20.png">
         </div>
     </div>
 </div>
@@ -1487,6 +1491,8 @@
     <p th:text="${ti.statName}"></p>
     <p th:text="${ti.stat}"></p>
 </div>
+
+<a class="tooltipvlad" href="#">Анкор ссылки<span><img src="/img/vpip20.png"/></span></a>
 
 <form id="setStat" th:action="@{addStat}" method="post">
     <input type="hidden" id="stat" value=""

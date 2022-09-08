@@ -1,9 +1,12 @@
 package com.stsetsevich.smartpoker.domain;
 
 
+import com.stsetsevich.smartpoker.engine.StatsCalc;
+import com.stsetsevich.smartpoker.repos.StatRepo;
 import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 public class Stat {
@@ -77,4 +80,5 @@ public class Stat {
     public void setPoint4(double point4) {
         this.point4 = point4;
     }
+
 }
