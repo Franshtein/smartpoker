@@ -90,105 +90,6 @@ public class FlopStatsCalc extends StatsCalc {
         }
         return playerStat;
     }
-
-    //Записываем в коллекцию данные каждого игрока для третьей строки таблицы
-    //Вычисляем значения и в какой диапазон они попадают
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine45(ArrayList<Player> players, StatRepo statRepo) {
-        HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
-        int i = 0;
-        for (Player pl : players) {
-            ArrayList<StatValue> stats = new ArrayList<>();
-            StatValue statValue;
-            try {
-
-                String statname = "squeezeTotal";
-                statValue = new StatValue(Double.toString(pl.getSqueezeTotal()), checkDiap(pl.getSqueezeTotal(),
-                        getPoints(statname, statRepo), Variant.ONE), statname);
-                stats.add(statValue);
-
-                statname = "foldToSqueezeTotal";
-                statValue = new StatValue(Double.toString(pl.getFoldToSqueezeTotal()), checkDiap(pl.getFoldToSqueezeTotal(),
-                        getPoints(statname, statRepo), Variant.ONE), statname);
-                stats.add(statValue);
-
-                statname = "wtsd";
-                statValue = new StatValue(Double.toString(pl.getWtsd()), checkDiap(pl.getWtsd(),
-                        getPoints(statname, statRepo), Variant.ONE), statname);
-                stats.add(statValue);
-
-                statname = "wwsf";
-                statValue = new StatValue(Double.toString(pl.getWwsf()), checkDiap(pl.getWwsf(),
-                        getPoints(statname, statRepo), Variant.ONE), statname);
-                stats.add(statValue);
-            } finally {
-                playerStat.put(i, stats);
-                i++;
-            }
-        }
-        return playerStat;
-    }
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine4(ArrayList<Player> players, StatRepo statRepo) {
-        HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
-        int i = 0;
-        for (Player pl : players) {
-            ArrayList<StatValue> stats = new ArrayList<>();
-            StatValue statValue;
-            try {
-
-                String statname = "";
-                statValue = new StatValue("-", 1, statname);
-                stats.add(statValue);
-
-                statname = "";
-                statValue = new StatValue("-", 1, statname);
-                stats.add(statValue);
-
-                statname = "";
-                statValue = new StatValue("-", 1, statname);
-                stats.add(statValue);
-
-                statname = "";
-                statValue = new StatValue("-", 1, statname);
-                stats.add(statValue);
-            } finally {
-                playerStat.put(i, stats);
-                i++;
-            }
-        }
-        return playerStat;
-    }
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine5(ArrayList<Player> players, StatRepo statRepo) {
-        HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
-        int i = 0;
-        for (Player pl : players) {
-            ArrayList<StatValue> stats = new ArrayList<>();
-            StatValue statValue;
-            try {
-
-                String statname = "";
-                statValue = new StatValue("-", 1, statname);
-                stats.add(statValue);
-
-                statname = "";
-                statValue = new StatValue("-", 1, statname);
-                stats.add(statValue);
-
-                statname = "";
-                statValue = new StatValue("-", 1, statname);
-                stats.add(statValue);
-
-                statname = "";
-                statValue = new StatValue("-", 1, statname);
-                stats.add(statValue);
-            } finally {
-                playerStat.put(i, stats);
-                i++;
-            }
-        }
-        return playerStat;
-    }
-    //Записываем в коллекцию данные каждого игрока для четвертой строки таблицы
-    //Вычисляем значения и в какой диапазон они попадают
     public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine3(ArrayList<Player> players, StatRepo statRepo) {
         HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
         int i = 0;
@@ -224,6 +125,50 @@ public class FlopStatsCalc extends StatsCalc {
         }
         return playerStat;
     }
+    //Записываем в коллекцию данные каждого игрока для третьей строки таблицы
+    //Вычисляем значения и в какой диапазон они попадают
+
+    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine4(ArrayList<Player> players, StatRepo statRepo) {
+        HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
+        int i = 0;
+        for (Player pl : players) {
+            ArrayList<StatValue> stats = new ArrayList<>();
+            StatValue statValue;
+            try {
+
+                String statname = "";
+                statValue = new StatValue("-", 1, statname);
+                stats.add(statValue);
+
+            } finally {
+                playerStat.put(i, stats);
+                i++;
+            }
+        }
+        return playerStat;
+    }
+    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine5(ArrayList<Player> players, StatRepo statRepo) {
+        HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
+        int i = 0;
+        for (Player pl : players) {
+            ArrayList<StatValue> stats = new ArrayList<>();
+            StatValue statValue;
+            try {
+
+                String statname = "";
+                statValue = new StatValue("-", 1, statname);
+                stats.add(statValue);
+
+            } finally {
+                playerStat.put(i, stats);
+                i++;
+            }
+        }
+        return playerStat;
+    }
+    //Записываем в коллекцию данные каждого игрока для четвертой строки таблицы
+    //Вычисляем значения и в какой диапазон они попадают
+
 
 
 }
