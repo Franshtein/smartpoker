@@ -27,121 +27,14 @@
 </div>
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="preflop" role="tabpanel" aria-labelledby="preflop-list">
-        <div class="players-table">
-            <div class="container-fluid text-center" th:classappend="container">
-                <div class="row row-height-400">
-                    <div class="col align-self-end">
-                        <a th:href="'extrastats?player='+${player.nickname}+'&stat=0'" target="_blank"
-                           th:class="colorgreen" th:text="${player.nickname}"
-                           data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"
-                           id="liveToastBtn4"></a>
-                        <div th:replace="player-form::frag (1,${player},${player2},${player3},${player4},${player5})">
-                        </div>
-                        <div th:replace="player-table::frag (${player},${plStatsLine1.get(0)},${plStatsLine2.get(0)},${plStatsLine3.get(0)},${plStatsLine4.get(0)},${plStatsLine5.get(0)},${seats.get(0)})">
-                        </div>
-                    </div>
-                    <div class="col  align-self-start">
-                        <a th:href="'3bet?player='+${player2.nickname}" target="_blank"
-                           th:class="colorgreen" th:text="${player2.nickname}"></a>
-                        <div th:replace="player-form::frag (2,${player},${player2},${player3},${player4},${player5})">
-                        </div>
-                        <div th:replace="player-table::frag (${player2},${plStatsLine1.get(1)},${plStatsLine2.get(1)},${plStatsLine3.get(1)},${plStatsLine4.get(1)},${plStatsLine5.get(1)},${seats.get(1)})">
-                        </div>
-                    </div>
-                    <div class="col  align-self-end">
-                        <a th:href="'3bet?player='+${player3.nickname}" target="_blank"
-                           th:class="colorgreen" th:text="${player3.nickname}"></a>
-                        <div th:replace="player-form::frag (3,${player},${player2},${player3},${player4},${player5})">
-                        </div>
-                        <div th:replace="player-table::frag (${player3},${plStatsLine1.get(2)},${plStatsLine2.get(2)},${plStatsLine3.get(2)},${plStatsLine4.get(2)},${plStatsLine5.get(2)},${seats.get(2)})">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container text-center">
-                <div class="row justify-content-evenly">
-                    <div class="col-4">
-                        <a th:href="'extrastats?player='+${player4.nickname}+'&stat=0'" target="_blank"
-                           th:class="colorgreen" th:text="${player4.nickname}"
-                           data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
-                        <div th:replace="player-form::frag (4,${player},${player2},${player3},${player4},${player5})">
-                        </div>
-                        <div th:replace="player-table::frag (${player4},${plStatsLine1.get(3)},${plStatsLine2.get(3)},${plStatsLine3.get(3)},${plStatsLine4.get(3)},${plStatsLine5.get(3)},${seats.get(3)})">
-                        </div>
-                    </div>
-
-                    <div class="col-4">
-                        <a th:href="'extrastats?player='+${player5.nickname}+'&stat=0'" target="_blank"
-                           th:class="colorgreen" th:text="${player5.nickname}"
-                           data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
-                        <div th:replace="player-form::frag (5,${player},${player2},${player3},${player4},${player5})">
-                        </div>
-                        <div th:replace="player-table::frag (${player5},${plStatsLine1.get(4)},${plStatsLine2.get(4)},${plStatsLine3.get(4)},${plStatsLine4.get(4)},${plStatsLine5.get(4)},${seats.get(4)})">
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div th:replace="tab::frag (${player},${player2},${player3},${player4},${player5},${plStatsLine1},${plStatsLine2},${plStatsLine3},${plStatsLine4},${plStatsLine5},${seats})">
         </div>
 
     </div>
     <div class="tab-pane fade" id="flop" role="tabpanel" aria-labelledby="flop-list">
-        <div class="players-table">
-            <div class="container-fluid text-center" th:classappend="container">
-                <div class="row row-height-400">
-                    <div class="col align-self-end">
-                        <a th:href="'extrastats?player='+${player.nickname}+'&stat=0'" target="_blank"
-                           th:class="colorgreen" th:text="${player.nickname}"
-                           data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"
-                           id="liveToastBtn4"></a>
-                        <div th:replace="player-form::frag (1,${player},${player2},${player3},${player4},${player5})">
-                        </div>
-                        <div th:replace="player-table::frag (${player},${flopStatsLine1.get(0)},${flopStatsLine2.get(0)},${flopStatsLine3.get(0)},${flopStatsLine4.get(0)},${flopStatsLine5.get(0)},${seats.get(0)})">
-                        </div>
-                    </div>
-                    <div class="col  align-self-start">
-                        <a th:href="'3bet?player='+${player2.nickname}" target="_blank"
-                           th:class="colorgreen" th:text="${player2.nickname}"></a>
-                        <div th:replace="player-form::frag (2,${player},${player2},${player3},${player4},${player5})">
-                        </div>
-                        <div th:replace="player-table::frag (${player2},${flopStatsLine1.get(1)},${flopStatsLine2.get(1)},${flopStatsLine3.get(1)},${flopStatsLine4.get(1)},${flopStatsLine5.get(1)},${seats.get(1)})">
-                        </div>
-                    </div>
-                    <div class="col  align-self-end">
-                        <a th:href="'3bet?player='+${player3.nickname}" target="_blank"
-                           th:class="colorgreen" th:text="${player3.nickname}"></a>
-                        <div th:replace="player-form::frag (3,${player},${player2},${player3},${player4},${player5})">
-                        </div>
-                        <div th:replace="player-table::frag (${player3},${flopStatsLine1.get(2)},${flopStatsLine2.get(2)},${flopStatsLine3.get(2)},${flopStatsLine4.get(2)},${flopStatsLine5.get(2)},${seats.get(2)})">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container text-center">
-                <div class="row justify-content-evenly">
-                    <div class="col-4">
-                        <a th:href="'extrastats?player='+${player4.nickname}+'&stat=0'" target="_blank"
-                           th:class="colorgreen" th:text="${player4.nickname}"
-                           data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
-                        <div th:replace="player-form::frag (4,${player},${player2},${player3},${player4},${player5})">
-                        </div>
-                        <div th:replace="player-table::frag (${player4},${flopStatsLine1.get(3)},${flopStatsLine2.get(3)},${flopStatsLine3.get(3)},${flopStatsLine4.get(3)},${flopStatsLine5.get(3)},${seats.get(3)})">
-                        </div>
-                    </div>
-
-                    <div class="col-4">
-                        <a th:href="'extrastats?player='+${player5.nickname}+'&stat=0'" target="_blank"
-                           th:class="colorgreen" th:text="${player5.nickname}"
-                           data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
-                        <div th:replace="player-form::frag (5,${player},${player2},${player3},${player4},${player5})">
-                        </div>
-                        <div th:replace="player-table::frag (${player5},${flopStatsLine1.get(4)},${flopStatsLine2.get(4)},${flopStatsLine3.get(4)},${flopStatsLine4.get(4)},${flopStatsLine5.get(4)},${seats.get(4)})">
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div th:replace="tab::frag (${player},${player2},${player3},${player4},${player5},${flopStatsLine1},${flopStatsLine2},${flopStatsLine3},${flopStatsLine4},${flopStatsLine5},${seats})">
         </div>
+
     </div>
     <div class="tab-pane fade" id="turn" role="tabpanel" aria-labelledby="turn">3</div>
     <div class="tab-pane fade" id="river" role="tabpanel" aria-labelledby="river-list">
