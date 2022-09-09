@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
 
-<div th:fragment="frag (player, plStatsLine1, plStatsLine2,plStatsLine3,plStatsLine4, seats)">
+<div th:fragment="frag (player, plStatsLine1, plStatsLine2,plStatsLine3,plStatsLine4,plStatsLine5, seats)">
     <div th:switch="${player.nickname}">
         <table th:case="'Empty Seat'" class="table table-striped" border="3"
                th:classappend="${seats}">
+            <tr>
+                <td th:each="stat : ${plStatsLine1}">-</td>
+            </tr>
             <tr>
                 <td th:each="stat : ${plStatsLine1}">-</td>
             </tr>
@@ -92,8 +95,32 @@
                     </div>
                 </td>
             </tr>
-            <tr>
+            <tr th:if="${plStatsLine4!=null}">
                 <td th:each="stat : ${plStatsLine4}">
+                    <div th:each="stat2 : ${stat}">
+                        <div th:switch="${stat2.address}">
+                            <div th:case="'#'">
+                                <div th:class="${stat2.statColor}"
+                                     th:text="${stat2.stat}"
+                                     th:title="${stat2.statName}">
+                                </div>
+                            </div>
+                            <div th:case="*">
+
+                                <div><a
+
+                                        th:onclick="getStatId([[${stat2.statName}]],[[${player.nickname}]])"
+                                        th:text="${stat2.stat}"
+                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
+                                        href="#"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr th:if="${plStatsLine5!=null}">
+                <td th:each="stat : ${plStatsLine5}">
                     <div th:each="stat2 : ${stat}">
                         <div th:switch="${stat2.address}">
                             <div th:case="'#'">

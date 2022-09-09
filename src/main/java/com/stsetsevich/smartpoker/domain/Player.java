@@ -1968,4 +1968,7 @@ public class Player {
     }
 
 
+    public double getaAfqFlop() {
+        return afqFlop;
+    }
 }

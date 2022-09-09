@@ -120,26 +120,27 @@ public class StatValue {
 
     public void setPicture() {
         String picture;
-        if (getDependOnStat()==0) {
-            double dstat = Double.parseDouble(this.stat);
-            int istat = (int) dstat;
-            // System.out.println(istat);
-            picture = "/img/" + statName + "/" + istat + ".png";
-            // System.out.println(picture);
+        if(!stat.equals("-")) {
+            if (getDependOnStat() == 0) {
+                double dstat = Double.parseDouble(this.stat);
+                int istat = (int) dstat;
+                // System.out.println(istat);
+                picture = "/img/" + statName + "/" + istat + ".png";
+                // System.out.println(picture);
+            } else {
+                double dstat = Double.parseDouble(this.stat);
+                int istat = (int) dstat;
+                int depIStat = (int) getDependOnStat();
+                // System.out.println(istat);
+                picture = "/img/" + statName + "/" + depIStat + "-" + istat + ".png";
+                // System.out.println(picture);
+            }
+            File f = new File("E:/idea_projects/smartpoker/src/main/resources/static" + picture);
+            if (f.exists() && !f.isDirectory()) {
+                System.out.println("FILE EXSIST");
+            } else picture = null;
         }
-        else {
-            double dstat = Double.parseDouble(this.stat);
-            int istat = (int) dstat;
-            int depIStat = (int) getDependOnStat();
-            // System.out.println(istat);
-            picture = "/img/" + statName + "/"+depIStat+ "-" + istat + ".png";
-            // System.out.println(picture);
-        }
-        File f = new File("E:/idea_projects/smartpoker/src/main/resources/static"+picture);
-        if(f.exists() && !f.isDirectory()) {
-            System.out.println("FILE EXSIST");
-        }
-        else picture=null;
+        else picture = null;
         this.picture = picture;
     }
 

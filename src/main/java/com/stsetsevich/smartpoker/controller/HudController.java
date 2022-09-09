@@ -29,6 +29,8 @@ public class HudController {
     @Autowired
     PreflopStatsCalc preflopStatsCalc;
     @Autowired
+    FlopStatsCalc flopStatsCalc;
+    @Autowired
     ExtraStatsCalc extraStatsCalc;
     @Autowired
     UserRepo userRepo;
@@ -48,7 +50,7 @@ public class HudController {
         addPlayer4 = "Franshtik";
         addPlayer5 = "Franshtik";
         ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
-        modelPutGeneralInfo(model, pl, statRepo, preflopStatsCalc);
+        modelPutGeneralInfo(model, pl);
         return "hud";
     }
 
@@ -60,7 +62,7 @@ public class HudController {
 
         ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
 
-        modelPutGeneralInfo(model, pl, statRepo, preflopStatsCalc);
+        modelPutGeneralInfo(model, pl);
 
         return "hud";
     }
@@ -72,7 +74,7 @@ public class HudController {
 
         ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
 
-        modelPutGeneralInfo(model, pl, statRepo, preflopStatsCalc);
+        modelPutGeneralInfo(model, pl);
 
         return "hud";
 
@@ -99,12 +101,12 @@ public class HudController {
         model.put("statValues", statValues);
 
 
-        modelPutGeneralInfo(model, pl, statRepo, preflopStatsCalc);
+        modelPutGeneralInfo(model, pl);
         return "hud";
 
     }
 
-    private static void modelPutGeneralInfo(Map<String, Object> model, ArrayList<Player> pl, StatRepo statRepo, PreflopStatsCalc preflopStatsCalc) {
+    private void modelPutGeneralInfo(Map<String, Object> model, ArrayList<Player> pl) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         model.put("name", username);
@@ -119,6 +121,13 @@ public class HudController {
         model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl, statRepo));
         model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl, statRepo));
         model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl, statRepo));
+        model.put("plStatsLine5", preflopStatsCalc.hudStatsCalcLine5(pl, statRepo));
+
+        model.put("flopStatsLine1", flopStatsCalc.hudStatsCalcLine1(pl, statRepo));
+        model.put("flopStatsLine2", flopStatsCalc.hudStatsCalcLine2(pl, statRepo));
+        model.put("flopStatsLine3", flopStatsCalc.hudStatsCalcLine3(pl, statRepo));
+        model.put("flopStatsLine4", flopStatsCalc.hudStatsCalcLine4(pl, statRepo));
+        model.put("flopStatsLine5", flopStatsCalc.hudStatsCalcLine5(pl, statRepo));
 
         //Информация об игроках за столом
         //if (pl.get(0).getNickname().equals("Franshtik (PS)")) pl.get(0).setNickname("Empty Seat");

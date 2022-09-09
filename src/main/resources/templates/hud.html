@@ -37,7 +37,7 @@
                            id="liveToastBtn4"></a>
                         <div th:replace="player-form::frag (1,${player},${player2},${player3},${player4},${player5})">
                         </div>
-                        <div th:replace="player-table::frag (${player},${plStatsLine1.get(0)},${plStatsLine2.get(0)},${plStatsLine3.get(0)},${plStatsLine4.get(0)},${seats.get(0)})">
+                        <div th:replace="player-table::frag (${player},${plStatsLine1.get(0)},${plStatsLine2.get(0)},${plStatsLine3.get(0)},${plStatsLine4.get(0)},${plStatsLine5.get(0)},${seats.get(0)})">
                         </div>
                     </div>
                     <div class="col  align-self-start">
@@ -45,7 +45,7 @@
                            th:class="colorgreen" th:text="${player2.nickname}"></a>
                         <div th:replace="player-form::frag (2,${player},${player2},${player3},${player4},${player5})">
                         </div>
-                        <div th:replace="player-table::frag (${player2},${plStatsLine1.get(1)},${plStatsLine2.get(1)},${plStatsLine3.get(1)},${plStatsLine4.get(1)},${seats.get(1)})">
+                        <div th:replace="player-table::frag (${player2},${plStatsLine1.get(1)},${plStatsLine2.get(1)},${plStatsLine3.get(1)},${plStatsLine4.get(1)},${plStatsLine5.get(1)},${seats.get(1)})">
                         </div>
                     </div>
                     <div class="col  align-self-end">
@@ -53,7 +53,7 @@
                            th:class="colorgreen" th:text="${player3.nickname}"></a>
                         <div th:replace="player-form::frag (3,${player},${player2},${player3},${player4},${player5})">
                         </div>
-                        <div th:replace="player-table::frag (${player3},${plStatsLine1.get(2)},${plStatsLine2.get(2)},${plStatsLine3.get(2)},${plStatsLine4.get(2)},${seats.get(2)})">
+                        <div th:replace="player-table::frag (${player3},${plStatsLine1.get(2)},${plStatsLine2.get(2)},${plStatsLine3.get(2)},${plStatsLine4.get(2)},${plStatsLine5.get(2)},${seats.get(2)})">
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
                         <div th:replace="player-form::frag (4,${player},${player2},${player3},${player4},${player5})">
                         </div>
-                        <div th:replace="player-table::frag (${player4},${plStatsLine1.get(3)},${plStatsLine2.get(3)},${plStatsLine3.get(3)},${plStatsLine4.get(3)},${seats.get(3)})">
+                        <div th:replace="player-table::frag (${player4},${plStatsLine1.get(3)},${plStatsLine2.get(3)},${plStatsLine3.get(3)},${plStatsLine4.get(3)},${plStatsLine5.get(3)},${seats.get(3)})">
                         </div>
                     </div>
 
@@ -77,7 +77,7 @@
                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
                         <div th:replace="player-form::frag (5,${player},${player2},${player3},${player4},${player5})">
                         </div>
-                        <div th:replace="player-table::frag (${player5},${plStatsLine1.get(4)},${plStatsLine2.get(4)},${plStatsLine3.get(4)},${plStatsLine4.get(4)},${seats.get(4)})">
+                        <div th:replace="player-table::frag (${player5},${plStatsLine1.get(4)},${plStatsLine2.get(4)},${plStatsLine3.get(4)},${plStatsLine4.get(4)},${plStatsLine5.get(4)},${seats.get(4)})">
                         </div>
                     </div>
                 </div>
@@ -85,9 +85,7 @@
         </div>
 
     </div>
-    <div class="tab-pane fade" id="flop" role="tabpanel" aria-labelledby="flop-list">2</div>
-    <div class="tab-pane fade" id="turn" role="tabpanel" aria-labelledby="turn">3</div>
-    <div class="tab-pane fade" id="river" role="tabpanel" aria-labelledby="river-list">
+    <div class="tab-pane fade" id="flop" role="tabpanel" aria-labelledby="flop-list">
         <div class="players-table">
             <div class="container-fluid text-center" th:classappend="container">
                 <div class="row row-height-400">
@@ -96,338 +94,26 @@
                            th:class="colorgreen" th:text="${player.nickname}"
                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"
                            id="liveToastBtn4"></a>
-                        <form th:action="@{addPlayer}" method="post">
-                            <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
-                            <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
-                            <input type="hidden" th:value="${player4.nickname}" name="addPlayer4">
-                            <input type="hidden" th:value="${player5.nickname}" name="addPlayer5">
-                            <input type="text" name="addPlayer">
-                            <button type="submit">Search</button>
-
-                        </form>
-
-                        <table th:object="${player}" class="table table-striped" border="3"
-                               th:classappend="${seats.get(0)}">
-                            <tr>
-                                <td th:each="stat : ${plStatsLine1.get(0)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td th:each="stat : ${plStatsLine2.get(0)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td th:each="stat : ${plStatsLine3.get(0)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td th:each="stat : ${plStatsLine4.get(0)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-
+                        <div th:replace="player-form::frag (1,${player},${player2},${player3},${player4},${player5})">
+                        </div>
+                        <div th:replace="player-table::frag (${player},${flopStatsLine1.get(0)},${flopStatsLine2.get(0)},${flopStatsLine3.get(0)},${flopStatsLine4.get(0)},${flopStatsLine5.get(0)},${seats.get(0)})">
+                        </div>
                     </div>
                     <div class="col  align-self-start">
                         <a th:href="'3bet?player='+${player2.nickname}" target="_blank"
                            th:class="colorgreen" th:text="${player2.nickname}"></a>
-                        <form th:action="@{addPlayer2}" method="post">
-                            <input type="hidden" th:value="${player.nickname}" name="addPlayer">
-                            <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
-                            <input type="hidden" th:value="${player4.nickname}" name="addPlayer4">
-                            <input type="hidden" th:value="${player5.nickname}" name="addPlayer5">
-                            <input type="text" name="addPlayer2">
-                            <button type="submit">Search</button>
-
-                        </form>
-                        <table th:object="${player2}" class="table table-striped" border="3"
-                               th:classappend="${seats.get(1)}">
-
-                            <tr>
-                                <td th:each="stat : ${plStatsLine1.get(1)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player2.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td th:each="stat : ${plStatsLine2.get(1)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player2.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td th:each="stat : ${plStatsLine3.get(1)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player2.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td th:each="stat : ${plStatsLine4.get(1)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player2.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                        <div th:replace="player-form::frag (2,${player},${player2},${player3},${player4},${player5})">
+                        </div>
+                        <div th:replace="player-table::frag (${player2},${flopStatsLine1.get(1)},${flopStatsLine2.get(1)},${flopStatsLine3.get(1)},${flopStatsLine4.get(1)},${flopStatsLine5.get(1)},${seats.get(1)})">
+                        </div>
                     </div>
                     <div class="col  align-self-end">
                         <a th:href="'3bet?player='+${player3.nickname}" target="_blank"
                            th:class="colorgreen" th:text="${player3.nickname}"></a>
-                        <form th:action="@{addPlayer3}" method="post">
-                            <input type="hidden" th:value="${player.nickname}" name="addPlayer">
-                            <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
-                            <input type="hidden" th:value="${player4.nickname}" name="addPlayer4">
-                            <input type="hidden" th:value="${player5.nickname}" name="addPlayer5">
-                            <input type="text" name="addPlayer3">
-                            <button type="submit">Search</button>
-
-                        </form>
-                        <table th:object="${player3}" class="table table-striped" border="3"
-                               th:classappend="${seats.get(2)}">
-                            <tr>
-                                <td th:each="stat : ${plStatsLine1.get(2)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player3.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td th:each="stat : ${plStatsLine2.get(2)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player3.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td th:each="stat : ${plStatsLine3.get(2)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player3.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td th:each="stat : ${plStatsLine4.get(2)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player3.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                        <div th:replace="player-form::frag (3,${player},${player2},${player3},${player4},${player5})">
+                        </div>
+                        <div th:replace="player-table::frag (${player3},${flopStatsLine1.get(2)},${flopStatsLine2.get(2)},${flopStatsLine3.get(2)},${flopStatsLine4.get(2)},${flopStatsLine5.get(2)},${seats.get(2)})">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -438,234 +124,28 @@
                         <a th:href="'extrastats?player='+${player4.nickname}+'&stat=0'" target="_blank"
                            th:class="colorgreen" th:text="${player4.nickname}"
                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
-                        <form th:action="@{addPlayer4}" method="post">
-                            <input type="hidden" th:value="${player.nickname}" name="addPlayer">
-                            <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
-                            <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
-                            <input type="hidden" th:value="${player5.nickname}" name="addPlayer5">
-                            <input type="text" name="addPlayer4">
-                            <button type="submit">Search</button>
-
-                        </form>
-                        <table th:object="${player4}" class="table table-striped" border="3"
-                               th:classappend="${seats.get(3)}">
-
-                            <tr>
-                                <td th:each="stat : ${plStatsLine1.get(3)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player4.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td th:each="stat : ${plStatsLine2.get(3)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player4.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td th:each="stat : ${plStatsLine3.get(3)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player4.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td th:each="stat : ${plStatsLine4.get(3)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player4.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                        <div th:replace="player-form::frag (4,${player},${player2},${player3},${player4},${player5})">
+                        </div>
+                        <div th:replace="player-table::frag (${player4},${flopStatsLine1.get(3)},${flopStatsLine2.get(3)},${flopStatsLine3.get(3)},${flopStatsLine4.get(3)},${flopStatsLine5.get(3)},${seats.get(3)})">
+                        </div>
                     </div>
 
                     <div class="col-4">
                         <a th:href="'extrastats?player='+${player5.nickname}+'&stat=0'" target="_blank"
                            th:class="colorgreen" th:text="${player5.nickname}"
                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
-                        <form th:action="@{addPlayer5}" method="post">
-                            <input type="hidden" th:value="${player.nickname}" name="addPlayer">
-                            <input type="hidden" th:value="${player2.nickname}" name="addPlayer2">
-                            <input type="hidden" th:value="${player3.nickname}" name="addPlayer3">
-                            <input type="hidden" th:value="${player4.nickname}" name="addPlayer4">
-                            <input type="text" name="addPlayer5">
-                            <button type="submit">Search</button>
-
-                        </form>
-                        <table th:object="${player5}" class="table table-striped" border="3"
-                               th:classappend="${seats.get(4)}">
-
-                            <tr>
-                                <td th:each="stat : ${plStatsLine1.get(4)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player5.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td th:each="stat : ${plStatsLine2.get(4)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player5.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td th:each="stat : ${plStatsLine3.get(4)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player5.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td th:each="stat : ${plStatsLine4.get(4)}">
-                                    <div th:each="stat2 : ${stat}">
-                                        <div th:switch="${stat2.address}">
-                                            <div th:case="'#'">
-                                                <div th:class="${stat2.statColor}"
-                                                     th:text="${stat2.stat}"
-                                                     th:title="${stat2.statName}">
-                                                </div>
-                                            </div>
-                                            <div th:case="*">
-
-                                                <div><a
-
-                                                        th:onclick="getStatId([[${stat2.statName}]],[[${player5.nickname}]])"
-                                                        th:text="${stat2.stat}"
-                                                        th:title="${stat2.statName}" th:class="${stat2.statColor}"
-                                                        href="#"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                        <div th:replace="player-form::frag (5,${player},${player2},${player3},${player4},${player5})">
+                        </div>
+                        <div th:replace="player-table::frag (${player5},${flopStatsLine1.get(4)},${flopStatsLine2.get(4)},${flopStatsLine3.get(4)},${flopStatsLine4.get(4)},${flopStatsLine5.get(4)},${seats.get(4)})">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="tab-pane fade" id="turn" role="tabpanel" aria-labelledby="turn">3</div>
+    <div class="tab-pane fade" id="river" role="tabpanel" aria-labelledby="river-list">
+
     </div>
 
     <div class="container text-center">

@@ -44,10 +44,6 @@ public class PreflopStatsCalc extends StatsCalc {
                         getPoints(statname, statRepo), Variant.THREE), statname);
                 stats.add(statValue);
 
-                statname = "total4bet";
-                statValue = new StatValue(Double.toString(pl.getTotal4bet()), checkDiap(pl.getTotal4bet(),
-                        getPoints(statname, statRepo), Variant.ONE), true, statname, pl);
-                stats.add(statValue);
             }
             finally {
                 playerStat.put(i, stats);
@@ -62,7 +58,7 @@ public class PreflopStatsCalc extends StatsCalc {
 
     //Записываем в коллекцию данные каждого игрока для второй строки таблицы
     //Вычисляем значения и в какой диапазон они попадают
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine2(ArrayList<Player> players, StatRepo statRepo) {
+    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine25(ArrayList<Player> players, StatRepo statRepo) {
         HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
         int i = 0;
         for (Player pl : players) {
@@ -139,7 +135,7 @@ public class PreflopStatsCalc extends StatsCalc {
 
     //Записываем в коллекцию данные каждого игрока для четвертой строки таблицы
     //Вычисляем значения и в какой диапазон они попадают
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine4(ArrayList<Player> players, StatRepo statRepo) {
+    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine5(ArrayList<Player> players, StatRepo statRepo) {
         HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
         int i = 0;
         for (Player pl : players) {
@@ -167,15 +163,83 @@ public class PreflopStatsCalc extends StatsCalc {
                     getPoints(statname, statRepo), Variant.TWO), statname);
             stats.add(statValue);
 
-                statname = "checkRaiseFlop";
-                statValue = new StatValue(Double.toString(pl.getCheckRaiseFlop()), checkDiap(pl.getCheckRaiseFlop(),
-                        getPoints(statname, statRepo), Variant.ONE, pl.getVpip(), "vpip", statRepo), statname);
-                stats.add(statValue);
             }
             finally {
                 playerStat.put(i, stats);
                 i++;
             }
+        }
+        return playerStat;
+    }
+    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine2(ArrayList<Player> players, StatRepo statRepo) {
+        HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
+        int i = 0;
+        for (Player pl : players) {
+            ArrayList<StatValue> stats = new ArrayList<>();
+            StatValue statValue;
+            try {
+
+                String statname = "total4bet";
+                statValue = new StatValue(Double.toString(pl.getTotal4bet()), checkDiap(pl.getTotal4bet(),
+                        getPoints(statname, statRepo), Variant.ONE), true, statname, pl);
+                stats.add(statValue);
+                statname = "foldTo4betTotal";
+                statValue = new StatValue(Double.toString(pl.getFoldTo4betTotal()), checkDiap(pl.getFoldTo4betTotal(),
+                        getPoints(statname, statRepo), Variant.THREE), statname);
+                stats.add(statValue);
+                statname = "total5bet";
+                statValue = new StatValue(Double.toString(pl.getTotal5bet()), checkDiap(pl.getTotal5bet(),
+                        getPoints(statname, statRepo), Variant.ONE), true, statname, pl);
+                stats.add(statValue);
+                statname = "foldTo5betTotal";
+                statValue = new StatValue(Double.toString(pl.getFoldTo5betTotal()), checkDiap(pl.getFoldTo5betTotal(),
+                        getPoints(statname, statRepo), Variant.THREE), statname);
+                stats.add(statValue);
+
+            }
+            finally {
+                playerStat.put(i, stats);
+                i++;
+            }
+
+
+
+        }
+        return playerStat;
+    }
+    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine4(ArrayList<Player> players, StatRepo statRepo) {
+        HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
+        int i = 0;
+        for (Player pl : players) {
+            ArrayList<StatValue> stats = new ArrayList<>();
+            StatValue statValue;
+            try {
+
+                String statname = "pfrBu";
+                statValue = new StatValue(Double.toString(pl.getPfrBu()), checkDiap(pl.getPfrBu(),
+                        getPoints(statname, statRepo), Variant.ONE), true, statname, pl);
+                stats.add(statValue);
+                statname = "foldTo3betIpBu";
+                statValue = new StatValue(Double.toString(pl.getFoldTo3betIpBu()), checkDiap(pl.getFoldTo3betIpBu(),
+                        getPoints(statname, statRepo), Variant.THREE), statname);
+                stats.add(statValue);
+                statname = "callOpenraiseBb";
+                statValue = new StatValue(Double.toString(pl.getCallOpenraiseBb()), checkDiap(pl.getCallOpenraiseBb(),
+                        getPoints(statname, statRepo), Variant.ONE), true, statname, pl);
+                stats.add(statValue);
+                statname = "bbVsBu3bet";
+                statValue = new StatValue(Double.toString(pl.getBbVsBu3bet()), checkDiap(pl.getBbVsBu3bet(),
+                        getPoints(statname, statRepo), Variant.ONE),true, statname, pl);
+                stats.add(statValue);
+
+            }
+            finally {
+                playerStat.put(i, stats);
+                i++;
+            }
+
+
+
         }
         return playerStat;
     }
