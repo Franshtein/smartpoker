@@ -95,7 +95,7 @@
                     </div>
                 </td>
             </tr>
-            <tr th:if="${plStatsLine4!=null}">
+            <tr th:if="${!plStatsLine4.get(0).stat.equals('-')}">
                 <td th:each="stat : ${plStatsLine4}">
                     <div th:each="stat2 : ${stat}">
                         <div th:switch="${stat2.address}">
@@ -119,7 +119,7 @@
                     </div>
                 </td>
             </tr>
-            <tr th:if="${plStatsLine5!=null}">
+            <tr th:if="${!plStatsLine5.get(0).stat.equals('-')}">
                 <td th:each="stat : ${plStatsLine5}">
                     <div th:each="stat2 : ${stat}">
                         <div th:switch="${stat2.address}">
