@@ -109,20 +109,25 @@ public class PreflopStatsCalc extends StatsCalc {
             statValue = new StatValue(Double.toString(pl.getSqueezeTotal()), checkDiap(pl.getSqueezeTotal(),
                     getPoints(statname, statRepo), Variant.ONE), statname);
             stats.add(statValue);
-
+/*
             statname = "foldToSqueezeTotal";
             statValue = new StatValue(Double.toString(pl.getFoldToSqueezeTotal()), checkDiap(pl.getFoldToSqueezeTotal(),
                     getPoints(statname, statRepo), Variant.ONE), statname);
             stats.add(statValue);
-
+*/
             statname = "wtsd";
             statValue = new StatValue(Double.toString(pl.getWtsd()), checkDiap(pl.getWtsd(),
                     getPoints(statname, statRepo), Variant.ONE), statname);
             stats.add(statValue);
 
+                statname = "w$sd";
+                statValue = new StatValue(Double.toString(pl.getW$sd()), checkDiap(pl.getW$sd(),
+                        getPoints(statname, statRepo), Variant.TWO), statname);
+                stats.add(statValue);
+
             statname = "wwsf";
             statValue = new StatValue(Double.toString(pl.getWwsf()), checkDiap(pl.getWwsf(),
-                    getPoints(statname, statRepo), Variant.ONE), statname);
+                    getPoints(statname, statRepo), Variant.TWO), statname);
             stats.add(statValue);
             }
             finally {

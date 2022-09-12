@@ -107,6 +107,8 @@ public class ParsePlayer {
 
 
     public Document parsePlayer(String nickname) throws IOException {
+
+        nickname = nickname.split(" \\(PS\\)")[0];
         String url = "https://smarthand.pro/ps/#"+nickname;
 
         final WebClient webClient = new WebClient(BrowserVersion.BEST_SUPPORTED);

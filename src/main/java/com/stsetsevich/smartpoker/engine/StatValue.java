@@ -7,7 +7,7 @@ import java.io.File;
 public class StatValue {
     enum StatColor
     {
-        INFINITY_TO_POINT1("colorblue"), POINT1_TO_POINT2("coloryellow"), POINT2_TO_POINT3("colorred"), POINT3_TO_POINT4("colorpink"), POINT4_TO_INFINITY("colorgreen");
+        INFINITY_TO_POINT1("colorblue"), POINT1_TO_POINT2("coloryellow"), POINT2_TO_POINT3("colorred"), POINT3_TO_POINT4("colorgreen"), POINT4_TO_INFINITY("colorpink");
         private String color;
 
         StatColor(String color) {

@@ -41,8 +41,32 @@ public class CalcPlayerStats {
         stats.add(statValue);
         statValue = new StatValue(Double.toString(over10kHandsAndPlusEvCalcAvgCheckRaiseRiver(subPlayers)), 0, "avgCheckRaiseRiver, 10k+ Hands, ev>0");
         stats.add(statValue);
-
+        statValue = new StatValue(Double.toString(nice(subPlayers)), 0, "need, 10k+ Hands, ev>0");
+        stats.add(statValue);
+        statValue = new StatValue(Double.toString(nice2(subPlayers)), 0, "avgCheckRaiseRiver, 10k+ Hands, ev>0");
+        stats.add(statValue);
+        statValue = new StatValue(Double.toString(nice3(subPlayers)), 0, "avgCheckRaiseRiver, 10k+ Hands, ev>0");
+        stats.add(statValue);
         return stats;
+
+    }
+    private static double nice(ArrayList<Player> players) {
+        ArrayList<Player> subPlayers = new ArrayList<>(players);
+        subPlayers.removeIf(n -> (n.getTotalHands()<=10000|| n.getAvgBb100()<4));
+        System.out.println(subPlayers.size());
+        return subPlayers.stream().flatMapToDouble(player -> DoubleStream.of(player.getWonAfterRaiseFlop())).average().orElse(0);
+    }
+    private static double nice2(ArrayList<Player> players) {
+        ArrayList<Player> subPlayers = new ArrayList<>(players);
+        subPlayers.removeIf(n -> (n.getTotalHands()<=10000|| n.getAvgBb100()<4));
+        System.out.println(subPlayers.size());
+        return subPlayers.stream().flatMapToDouble(player -> DoubleStream.of(player.getWonAfterRaiseTurn())).average().orElse(0);
+    }
+    private static double nice3(ArrayList<Player> players) {
+        ArrayList<Player> subPlayers = new ArrayList<>(players);
+        subPlayers.removeIf(n -> (n.getTotalHands()<=10000|| n.getAvgBb100()<4));
+        System.out.println(subPlayers.size());
+        return subPlayers.stream().flatMapToDouble(player -> DoubleStream.of(player.getWonAfterRaiseRiver())).average().orElse(0);
     }
 
     private static double calcAvgEvBb100(ArrayList<Player> players) {
@@ -86,4 +110,5 @@ public class CalcPlayerStats {
         subPlayers.removeIf(n -> (n.getTotalHands()<=10000 || n.getAvgBb100()<0));
         return subPlayers.stream().flatMapToDouble(player -> DoubleStream.of(player.getCheckRaiseRiver())).average().orElse(0);
     }
+
 }

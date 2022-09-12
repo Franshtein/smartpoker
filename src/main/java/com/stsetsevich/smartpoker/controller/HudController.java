@@ -31,6 +31,10 @@ public class HudController {
     @Autowired
     FlopStatsCalc flopStatsCalc;
     @Autowired
+    TurnStatsCalc turnStatsCalc;
+    @Autowired
+    RiverStatsCalc riverStatsCalc;
+    @Autowired
     ExtraStatsCalc extraStatsCalc;
     @Autowired
     UserRepo userRepo;
@@ -111,10 +115,7 @@ public class HudController {
         String username = auth.getName();
         model.put("name", username);
 
-        model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
 
-        //Информация о цвете таблиц
-        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
 
         //Информация о префлопе для таблиц со статами
         model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, statRepo));
@@ -129,6 +130,18 @@ public class HudController {
         model.put("flopStatsLine4", flopStatsCalc.hudStatsCalcLine4(pl, statRepo));
         model.put("flopStatsLine5", flopStatsCalc.hudStatsCalcLine5(pl, statRepo));
 
+        model.put("turnStatsLine1", turnStatsCalc.hudStatsCalcLine1(pl, statRepo));
+        model.put("turnStatsLine2", turnStatsCalc.hudStatsCalcLine2(pl, statRepo));
+        model.put("turnStatsLine3", turnStatsCalc.hudStatsCalcLine3(pl, statRepo));
+        model.put("turnStatsLine4", turnStatsCalc.hudStatsCalcLine4(pl, statRepo));
+        model.put("turnStatsLine5", turnStatsCalc.hudStatsCalcLine5(pl, statRepo));
+
+        model.put("riverStatsLine1", riverStatsCalc.hudStatsCalcLine1(pl, statRepo));
+        model.put("riverStatsLine2", riverStatsCalc.hudStatsCalcLine2(pl, statRepo));
+        model.put("riverStatsLine3", riverStatsCalc.hudStatsCalcLine3(pl, statRepo));
+        model.put("riverStatsLine4", riverStatsCalc.hudStatsCalcLine4(pl, statRepo));
+        model.put("riverStatsLine5", riverStatsCalc.hudStatsCalcLine5(pl, statRepo));
+
         //Информация об игроках за столом
         //if (pl.get(0).getNickname().equals("Franshtik (PS)")) pl.get(0).setNickname("Empty Seat");
 
@@ -137,6 +150,11 @@ public class HudController {
         model.put("player3", pl.get(2));
         model.put("player4", pl.get(3));
         model.put("player5", pl.get(4));
+
+        model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
+
+        //Информация о цвете таблиц
+        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
 
        /* String picture;
         if(pl.get(0).getVpip()<=20) picture="/img/vpip/20.png";

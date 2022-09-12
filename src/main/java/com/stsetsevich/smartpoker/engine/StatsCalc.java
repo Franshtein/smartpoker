@@ -82,12 +82,12 @@ public class StatsCalc {
         String seat;
         for (Player pl : players) {
             if (!pl.getNickname().equals("Empty Seat")) {
-                int i = checkDiap(pl.getAvgBb100(), getPoints("avgBb100", statRepo), Variant.TWO);
-                seat = "table-striped-green";
-                if (i == 0) seat = "table-striped-blue";
-                if (i == 1) seat = "table-striped-yellow";
-                if (i == 2) seat = "table-striped-red";
-                if (i == 3) seat = "table-striped-pink";
+                int i = checkDiap(pl.getAvgBb100(), getPoints("avgBb100", statRepo), Variant.ONE);
+                seat = "table-striped-red";
+                if (i == 0) seat = "table-striped-pink";
+                if (i == 1) seat = "table-striped-blue";
+                if (i == 2) seat = "table-striped-green";
+                if (i == 3) seat = "table-striped-yellow";
             }
             else seat = "table-striped-empty";
             seats.add(seat);
