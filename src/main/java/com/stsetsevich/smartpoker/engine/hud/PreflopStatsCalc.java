@@ -1,8 +1,8 @@
-package com.stsetsevich.smartpoker.engine;
+package com.stsetsevich.smartpoker.engine.hud;
 
 
 import com.stsetsevich.smartpoker.domain.Player;
-import com.stsetsevich.smartpoker.domain.Stat;
+import com.stsetsevich.smartpoker.engine.StatValue;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import org.springframework.stereotype.Service;
 
@@ -140,6 +140,7 @@ public class PreflopStatsCalc extends StatsCalc {
 
     //Записываем в коллекцию данные каждого игрока для четвертой строки таблицы
     //Вычисляем значения и в какой диапазон они попадают
+    @Override
     public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine4(ArrayList<Player> players, StatRepo statRepo) {
         HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
         int i = 0;
@@ -176,6 +177,7 @@ public class PreflopStatsCalc extends StatsCalc {
         }
         return playerStat;
     }
+    @Override
     public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine5(ArrayList<Player> players, StatRepo statRepo) {
         HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
         int i = 0;

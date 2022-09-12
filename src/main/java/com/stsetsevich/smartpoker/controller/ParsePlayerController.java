@@ -2,6 +2,8 @@ package com.stsetsevich.smartpoker.controller;
 
 
 import com.stsetsevich.smartpoker.engine.*;
+import com.stsetsevich.smartpoker.engine.parse.ParsePlayer;
+import com.stsetsevich.smartpoker.engine.parse.StatsParse;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import com.stsetsevich.smartpoker.repos.UserRepo;
 import com.stsetsevich.smartpoker.repos.UserSmarthandAccountAndCookiesRepo;
@@ -30,7 +32,8 @@ public class ParsePlayerController {
     UserSmarthandAccountAndCookiesRepo userSmarthandAccountAndCookiesRepo;
     @Autowired
     SetPlayersAtTable setPlayersAtTable;
-    @Autowired ParsePlayer parsePlayer;
+    @Autowired
+    ParsePlayer parsePlayer;
     @Autowired AddOrUpdatePlayer addOrUpdatePlayer;
 
     @GetMapping("/search")

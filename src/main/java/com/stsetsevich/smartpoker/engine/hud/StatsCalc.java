@@ -1,9 +1,11 @@
-package com.stsetsevich.smartpoker.engine;
+package com.stsetsevich.smartpoker.engine.hud;
 
 import com.stsetsevich.smartpoker.domain.Player;
+import com.stsetsevich.smartpoker.engine.StatValue;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class StatsCalc {
     protected enum Variant {
@@ -95,5 +97,43 @@ public class StatsCalc {
         return seats;
     }
 
+    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine4(ArrayList<Player> players, StatRepo statRepo) {
+        HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
+        int i = 0;
+        for (Player pl : players) {
+            ArrayList<StatValue> stats = new ArrayList<>();
+            StatValue statValue;
+            try {
+
+                String statname = "";
+                statValue = new StatValue("-", 1, statname);
+                stats.add(statValue);
+
+            } finally {
+                playerStat.put(i, stats);
+                i++;
+            }
+        }
+        return playerStat;
+    }
+    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine5(ArrayList<Player> players, StatRepo statRepo) {
+        HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
+        int i = 0;
+        for (Player pl : players) {
+            ArrayList<StatValue> stats = new ArrayList<>();
+            StatValue statValue;
+            try {
+
+                String statname = "";
+                statValue = new StatValue("-", 1, statname);
+                stats.add(statValue);
+
+            } finally {
+                playerStat.put(i, stats);
+                i++;
+            }
+        }
+        return playerStat;
+    }
 
 }

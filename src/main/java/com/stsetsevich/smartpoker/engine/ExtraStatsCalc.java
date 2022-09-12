@@ -1,6 +1,7 @@
 package com.stsetsevich.smartpoker.engine;
 
 import com.stsetsevich.smartpoker.domain.Player;
+import com.stsetsevich.smartpoker.engine.hud.StatsCalc;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import org.springframework.stereotype.Service;
 

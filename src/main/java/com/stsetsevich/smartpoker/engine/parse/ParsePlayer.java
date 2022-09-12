@@ -1,4 +1,4 @@
-package com.stsetsevich.smartpoker.engine;
+package com.stsetsevich.smartpoker.engine.parse;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CookieManager;

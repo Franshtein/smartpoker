@@ -1,4 +1,4 @@
-package com.stsetsevich.smartpoker.engine;
+package com.stsetsevich.smartpoker.engine.parse;
 
 import com.stsetsevich.smartpoker.domain.Player;
 import org.jsoup.Jsoup;

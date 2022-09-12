@@ -1,7 +1,8 @@
-package com.stsetsevich.smartpoker.engine;
+package com.stsetsevich.smartpoker.engine.hud;
 
 
 import com.stsetsevich.smartpoker.domain.Player;
+import com.stsetsevich.smartpoker.engine.StatValue;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 @Service
-public class FlopStatsCalc extends StatsCalc {
+public class RiverStatsCalc extends StatsCalc {
 
 
     //Записываем в коллекцию данные каждого игрока для первой строки таблицы
@@ -23,23 +24,23 @@ public class FlopStatsCalc extends StatsCalc {
             try {
 
 
-                String statname = "cBetFlopTotal";
-                statValue = new StatValue(Double.toString(pl.getcBetFlopTotal()), checkDiap(pl.getcBetFlopTotal(),
+                String statname = "cBetRiverTotal";
+                statValue = new StatValue(Double.toString(pl.getcBetRiverTotal()), checkDiap(pl.getcBetRiverTotal(),
                         getPoints(statname, statRepo), Variant.ONE), statname);
                 stats.add(statValue);
 
-                statname = "foldVsCbetFlopTotal";
-                statValue = new StatValue(Double.toString(pl.getFoldVsCbetFlopTotal()), checkDiap(pl.getFoldVsCbetFlopTotal(),
+                statname = "foldVsCbetRiverTotal";
+                statValue = new StatValue(Double.toString(pl.getFoldVsCbetRiverTotal()), checkDiap(pl.getFoldVsCbetRiverTotal(),
                         getPoints(statname, statRepo), Variant.THREE), true, statname, pl);
                 stats.add(statValue);
 
-                statname = "skippedCbetFoldFlopTotal";
-                statValue = new StatValue(Double.toString(pl.getSkippedCbetFoldFlopTotal()), checkDiap(pl.getSkippedCbetFoldFlopTotal(),
+                statname = "skippedCbetFoldRiverTotal";
+                statValue = new StatValue(Double.toString(pl.getSkippedCbetFoldRiverTotal()), checkDiap(pl.getSkippedCbetFoldRiverTotal(),
                         getPoints(statname, statRepo), Variant.THREE), true, statname, pl);
                 stats.add(statValue);
 
-                statname = "raiseToCbetFlopTotal";
-                statValue = new StatValue(Double.toString(pl.getRaiseToCbetFlopTotal()), checkDiap(pl.getRaiseToCbetFlopTotal(),
+                statname = "raiseToCbetRiverTotal";
+                statValue = new StatValue(Double.toString(pl.getRaiseToCbetRiverTotal()), checkDiap(pl.getRaiseToCbetRiverTotal(),
                         getPoints(statname, statRepo), Variant.ONE), statname);
                 stats.add(statValue);
 
@@ -64,23 +65,23 @@ public class FlopStatsCalc extends StatsCalc {
             StatValue statValue;
             try {
 
-                String statname = "donkFlop";
-                statValue = new StatValue(Double.toString(pl.getDonkFlop()), checkDiap(pl.getDonkFlop(),
+                String statname = "donkRiver";
+                statValue = new StatValue(Double.toString(pl.getDonkRiver()), checkDiap(pl.getDonkRiver(),
                         getPoints(statname, statRepo), Variant.ONE), statname);
                 stats.add(statValue);
 
-                statname = "checkCallFlop";
-                statValue = new StatValue(Double.toString(pl.getCheckCallFlop()), checkDiap(pl.getCheckCallFlop(),
+                statname = "checkCallTurn";
+                statValue = new StatValue(Double.toString(pl.getCheckCallRiver()), checkDiap(pl.getCheckCallRiver(),
                         getPoints(statname, statRepo), Variant.ONE), statname);
                 stats.add(statValue);
 
-                statname = "checkRaiseFlop";
-                statValue = new StatValue(Double.toString(pl.getCheckRaiseFlop()), checkDiap(pl.getCheckRaiseFlop(),
+                statname = "checkRaiseRiver";
+                statValue = new StatValue(Double.toString(pl.getCheckRaiseRiver()), checkDiap(pl.getCheckRaiseRiver(),
                         getPoints(statname, statRepo), Variant.ONE, pl.getVpip(), "vpip", statRepo), statname);
                 stats.add(statValue);
 
-                statname = "afqFlop";
-                statValue = new StatValue(Double.toString(pl.getAfqFlop()), checkDiap(pl.getAfqFlop(),
+                statname = "afqRiver";
+                statValue = new StatValue(Double.toString(pl.getAfqRiver()), checkDiap(pl.getAfqRiver(),
                         getPoints(statname, statRepo), Variant.ONE), statname);
                 stats.add(statValue);
             } finally {
@@ -98,18 +99,18 @@ public class FlopStatsCalc extends StatsCalc {
             StatValue statValue;
             try {
 
-                String statname = "betToMissCbetFlopTotal";
-                statValue = new StatValue(Double.toString(pl.getBetToMissCbetFlopTotal()), checkDiap(pl.getBetToMissCbetFlopTotal(),
+                String statname = "betToMissCbetRiverTotal";
+                statValue = new StatValue(Double.toString(pl.getBetToMissCbetRiverTotal()), checkDiap(pl.getBetToMissCbetRiverTotal(),
                         getPoints(statname, statRepo), Variant.ONE), statname);
                 stats.add(statValue);
 
-                statname = "wonAfterRaiseFlop";
-                statValue = new StatValue(Double.toString(pl.getWonAfterRaiseFlop()), checkDiap(pl.getWonAfterRaiseFlop(),
+                statname = "wonAfterRaiseRiver";
+                statValue = new StatValue(Double.toString(pl.getWonAfterRaiseRiver()), checkDiap(pl.getWonAfterRaiseRiver(),
                         getPoints(statname, statRepo), Variant.TWO), statname);
                 stats.add(statValue);
 
-                statname = "aggFactorFlop";
-                statValue = new StatValue(Double.toString(pl.getAggFactorFlop()), checkDiap(pl.getAggFactorFlop(),
+                statname = "aggFactorRiver";
+                statValue = new StatValue(Double.toString(pl.getAggFactorRiver()), checkDiap(pl.getAggFactorRiver(),
                         getPoints(statname, statRepo), Variant.ONE), statname);
                 stats.add(statValue);
 
@@ -125,49 +126,6 @@ public class FlopStatsCalc extends StatsCalc {
         }
         return playerStat;
     }
-    //Записываем в коллекцию данные каждого игрока для третьей строки таблицы
-    //Вычисляем значения и в какой диапазон они попадают
-
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine4(ArrayList<Player> players, StatRepo statRepo) {
-        HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
-        int i = 0;
-        for (Player pl : players) {
-            ArrayList<StatValue> stats = new ArrayList<>();
-            StatValue statValue;
-            try {
-
-                String statname = "";
-                statValue = new StatValue("-", 1, statname);
-                stats.add(statValue);
-
-            } finally {
-                playerStat.put(i, stats);
-                i++;
-            }
-        }
-        return playerStat;
-    }
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine5(ArrayList<Player> players, StatRepo statRepo) {
-        HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
-        int i = 0;
-        for (Player pl : players) {
-            ArrayList<StatValue> stats = new ArrayList<>();
-            StatValue statValue;
-            try {
-
-                String statname = "";
-                statValue = new StatValue("-", 1, statname);
-                stats.add(statValue);
-
-            } finally {
-                playerStat.put(i, stats);
-                i++;
-            }
-        }
-        return playerStat;
-    }
-    //Записываем в коллекцию данные каждого игрока для четвертой строки таблицы
-    //Вычисляем значения и в какой диапазон они попадают
 
 
 

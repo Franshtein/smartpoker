@@ -1,7 +1,8 @@
-package com.stsetsevich.smartpoker.engine;
+package com.stsetsevich.smartpoker.engine.hud;
 
 
 import com.stsetsevich.smartpoker.domain.Player;
+import com.stsetsevich.smartpoker.engine.StatValue;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import org.springframework.stereotype.Service;
 
@@ -125,49 +126,6 @@ public class TurnStatsCalc extends StatsCalc {
         }
         return playerStat;
     }
-    //Записываем в коллекцию данные каждого игрока для третьей строки таблицы
-    //Вычисляем значения и в какой диапазон они попадают
-
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine4(ArrayList<Player> players, StatRepo statRepo) {
-        HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
-        int i = 0;
-        for (Player pl : players) {
-            ArrayList<StatValue> stats = new ArrayList<>();
-            StatValue statValue;
-            try {
-
-                String statname = "";
-                statValue = new StatValue("-", 1, statname);
-                stats.add(statValue);
-
-            } finally {
-                playerStat.put(i, stats);
-                i++;
-            }
-        }
-        return playerStat;
-    }
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine5(ArrayList<Player> players, StatRepo statRepo) {
-        HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
-        int i = 0;
-        for (Player pl : players) {
-            ArrayList<StatValue> stats = new ArrayList<>();
-            StatValue statValue;
-            try {
-
-                String statname = "";
-                statValue = new StatValue("-", 1, statname);
-                stats.add(statValue);
-
-            } finally {
-                playerStat.put(i, stats);
-                i++;
-            }
-        }
-        return playerStat;
-    }
-    //Записываем в коллекцию данные каждого игрока для четвертой строки таблицы
-    //Вычисляем значения и в какой диапазон они попадают
 
 
 

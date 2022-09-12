@@ -1,20 +1,15 @@
 package com.stsetsevich.smartpoker.engine;
 
 import com.stsetsevich.smartpoker.domain.Player;
-import com.stsetsevich.smartpoker.domain.User;
 import com.stsetsevich.smartpoker.domain.UserSmarthandAccountAndCookies;
+import com.stsetsevich.smartpoker.engine.parse.ParsePlayer;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import com.stsetsevich.smartpoker.repos.UserRepo;
 import com.stsetsevich.smartpoker.repos.UserSmarthandAccountAndCookiesRepo;
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.sql.Date;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 
 @Service
