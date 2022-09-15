@@ -24,7 +24,13 @@ public class TableInfoCalc {
             avg += player.getAvgBb100();
         }
         return avg/players.size(); */
-        return players.stream().flatMapToDouble(player -> DoubleStream.of(player.getAvgBb100())).average().orElse(0);
+        try {
+         return  players.stream().flatMapToDouble(player -> DoubleStream.of(player.getAvgBb100())).average().orElse(0);
+        }
+        catch (Exception exception)
+        {
+            return 0;
+        }
     }
 
 }

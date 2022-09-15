@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.DoubleStream;
 
 
@@ -19,7 +20,7 @@ public class CalcPlayerStats {
 
 
     public ArrayList<StatValue> extraStatsCalc() {
-        allPlayers=new ArrayList<>((Collection) playerRepo.findAll());
+        allPlayers = new ArrayList<>((Collection) playerRepo.findAll());
         ArrayList<Player> subPlayers = new ArrayList<>(allPlayers);
         //subPlayers.removeIf(n -> (n.getNickname().equals("Empty Seat")));
         ArrayList<StatValue> stats = new ArrayList<>();
@@ -47,24 +48,53 @@ public class CalcPlayerStats {
         stats.add(statValue);
         statValue = new StatValue(Double.toString(nice3(subPlayers)), 0, "avgCheckRaiseRiver, 10k+ Hands, ev>0");
         stats.add(statValue);
+
+
+        statValue = new StatValue(Double.toString(getAverageWhereTotalHandsOver10kAndAvgBb100Over4Bb
+                (subPlayers, (players -> players.stream().flatMapToDouble(player -> DoubleStream.of(player.getWonAfterRaiseFlop())).average().orElse(0)))),
+                0, "CHECKavgCheckRaiseRiver, 10k+ Hands, ev>0");
+        stats.add(statValue);
+        statValue = new StatValue(Double.toString(getAverageWhereTotalHandsOver10kAndAvgBb100Over4Bb
+                (subPlayers, (players -> players.stream().flatMapToDouble(player -> DoubleStream.of(player.getWonAfterRaiseTurn())).average().orElse(0)))),
+                0, "CHECKavgCheckRaiseRiver, 10k+ Hands, ev>0");
+        stats.add(statValue);
+        statValue = new StatValue(Double.toString(getAverageWhereTotalHandsOver10kAndAvgBb100Over4Bb
+                (subPlayers, (players -> players.stream().parallel().unordered().filter(player -> player.getAvgBb100()>8).flatMapToDouble(player -> DoubleStream.of(player.getWonAfterRaiseRiver())).average().orElse(0)))),
+                0, "CHECKavgCheckRaiseRiver, 10k+ Hands, ev>0");
+        stats.add(statValue);
         return stats;
 
     }
+
+    @FunctionalInterface
+    interface Calculation {
+        double getAverage(List<Player> players);
+    }
+
+    private static double getAverageWhereTotalHandsOver10kAndAvgBb100Over4Bb(List<Player> players, Calculation calculation) {
+        ArrayList<Player> subPlayers = new ArrayList<>(players);
+        subPlayers.removeIf(n -> (n.getTotalHands() <= 10000 || n.getAvgBb100() < 4));
+
+        return calculation.getAverage(subPlayers);
+    }
+
     private static double nice(ArrayList<Player> players) {
         ArrayList<Player> subPlayers = new ArrayList<>(players);
-        subPlayers.removeIf(n -> (n.getTotalHands()<=10000|| n.getAvgBb100()<4));
+        subPlayers.removeIf(n -> (n.getTotalHands() <= 10000 || n.getAvgBb100() < 4));
         System.out.println(subPlayers.size());
         return subPlayers.stream().flatMapToDouble(player -> DoubleStream.of(player.getWonAfterRaiseFlop())).average().orElse(0);
     }
+
     private static double nice2(ArrayList<Player> players) {
         ArrayList<Player> subPlayers = new ArrayList<>(players);
-        subPlayers.removeIf(n -> (n.getTotalHands()<=10000|| n.getAvgBb100()<4));
+        subPlayers.removeIf(n -> (n.getTotalHands() <= 10000 || n.getAvgBb100() < 4));
         System.out.println(subPlayers.size());
         return subPlayers.stream().flatMapToDouble(player -> DoubleStream.of(player.getWonAfterRaiseTurn())).average().orElse(0);
     }
+
     private static double nice3(ArrayList<Player> players) {
         ArrayList<Player> subPlayers = new ArrayList<>(players);
-        subPlayers.removeIf(n -> (n.getTotalHands()<=10000|| n.getAvgBb100()<4));
+        subPlayers.removeIf(n -> (n.getTotalHands() <= 10000 || n.getAvgBb100() < 4));
         System.out.println(subPlayers.size());
         return subPlayers.stream().flatMapToDouble(player -> DoubleStream.of(player.getWonAfterRaiseRiver())).average().orElse(0);
     }
@@ -72,42 +102,50 @@ public class CalcPlayerStats {
     private static double calcAvgEvBb100(ArrayList<Player> players) {
         return players.stream().flatMapToDouble(player -> DoubleStream.of(player.getAvgBb100())).average().orElse(0);
     }
+
     private static double over10kHandsCalcAvgEvBb100(ArrayList<Player> players) {
         ArrayList<Player> subPlayers = new ArrayList<>(players);
-        subPlayers.removeIf(n -> (n.getTotalHands()<=10000));
+        subPlayers.removeIf(n -> (n.getTotalHands() <= 10000));
         return subPlayers.stream().flatMapToDouble(player -> DoubleStream.of(player.getAvgBb100())).average().orElse(0);
     }
+
     private static double over10kHandsAndPlusEvCalcAvgEvBb100(ArrayList<Player> players) {
         ArrayList<Player> subPlayers = new ArrayList<>(players);
-        subPlayers.removeIf(n -> (n.getTotalHands()<=10000 || n.getAvgBb100()<0));
+        subPlayers.removeIf(n -> (n.getTotalHands() <= 10000 || n.getAvgBb100() < 0));
         return subPlayers.stream().flatMapToDouble(player -> DoubleStream.of(player.getAvgBb100())).average().orElse(0);
     }
+
     private static double calcAvgVpip(ArrayList<Player> players) {
         return players.stream().flatMapToDouble(player -> DoubleStream.of(player.getVpip())).average().orElse(0);
     }
+
     private static double over10kHandsCalcAvgVpip(ArrayList<Player> players) {
         ArrayList<Player> subPlayers = new ArrayList<>(players);
-        subPlayers.removeIf(n -> (n.getTotalHands()<=10000));
+        subPlayers.removeIf(n -> (n.getTotalHands() <= 10000));
         return subPlayers.stream().flatMapToDouble(player -> DoubleStream.of(player.getVpip())).average().orElse(0);
     }
+
     private static double over10kHandsAndPlusEvCalcAvgVpip(ArrayList<Player> players) {
         ArrayList<Player> subPlayers = new ArrayList<>(players);
-        subPlayers.removeIf(n -> (n.getTotalHands()<=10000 || n.getAvgBb100()<0));
+        subPlayers.removeIf(n -> (n.getTotalHands() <= 10000 || n.getAvgBb100() < 0));
         return subPlayers.stream().flatMapToDouble(player -> DoubleStream.of(player.getVpip())).average().orElse(0);
     }
+
     private static double over10kHandsAndPlusEvCalcAvgCheckRaiseFlop(ArrayList<Player> players) {
         ArrayList<Player> subPlayers = new ArrayList<>(players);
-        subPlayers.removeIf(n -> (n.getTotalHands()<=10000 || n.getAvgBb100()<0));
+        subPlayers.removeIf(n -> (n.getTotalHands() <= 10000 || n.getAvgBb100() < 0));
         return subPlayers.stream().flatMapToDouble(player -> DoubleStream.of(player.getCheckRaiseFlop())).average().orElse(0);
     }
+
     private static double over10kHandsAndPlusEvCalcAvgCheckRaiseTurn(ArrayList<Player> players) {
         ArrayList<Player> subPlayers = new ArrayList<>(players);
-        subPlayers.removeIf(n -> (n.getTotalHands()<=10000 || n.getAvgBb100()<0));
+        subPlayers.removeIf(n -> (n.getTotalHands() <= 10000 || n.getAvgBb100() < 0));
         return subPlayers.stream().flatMapToDouble(player -> DoubleStream.of(player.getCheckRaiseTurn())).average().orElse(0);
     }
+
     private static double over10kHandsAndPlusEvCalcAvgCheckRaiseRiver(ArrayList<Player> players) {
         ArrayList<Player> subPlayers = new ArrayList<>(players);
-        subPlayers.removeIf(n -> (n.getTotalHands()<=10000 || n.getAvgBb100()<0));
+        subPlayers.removeIf(n -> (n.getTotalHands() <= 10000 || n.getAvgBb100() < 0));
         return subPlayers.stream().flatMapToDouble(player -> DoubleStream.of(player.getCheckRaiseRiver())).average().orElse(0);
     }
 

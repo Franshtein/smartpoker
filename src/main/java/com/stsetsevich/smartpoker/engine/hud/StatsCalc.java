@@ -7,7 +7,7 @@ import com.stsetsevich.smartpoker.repos.StatRepo;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class StatsCalc {
+public class StatsCalc{
     protected enum Variant {
         ONE, TWO, THREE;
     }

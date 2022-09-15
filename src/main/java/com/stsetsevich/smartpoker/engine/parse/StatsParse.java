@@ -40,38 +40,7 @@ public class StatsParse {
         this.text = text;
     }
 
-    public void getText() {
-        try {
-            Document doc = Jsoup.connect("https://yandex.by/")
-                    .userAgent("Chrome/4.0.249.0 Safari/532.5")
-                    .referrer("http://www.google.com")
-                    .get();
-            //    Elements listNews = doc.select("div#tabnews_newsc.content-tabs__items.content-tabs__items_active_true");
-            Elements listNews = doc.select("div#wd-_topnews-1.b-widget-data.b-wrapper.b-wrapper-");
-            for (Element element : listNews.select("a"))
-                System.out.println(element.text());
 
-        } catch (Exception exception) {
-            System.out.println("Не удается получить доступ к информации");
-        }
-        System.out.println("Working?");
-    }
-
-    public void getWiki() {
-        try {
-            Document doc = Jsoup.connect("https://en.wikipedia.org/").get();
-            log(doc.title());
-            Elements newsHeadlines = doc.select("#mp-itn b a");
-            for (Element headline : newsHeadlines) {
-                log("%s\n\t%s",
-                        headline.attr("title"), headline.absUrl("href"));
-            }
-
-        } catch (Exception exception) {
-            System.out.println("Не удается получить доступ к информации");
-        }
-        System.out.println("Working WIKI?");
-    }
     public StatsParse(Document doc) {
 
         // Document doc = Jsoup.connect("E:/test2.html").get();

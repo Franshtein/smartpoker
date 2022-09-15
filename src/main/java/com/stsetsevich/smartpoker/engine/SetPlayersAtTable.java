@@ -79,7 +79,7 @@ public class SetPlayersAtTable {
             if (pl == null) pl = playerRepo.findByNickname(playerName.get(i) + " (PS)");
             if (pl == null) {
                 System.out.println("Игрок не найден, установлено значение по умолчанию");
-              //  pl = playerRepo.findByNickname("Franshtik (PS)");
+                pl = playerRepo.findByNickname("Empty Seat");
             }
 
 

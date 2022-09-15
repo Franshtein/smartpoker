@@ -12,24 +12,25 @@ public class ExtraStatsCalc extends StatsCalc {
     //По инстансу игрока и id стата вычисляем, какими статами нужно заполнить таблицу и заполняем её.
     public static ArrayList<StatValue> extraStatsCalc(Player player, String statName, StatRepo statRepo) {
         ArrayList<StatValue> stats = new ArrayList<>();
-        switch (statName) {
-            case ("totalPfr"):
-                getPfrStats(player, stats, statRepo);
-                return stats;
-            case ("total3bet"):
-                System.out.println("3bet work");
-                getThreeBetStats(player, stats, statRepo);
-                return stats;
-            case ("total4bet"):
-                System.out.println("4bet work");
-                getFourBetStats(player, stats, statRepo);
-                return stats;
-            case ("3"):
-                System.out.println("not method exsist");
-                break;
+        if (statName != null) {
+            switch (statName) {
+                case ("totalPfr"):
+                    getPfrStats(player, stats, statRepo);
+                    return stats;
+                case ("total3bet"):
+                    System.out.println("3bet work");
+                    getThreeBetStats(player, stats, statRepo);
+                    return stats;
+                case ("total4bet"):
+                    System.out.println("4bet work");
+                    getFourBetStats(player, stats, statRepo);
+                    return stats;
+                case ("3"):
+                    System.out.println("not method exsist");
+                    break;
 
+            }
         }
-
         return null;
     }
 
@@ -72,6 +73,7 @@ public class ExtraStatsCalc extends StatsCalc {
 
         return stats;
     }
+
     private static ArrayList<StatValue> getFourBetStats(Player pl, ArrayList<StatValue> stats, StatRepo statRepo) {
         StatValue statValue;
         String statname = "total4bet";
@@ -111,6 +113,7 @@ public class ExtraStatsCalc extends StatsCalc {
 
         return stats;
     }
+
     private static ArrayList<StatValue> getPfrStats(Player pl, ArrayList<StatValue> stats, StatRepo statRepo) {
         StatValue statValue;
         String statname = "totalPfr";

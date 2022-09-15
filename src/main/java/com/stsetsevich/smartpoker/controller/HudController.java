@@ -6,6 +6,7 @@ import com.stsetsevich.smartpoker.engine.hud.FlopStatsCalc;
 import com.stsetsevich.smartpoker.engine.hud.PreflopStatsCalc;
 import com.stsetsevich.smartpoker.engine.hud.RiverStatsCalc;
 import com.stsetsevich.smartpoker.engine.hud.TurnStatsCalc;
+import com.stsetsevich.smartpoker.engine.parse.ParseYesOrNo;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import com.stsetsevich.smartpoker.repos.UserRepo;
@@ -50,11 +51,11 @@ public class HudController {
             , String addPlayer4, String addPlayer5) {
 
       //  ArrayList<String> playerStats = SetPlayersAtTable.getPlayerStats(playerRepo, "Franshtik (PS)");
-        addPlayer = "Franshtik";
-        addPlayer2 = "Franshtik";
-        addPlayer3 = "Franshtik";
-        addPlayer4 = "Franshtik";
-        addPlayer5 = "Franshtik";
+        addPlayer = "Empty Seat";
+        addPlayer2 = "Empty Seat";
+        addPlayer3 = "Empty Seat";
+        addPlayer4 = "Empty Seat";
+        addPlayer5 = "Empty Seat";
         ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
         modelPutGeneralInfo(model, pl);
         return "hud";

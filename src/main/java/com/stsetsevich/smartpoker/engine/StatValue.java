@@ -123,21 +123,23 @@ public class StatValue {
         if(!stat.equals("-")) {
             if (getDependOnStat() == 0) {
                 double dstat = Double.parseDouble(this.stat);
-                int istat = (int) dstat;
+                // int istat = (int) dstat;
+                int istat = Math.round((int) dstat);
                 // System.out.println(istat);
-                picture = "/img/" + statName + "/" + istat + ".png";
+                //picture = "/img/" + statName + "/" + istat + ".png";
+                picture = "/img/diap/" + istat + ".png";
                 // System.out.println(picture);
             } else {
                 double dstat = Double.parseDouble(this.stat);
-                int istat = (int) dstat;
-                int depIStat = (int) getDependOnStat();
+                int istat = Math.round((int) dstat);
+                int depIStat = Math.round((int) getDependOnStat());
                 // System.out.println(istat);
                 picture = "/img/" + statName + "/" + depIStat + "-" + istat + ".png";
                 // System.out.println(picture);
             }
             File f = new File("E:/idea_projects/smartpoker/src/main/resources/static" + picture);
             if (f.exists() && !f.isDirectory()) {
-                System.out.println("FILE EXSIST");
+              //  System.out.println("FILE EXSIST");
             } else picture = null;
         }
         else picture = null;

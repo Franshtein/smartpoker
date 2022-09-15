@@ -1,5 +1,6 @@
 package com.stsetsevich.smartpoker.controller;
 
+import com.stsetsevich.smartpoker.engine.parse.ParseYesOrNo;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,6 @@ public class MainController {
 
     @GetMapping("/main")
     public String main(Model model1) {
-
         return "main";
     }
 
