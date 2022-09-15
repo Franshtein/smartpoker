@@ -4,6 +4,7 @@ package com.stsetsevich.smartpoker.engine.hud;
 import com.stsetsevich.smartpoker.domain.Player;
 import com.stsetsevich.smartpoker.engine.StatValue;
 import com.stsetsevich.smartpoker.repos.StatRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,7 +16,9 @@ public class PreflopStatsCalc extends StatsCalc {
 
     //Записываем в коллекцию данные каждого игрока для первой строки таблицы
     //Вычисляем значения и в какой диапазон они попадают
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine1(ArrayList<Player> players, StatRepo statRepo) {
+    @Autowired
+    StatRepo statRepo;
+    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine1(ArrayList<Player> players) {
         HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
         int i = 0;
         for (Player pl : players) {
@@ -26,22 +29,22 @@ public class PreflopStatsCalc extends StatsCalc {
 
                 String statname = "vpip";
                 statValue = new StatValue(Double.toString(pl.getVpip()), checkDiap(pl.getVpip(),
-                        getPoints(statname, statRepo), Variant.ONE), statname);
+                        getPoints(statname), Variant.ONE), statname);
                 stats.add(statValue);
 
                 statname = "totalPfr";
                 statValue = new StatValue(Double.toString(pl.getTotalPfr()), checkDiap(pl.getTotalPfr(),
-                        getPoints(statname, statRepo), Variant.ONE), true, statname, pl);
+                        getPoints(statname), Variant.ONE), true, statname, pl);
                 stats.add(statValue);
 
                 statname = "total3bet";
                 statValue = new StatValue(Double.toString(pl.getTotal3bet()), checkDiap(pl.getTotal3bet(),
-                        getPoints(statname, statRepo), Variant.ONE), true, statname, pl);
+                        getPoints(statname), Variant.ONE), true, statname, pl);
                 stats.add(statValue);
 
                 statname = "foldTo3betTotal";
                 statValue = new StatValue(Double.toString(pl.getFoldTo3betTotal()), checkDiap(pl.getFoldTo3betTotal(),
-                        getPoints(statname, statRepo), Variant.THREE), true, statname, pl.getVpip(), pl);
+                        getPoints(statname), Variant.THREE), true, statname, pl.getVpip(), pl);
                 stats.add(statValue);
 
             }
@@ -58,7 +61,7 @@ public class PreflopStatsCalc extends StatsCalc {
 
     //Записываем в коллекцию данные каждого игрока для второй строки таблицы
     //Вычисляем значения и в какой диапазон они попадают
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine2(ArrayList<Player> players, StatRepo statRepo) {
+    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine2(ArrayList<Player> players) {
         HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
         int i = 0;
         for (Player pl : players) {
@@ -68,19 +71,19 @@ public class PreflopStatsCalc extends StatsCalc {
 
                 String statname = "total4bet";
                 statValue = new StatValue(Double.toString(pl.getTotal4bet()), checkDiap(pl.getTotal4bet(),
-                        getPoints(statname, statRepo), Variant.ONE), true, statname, pl);
+                        getPoints(statname), Variant.ONE), true, statname, pl);
                 stats.add(statValue);
                 statname = "foldTo4betTotal";
                 statValue = new StatValue(Double.toString(pl.getFoldTo4betTotal()), checkDiap(pl.getFoldTo4betTotal(),
-                        getPoints(statname, statRepo), Variant.THREE), statname);
+                        getPoints(statname), Variant.THREE), statname);
                 stats.add(statValue);
                 statname = "total5bet";
                 statValue = new StatValue(Double.toString(pl.getTotal5bet()), checkDiap(pl.getTotal5bet(),
-                        getPoints(statname, statRepo), Variant.ONE), true, statname, pl);
+                        getPoints(statname), Variant.ONE), true, statname, pl);
                 stats.add(statValue);
                 statname = "foldTo5betTotal";
                 statValue = new StatValue(Double.toString(pl.getFoldTo5betTotal()), checkDiap(pl.getFoldTo5betTotal(),
-                        getPoints(statname, statRepo), Variant.THREE), statname);
+                        getPoints(statname), Variant.THREE), statname);
                 stats.add(statValue);
 
             }
@@ -97,7 +100,7 @@ public class PreflopStatsCalc extends StatsCalc {
 
     //Записываем в коллекцию данные каждого игрока для третьей строки таблицы
     //Вычисляем значения и в какой диапазон они попадают
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine3(ArrayList<Player> players, StatRepo statRepo) {
+    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine3(ArrayList<Player> players) {
         HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
         int i = 0;
         for (Player pl : players) {
@@ -107,7 +110,7 @@ public class PreflopStatsCalc extends StatsCalc {
 
             String statname = "squeezeTotal";
             statValue = new StatValue(Double.toString(pl.getSqueezeTotal()), checkDiap(pl.getSqueezeTotal(),
-                    getPoints(statname, statRepo), Variant.ONE), statname);
+                    getPoints(statname), Variant.ONE), statname);
             stats.add(statValue);
 /*
             statname = "foldToSqueezeTotal";
@@ -117,17 +120,17 @@ public class PreflopStatsCalc extends StatsCalc {
 */
             statname = "wtsd";
             statValue = new StatValue(Double.toString(pl.getWtsd()), checkDiap(pl.getWtsd(),
-                    getPoints(statname, statRepo), Variant.ONE), statname);
+                    getPoints(statname), Variant.ONE), statname);
             stats.add(statValue);
 
                 statname = "w$sd";
                 statValue = new StatValue(Double.toString(pl.getW$sd()), checkDiap(pl.getW$sd(),
-                        getPoints(statname, statRepo), Variant.TWO), statname);
+                        getPoints(statname), Variant.TWO), statname);
                 stats.add(statValue);
 
             statname = "wwsf";
             statValue = new StatValue(Double.toString(pl.getWwsf()), checkDiap(pl.getWwsf(),
-                    getPoints(statname, statRepo), Variant.TWO), statname);
+                    getPoints(statname), Variant.TWO), statname);
             stats.add(statValue);
             }
             finally {
@@ -141,7 +144,7 @@ public class PreflopStatsCalc extends StatsCalc {
     //Записываем в коллекцию данные каждого игрока для четвертой строки таблицы
     //Вычисляем значения и в какой диапазон они попадают
     @Override
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine4(ArrayList<Player> players, StatRepo statRepo) {
+    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine4(ArrayList<Player> players) {
         HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
         int i = 0;
         for (Player pl : players) {
@@ -151,19 +154,19 @@ public class PreflopStatsCalc extends StatsCalc {
 
                 String statname = "pfrBu";
                 statValue = new StatValue(Double.toString(pl.getPfrBu()), checkDiap(pl.getPfrBu(),
-                        getPoints(statname, statRepo), Variant.ONE), true, statname, pl);
+                        getPoints(statname), Variant.ONE), true, statname, pl);
                 stats.add(statValue);
                 statname = "foldTo3betIpBu";
                 statValue = new StatValue(Double.toString(pl.getFoldTo3betIpBu()), checkDiap(pl.getFoldTo3betIpBu(),
-                        getPoints(statname, statRepo), Variant.THREE), statname);
+                        getPoints(statname), Variant.THREE), statname);
                 stats.add(statValue);
                 statname = "callOpenraiseBb";
                 statValue = new StatValue(Double.toString(pl.getCallOpenraiseBb()), checkDiap(pl.getCallOpenraiseBb(),
-                        getPoints(statname, statRepo), Variant.ONE), true, statname, pl);
+                        getPoints(statname), Variant.ONE), true, statname, pl);
                 stats.add(statValue);
                 statname = "bbVsBu3bet";
                 statValue = new StatValue(Double.toString(pl.getBbVsBu3bet()), checkDiap(pl.getBbVsBu3bet(),
-                        getPoints(statname, statRepo), Variant.ONE),true, statname, pl);
+                        getPoints(statname), Variant.ONE),true, statname, pl);
                 stats.add(statValue);
 
             }
@@ -178,7 +181,7 @@ public class PreflopStatsCalc extends StatsCalc {
         return playerStat;
     }
     @Override
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine5(ArrayList<Player> players, StatRepo statRepo) {
+    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine5(ArrayList<Player> players) {
         HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
         int i = 0;
         for (Player pl : players) {
@@ -188,22 +191,22 @@ public class PreflopStatsCalc extends StatsCalc {
 
                 String statname = "aggFactorFlop";
                 statValue = new StatValue(Double.toString(pl.getAggFactorFlop()), checkDiap(pl.getAggFactorFlop(),
-                        getPoints(statname, statRepo), Variant.ONE), statname);
+                        getPoints(statname), Variant.ONE), statname);
                 stats.add(statValue);
 
                 statname = "aggFactorTurn";
                 statValue = new StatValue(Double.toString(pl.getAggFactorTurn()), checkDiap(pl.getAggFactorTurn(),
-                        getPoints(statname, statRepo), Variant.ONE), statname);
+                        getPoints(statname), Variant.ONE), statname);
                 stats.add(statValue);
 
                 statname = "aggFactorRiver";
                 statValue = new StatValue(Double.toString(pl.getAggFactorRiver()), checkDiap(pl.getAggFactorRiver(),
-                        getPoints(statname, statRepo), Variant.ONE), statname);
+                        getPoints(statname), Variant.ONE), statname);
                 stats.add(statValue);
 
                 statname = "totalHands";
                 statValue = new StatValue(Double.toString(pl.getTotalHands()), checkDiap(pl.getTotalHands(),
-                        getPoints(statname, statRepo), Variant.TWO), statname);
+                        getPoints(statname), Variant.TWO), statname);
                 stats.add(statValue);
 
             }

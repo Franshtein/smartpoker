@@ -100,7 +100,7 @@ public class HudController {
 
 
         Player playerNick = SetPlayersAtTable.checkPlayer(playerRepo, player);
-        ArrayList<StatValue> statValues = extraStatsCalc.extraStatsCalc(playerNick, addStat, statRepo);
+        ArrayList<StatValue> statValues = extraStatsCalc.extraStatsCalc(playerNick, addStat);
 
         //Информация для всплывающих сообщений с доп. статами
         model.put("statExtra", addStat);
@@ -121,29 +121,29 @@ public class HudController {
 
 
         //Информация о префлопе для таблиц со статами
-        model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, statRepo));
-        model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl, statRepo));
-        model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl, statRepo));
-        model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl, statRepo));
-        model.put("plStatsLine5", preflopStatsCalc.hudStatsCalcLine5(pl, statRepo));
+        model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl));
+        model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl));
+        model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine4(pl));
+        model.put("plStatsLine5", preflopStatsCalc.hudStatsCalcLine5(pl));
 
-        model.put("flopStatsLine1", flopStatsCalc.hudStatsCalcLine1(pl, statRepo));
-        model.put("flopStatsLine2", flopStatsCalc.hudStatsCalcLine2(pl, statRepo));
-        model.put("flopStatsLine3", flopStatsCalc.hudStatsCalcLine3(pl, statRepo));
-        model.put("flopStatsLine4", flopStatsCalc.hudStatsCalcLine4(pl, statRepo));
-        model.put("flopStatsLine5", flopStatsCalc.hudStatsCalcLine5(pl, statRepo));
+        model.put("flopStatsLine1", flopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("flopStatsLine2", flopStatsCalc.hudStatsCalcLine2(pl));
+        model.put("flopStatsLine3", flopStatsCalc.hudStatsCalcLine3(pl));
+        model.put("flopStatsLine4", flopStatsCalc.hudStatsCalcLine4(pl));
+        model.put("flopStatsLine5", flopStatsCalc.hudStatsCalcLine5(pl));
 
-        model.put("turnStatsLine1", turnStatsCalc.hudStatsCalcLine1(pl, statRepo));
-        model.put("turnStatsLine2", turnStatsCalc.hudStatsCalcLine2(pl, statRepo));
-        model.put("turnStatsLine3", turnStatsCalc.hudStatsCalcLine3(pl, statRepo));
-        model.put("turnStatsLine4", turnStatsCalc.hudStatsCalcLine4(pl, statRepo));
-        model.put("turnStatsLine5", turnStatsCalc.hudStatsCalcLine5(pl, statRepo));
+        model.put("turnStatsLine1", turnStatsCalc.hudStatsCalcLine1(pl));
+        model.put("turnStatsLine2", turnStatsCalc.hudStatsCalcLine2(pl));
+        model.put("turnStatsLine3", turnStatsCalc.hudStatsCalcLine3(pl));
+        model.put("turnStatsLine4", turnStatsCalc.hudStatsCalcLine4(pl));
+        model.put("turnStatsLine5", turnStatsCalc.hudStatsCalcLine5(pl));
 
-        model.put("riverStatsLine1", riverStatsCalc.hudStatsCalcLine1(pl, statRepo));
-        model.put("riverStatsLine2", riverStatsCalc.hudStatsCalcLine2(pl, statRepo));
-        model.put("riverStatsLine3", riverStatsCalc.hudStatsCalcLine3(pl, statRepo));
-        model.put("riverStatsLine4", riverStatsCalc.hudStatsCalcLine4(pl, statRepo));
-        model.put("riverStatsLine5", riverStatsCalc.hudStatsCalcLine5(pl, statRepo));
+        model.put("riverStatsLine1", riverStatsCalc.hudStatsCalcLine1(pl));
+        model.put("riverStatsLine2", riverStatsCalc.hudStatsCalcLine2(pl));
+        model.put("riverStatsLine3", riverStatsCalc.hudStatsCalcLine3(pl));
+        model.put("riverStatsLine4", riverStatsCalc.hudStatsCalcLine4(pl));
+        model.put("riverStatsLine5", riverStatsCalc.hudStatsCalcLine5(pl));
 
         //Информация об игроках за столом
         //if (pl.get(0).getNickname().equals("Franshtik (PS)")) pl.get(0).setNickname("Empty Seat");
@@ -157,7 +157,7 @@ public class HudController {
         model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
 
         //Информация о цвете таблиц
-        model.put("seats", preflopStatsCalc.hudSeatsColor(pl, statRepo));
+        model.put("seats", preflopStatsCalc.hudSeatsColor(pl));
 
        /* String picture;
         if(pl.get(0).getVpip()<=20) picture="/img/vpip/20.png";

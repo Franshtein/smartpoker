@@ -3,11 +3,14 @@ package com.stsetsevich.smartpoker.engine.hud;
 import com.stsetsevich.smartpoker.domain.Player;
 import com.stsetsevich.smartpoker.engine.StatValue;
 import com.stsetsevich.smartpoker.repos.StatRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class StatsCalc{
+    @Autowired
+    StatRepo statRepo;
     protected enum Variant {
         ONE, TWO, THREE;
     }
@@ -37,8 +40,8 @@ public class StatsCalc{
         }
         return 0;
     }
-    protected static int checkDiap(double stat, double points[], Variant variant, double primaryStat, String statName, StatRepo statRepo) {
-        int primaryValue = checkDiap(primaryStat, getPoints(statName, statRepo), Variant.ONE);
+    protected int checkDiap(double stat, double points[], Variant variant, double primaryStat, String statName, StatRepo statRepo) {
+        int primaryValue = checkDiap(primaryStat, getPoints(statName), Variant.ONE);
         double weight=1;
         if(primaryValue==4) weight=1.4;
         if(primaryValue==3) weight=1.2;
@@ -69,7 +72,7 @@ public class StatsCalc{
     }
 
     //Получаем массив точек для будущей проверки, в какой диапазон попадает значение стата игрока.
-    protected static double[] getPoints(String statname, StatRepo statRepo) {
+    protected  double[] getPoints(String statname) {
         double[] points = new double[4];
         points[0] = statRepo.findStatByStatname(statname).getPoint1();
         points[1] = statRepo.findStatByStatname(statname).getPoint2();
@@ -79,12 +82,12 @@ public class StatsCalc{
     }
 
     //Выясняем, каким цветом будем закрашивать таблицы с данными об игроках.
-    public static ArrayList<String> hudSeatsColor(ArrayList<Player> players, StatRepo statRepo) {
+    public ArrayList<String> hudSeatsColor(ArrayList<Player> players) {
         ArrayList<String> seats = new ArrayList<>();
         String seat;
         for (Player pl : players) {
             if (!pl.getNickname().equals("Empty Seat")) {
-                int i = checkDiap(pl.getAvgBb100(), getPoints("avgBb100", statRepo), Variant.ONE);
+                int i = checkDiap(pl.getAvgBb100(), getPoints("avgBb100"), Variant.ONE);
                 seat = "table-striped-red";
                 if (i == 0) seat = "table-striped-pink";
                 if (i == 1) seat = "table-striped-blue";
@@ -97,7 +100,7 @@ public class StatsCalc{
         return seats;
     }
 
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine4(ArrayList<Player> players, StatRepo statRepo) {
+    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine4(ArrayList<Player> players) {
         HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
         int i = 0;
         for (Player pl : players) {
@@ -116,7 +119,7 @@ public class StatsCalc{
         }
         return playerStat;
     }
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine5(ArrayList<Player> players, StatRepo statRepo) {
+    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine5(ArrayList<Player> players) {
         HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
         int i = 0;
         for (Player pl : players) {

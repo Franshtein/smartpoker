@@ -33,7 +33,7 @@ public class ExtraStatsController {
         model.put("name", username);
 
         Player playerNick = SetPlayersAtTable.checkPlayer(playerRepo, player);
-        ArrayList<StatValue> statValues = extraStatsCalc.extraStatsCalc(playerNick, stat, statRepo);
+        ArrayList<StatValue> statValues = extraStatsCalc.extraStatsCalc(playerNick, stat);
         model.put("statValues", statValues);
 
         return "extrastats";
@@ -48,7 +48,7 @@ public class ExtraStatsController {
         String username = auth.getName();
         model.put("name", username);
         Player playerNick = SetPlayersAtTable.checkPlayer(playerRepo, player);
-        ArrayList<StatValue> statValues = extraStatsCalc.extraStatsCalc(playerNick, stat, statRepo);
+        ArrayList<StatValue> statValues = extraStatsCalc.extraStatsCalc(playerNick, stat);
         model.put("statValues", statValues);
 
         return "extrastats";

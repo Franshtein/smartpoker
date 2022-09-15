@@ -15,7 +15,7 @@ public class RiverStatsCalc extends StatsCalc {
 
     //Записываем в коллекцию данные каждого игрока для первой строки таблицы
     //Вычисляем значения и в какой диапазон они попадают
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine1(ArrayList<Player> players, StatRepo statRepo) {
+    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine1(ArrayList<Player> players) {
         HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
         int i = 0;
         for (Player pl : players) {
@@ -26,22 +26,22 @@ public class RiverStatsCalc extends StatsCalc {
 
                 String statname = "cBetRiverTotal";
                 statValue = new StatValue(Double.toString(pl.getcBetRiverTotal()), checkDiap(pl.getcBetRiverTotal(),
-                        getPoints(statname, statRepo), Variant.ONE), statname);
+                        getPoints(statname), Variant.ONE), statname);
                 stats.add(statValue);
 
                 statname = "foldVsCbetRiverTotal";
                 statValue = new StatValue(Double.toString(pl.getFoldVsCbetRiverTotal()), checkDiap(pl.getFoldVsCbetRiverTotal(),
-                        getPoints(statname, statRepo), Variant.THREE), true, statname, pl);
+                        getPoints(statname), Variant.THREE), true, statname, pl);
                 stats.add(statValue);
 
                 statname = "skippedCbetFoldRiverTotal";
                 statValue = new StatValue(Double.toString(pl.getSkippedCbetFoldRiverTotal()), checkDiap(pl.getSkippedCbetFoldRiverTotal(),
-                        getPoints(statname, statRepo), Variant.THREE), true, statname, pl);
+                        getPoints(statname), Variant.THREE), true, statname, pl);
                 stats.add(statValue);
 
                 statname = "raiseToCbetRiverTotal";
                 statValue = new StatValue(Double.toString(pl.getRaiseToCbetRiverTotal()), checkDiap(pl.getRaiseToCbetRiverTotal(),
-                        getPoints(statname, statRepo), Variant.ONE), statname);
+                        getPoints(statname), Variant.ONE), statname);
                 stats.add(statValue);
 
             } finally {
@@ -56,7 +56,7 @@ public class RiverStatsCalc extends StatsCalc {
 
     //Записываем в коллекцию данные каждого игрока для второй строки таблицы
     //Вычисляем значения и в какой диапазон они попадают
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine2(ArrayList<Player> players, StatRepo statRepo) {
+    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine2(ArrayList<Player> players) {
         HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
         int i = 0;
         for (Player pl : players) {
@@ -67,22 +67,22 @@ public class RiverStatsCalc extends StatsCalc {
 
                 String statname = "donkRiver";
                 statValue = new StatValue(Double.toString(pl.getDonkRiver()), checkDiap(pl.getDonkRiver(),
-                        getPoints(statname, statRepo), Variant.ONE), statname);
+                        getPoints(statname), Variant.ONE), statname);
                 stats.add(statValue);
 
                 statname = "checkCallTurn";
                 statValue = new StatValue(Double.toString(pl.getCheckCallRiver()), checkDiap(pl.getCheckCallRiver(),
-                        getPoints(statname, statRepo), Variant.ONE), statname);
+                        getPoints(statname), Variant.ONE), statname);
                 stats.add(statValue);
 
                 statname = "checkRaiseRiver";
                 statValue = new StatValue(Double.toString(pl.getCheckRaiseRiver()), checkDiap(pl.getCheckRaiseRiver(),
-                        getPoints(statname, statRepo), Variant.ONE, pl.getVpip(), "vpip", statRepo), statname);
+                        getPoints(statname), Variant.ONE, pl.getVpip(), "vpip", statRepo), statname);
                 stats.add(statValue);
 
                 statname = "afqRiver";
                 statValue = new StatValue(Double.toString(pl.getAfqRiver()), checkDiap(pl.getAfqRiver(),
-                        getPoints(statname, statRepo), Variant.ONE), statname);
+                        getPoints(statname), Variant.ONE), statname);
                 stats.add(statValue);
             } finally {
                 playerStat.put(i, stats);
@@ -91,7 +91,7 @@ public class RiverStatsCalc extends StatsCalc {
         }
         return playerStat;
     }
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine3(ArrayList<Player> players, StatRepo statRepo) {
+    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine3(ArrayList<Player> players) {
         HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
         int i = 0;
         for (Player pl : players) {
@@ -101,22 +101,22 @@ public class RiverStatsCalc extends StatsCalc {
 
                 String statname = "betToMissCbetRiverTotal";
                 statValue = new StatValue(Double.toString(pl.getBetToMissCbetRiverTotal()), checkDiap(pl.getBetToMissCbetRiverTotal(),
-                        getPoints(statname, statRepo), Variant.ONE), statname);
+                        getPoints(statname), Variant.ONE), statname);
                 stats.add(statValue);
 
                 statname = "wonAfterRaiseRiver";
                 statValue = new StatValue(Double.toString(pl.getWonAfterRaiseRiver()), checkDiap(pl.getWonAfterRaiseRiver(),
-                        getPoints(statname, statRepo), Variant.TWO), statname);
+                        getPoints(statname), Variant.TWO), statname);
                 stats.add(statValue);
 
                 statname = "aggFactorRiver";
                 statValue = new StatValue(Double.toString(pl.getAggFactorRiver()), checkDiap(pl.getAggFactorRiver(),
-                        getPoints(statname, statRepo), Variant.ONE), statname);
+                        getPoints(statname), Variant.ONE), statname);
                 stats.add(statValue);
 
                 statname = "totalHands";
                 statValue = new StatValue(Double.toString(pl.getTotalHands()), checkDiap(pl.getTotalHands(),
-                        getPoints(statname, statRepo), Variant.TWO), statname);
+                        getPoints(statname), Variant.TWO), statname);
                 stats.add(statValue);
 
             } finally {
