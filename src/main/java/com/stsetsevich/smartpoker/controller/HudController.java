@@ -6,7 +6,6 @@ import com.stsetsevich.smartpoker.engine.hud.FlopStatsCalc;
 import com.stsetsevich.smartpoker.engine.hud.PreflopStatsCalc;
 import com.stsetsevich.smartpoker.engine.hud.RiverStatsCalc;
 import com.stsetsevich.smartpoker.engine.hud.TurnStatsCalc;
-import com.stsetsevich.smartpoker.engine.parse.ParseYesOrNo;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import com.stsetsevich.smartpoker.repos.UserRepo;
@@ -45,6 +44,11 @@ public class HudController {
     UserSmarthandAccountAndCookiesRepo userSmarthandAccountAndCookiesRepo;
     @Autowired
     SetPlayersAtTable setPlayersAtTable;
+   // @Autowired
+   // EntityManager entityManager;
+    @Autowired
+   StatInfoWORK statInfo;
+
 
     @GetMapping("/hud")
     public String hud(String nickname, Map<String, Object> model, String addPlayer, String addPlayer2, String addPlayer3
@@ -56,8 +60,32 @@ public class HudController {
         addPlayer3 = "Empty Seat";
         addPlayer4 = "Empty Seat";
         addPlayer5 = "Empty Seat";
-        ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        ArrayList<Player> pl = setPlayersAtTable.getAllPlayers(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
         modelPutGeneralInfo(model, pl);
+        System.out.println(playerRepo.findSomething("Vot blin"));;
+       /* String stat="total3bet";
+        String nick="Franshtik (PS)";
+        Query query = entityManager.createNativeQuery("SELECT "+stat+" FROM player where nickname='"+nick+"'");
+        List list=query.getResultList();
+        System.out.println(list);
+
+        */
+
+       // statInfo.setInfo("total3bet", playerRepo.findByNickname("Franshtik (PS)"));
+
+
+/*
+        statInfo.setInfo("total_hands");
+        ;
+StatInfo statInfo1 = statInfo.getStatInfo();
+statInfo1.setInfo("total3bet");
+        StatInfo statInfo2 = statInfo.getStatInfo();
+        statInfo2.setInfo("afq_flop");
+        System.out.println(statInfo);
+        System.out.println(statInfo1);
+        System.out.println(statInfo2);
+
+*/
         return "hud";
     }
 
@@ -67,7 +95,7 @@ public class HudController {
             , String addPlayer4, String addPlayer5) {
 
 
-        ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        ArrayList<Player> pl = setPlayersAtTable.getAllPlayers(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
 
         modelPutGeneralInfo(model, pl);
 
@@ -79,7 +107,7 @@ public class HudController {
             , String addPlayer4, String addPlayer5, Map<String, Object> model) {
 
 
-        ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        ArrayList<Player> pl = setPlayersAtTable.getAllPlayers(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
 
         modelPutGeneralInfo(model, pl);
 
@@ -96,16 +124,16 @@ public class HudController {
         //  List<Message> messages = messageRepo.findByTag(filter);
 
 
-        ArrayList<Player> pl = setPlayersAtTable.getAllPlayerStats(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        ArrayList<Player> pl = setPlayersAtTable.getAllPlayers(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
 
 
         Player playerNick = SetPlayersAtTable.checkPlayer(playerRepo, player);
-        ArrayList<StatValue> statValues = extraStatsCalc.extraStatsCalc(playerNick, addStat);
+        ArrayList<StatInfo> statInfos = extraStatsCalc.extraStatsCalc(playerNick, addStat);
 
         //Информация для всплывающих сообщений с доп. статами
         model.put("statExtra", addStat);
         model.put("statPlayer", player);
-        model.put("statValues", statValues);
+        model.put("statValues", statInfos);
 
 
         modelPutGeneralInfo(model, pl);
@@ -118,9 +146,33 @@ public class HudController {
         String username = auth.getName();
         model.put("name", username);
 
+        model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("plStatsLine5", preflopStatsCalc.hudStatsCalcLine1(pl));
+
+        model.put("flopStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("flopStatsLine2", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("flopStatsLine3", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("flopStatsLine4", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("flopStatsLine5", preflopStatsCalc.hudStatsCalcLine1(pl));
+
+        model.put("turnStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("turnStatsLine2", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("turnStatsLine3", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("turnStatsLine4", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("turnStatsLine5", preflopStatsCalc.hudStatsCalcLine1(pl));
+
+        model.put("riverStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("riverStatsLine2", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("riverStatsLine3", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("riverStatsLine4", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("riverStatsLine5", preflopStatsCalc.hudStatsCalcLine1(pl));
 
 
         //Информация о префлопе для таблиц со статами
+        /*
         model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl));
         model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine2(pl));
         model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine3(pl));
@@ -145,6 +197,9 @@ public class HudController {
         model.put("riverStatsLine4", riverStatsCalc.hudStatsCalcLine4(pl));
         model.put("riverStatsLine5", riverStatsCalc.hudStatsCalcLine5(pl));
 
+
+         */
+
         //Информация об игроках за столом
         //if (pl.get(0).getNickname().equals("Franshtik (PS)")) pl.get(0).setNickname("Empty Seat");
 
@@ -154,7 +209,8 @@ public class HudController {
         model.put("player4", pl.get(3));
         model.put("player5", pl.get(4));
 
-        model.put("tableinfo", TableInfoCalc.extraStatsCalc(pl));
+        TableInfoCalc tableInfoCalc= new TableInfoCalc();
+        model.put("tableinfo", tableInfoCalc.extraStatsCalc(pl));
 
         //Информация о цвете таблиц
         model.put("seats", preflopStatsCalc.hudSeatsColor(pl));

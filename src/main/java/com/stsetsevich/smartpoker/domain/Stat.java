@@ -5,6 +5,7 @@ import javax.persistence.*;
 
 @Entity
 public class Stat {
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
@@ -14,6 +15,10 @@ public class Stat {
     private double point2;
     private double point3;
     private double point4;
+
+    @Column(name = "calc_variant")
+    @Enumerated(EnumType.STRING)
+    private CalcDiapVariant calcDiapVariant;
 
     public Stat(){
     }
@@ -76,4 +81,17 @@ public class Stat {
         this.point4 = point4;
     }
 
+    public CalcDiapVariant getCalcDiapVariant() {
+        return calcDiapVariant;
+    }
+
+    public void setCalcDiapVariant(CalcDiapVariant calcDiapVariant) {
+        this.calcDiapVariant = calcDiapVariant;
+    }
+
+    public double[] getPoints()
+    {
+        double[] points= {getPoint1(), getPoint2(), getPoint3(), getPoint4()};
+        return points;
+    }
 }

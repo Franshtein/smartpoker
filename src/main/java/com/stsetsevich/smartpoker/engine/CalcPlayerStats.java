@@ -19,49 +19,52 @@ public class CalcPlayerStats {
     private ArrayList<Player> allPlayers;
 
 
-    public ArrayList<StatValue> extraStatsCalc() {
+    public ArrayList<StatInfo> extraStatsCalc() {
         allPlayers = new ArrayList<>((Collection) playerRepo.findAll());
         ArrayList<Player> subPlayers = new ArrayList<>(allPlayers);
         //subPlayers.removeIf(n -> (n.getNickname().equals("Empty Seat")));
-        ArrayList<StatValue> stats = new ArrayList<>();
-        StatValue statValue = new StatValue(Double.toString(calcAvgEvBb100(subPlayers)), 0, "avgEvBb100");
-        stats.add(statValue);
-        statValue = new StatValue(Double.toString(over10kHandsCalcAvgEvBb100(subPlayers)), 0, "avgEvBb100, 10k+ Hands");
-        stats.add(statValue);
-        statValue = new StatValue(Double.toString(over10kHandsAndPlusEvCalcAvgEvBb100(subPlayers)), 0, "avgEvBb100, 10k+ Hands, ev>0");
-        stats.add(statValue);
-        statValue = new StatValue(Double.toString(calcAvgVpip(subPlayers)), 0, "avgVpip");
-        stats.add(statValue);
-        statValue = new StatValue(Double.toString(over10kHandsCalcAvgVpip(subPlayers)), 0, "avgVpip, 10k+ Hands");
-        stats.add(statValue);
-        statValue = new StatValue(Double.toString(over10kHandsAndPlusEvCalcAvgVpip(subPlayers)), 0, "avgVpip, 10k+ Hands, ev>0");
-        stats.add(statValue);
-        statValue = new StatValue(Double.toString(over10kHandsAndPlusEvCalcAvgCheckRaiseFlop(subPlayers)), 0, "avgCheckRaiseFlop, 10k+ Hands, ev>0");
-        stats.add(statValue);
-        statValue = new StatValue(Double.toString(over10kHandsAndPlusEvCalcAvgCheckRaiseTurn(subPlayers)), 0, "avgCheckRaiseTurn, 10k+ Hands, ev>0");
-        stats.add(statValue);
-        statValue = new StatValue(Double.toString(over10kHandsAndPlusEvCalcAvgCheckRaiseRiver(subPlayers)), 0, "avgCheckRaiseRiver, 10k+ Hands, ev>0");
-        stats.add(statValue);
-        statValue = new StatValue(Double.toString(nice(subPlayers)), 0, "need, 10k+ Hands, ev>0");
-        stats.add(statValue);
-        statValue = new StatValue(Double.toString(nice2(subPlayers)), 0, "avgCheckRaiseRiver, 10k+ Hands, ev>0");
-        stats.add(statValue);
-        statValue = new StatValue(Double.toString(nice3(subPlayers)), 0, "avgCheckRaiseRiver, 10k+ Hands, ev>0");
-        stats.add(statValue);
+        ArrayList<StatInfo> stats = new ArrayList<>();
+        /*
+        StatInfo statInfo = new StatInfo(Double.toString(calcAvgEvBb100(subPlayers)), 0, "avgEvBb100");
+        stats.add(statInfo);
+        statInfo = new StatInfo(Double.toString(over10kHandsCalcAvgEvBb100(subPlayers)), 0, "avgEvBb100, 10k+ Hands");
+        stats.add(statInfo);
+        statInfo = new StatInfo(Double.toString(over10kHandsAndPlusEvCalcAvgEvBb100(subPlayers)), 0, "avgEvBb100, 10k+ Hands, ev>0");
+        stats.add(statInfo);
+        statInfo = new StatInfo(Double.toString(calcAvgVpip(subPlayers)), 0, "avgVpip");
+        stats.add(statInfo);
+        statInfo = new StatInfo(Double.toString(over10kHandsCalcAvgVpip(subPlayers)), 0, "avgVpip, 10k+ Hands");
+        stats.add(statInfo);
+        statInfo = new StatInfo(Double.toString(over10kHandsAndPlusEvCalcAvgVpip(subPlayers)), 0, "avgVpip, 10k+ Hands, ev>0");
+        stats.add(statInfo);
+        statInfo = new StatInfo(Double.toString(over10kHandsAndPlusEvCalcAvgCheckRaiseFlop(subPlayers)), 0, "avgCheckRaiseFlop, 10k+ Hands, ev>0");
+        stats.add(statInfo);
+        statInfo = new StatInfo(Double.toString(over10kHandsAndPlusEvCalcAvgCheckRaiseTurn(subPlayers)), 0, "avgCheckRaiseTurn, 10k+ Hands, ev>0");
+        stats.add(statInfo);
+        statInfo = new StatInfo(Double.toString(over10kHandsAndPlusEvCalcAvgCheckRaiseRiver(subPlayers)), 0, "avgCheckRaiseRiver, 10k+ Hands, ev>0");
+        stats.add(statInfo);
+        statInfo = new StatInfo(Double.toString(nice(subPlayers)), 0, "need, 10k+ Hands, ev>0");
+        stats.add(statInfo);
+        statInfo = new StatInfo(Double.toString(nice2(subPlayers)), 0, "avgCheckRaiseRiver, 10k+ Hands, ev>0");
+        stats.add(statInfo);
+        statInfo = new StatInfo(Double.toString(nice3(subPlayers)), 0, "avgCheckRaiseRiver, 10k+ Hands, ev>0");
+        stats.add(statInfo);
 
 
-        statValue = new StatValue(Double.toString(getAverageWhereTotalHandsOver10kAndAvgBb100Over4Bb
+        statInfo = new StatInfo(Double.toString(getAverageWhereTotalHandsOver10kAndAvgBb100Over4Bb
                 (subPlayers, (players -> players.stream().flatMapToDouble(player -> DoubleStream.of(player.getWonAfterRaiseFlop())).average().orElse(0)))),
                 0, "CHECKavgCheckRaiseRiver, 10k+ Hands, ev>0");
-        stats.add(statValue);
-        statValue = new StatValue(Double.toString(getAverageWhereTotalHandsOver10kAndAvgBb100Over4Bb
+        stats.add(statInfo);
+        statInfo = new StatInfo(Double.toString(getAverageWhereTotalHandsOver10kAndAvgBb100Over4Bb
                 (subPlayers, (players -> players.stream().flatMapToDouble(player -> DoubleStream.of(player.getWonAfterRaiseTurn())).average().orElse(0)))),
                 0, "CHECKavgCheckRaiseRiver, 10k+ Hands, ev>0");
-        stats.add(statValue);
-        statValue = new StatValue(Double.toString(getAverageWhereTotalHandsOver10kAndAvgBb100Over4Bb
+        stats.add(statInfo);
+        statInfo = new StatInfo(Double.toString(getAverageWhereTotalHandsOver10kAndAvgBb100Over4Bb
                 (subPlayers, (players -> players.stream().parallel().unordered().filter(player -> player.getAvgBb100()>8).flatMapToDouble(player -> DoubleStream.of(player.getWonAfterRaiseRiver())).average().orElse(0)))),
                 0, "CHECKavgCheckRaiseRiver, 10k+ Hands, ev>0");
-        stats.add(statValue);
+        stats.add(statInfo);
+
+         */
         return stats;
 
     }

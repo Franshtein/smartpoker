@@ -48,7 +48,7 @@ public class SetPlayersAtTable {
         return stats;
     }
 
-    public ArrayList<Player> getAllPlayerStats(String p1, String p2, String p3, String p4, String p5) {
+    public ArrayList<Player> getAllPlayers(String p1, String p2, String p3, String p4, String p5) {
         ArrayList<String> playerName = new ArrayList<>();
         playerName.add(p1);
         playerName.add(p2);

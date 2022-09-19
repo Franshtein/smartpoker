@@ -1,18 +1,22 @@
 package com.stsetsevich.smartpoker.engine;
 
 import com.stsetsevich.smartpoker.domain.Player;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.stream.DoubleStream;
 
 public class TableInfoCalc {
-
-    public static ArrayList<StatValue> extraStatsCalc(ArrayList<Player> players) {
+    @Autowired
+    StatInfo statInfoMother;
+    public ArrayList<StatInfo> extraStatsCalc(ArrayList<Player> players) {
         ArrayList<Player> subPlayers = new ArrayList<>(players);
         subPlayers.removeIf(n -> (n.getNickname().equals("Empty Seat")));
-        ArrayList<StatValue> stats = new ArrayList<>();
-        StatValue statValue = new StatValue(Double.toString(calcAvgEvBb100(subPlayers)), 0, "avgEvBb100");
-        stats.add(statValue);
+        ArrayList<StatInfo> stats = new ArrayList<>();
+       /// StatInfo statInfo = new StatInfo(Double.toString(calcAvgEvBb100(subPlayers)), 0, "avgEvBb100");
+       // statInfo = statInfoMother.getStatInfo();
+       // statInfo.setInfo(statname, pl);
+       // stats.add(statInfo);
 
         return stats;
     }

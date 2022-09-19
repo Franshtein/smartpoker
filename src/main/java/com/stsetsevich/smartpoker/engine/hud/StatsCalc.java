@@ -1,7 +1,7 @@
 package com.stsetsevich.smartpoker.engine.hud;
 
 import com.stsetsevich.smartpoker.domain.Player;
-import com.stsetsevich.smartpoker.engine.StatValue;
+import com.stsetsevich.smartpoker.engine.StatInfo;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,9 +11,12 @@ import java.util.HashMap;
 public class StatsCalc{
     @Autowired
     StatRepo statRepo;
+    @Autowired
+    StatInfo statInfoMother;
     protected enum Variant {
         ONE, TWO, THREE;
     }
+    protected boolean needHref=true;
     //Проверка, в какой диапазон попадает значение стата игрока, чтобы определить каким цветом его закрашивать
     //Три разных варианта, в зависимости от типа стата, т.к. некоторые нужно инвертировать и т.п.
     protected static int checkDiap(double stat, double points[], Variant variant) {
@@ -87,7 +90,7 @@ public class StatsCalc{
         String seat;
         for (Player pl : players) {
             if (!pl.getNickname().equals("Empty Seat")) {
-                int i = checkDiap(pl.getAvgBb100(), getPoints("avgBb100"), Variant.ONE);
+                int i = checkDiap(pl.getAvgBb100(), getPoints("avg_bb100"), Variant.ONE);
                 seat = "table-striped-red";
                 if (i == 0) seat = "table-striped-pink";
                 if (i == 1) seat = "table-striped-blue";
@@ -100,17 +103,18 @@ public class StatsCalc{
         return seats;
     }
 
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine4(ArrayList<Player> players) {
-        HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
+    public HashMap<Integer, ArrayList<StatInfo>> hudStatsCalcLine4(ArrayList<Player> players) {
+        HashMap<Integer, ArrayList<StatInfo>> playerStat = new HashMap<>();
         int i = 0;
         for (Player pl : players) {
-            ArrayList<StatValue> stats = new ArrayList<>();
-            StatValue statValue;
+            ArrayList<StatInfo> stats = new ArrayList<>();
+            StatInfo statInfo;
             try {
 
-                String statname = "";
-                statValue = new StatValue("-", 1, statname);
-                stats.add(statValue);
+                String statname = "-";
+                statInfo = statInfoMother.getStatInfo();
+                statInfo.setInfo(statname);
+                stats.add(statInfo);
 
             } finally {
                 playerStat.put(i, stats);
@@ -119,17 +123,18 @@ public class StatsCalc{
         }
         return playerStat;
     }
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine5(ArrayList<Player> players) {
-        HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
+    public HashMap<Integer, ArrayList<StatInfo>> hudStatsCalcLine5(ArrayList<Player> players) {
+        HashMap<Integer, ArrayList<StatInfo>> playerStat = new HashMap<>();
         int i = 0;
         for (Player pl : players) {
-            ArrayList<StatValue> stats = new ArrayList<>();
-            StatValue statValue;
+            ArrayList<StatInfo> stats = new ArrayList<>();
+            StatInfo statInfo;
             try {
 
-                String statname = "";
-                statValue = new StatValue("-", 1, statname);
-                stats.add(statValue);
+                String statname = "-";
+                statInfo = statInfoMother.getStatInfo();
+                statInfo.setInfo(statname);
+                stats.add(statInfo);
 
             } finally {
                 playerStat.put(i, stats);

@@ -2,8 +2,8 @@ package com.stsetsevich.smartpoker.engine.hud;
 
 
 import com.stsetsevich.smartpoker.domain.Player;
-import com.stsetsevich.smartpoker.engine.StatValue;
-import com.stsetsevich.smartpoker.repos.StatRepo;
+import com.stsetsevich.smartpoker.engine.StatInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,38 +11,39 @@ import java.util.HashMap;
 
 @Service
 public class TurnStatsCalc extends StatsCalc {
-
+    @Autowired
+    StatInfo statInfoMother;
 
     //Записываем в коллекцию данные каждого игрока для первой строки таблицы
     //Вычисляем значения и в какой диапазон они попадают
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine1(ArrayList<Player> players) {
-        HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
+    public HashMap<Integer, ArrayList<StatInfo>> hudStatsCalcLine1(ArrayList<Player> players) {
+        HashMap<Integer, ArrayList<StatInfo>> playerStat = new HashMap<>();
         int i = 0;
         for (Player pl : players) {
-            ArrayList<StatValue> stats = new ArrayList<>();
-            StatValue statValue;
+            ArrayList<StatInfo> stats = new ArrayList<>();
+            StatInfo statInfo;
             try {
 
 
                 String statname = "cBetTurnTotal";
-                statValue = new StatValue(Double.toString(pl.getcBetTurnTotal()), checkDiap(pl.getcBetTurnTotal(),
-                        getPoints(statname), Variant.ONE), statname);
-                stats.add(statValue);
+                statInfo = statInfoMother.getStatInfo();
+                statInfo.setInfo(statname, pl);
+                stats.add(statInfo);
 
                 statname = "foldVsCbetTurnTotal";
-                statValue = new StatValue(Double.toString(pl.getFoldVsCbetTurnTotal()), checkDiap(pl.getFoldVsCbetTurnTotal(),
-                        getPoints(statname), Variant.THREE), true, statname, pl);
-                stats.add(statValue);
+                statInfo = statInfoMother.getStatInfo();
+                statInfo.setInfo(statname, pl);
+                stats.add(statInfo);
 
                 statname = "skippedCbetFoldTurnTotal";
-                statValue = new StatValue(Double.toString(pl.getSkippedCbetFoldTurnTotal()), checkDiap(pl.getSkippedCbetFoldTurnTotal(),
-                        getPoints(statname), Variant.THREE), true, statname, pl);
-                stats.add(statValue);
+                statInfo = statInfoMother.getStatInfo();
+                statInfo.setInfo(statname, pl);
+                stats.add(statInfo);
 
                 statname = "raiseToCbetTurnTotal";
-                statValue = new StatValue(Double.toString(pl.getRaiseToCbetTurnTotal()), checkDiap(pl.getRaiseToCbetTurnTotal(),
-                        getPoints(statname), Variant.ONE), statname);
-                stats.add(statValue);
+                statInfo = statInfoMother.getStatInfo();
+                statInfo.setInfo(statname, pl);
+                stats.add(statInfo);
 
             } finally {
                 playerStat.put(i, stats);
@@ -56,34 +57,34 @@ public class TurnStatsCalc extends StatsCalc {
 
     //Записываем в коллекцию данные каждого игрока для второй строки таблицы
     //Вычисляем значения и в какой диапазон они попадают
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine2(ArrayList<Player> players) {
-        HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
+    public HashMap<Integer, ArrayList<StatInfo>> hudStatsCalcLine2(ArrayList<Player> players) {
+        HashMap<Integer, ArrayList<StatInfo>> playerStat = new HashMap<>();
         int i = 0;
         for (Player pl : players) {
 
-            ArrayList<StatValue> stats = new ArrayList<>();
-            StatValue statValue;
+            ArrayList<StatInfo> stats = new ArrayList<>();
+            StatInfo statInfo;
             try {
 
                 String statname = "donkTurn";
-                statValue = new StatValue(Double.toString(pl.getDonkTurn()), checkDiap(pl.getDonkTurn(),
-                        getPoints(statname), Variant.ONE), statname);
-                stats.add(statValue);
+                statInfo = statInfoMother.getStatInfo();
+                statInfo.setInfo(statname, pl);
+                stats.add(statInfo);
 
                 statname = "checkCallTurn";
-                statValue = new StatValue(Double.toString(pl.getCheckCallTurn()), checkDiap(pl.getCheckCallTurn(),
-                        getPoints(statname), Variant.ONE), statname);
-                stats.add(statValue);
+                statInfo = statInfoMother.getStatInfo();
+                statInfo.setInfo(statname, pl);
+                stats.add(statInfo);
 
                 statname = "checkRaiseTurn";
-                statValue = new StatValue(Double.toString(pl.getCheckRaiseTurn()), checkDiap(pl.getCheckRaiseTurn(),
-                        getPoints(statname), Variant.ONE, pl.getVpip(), "vpip", statRepo), statname);
-                stats.add(statValue);
+                statInfo = statInfoMother.getStatInfo();
+                statInfo.setInfo(statname, pl);
+                stats.add(statInfo);
 
                 statname = "afqTurn";
-                statValue = new StatValue(Double.toString(pl.getAfqTurn()), checkDiap(pl.getAfqTurn(),
-                        getPoints(statname), Variant.ONE), statname);
-                stats.add(statValue);
+                statInfo = statInfoMother.getStatInfo();
+                statInfo.setInfo(statname, pl);
+                stats.add(statInfo);
             } finally {
                 playerStat.put(i, stats);
                 i++;
@@ -91,33 +92,33 @@ public class TurnStatsCalc extends StatsCalc {
         }
         return playerStat;
     }
-    public HashMap<Integer, ArrayList<StatValue>> hudStatsCalcLine3(ArrayList<Player> players) {
-        HashMap<Integer, ArrayList<StatValue>> playerStat = new HashMap<>();
+    public HashMap<Integer, ArrayList<StatInfo>> hudStatsCalcLine3(ArrayList<Player> players) {
+        HashMap<Integer, ArrayList<StatInfo>> playerStat = new HashMap<>();
         int i = 0;
         for (Player pl : players) {
-            ArrayList<StatValue> stats = new ArrayList<>();
-            StatValue statValue;
+            ArrayList<StatInfo> stats = new ArrayList<>();
+            StatInfo statInfo;
             try {
 
                 String statname = "betToMissCbetTurnTotal";
-                statValue = new StatValue(Double.toString(pl.getBetToMissCbetTurnTotal()), checkDiap(pl.getBetToMissCbetTurnTotal(),
-                        getPoints(statname), Variant.ONE), statname);
-                stats.add(statValue);
+                statInfo = statInfoMother.getStatInfo();
+                statInfo.setInfo(statname, pl);
+                stats.add(statInfo);
 
                 statname = "wonAfterRaiseTurn";
-                statValue = new StatValue(Double.toString(pl.getWonAfterRaiseTurn()), checkDiap(pl.getWonAfterRaiseTurn(),
-                        getPoints(statname), Variant.TWO), statname);
-                stats.add(statValue);
+                statInfo = statInfoMother.getStatInfo();
+                statInfo.setInfo(statname, pl);
+                stats.add(statInfo);
 
                 statname = "aggFactorTurn";
-                statValue = new StatValue(Double.toString(pl.getAggFactorTurn()), checkDiap(pl.getAggFactorTurn(),
-                        getPoints(statname), Variant.ONE), statname);
-                stats.add(statValue);
+                statInfo = statInfoMother.getStatInfo();
+                statInfo.setInfo(statname, pl);
+                stats.add(statInfo);
 
                 statname = "totalHands";
-                statValue = new StatValue(Double.toString(pl.getTotalHands()), checkDiap(pl.getTotalHands(),
-                        getPoints(statname), Variant.TWO), statname);
-                stats.add(statValue);
+                statInfo = statInfoMother.getStatInfo();
+                statInfo.setInfo(statname, pl);
+                stats.add(statInfo);
 
             } finally {
                 playerStat.put(i, stats);

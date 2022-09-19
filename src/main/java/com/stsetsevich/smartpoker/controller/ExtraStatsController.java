@@ -3,7 +3,7 @@ package com.stsetsevich.smartpoker.controller;
 import com.stsetsevich.smartpoker.domain.Player;
 import com.stsetsevich.smartpoker.engine.ExtraStatsCalc;
 import com.stsetsevich.smartpoker.engine.SetPlayersAtTable;
-import com.stsetsevich.smartpoker.engine.StatValue;
+import com.stsetsevich.smartpoker.engine.StatInfo;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +33,8 @@ public class ExtraStatsController {
         model.put("name", username);
 
         Player playerNick = SetPlayersAtTable.checkPlayer(playerRepo, player);
-        ArrayList<StatValue> statValues = extraStatsCalc.extraStatsCalc(playerNick, stat);
-        model.put("statValues", statValues);
+        ArrayList<StatInfo> statInfos = extraStatsCalc.extraStatsCalc(playerNick, stat);
+        model.put("statValues", statInfos);
 
         return "extrastats";
     }
@@ -48,8 +48,8 @@ public class ExtraStatsController {
         String username = auth.getName();
         model.put("name", username);
         Player playerNick = SetPlayersAtTable.checkPlayer(playerRepo, player);
-        ArrayList<StatValue> statValues = extraStatsCalc.extraStatsCalc(playerNick, stat);
-        model.put("statValues", statValues);
+        ArrayList<StatInfo> statInfos = extraStatsCalc.extraStatsCalc(playerNick, stat);
+        model.put("statValues", statInfos);
 
         return "extrastats";
     }

@@ -1,5 +1,6 @@
 package com.stsetsevich.smartpoker.controller;
 
+import com.stsetsevich.smartpoker.domain.CalcDiapVariant;
 import com.stsetsevich.smartpoker.domain.Stat;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class StatsDiapController {
     }
 
     @PostMapping("/statsdiap")
-    public String add(String statname, double point1, double point2, double point3, double point4, Model model1) {
+    public String add(String statname, double point1, double point2, double point3, double point4, String newstatname, CalcDiapVariant calcDiapVariant, Model model1) {
 
         System.out.println(statname + point1 + point2 + point3 + point4);
 
@@ -36,7 +37,10 @@ public class StatsDiapController {
         stat.setPoint2(point2);
         stat.setPoint3(point3);
         stat.setPoint4(point4);
+        stat.setStatname(newstatname);
+        stat.setCalcDiapVariant(calcDiapVariant);
         statRepo.save(stat);
+        System.out.println(calcDiapVariant);
         // Iterable<Stat> stats = statRepo.findAll();
         ArrayList<Stat> stats = statRepo.findAllByStatnameIsNotNullOrderById();
         model1.addAttribute("stats", stats);
