@@ -19,19 +19,19 @@ import java.util.List;
 @Component
 @Scope("prototype")
 public class StatInfo {
-    enum StatColor
-    {
-        INFINITY_TO_POINT1("colorblue"), POINT1_TO_POINT2("coloryellow"), POINT2_TO_POINT3("colorred"), POINT3_TO_POINT4("colorgreen"), POINT4_TO_INFINITY("colorpink");
+    enum StatColor {
+        INFINITY_TO_POINT1("colorblue"), POINT1_TO_POINT2("coloryellow"), POINT2_TO_POINT3("colorred"), POINT3_TO_POINT4("colorgreen"), POINT4_TO_INFINITY("colorpink"), DEFAULT("colorblack");
         private String color;
 
         StatColor(String color) {
-            this.color=color;
+            this.color = color;
         }
-        private String getColor()
-        {
+
+        private String getColor() {
             return color;
         }
     }
+
     @Autowired
     StatRepo statRepo;
     @Autowired
@@ -48,7 +48,7 @@ public class StatInfo {
     private int statColorDiap;
     private String statColor;
     private String picture;
-    private double dependOnStat=0;
+    private double dependOnStat = 0;
     private String address;
     private String statName;
 
@@ -57,60 +57,68 @@ public class StatInfo {
     public StatInfo getStatInfo() {
         return null;
     }
-    public StatInfo()
-    {
+
+    public StatInfo() {
 
     }
 
-    public void setInfo(String stat)
-    {
-        this.statName=stat;
-        this.stat=stat;
-        this.address="#";
+    public void setInfo(String stat) {
+        this.statName = stat;
+        this.stat = stat;
+        this.address = "#";
     }
-    public void setInfo(String stat, Player player)
-    {
-        this.player=player;
-        this.statName=stat;
-        this.stat=stat;
-        this.statTry =statRepo.findStatByStatname(stat);
-        setStatValue();
-        setPoints();
-        this.statColorDiap=checkDiap();
-        setStatColor();
-        this.address="#";
-        setPicture();
 
-    }
-    public void setInfo(String stat, Player player, boolean needHref)
-    {
-        this.player=player;
-        this.statName=stat;
-        this.stat=stat;
-        this.statTry =statRepo.findStatByStatname(stat);
-        setStatValue();
-        setPoints();
-        this.statColorDiap=checkDiap();
-        setStatColor();
-        if(needHref == true)
-        {
-            this.address="extrastats?player="+player.getNickname()+"&stat="+statName;
+    public void setInfo(String stat, Player player) {
+        this.player = player;
+        this.statName = stat;
+        this.stat = stat;
+        this.statTry = statRepo.findStatByStatname(stat);
+        if (!statName.equals("-")) {
+            setStatValue();
+            System.out.println("this stat=" + this.stat);
+            setPoints();
+            this.statColorDiap = checkDiap();
+            setStatColor();
+            if (statTry.isNeedLink() == true) {
+                this.address = "extrastats?player=" + player.getNickname() + "&stat=" + statName;
+            }
+            else this.address = "#";
+            setPicture();
+        } else {
+            this.statColorDiap = 5;
+            setStatColor();
+            this.address = "#";
         }
-        else this.address="#";
+
+    }
+
+    public void setInfo(String stat, Player player, boolean needHref) {
+        this.player = player;
+        this.statName = stat;
+        this.stat = stat;
+        this.statTry = statRepo.findStatByStatname(stat);
+        setStatValue();
+        setPoints();
+        this.statColorDiap = checkDiap();
+        setStatColor();
+        if (needHref == true) {
+            this.address = "extrastats?player=" + player.getNickname() + "&stat=" + statName;
+        } else this.address = "#";
         setPicture();
     }
-    private void setStatValue()
-    {
-        Query query = entityManager.createNativeQuery("SELECT "+ statTry.getStatname()+" FROM player where nickname='"+player.getNickname()+"'");
-        List<String> list=query.getResultList();
+
+    private void setStatValue() {
+        Query query = entityManager.createNativeQuery("SELECT " + statTry.getStatname() + " FROM player where nickname='" + player.getNickname() + "'");
+        List<String> list = query.getResultList();
         List<Object> list2 = new ArrayList<>(list);
-        stat=list2.get(0).toString();
-        this.statValue=Double.parseDouble(stat);
+        stat = list2.get(0).toString();
+        this.statValue = Double.parseDouble(stat);
     }
-    private void setPoints()
-    {
-        this.points= statTry.getPoints();
+
+    private void setPoints() {
+        this.points = statTry.getPoints();
     }
+
     private int checkDiap() {
         CalcDiapVariant variant = statTry.getCalcDiapVariant();
         if (variant == CalcDiapVariant.ONE) {
@@ -136,18 +144,20 @@ public class StatInfo {
         }
         return 0;
     }
+
     public void setStatColor() {
-        if(statColorDiap==0) this.statColor= StatColor.INFINITY_TO_POINT1.getColor();
-        else if(statColorDiap==1) this.statColor= StatColor.POINT1_TO_POINT2.getColor();
-        else if(statColorDiap==2) this.statColor= StatColor.POINT2_TO_POINT3.getColor();
-        else if(statColorDiap==3) this.statColor= StatColor.POINT3_TO_POINT4.getColor();
-        else this.statColor= StatColor.POINT4_TO_INFINITY.getColor();
+        if (statColorDiap == 0) this.statColor = StatColor.INFINITY_TO_POINT1.getColor();
+        else if (statColorDiap == 1) this.statColor = StatColor.POINT1_TO_POINT2.getColor();
+        else if (statColorDiap == 2) this.statColor = StatColor.POINT2_TO_POINT3.getColor();
+        else if (statColorDiap == 3) this.statColor = StatColor.POINT3_TO_POINT4.getColor();
+        else if (statColorDiap == 4) this.statColor = StatColor.POINT4_TO_INFINITY.getColor();
+        else this.statColor = StatColor.DEFAULT.getColor();
 
     }
 
     public void setPicture() {
         String picture;
-        if(!statTry.equals("-")) {
+        if (!stat.equals("-")) {
             if (dependOnStat == 0) {
                 double dstat = statValue;
                 // int istat = (int) dstat;
@@ -168,8 +178,7 @@ public class StatInfo {
             if (f.exists() && !f.isDirectory()) {
                 //  System.out.println("FILE EXSIST");
             } else picture = null;
-        }
-        else picture = null;
+        } else picture = null;
         this.picture = picture;
     }
 

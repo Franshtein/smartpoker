@@ -2,6 +2,7 @@ package com.stsetsevich.smartpoker.domain;
 
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Stat {
@@ -15,6 +16,8 @@ public class Stat {
     private double point2;
     private double point3;
     private double point4;
+    @Column (name = "need_link")
+    private  boolean needLink;
 
     @Column(name = "calc_variant")
     @Enumerated(EnumType.STRING)
@@ -93,5 +96,13 @@ public class Stat {
     {
         double[] points= {getPoint1(), getPoint2(), getPoint3(), getPoint4()};
         return points;
+    }
+
+    public boolean isNeedLink() {
+        return needLink;
+    }
+
+    public void setNeedLink(boolean needLink) {
+        this.needLink = needLink;
     }
 }

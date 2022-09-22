@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 @Controller
 public class StatsDiapController {
@@ -21,6 +23,8 @@ public class StatsDiapController {
 
         //  Iterable<Stat> stats = statRepo.findAll();
         ArrayList<Stat> stats = statRepo.findAllByStatnameIsNotNullOrderById();
+        Comparator<Stat> comparator = Comparator.comparing(obj -> obj.getStatname());
+        Collections.sort(stats, comparator);
         model1.addAttribute("stats", stats);
         return "statsdiap";
     }
@@ -43,6 +47,8 @@ public class StatsDiapController {
         System.out.println(calcDiapVariant);
         // Iterable<Stat> stats = statRepo.findAll();
         ArrayList<Stat> stats = statRepo.findAllByStatnameIsNotNullOrderById();
+        Comparator<Stat> comparator = Comparator.comparing(obj -> obj.getStatname());
+        Collections.sort(stats, comparator);
         model1.addAttribute("stats", stats);
 
         return "statsdiap";

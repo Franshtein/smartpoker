@@ -71,7 +71,7 @@ public class RiverStatsCalc extends StatsCalc {
                 statInfo.setInfo(statname, pl);
                 stats.add(statInfo);
 
-                statname = "checkCallTurn";
+                statname = "checkCallRiver";
                 statInfo = statInfoMother.getStatInfo();
                 statInfo.setInfo(statname, pl);
                 stats.add(statInfo);

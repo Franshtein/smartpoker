@@ -14,6 +14,9 @@
 .coloryellow {
     color: yellow;
 }
+.colorblack {
+    color: black;
+}
 
 label.btn-outline-primary{
     background-color: cadetblue;

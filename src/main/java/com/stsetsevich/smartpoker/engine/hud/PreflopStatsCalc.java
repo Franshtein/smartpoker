@@ -1,8 +1,11 @@
 package com.stsetsevich.smartpoker.engine.hud;
 
 
+import com.stsetsevich.smartpoker.domain.Hud;
 import com.stsetsevich.smartpoker.domain.Player;
+import com.stsetsevich.smartpoker.domain.RoundOfBidding;
 import com.stsetsevich.smartpoker.engine.StatInfo;
+import com.stsetsevich.smartpoker.engine.edithud.HudEdit;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +23,10 @@ public class PreflopStatsCalc extends StatsCalc {
     StatRepo statRepo;
     @Autowired
     StatInfo statInfoMother;
+    @Autowired
+    HudEdit hudEdit;
 
-    public HashMap<Integer, ArrayList<StatInfo>> hudStatsCalcLine1(ArrayList<Player> players) {
+    public HashMap<Integer, ArrayList<StatInfo>> hudStatsCalcLine1(ArrayList<Player> players, String table, int line) {
         HashMap<Integer, ArrayList<StatInfo>> playerStat = new HashMap<>();
         int i = 0;
         for (Player pl : players) {
@@ -29,8 +34,17 @@ public class PreflopStatsCalc extends StatsCalc {
             StatInfo statInfo;
 
             try {
+           // String[] statnames = {"vpip", "total_pfr", "total3bet", "fold_to3bet_total"};
+           String[] statnames = hudEdit.parseStatFromNumberToStringView(RoundOfBidding.valueOf(table))[line];
+                System.out.println(statnames[0]);
 
-
+            for (int j=0; j<statnames.length; j++)
+            {
+                statInfo = statInfoMother.getStatInfo();
+                statInfo.setInfo(statnames[j], pl);
+                stats.add(statInfo);
+            }
+            /*
                 String statname = "vpip";
 
                 statInfo = statInfoMother.getStatInfo();
@@ -51,6 +65,34 @@ public class PreflopStatsCalc extends StatsCalc {
                 statInfo = statInfoMother.getStatInfo();
                 statInfo.setInfo(statname, pl, needHref);
                 stats.add(statInfo);
+            */
+            } finally {
+                playerStat.put(i, stats);
+                i++;
+            }
+
+
+        }
+        return playerStat;
+    }
+    public HashMap<Integer, ArrayList<StatInfo>> hudStatsCalcLine1(ArrayList<Player> players) {
+        HashMap<Integer, ArrayList<StatInfo>> playerStat = new HashMap<>();
+        int i = 0;
+        for (Player pl : players) {
+            ArrayList<StatInfo> stats = new ArrayList<>();
+            StatInfo statInfo;
+
+            try {
+                // String[] statnames = {"vpip", "total_pfr", "total3bet", "fold_to3bet_total"};
+                String[] statnames = hudEdit.parseStatFromNumberToStringView(RoundOfBidding.valueOf("PREFLOP"))[0];
+                System.out.println(statnames[0]);
+
+                for (int j=0; j<statnames.length; j++)
+                {
+                    statInfo = statInfoMother.getStatInfo();
+                    statInfo.setInfo(statnames[j], pl);
+                    stats.add(statInfo);
+                }
 
             } finally {
                 playerStat.put(i, stats);

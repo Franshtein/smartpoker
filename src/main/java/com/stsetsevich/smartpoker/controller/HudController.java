@@ -146,29 +146,29 @@ statInfo1.setInfo("total3bet");
         String username = auth.getName();
         model.put("name", username);
 
-        model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl));
-        model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine1(pl));
-        model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine1(pl));
-        model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine1(pl));
-        model.put("plStatsLine5", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, "PREFLOP", 0));
+        model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine1(pl, "PREFLOP", 1));
+        model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine1(pl, "PREFLOP", 2));
+        model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine1(pl, "PREFLOP", 3));
+        model.put("plStatsLine5", preflopStatsCalc.hudStatsCalcLine1(pl, "PREFLOP", 4));
 
-        model.put("flopStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl));
-        model.put("flopStatsLine2", preflopStatsCalc.hudStatsCalcLine1(pl));
-        model.put("flopStatsLine3", preflopStatsCalc.hudStatsCalcLine1(pl));
-        model.put("flopStatsLine4", preflopStatsCalc.hudStatsCalcLine1(pl));
-        model.put("flopStatsLine5", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("flopStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, "FLOP", 0));
+        model.put("flopStatsLine2", preflopStatsCalc.hudStatsCalcLine1(pl, "FLOP", 1));
+        model.put("flopStatsLine3", preflopStatsCalc.hudStatsCalcLine1(pl, "FLOP", 2));
+        model.put("flopStatsLine4", preflopStatsCalc.hudStatsCalcLine1(pl, "FLOP", 3));
+        model.put("flopStatsLine5", preflopStatsCalc.hudStatsCalcLine1(pl, "FLOP", 4));
 
-        model.put("turnStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl));
-        model.put("turnStatsLine2", preflopStatsCalc.hudStatsCalcLine1(pl));
-        model.put("turnStatsLine3", preflopStatsCalc.hudStatsCalcLine1(pl));
-        model.put("turnStatsLine4", preflopStatsCalc.hudStatsCalcLine1(pl));
-        model.put("turnStatsLine5", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("turnStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, "TURN", 0));
+        model.put("turnStatsLine2", preflopStatsCalc.hudStatsCalcLine1(pl, "TURN", 1));
+        model.put("turnStatsLine3", preflopStatsCalc.hudStatsCalcLine1(pl, "TURN", 2));
+        model.put("turnStatsLine4", preflopStatsCalc.hudStatsCalcLine1(pl, "TURN", 3));
+        model.put("turnStatsLine5", preflopStatsCalc.hudStatsCalcLine1(pl, "TURN", 4));
 
-        model.put("riverStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl));
-        model.put("riverStatsLine2", preflopStatsCalc.hudStatsCalcLine1(pl));
-        model.put("riverStatsLine3", preflopStatsCalc.hudStatsCalcLine1(pl));
-        model.put("riverStatsLine4", preflopStatsCalc.hudStatsCalcLine1(pl));
-        model.put("riverStatsLine5", preflopStatsCalc.hudStatsCalcLine1(pl));
+        model.put("riverStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, "RIVER", 0));
+        model.put("riverStatsLine2", preflopStatsCalc.hudStatsCalcLine1(pl, "RIVER", 1));
+        model.put("riverStatsLine3", preflopStatsCalc.hudStatsCalcLine1(pl, "RIVER", 2));
+        model.put("riverStatsLine4", preflopStatsCalc.hudStatsCalcLine1(pl, "RIVER", 3));
+        model.put("riverStatsLine5", preflopStatsCalc.hudStatsCalcLine1(pl, "RIVER", 4));
 
 
         //Информация о префлопе для таблиц со статами
