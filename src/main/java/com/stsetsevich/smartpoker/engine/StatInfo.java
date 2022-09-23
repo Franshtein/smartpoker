@@ -75,7 +75,6 @@ public class StatInfo {
         this.statTry = statRepo.findStatByStatname(stat);
         if (!statName.equals("-")) {
             setStatValue();
-            System.out.println("this stat=" + this.stat);
             setPoints();
             this.statColorDiap = checkDiap();
             setStatColor();

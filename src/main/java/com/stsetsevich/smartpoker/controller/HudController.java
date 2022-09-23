@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -146,29 +147,21 @@ statInfo1.setInfo("total3bet");
         String username = auth.getName();
         model.put("name", username);
 
-        model.put("plStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, "PREFLOP", 0));
-        model.put("plStatsLine2", preflopStatsCalc.hudStatsCalcLine1(pl, "PREFLOP", 1));
-        model.put("plStatsLine3", preflopStatsCalc.hudStatsCalcLine1(pl, "PREFLOP", 2));
-        model.put("plStatsLine4", preflopStatsCalc.hudStatsCalcLine1(pl, "PREFLOP", 3));
-        model.put("plStatsLine5", preflopStatsCalc.hudStatsCalcLine1(pl, "PREFLOP", 4));
+        List<Map<Integer, StatInfo[][]>> list = new ArrayList<>(preflopStatsCalc.hudStatsCalcLineTEST(pl, "PREFLOP",5));
 
-        model.put("flopStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, "FLOP", 0));
-        model.put("flopStatsLine2", preflopStatsCalc.hudStatsCalcLine1(pl, "FLOP", 1));
-        model.put("flopStatsLine3", preflopStatsCalc.hudStatsCalcLine1(pl, "FLOP", 2));
-        model.put("flopStatsLine4", preflopStatsCalc.hudStatsCalcLine1(pl, "FLOP", 3));
-        model.put("flopStatsLine5", preflopStatsCalc.hudStatsCalcLine1(pl, "FLOP", 4));
+        System.out.println("FIRST");
+        System.out.println(list);
+        System.out.println("SECOND");
+        System.out.println(list.get(0).get(0));
+        System.out.println("THIRD");
 
-        model.put("turnStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, "TURN", 0));
-        model.put("turnStatsLine2", preflopStatsCalc.hudStatsCalcLine1(pl, "TURN", 1));
-        model.put("turnStatsLine3", preflopStatsCalc.hudStatsCalcLine1(pl, "TURN", 2));
-        model.put("turnStatsLine4", preflopStatsCalc.hudStatsCalcLine1(pl, "TURN", 3));
-        model.put("turnStatsLine5", preflopStatsCalc.hudStatsCalcLine1(pl, "TURN", 4));
+        //  Получаем первый Map --- Получаем первый Лист в Map --- Получаем первый элемент листа --- получаем данные этого элемента
+        System.out.println(list.get(0).get(0)[0][0].getStat());
+        model.put("plStats", preflopStatsCalc.hudStatsCalcLineTEST(pl, "PREFLOP", 5));
+        model.put("flopStats", preflopStatsCalc.hudStatsCalcLineTEST(pl, "FLOP", 5));
+        model.put("turnStats", preflopStatsCalc.hudStatsCalcLineTEST(pl, "TURN", 5));
+        model.put("riverStats", preflopStatsCalc.hudStatsCalcLineTEST(pl, "RIVER", 5));
 
-        model.put("riverStatsLine1", preflopStatsCalc.hudStatsCalcLine1(pl, "RIVER", 0));
-        model.put("riverStatsLine2", preflopStatsCalc.hudStatsCalcLine1(pl, "RIVER", 1));
-        model.put("riverStatsLine3", preflopStatsCalc.hudStatsCalcLine1(pl, "RIVER", 2));
-        model.put("riverStatsLine4", preflopStatsCalc.hudStatsCalcLine1(pl, "RIVER", 3));
-        model.put("riverStatsLine5", preflopStatsCalc.hudStatsCalcLine1(pl, "RIVER", 4));
 
 
         //Информация о префлопе для таблиц со статами

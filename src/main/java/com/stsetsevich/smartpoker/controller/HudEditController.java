@@ -1,9 +1,6 @@
 package com.stsetsevich.smartpoker.controller;
 
-import com.stsetsevich.smartpoker.domain.CalcDiapVariant;
-import com.stsetsevich.smartpoker.domain.Hud;
-import com.stsetsevich.smartpoker.domain.Stat;
-import com.stsetsevich.smartpoker.domain.User;
+import com.stsetsevich.smartpoker.domain.*;
 import com.stsetsevich.smartpoker.engine.edithud.HudEdit;
 import com.stsetsevich.smartpoker.repos.HudRepo;
 import com.stsetsevich.smartpoker.repos.StatRepo;
@@ -40,11 +37,13 @@ public class HudEditController {
         List<Stat> stats = statRepo.findAllByStatnameIsNotNullOrderById();
         Comparator<Stat> comparator = Comparator.comparing(obj -> obj.getStatname());
         Collections.sort(stats, comparator);
+        String[][] statnames = hudEdit.parseStatFromNumberToStringView(RoundOfBidding.valueOf("PREFLOP"));
         model1.addAttribute("needstat", "-");
         model1.addAttribute("stats", stats);
-        model1.addAttribute("numrows", 5);
-        model1.addAttribute("numcols", 5);
+        model1.addAttribute("numrows", statnames.length);
+        model1.addAttribute("numcols", statnames[0].length);
         model1.addAttribute("roundOfBidding", "PREFLOP");
+        model1.addAttribute("statsTable", statnames);
         return "hud-edit";
     }
 

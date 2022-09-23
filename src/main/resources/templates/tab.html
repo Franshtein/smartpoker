@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-<div th:fragment="frag (player, player2, player3, player4, player5, plStatsLine1, plStatsLine2,plStatsLine3,plStatsLine4,plStatsLine5, seats)">
+<div th:fragment="frag (player, player2, player3, player4, player5,plStats,seats)">
     <div class="players-table">
         <div class="container-fluid text-center" th:classappend="container">
             <div class="row row-height-400">
@@ -12,7 +12,7 @@
                        id="liveToastBtn4"></a>
                     <div th:replace="player-form::frag (1,${player},${player2},${player3},${player4},${player5})">
                     </div>
-                    <div th:replace="player-table::frag (${player},${plStatsLine1.get(0)},${plStatsLine2.get(0)},${plStatsLine3.get(0)},${plStatsLine4.get(0)},${plStatsLine5.get(0)},${seats.get(0)})">
+                    <div th:replace="player-table::frag (${player},${plStats.get(0).get(0)},${seats.get(0)})">
                     </div>
                 </div>
                 <div class="col  align-self-start">
@@ -20,7 +20,7 @@
                        th:class="colorgreen" th:text="${player2.nickname}"></a>
                     <div th:replace="player-form::frag (2,${player},${player2},${player3},${player4},${player5})">
                     </div>
-                    <div th:replace="player-table::frag (${player2},${plStatsLine1.get(1)},${plStatsLine2.get(1)},${plStatsLine3.get(1)},${plStatsLine4.get(1)},${plStatsLine5.get(1)},${seats.get(1)})">
+                    <div th:replace="player-table::frag (${player2},${plStats.get(0).get(1)},${seats.get(1)})">
                     </div>
                 </div>
                 <div class="col  align-self-end">
@@ -28,7 +28,7 @@
                        th:class="colorgreen" th:text="${player3.nickname}"></a>
                     <div th:replace="player-form::frag (3,${player},${player2},${player3},${player4},${player5})">
                     </div>
-                    <div th:replace="player-table::frag (${player3},${plStatsLine1.get(2)},${plStatsLine2.get(2)},${plStatsLine3.get(2)},${plStatsLine4.get(2)},${plStatsLine5.get(2)},${seats.get(2)})">
+                    <div th:replace="player-table::frag (${player3},${plStats.get(0).get(2)},${seats.get(2)})">
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
                     <div th:replace="player-form::frag (4,${player},${player2},${player3},${player4},${player5})">
                     </div>
-                    <div th:replace="player-table::frag (${player4},${plStatsLine1.get(3)},${plStatsLine2.get(3)},${plStatsLine3.get(3)},${plStatsLine4.get(3)},${plStatsLine5.get(3)},${seats.get(3)})">
+                    <div th:replace="player-table::frag (${player4},${plStats.get(0).get(3)},${seats.get(3)})">
                     </div>
                 </div>
 
@@ -52,7 +52,7 @@
                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
                     <div th:replace="player-form::frag (5,${player},${player2},${player3},${player4},${player5})">
                     </div>
-                    <div th:replace="player-table::frag (${player5},${plStatsLine1.get(4)},${plStatsLine2.get(4)},${plStatsLine3.get(4)},${plStatsLine4.get(4)},${plStatsLine5.get(4)},${seats.get(4)})">
+                    <div th:replace="player-table::frag (${player5},${plStats.get(0).get(4)},${seats.get(4)})">
                     </div>
                 </div>
             </div>

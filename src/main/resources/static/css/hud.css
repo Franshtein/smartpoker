@@ -100,7 +100,7 @@ button.btn{
     background-color: blue;
 }
 
-.tooltipvlad span{
+.tooltipImg span{
     border-radius: 5px 5px 5px 5px;
     visibility: hidden;
     position: absolute;
@@ -111,7 +111,7 @@ button.btn{
     border-radius: 5px;
 }
 
-.tooltipvlad:hover span{
+.tooltipImg:hover span{
     visibility: visible;
 }
 /*

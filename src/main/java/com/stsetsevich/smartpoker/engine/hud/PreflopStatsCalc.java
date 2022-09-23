@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class PreflopStatsCalc extends StatsCalc {
@@ -36,7 +38,7 @@ public class PreflopStatsCalc extends StatsCalc {
             try {
            // String[] statnames = {"vpip", "total_pfr", "total3bet", "fold_to3bet_total"};
            String[] statnames = hudEdit.parseStatFromNumberToStringView(RoundOfBidding.valueOf(table))[line];
-                System.out.println(statnames[0]);
+
 
             for (int j=0; j<statnames.length; j++)
             {
@@ -75,6 +77,41 @@ public class PreflopStatsCalc extends StatsCalc {
         }
         return playerStat;
     }
+
+    public List<Map<Integer, StatInfo[][]>> hudStatsCalcLineTEST(ArrayList<Player> players, String table, int line) {
+        HashMap<Integer, StatInfo[][]> playerStat = new HashMap<>();
+        List<Map<Integer, StatInfo[][]>> list = new ArrayList<>();
+        int key = 0;
+        for (Player pl : players) {
+            int column=4;
+
+            StatInfo statInfo;
+            String[][] statnames = hudEdit.parseStatFromNumberToStringView(RoundOfBidding.valueOf(table));
+            System.out.println(statnames[0]);
+            StatInfo[][] stats = new StatInfo[statnames.length][statnames[0].length];
+            try {
+                // String[] statnames = {"vpip", "total_pfr", "total3bet", "fold_to3bet_total"};
+
+                for (int i=0; i<statnames.length; i++)
+                {
+                    for (int j=0; j<statnames[0].length; j++)
+                    {
+                        statInfo = statInfoMother.getStatInfo();
+                        statInfo.setInfo(statnames[i][j], pl);
+                        stats[i][j]=statInfo;
+                    }
+                }
+            } finally {
+                playerStat.put(key, stats);
+                key++;
+                list.add(playerStat);
+            }
+
+
+        }
+        return list;
+    }
+
     public HashMap<Integer, ArrayList<StatInfo>> hudStatsCalcLine1(ArrayList<Player> players) {
         HashMap<Integer, ArrayList<StatInfo>> playerStat = new HashMap<>();
         int i = 0;

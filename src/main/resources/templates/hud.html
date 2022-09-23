@@ -27,21 +27,21 @@
 </div>
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="preflop" role="tabpanel" aria-labelledby="preflop-list">
-        <div th:replace="tab::frag (${player},${player2},${player3},${player4},${player5},${plStatsLine1},${plStatsLine2},${plStatsLine3},${plStatsLine4},${plStatsLine5},${seats})">
+        <div th:replace="tab::frag (${player},${player2},${player3},${player4},${player5},${plStats},${seats})">
         </div>
 
     </div>
     <div class="tab-pane fade" id="flop" role="tabpanel" aria-labelledby="flop-list">
-        <div th:replace="tab::frag (${player},${player2},${player3},${player4},${player5},${flopStatsLine1},${flopStatsLine2},${flopStatsLine3},${flopStatsLine4},${flopStatsLine5},${seats})">
+        <div th:replace="tab::frag (${player},${player2},${player3},${player4},${player5},${flopStats},${seats})">
         </div>
 
     </div>
     <div class="tab-pane fade" id="turn" role="tabpanel" aria-labelledby="turn">
-        <div th:replace="tab::frag (${player},${player2},${player3},${player4},${player5},${turnStatsLine1},${turnStatsLine2},${turnStatsLine3},${turnStatsLine4},${turnStatsLine5},${seats})">
+        <div th:replace="tab::frag (${player},${player2},${player3},${player4},${player5},${turnStats},${seats})">
         </div>
     </div>
     <div class="tab-pane fade" id="river" role="tabpanel" aria-labelledby="river-list">
-        <div th:replace="tab::frag (${player},${player2},${player3},${player4},${player5},${riverStatsLine1},${riverStatsLine2},${riverStatsLine3},${riverStatsLine4},${riverStatsLine5},${seats})">
+        <div th:replace="tab::frag (${player},${player2},${player3},${player4},${player5},${riverStats},${seats})">
         </div>
     </div>
 
@@ -95,7 +95,7 @@
     <p th:text="${ti.stat}"></p>
 </div>
 
-<a class="tooltipvlad" href="#">Анкор ссылки<span><img src="/img/vpip20.png"/></span></a>
+<a class="tooltipImg" href="#">Анкор ссылки<span><img src="/img/vpip20.png"/></span></a>
 
 <form id="setStat" th:action="@{addStat}" method="post">
     <input type="hidden" id="stat" value=""

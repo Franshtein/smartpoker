@@ -28,10 +28,10 @@
 
 <div class="container-fluid text-center">
     <table class="table table-striped" th:classappend="table-striped-empty" th:if="${numrows}">
-        <tr th:each="numrow : ${numrowscount}">
-            <td th:each="numcol : ${numcolscount}">
+        <tr th:each="numrow : ${statsTable}">
+            <td th:each="numcol : ${numrow}">
                 <select th:name="calcDiapVariant" th:class="choise">
-                    <option th:each="stat : ${stats}" th:type="text" th:selected="${stat.statname == needstat}">
+                    <option th:each="stat : ${stats}" th:type="text" th:selected="${stat.statname == numcol}">
                         <div th:value="${stat.statname}" th:text="${stat.statname}">
                         </div>
                     </option>
