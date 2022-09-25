@@ -13,6 +13,8 @@
 <form th:action="createhud" id="createhud" method="post">
     <input type="number" name="numrows" th:value="${numrows}" value="5" size="2" min="1" max="5"/>
     <input type="number" name="numcols" th:value="${numcols}" value="5" size="2" min="1" max="5"/>
+    <input type="hidden" name="numrowsOld" th:value="${numrows}" value="5" size="2" min="1" max="5"/>
+    <input type="hidden" name="numcolsOld" th:value="${numcols}" value="5" size="2" min="1" max="5"/>
     <td>
         <select th:name="roundOfBidding">
             <option th:type="text" th:selected="${roundOfBidding}==PREFLOP">PREFLOP</option>
@@ -64,10 +66,16 @@
         <td>
             <button th:onclick="save()" type="submit">Save</button>
         </td>
+
     </form>
+    <td>
+                <button th:onclick="rollback()">Rollback</button>
+
+    </td>
 
     </tr>
 </table>
+
 
 <script type="text/javascript" src="../static/js/hud-edit.js" th:src="@{/js/hud-edit.js}"></script>
 

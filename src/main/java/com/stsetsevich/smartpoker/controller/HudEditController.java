@@ -47,19 +47,6 @@ public class HudEditController {
         return "hud-edit";
     }
 
-    @PostMapping("/hud-edit")
-    public String add(Model model1, int numcols, int numrows, String allstatsname) {
-
-        System.out.println(allstatsname);
-        List<Stat> stats = statRepo.findAllByStatnameIsNotNullOrderById();
-        Comparator<Stat> comparator = Comparator.comparing(obj -> obj.getStatname());
-        Collections.sort(stats, comparator);
-        model1.addAttribute("needstat", "-");
-        model1.addAttribute("stats", stats);
-        model1.addAttribute("numrows", numrows);
-        model1.addAttribute("numcols", numcols);
-        return "hud-edit";
-    }
 
     @PostMapping("/sethud")
     public String add2(Model model1, int numcols, int numrows, String allstatsname, String roundOfBidding) {
@@ -74,6 +61,10 @@ public class HudEditController {
 
         Comparator<Stat> comparator = Comparator.comparing(obj -> obj.getStatname());
         Collections.sort(stats, comparator);
+
+        String[][] statnames = hudEdit.parseStatFromNumberToStringView(RoundOfBidding.valueOf(roundOfBidding));
+        model1.addAttribute("statsTable", statnames);
+        model1.addAttribute("roundOfBidding", roundOfBidding);
         model1.addAttribute("needstat", "-");
         model1.addAttribute("stats", stats);
         model1.addAttribute("numrows", numrows);

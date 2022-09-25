@@ -11,3 +11,8 @@ function save() {
     document.forms["sethud"].elements["allstatsname"].value = str;
     alert(str);
 }
+function rollback() {
+    document.forms["createhud"].elements["numrows"].value = document.forms["createhud"].elements["numrowsOld"].value
+    document.forms["createhud"].elements["numcols"].value = document.forms["createhud"].elements["numcolsOld"].value
+    document.getElementById('createhud').submit();
+}
