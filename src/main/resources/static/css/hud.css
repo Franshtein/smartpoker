@@ -103,16 +103,22 @@ button.btn{
 .tooltipImg span{
     border-radius: 5px 5px 5px 5px;
     visibility: hidden;
-    position: absolute;
+    position: fixed;
     left: 35%;
     top: 35%;
     background: #fff;
     box-shadow: -2px 2px 10px -1px #333;
     border-radius: 5px;
+    z-index: 5;
 }
 
 .tooltipImg:hover span{
     visibility: visible;
+}
+.table-info{
+    position: fixed;
+    top: 15px;
+    right: 15px;
 }
 /*
 button.btn:hover{

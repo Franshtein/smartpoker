@@ -4,24 +4,24 @@ import com.stsetsevich.smartpoker.domain.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.DoubleStream;
 
 public class TableInfoCalc {
     @Autowired
     StatInfo statInfoMother;
-    public ArrayList<StatInfo> extraStatsCalc(ArrayList<Player> players) {
-        ArrayList<Player> subPlayers = new ArrayList<>(players);
-        subPlayers.removeIf(n -> (n.getNickname().equals("Empty Seat")));
-        ArrayList<StatInfo> stats = new ArrayList<>();
-       /// StatInfo statInfo = new StatInfo(Double.toString(calcAvgEvBb100(subPlayers)), 0, "avgEvBb100");
-       // statInfo = statInfoMother.getStatInfo();
-       // statInfo.setInfo(statname, pl);
-       // stats.add(statInfo);
+    public List<TableInfo> extraStatsCalc(List<Player> players) {
+        List<Player> subPlayers = new ArrayList<>(players);
+        subPlayers.removeIf(n -> (n.getNickname().equals("Empty Seat") || n.getTotalHands()<3000));
+        List<TableInfo> stats = new ArrayList<>();
+        TableInfo tableInfo = new TableInfo("avgBb100", calcAvgEvBb100(subPlayers));
+
+        stats.add(tableInfo);
 
         return stats;
     }
 
-    private static double calcAvgEvBb100(ArrayList<Player> players) {
+    private static double calcAvgEvBb100(List<Player> players) {
 
      /*  double avg=0;
         for (Player player : players) {

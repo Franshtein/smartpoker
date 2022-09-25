@@ -200,7 +200,6 @@ public class StatInfo {
     public Stat getStatTry() {
         return statTry;
     }
-
     public void setStatTry(Stat statTry) {
         this.statTry = statTry;
     }

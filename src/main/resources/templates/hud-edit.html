@@ -27,7 +27,8 @@
 <h2 th:text="${roundOfBidding}+' EDIT'"></h2>
 
 <div class="container-fluid text-center">
-    <table class="table table-striped" th:classappend="table-striped-empty" th:if="${numrows}">
+    <table class="table table-striped" th:classappend="table-striped-empty" th:border="3" th:if="${numrows}">
+        <div th:if="${statsTable}">
         <tr th:each="numrow : ${statsTable}">
             <td th:each="numcol : ${numrow}">
                 <select th:name="calcDiapVariant" th:class="choise">
@@ -38,6 +39,19 @@
                 </select>
             </td>
         </tr>
+        </div>
+        <div th:if="${numrowscount}">
+            <tr th:each="numrow : ${numrowscount}">
+                <td th:each="numcol : ${numcolscount}">
+                    <select th:name="calcDiapVariant" th:class="choise">
+                        <option th:each="stat : ${stats}" th:type="text" th:selected="${stat.statname == needstat}">
+                            <div th:value="${stat.statname}" th:text="${stat.statname}">
+                            </div>
+                        </option>
+                    </select>
+                </td>
+            </tr>
+        </div>
     </table>
 </div>
 <table class="table table-striped">
