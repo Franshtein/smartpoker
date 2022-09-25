@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-  <title>Spring Security Example </title>
+  <title>Log In to SmartPoker</title>
 </head>
 <body>
-Log In Page
+Log In to SmartPoker
 
 <form action="/login" method="post">
   <div><label> User Name : <input type="text" name="username"/> </label></div>
@@ -14,7 +14,6 @@ Log In Page
   <div><input type="submit" name="login" value="Sign In"/></div>
 </form>
 <a href="/registration">Add new user</a>
-<div>Hello, {{name}}</div>
 
 
 </body>
