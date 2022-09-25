@@ -143,9 +143,7 @@ statInfo1.setInfo("total3bet");
     }
 
     private void modelPutGeneralInfo(Map<String, Object> model, ArrayList<Player> pl) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        model.put("name", username);
+
 
         List<Map<Integer, StatInfo[][]>> list = new ArrayList<>(preflopStatsCalc.hudStatsCalcLineTEST(pl, "PREFLOP",5));
 

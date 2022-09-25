@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+
+<div th:fragment="frag">
+    <header>
+        <div th:text="'Hello, '+${#authentication.name}"></div>
+        <div>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+        </div>
+    </header>
+</div>
+</html>
