@@ -78,7 +78,7 @@ public class StatInfo {
             setPoints();
             this.statColorDiap = checkDiap();
             setStatColor();
-            if (statTry.isNeedLink() == true) {
+            if (statTry.isNeedLink()) {
                 this.address = "extrastats?player=" + player.getNickname() + "&stat=" + statName;
             }
             else this.address = "#";

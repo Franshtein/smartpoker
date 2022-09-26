@@ -25,6 +25,8 @@ public class ExtraStatsController {
     StatRepo statRepo;
     @Autowired
     ExtraStatsCalc extraStatsCalc;
+    @Autowired
+    SetPlayersAtTable setPlayersAtTable;
 
     @GetMapping("/extrastats")
     public String threeBet(Map<String, Object> model, String player, String stat) {
@@ -32,7 +34,7 @@ public class ExtraStatsController {
         String username = auth.getName();
         model.put("name", username);
 
-        Player playerNick = SetPlayersAtTable.checkPlayer(playerRepo, player);
+        Player playerNick = setPlayersAtTable.checkPlayer(player);
         ArrayList<StatInfo> statInfos = extraStatsCalc.extraStatsCalc(playerNick, stat);
         model.put("statValues", statInfos);
 
@@ -47,7 +49,7 @@ public class ExtraStatsController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         model.put("name", username);
-        Player playerNick = SetPlayersAtTable.checkPlayer(playerRepo, player);
+        Player playerNick = setPlayersAtTable.checkPlayer(player);
         ArrayList<StatInfo> statInfos = extraStatsCalc.extraStatsCalc(playerNick, stat);
         model.put("statValues", statInfos);
 

@@ -120,6 +120,9 @@ button.btn{
     top: 15px;
     right: 15px;
 }
+.error{
+    color: red;
+}
 /*
 button.btn:hover{
     background-color: red;

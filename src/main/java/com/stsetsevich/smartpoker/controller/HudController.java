@@ -6,6 +6,7 @@ import com.stsetsevich.smartpoker.engine.hud.FlopStatsCalc;
 import com.stsetsevich.smartpoker.engine.hud.PreflopStatsCalc;
 import com.stsetsevich.smartpoker.engine.hud.RiverStatsCalc;
 import com.stsetsevich.smartpoker.engine.hud.TurnStatsCalc;
+import com.stsetsevich.smartpoker.exceptions.PlayerNotFoundException;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import com.stsetsevich.smartpoker.repos.UserRepo;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -45,25 +47,34 @@ public class HudController {
     UserSmarthandAccountAndCookiesRepo userSmarthandAccountAndCookiesRepo;
     @Autowired
     SetPlayersAtTable setPlayersAtTable;
-   // @Autowired
-   // EntityManager entityManager;
+    // @Autowired
+    // EntityManager entityManager;
     @Autowired
-   StatInfoWORK statInfo;
+    StatInfoWORK statInfo;
 
 
     @GetMapping("/hud")
     public String hud(String nickname, Map<String, Object> model, String addPlayer, String addPlayer2, String addPlayer3
             , String addPlayer4, String addPlayer5) {
 
-      //  ArrayList<String> playerStats = SetPlayersAtTable.getPlayerStats(playerRepo, "Franshtik (PS)");
+        //  ArrayList<String> playerStats = SetPlayersAtTable.getPlayerStats(playerRepo, "Franshtik (PS)");
         addPlayer = "Empty Seat";
         addPlayer2 = "Empty Seat";
         addPlayer3 = "Empty Seat";
         addPlayer4 = "Empty Seat";
         addPlayer5 = "Empty Seat";
-        ArrayList<Player> pl = setPlayersAtTable.getAllPlayers(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
-        modelPutGeneralInfo(model, pl);
-        System.out.println(playerRepo.findSomething("Vot blin"));;
+        List<Player> pl = new ArrayList<>(Arrays.asList(playerRepo.findByNickname("Empty Seat"),playerRepo.findByNickname("Empty Seat"),playerRepo.findByNickname("Empty Seat"),playerRepo.findByNickname("Empty Seat"),playerRepo.findByNickname("Empty Seat")));
+        setPlayersAtTable.playersInit(pl);
+
+
+            modelPutGeneralInfo(model, pl);
+
+
+
+
+
+
+
        /* String stat="total3bet";
         String nick="Franshtik (PS)";
         Query query = entityManager.createNativeQuery("SELECT "+stat+" FROM player where nickname='"+nick+"'");
@@ -72,7 +83,7 @@ public class HudController {
 
         */
 
-       // statInfo.setInfo("total3bet", playerRepo.findByNickname("Franshtik (PS)"));
+        // statInfo.setInfo("total3bet", playerRepo.findByNickname("Franshtik (PS)"));
 
 
 /*
@@ -96,9 +107,11 @@ statInfo1.setInfo("total3bet");
             , String addPlayer4, String addPlayer5) {
 
 
-        ArrayList<Player> pl = setPlayersAtTable.getAllPlayers(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
 
-        modelPutGeneralInfo(model, pl);
+            List<Player> pl = setPlayersAtTable.getAllPlayers(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+            modelPutGeneralInfo(model, pl);
+
+
 
         return "hud";
     }
@@ -108,14 +121,13 @@ statInfo1.setInfo("total3bet");
             , String addPlayer4, String addPlayer5, Map<String, Object> model) {
 
 
-        ArrayList<Player> pl = setPlayersAtTable.getAllPlayers(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
-
+        List<Player> pl = setPlayersAtTable.getAllPlayers(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
         modelPutGeneralInfo(model, pl);
+
 
         return "hud";
 
     }
-
 
 
     @PostMapping("addStat")
@@ -125,10 +137,10 @@ statInfo1.setInfo("total3bet");
         //  List<Message> messages = messageRepo.findByTag(filter);
 
 
-        ArrayList<Player> pl = setPlayersAtTable.getAllPlayers(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+            List<Player> pl = setPlayersAtTable.getAllPlayers(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+            modelPutGeneralInfo(model, pl);
 
-
-        Player playerNick = SetPlayersAtTable.checkPlayer(playerRepo, player);
+        Player playerNick = setPlayersAtTable.checkPlayer(player);
         ArrayList<StatInfo> statInfos = extraStatsCalc.extraStatsCalc(playerNick, addStat);
 
         //Информация для всплывающих сообщений с доп. статами
@@ -137,15 +149,14 @@ statInfo1.setInfo("total3bet");
         model.put("statValues", statInfos);
 
 
-        modelPutGeneralInfo(model, pl);
         return "hud";
 
     }
 
-    private void modelPutGeneralInfo(Map<String, Object> model, ArrayList<Player> pl) {
+    private void modelPutGeneralInfo(Map<String, Object> model, List<Player> pl) {
 
 
-        List<Map<Integer, StatInfo[][]>> list = new ArrayList<>(preflopStatsCalc.hudStatsCalcLineTEST(pl, "PREFLOP",5));
+        List<Map<Integer, StatInfo[][]>> list = new ArrayList<>(preflopStatsCalc.hudStatsCalcLineTEST(pl, "PREFLOP", 5));
 
         System.out.println("FIRST");
         System.out.println(list);
@@ -159,7 +170,6 @@ statInfo1.setInfo("total3bet");
         model.put("flopStats", preflopStatsCalc.hudStatsCalcLineTEST(pl, "FLOP", 5));
         model.put("turnStats", preflopStatsCalc.hudStatsCalcLineTEST(pl, "TURN", 5));
         model.put("riverStats", preflopStatsCalc.hudStatsCalcLineTEST(pl, "RIVER", 5));
-
 
 
         //Информация о префлопе для таблиц со статами
@@ -200,11 +210,13 @@ statInfo1.setInfo("total3bet");
         model.put("player4", pl.get(3));
         model.put("player5", pl.get(4));
 
-        TableInfoCalc tableInfoCalc= new TableInfoCalc();
+        TableInfoCalc tableInfoCalc = new TableInfoCalc();
         model.put("tableinfo", tableInfoCalc.extraStatsCalc(pl));
 
         //Информация о цвете таблиц
         model.put("seats", preflopStatsCalc.hudSeatsColor(pl));
+
+        model.put("playerError", setPlayersAtTable.getPlayerNotFoundException());
 
        /* String picture;
         if(pl.get(0).getVpip()<=20) picture="/img/vpip/20.png";

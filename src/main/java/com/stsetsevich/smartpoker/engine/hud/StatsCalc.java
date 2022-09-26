@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class StatsCalc{
     @Autowired
@@ -85,8 +86,8 @@ public class StatsCalc{
     }
 
     //Выясняем, каким цветом будем закрашивать таблицы с данными об игроках.
-    public ArrayList<String> hudSeatsColor(ArrayList<Player> players) {
-        ArrayList<String> seats = new ArrayList<>();
+    public List<String> hudSeatsColor(List<Player> players) {
+        List<String> seats = new ArrayList<>();
         String seat;
         for (Player pl : players) {
             if (!pl.getNickname().equals("Empty Seat")) {

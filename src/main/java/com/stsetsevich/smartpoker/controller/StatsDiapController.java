@@ -41,7 +41,6 @@ public class StatsDiapController {
         stat.setPoint2(point2);
         stat.setPoint3(point3);
         stat.setPoint4(point4);
-        stat.setStatname(newstatname);
         stat.setCalcDiapVariant(calcDiapVariant);
         statRepo.save(stat);
         System.out.println(calcDiapVariant);

@@ -78,7 +78,7 @@ public class PreflopStatsCalc extends StatsCalc {
         return playerStat;
     }
 
-    public List<Map<Integer, StatInfo[][]>> hudStatsCalcLineTEST(ArrayList<Player> players, String table, int line) {
+    public List<Map<Integer, StatInfo[][]>> hudStatsCalcLineTEST(List<Player> players, String table, int line) {
         HashMap<Integer, StatInfo[][]> playerStat = new HashMap<>();
         List<Map<Integer, StatInfo[][]>> list = new ArrayList<>();
         int key = 0;

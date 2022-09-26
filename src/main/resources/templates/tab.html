@@ -6,6 +6,9 @@
         <div class="container-fluid text-center" th:classappend="container">
             <div class="row row-height-400">
                 <div class="col align-self-end">
+                    <div th:if="${playerError}">
+                        <div th:if="${playerError.playerPosition==0}" th:class="error" th:text="${playerError.toString}"></div>
+                    </div>
                     <a th:href="'extrastats?player='+${player.nickname}+'&stat=0'" target="_blank"
                        th:class="colorgreen" th:text="${player.nickname}"
                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"
@@ -16,6 +19,9 @@
                     </div>
                 </div>
                 <div class="col  align-self-start">
+                    <div th:if="${playerError}">
+                        <div th:if="${playerError.playerPosition==1}" th:class="error" th:text="${playerError.toString}"></div>
+                    </div>
                     <a th:href="'3bet?player='+${player2.nickname}" target="_blank"
                        th:class="colorgreen" th:text="${player2.nickname}"></a>
                     <div th:replace="player-form::frag (2,${player},${player2},${player3},${player4},${player5})">
@@ -24,6 +30,9 @@
                     </div>
                 </div>
                 <div class="col  align-self-end">
+                    <div th:if="${playerError}">
+                        <div th:if="${playerError.playerPosition==2}" th:class="error" th:text="${playerError.toString}"></div>
+                    </div>
                     <a th:href="'3bet?player='+${player3.nickname}" target="_blank"
                        th:class="colorgreen" th:text="${player3.nickname}"></a>
                     <div th:replace="player-form::frag (3,${player},${player2},${player3},${player4},${player5})">
@@ -37,6 +46,9 @@
         <div class="container text-center">
             <div class="row justify-content-evenly">
                 <div class="col-4">
+                    <div th:if="${playerError}">
+                        <div th:if="${playerError.playerPosition==3}" th:class="error" th:text="${playerError.toString}"></div>
+                    </div>
                     <a th:href="'extrastats?player='+${player4.nickname}+'&stat=0'" target="_blank"
                        th:class="colorgreen" th:text="${player4.nickname}"
                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
@@ -47,6 +59,9 @@
                 </div>
 
                 <div class="col-4">
+                    <div th:if="${playerError}">
+                        <div th:if="${playerError.playerPosition==4}" th:class="error" th:text="${playerError.toString}"></div>
+                    </div>
                     <a th:href="'extrastats?player='+${player5.nickname}+'&stat=0'" target="_blank"
                        th:class="colorgreen" th:text="${player5.nickname}"
                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>

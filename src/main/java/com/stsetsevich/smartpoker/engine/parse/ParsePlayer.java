@@ -53,8 +53,12 @@ public class ParsePlayer {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         User user = userRepo.findByUsername(username);
-        UserSmarthandAccountAndCookies smarthandAccount = new UserSmarthandAccountAndCookies();
-        smarthandAccount.setUser(user);
+        UserSmarthandAccountAndCookies smarthandAccount = userSmarthandAccountAndCookiesRepo.findByUser(userRepo.findByUsername(username));
+        if(smarthandAccount==null) {
+            smarthandAccount = new UserSmarthandAccountAndCookies();
+            smarthandAccount.setUser(user);
+        }
+
         smarthandAccount.setSessionId(cookie.get("PHPSESSID"));
        try {
            System.out.println("1");
@@ -143,6 +147,13 @@ public class ParsePlayer {
         if (element!=null) return null;
         //Если со старыми куками все-таки что-то не то (перезаписались и т.п.)
         try {
+            try {
+                htmlPage = webClient.getPage(url);
+            }
+            catch (Exception e){
+                System.out.println("Невозможно вставить такой ник в строку поиска");
+                return null;
+            }
            element  = htmlPage.getElementById("table_1");
            htmlPage = element.click();
         }
