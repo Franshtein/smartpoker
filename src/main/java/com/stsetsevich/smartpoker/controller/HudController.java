@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class HudController {
@@ -156,21 +153,25 @@ statInfo1.setInfo("total3bet");
     private void modelPutGeneralInfo(Map<String, Object> model, List<Player> pl) {
 
 
-        List<Map<Integer, StatInfo[][]>> list = new ArrayList<>(preflopStatsCalc.hudStatsCalcLineTEST(pl, "PREFLOP", 5));
+        Map<Integer, StatInfo[][]> map = new HashMap<>(preflopStatsCalc.hudStatsCalcLineTEST(pl, "PREFLOP"));
 
         System.out.println("FIRST");
-        System.out.println(list);
+        System.out.println(map);
         System.out.println("SECOND");
-        System.out.println(list.get(0).get(0));
         System.out.println("THIRD");
 
         //  Получаем первый Map --- Получаем первый Лист в Map --- Получаем первый элемент листа --- получаем данные этого элемента
-        System.out.println(list.get(0).get(0)[0][0].getStat());
-        model.put("plStats", preflopStatsCalc.hudStatsCalcLineTEST(pl, "PREFLOP", 5));
-        model.put("flopStats", preflopStatsCalc.hudStatsCalcLineTEST(pl, "FLOP", 5));
-        model.put("turnStats", preflopStatsCalc.hudStatsCalcLineTEST(pl, "TURN", 5));
-        model.put("riverStats", preflopStatsCalc.hudStatsCalcLineTEST(pl, "RIVER", 5));
+       /*
+        model.put("plStats", preflopStatsCalc.hudStatsCalcLineTEST(pl, "PREFLOP"));
+        model.put("flopStats", preflopStatsCalc.hudStatsCalcLineTEST(pl, "FLOP"));
+        model.put("turnStats", preflopStatsCalc.hudStatsCalcLineTEST(pl, "TURN"));
+        model.put("riverStats", preflopStatsCalc.hudStatsCalcLineTEST(pl, "RIVER"));
+        */
 
+        model.put("plStats", setPlayersAtTable.getPreflopStats());
+        model.put("flopStats", setPlayersAtTable.getFlopStats());
+        model.put("turnStats", setPlayersAtTable.getTurnStats());
+        model.put("riverStats", setPlayersAtTable.getRiverStats());
 
         //Информация о префлопе для таблиц со статами
         /*

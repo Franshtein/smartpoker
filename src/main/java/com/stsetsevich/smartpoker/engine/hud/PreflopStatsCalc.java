@@ -78,16 +78,13 @@ public class PreflopStatsCalc extends StatsCalc {
         return playerStat;
     }
 
-    public List<Map<Integer, StatInfo[][]>> hudStatsCalcLineTEST(List<Player> players, String table, int line) {
-        HashMap<Integer, StatInfo[][]> playerStat = new HashMap<>();
-        List<Map<Integer, StatInfo[][]>> list = new ArrayList<>();
+    public Map<Integer, StatInfo[][]> hudStatsCalcLineTEST(List<Player> players, String table) {
+        Map<Integer, StatInfo[][]> playerStat = new HashMap<>();
         int key = 0;
         for (Player pl : players) {
-            int column=4;
 
             StatInfo statInfo;
             String[][] statnames = hudEdit.parseStatFromNumberToStringView(RoundOfBidding.valueOf(table));
-            System.out.println(statnames[0]);
             StatInfo[][] stats = new StatInfo[statnames.length][statnames[0].length];
             try {
                 // String[] statnames = {"vpip", "total_pfr", "total3bet", "fold_to3bet_total"};
@@ -104,12 +101,11 @@ public class PreflopStatsCalc extends StatsCalc {
             } finally {
                 playerStat.put(key, stats);
                 key++;
-                list.add(playerStat);
             }
 
 
         }
-        return list;
+        return playerStat;
     }
 
     public HashMap<Integer, ArrayList<StatInfo>> hudStatsCalcLine1(ArrayList<Player> players) {

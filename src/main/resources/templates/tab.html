@@ -15,7 +15,7 @@
                        id="liveToastBtn4"></a>
                     <div th:replace="player-form::frag (1,${player},${player2},${player3},${player4},${player5})">
                     </div>
-                    <div th:replace="player-table::frag (${player},${plStats.get(0).get(0)},${seats.get(0)})">
+                    <div th:replace="player-table::frag (${player},${plStats.get(0)},${seats.get(0)})">
                     </div>
                 </div>
                 <div class="col  align-self-start">
@@ -26,7 +26,7 @@
                        th:class="colorgreen" th:text="${player2.nickname}"></a>
                     <div th:replace="player-form::frag (2,${player},${player2},${player3},${player4},${player5})">
                     </div>
-                    <div th:replace="player-table::frag (${player2},${plStats.get(0).get(1)},${seats.get(1)})">
+                    <div th:replace="player-table::frag (${player2},${plStats.get(1)},${seats.get(1)})">
                     </div>
                 </div>
                 <div class="col  align-self-end">
@@ -37,7 +37,7 @@
                        th:class="colorgreen" th:text="${player3.nickname}"></a>
                     <div th:replace="player-form::frag (3,${player},${player2},${player3},${player4},${player5})">
                     </div>
-                    <div th:replace="player-table::frag (${player3},${plStats.get(0).get(2)},${seats.get(2)})">
+                    <div th:replace="player-table::frag (${player3},${plStats.get(2)},${seats.get(2)})">
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
                     <div th:replace="player-form::frag (4,${player},${player2},${player3},${player4},${player5})">
                     </div>
-                    <div th:replace="player-table::frag (${player4},${plStats.get(0).get(3)},${seats.get(3)})">
+                    <div th:replace="player-table::frag (${player4},${plStats.get(3)},${seats.get(3)})">
                     </div>
                 </div>
 
@@ -67,7 +67,7 @@
                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
                     <div th:replace="player-form::frag (5,${player},${player2},${player3},${player4},${player5})">
                     </div>
-                    <div th:replace="player-table::frag (${player5},${plStats.get(0).get(4)},${seats.get(4)})">
+                    <div th:replace="player-table::frag (${player5},${plStats.get(4)},${seats.get(4)})">
                     </div>
                 </div>
             </div>
