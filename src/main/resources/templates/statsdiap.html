@@ -36,6 +36,8 @@
             <th>
                 <div>Variant edit</div>
             </th>
+            <th th:text="isNeedLink"></th>
+            <th th:text="isNeedImage"></th>
         </div>
     </tr>
     <tr th:each="stat : ${stats}">
@@ -46,6 +48,7 @@
         <td th:text="${stat.point3}"></td>
         <td th:text="${stat.point4}"></td>
         <td th:text="${stat.calcDiapVariant}"></td>
+
         <div sec:authorize="hasAuthority('ADMIN')">
             <form th:action="@{statsdiap}" method="post">
                 <td>
@@ -80,6 +83,12 @@
                             THREE
                         </option>
                     </select>
+                </td>
+                <td>
+                    <label><input type="checkbox" th:object="${stat}" th:checked="*{needLink}" name="needLink"></label>
+                </td>
+                <td>
+                    <label><input type="checkbox" th:object="${stat}" th:checked="*{needImage}" name="needImage"></label>
                 </td>
                 <td>
                     <button type="submit">Add</button>

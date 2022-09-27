@@ -30,7 +30,7 @@ public class StatsDiapController {
     }
 
     @PostMapping("/statsdiap")
-    public String add(String statname, double point1, double point2, double point3, double point4, String newstatname, CalcDiapVariant calcDiapVariant, Model model1) {
+    public String add(String statname, double point1, double point2, double point3, double point4, boolean needLink, boolean needImage, CalcDiapVariant calcDiapVariant, Model model1) {
 
         System.out.println(statname + point1 + point2 + point3 + point4);
 
@@ -41,6 +41,9 @@ public class StatsDiapController {
         stat.setPoint2(point2);
         stat.setPoint3(point3);
         stat.setPoint4(point4);
+        stat.setNeedLink(needLink);
+        stat.setNeedImage(needImage);
+
         stat.setCalcDiapVariant(calcDiapVariant);
         statRepo.save(stat);
         System.out.println(calcDiapVariant);

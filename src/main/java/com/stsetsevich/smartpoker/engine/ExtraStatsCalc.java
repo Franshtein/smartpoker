@@ -16,7 +16,7 @@ public class ExtraStatsCalc extends StatsCalc {
         ArrayList<StatInfo> stats = new ArrayList<>();
         if (statName != null) {
             switch (statName) {
-                case ("totalPfr"):
+                case ("total_pfr"):
                     getPfrStats(player, stats);
                     return stats;
                 case ("total3bet"):
@@ -118,32 +118,32 @@ public class ExtraStatsCalc extends StatsCalc {
 
     private ArrayList<StatInfo> getPfrStats(Player pl, ArrayList<StatInfo> stats) {
         StatInfo statInfo;
-        String statname = "totalPfr";
+        String statname = "total_pfr";
         statInfo = statInfoMother.getStatInfo();
         statInfo.setInfo(statname, pl);
         stats.add(statInfo);
 
-        statname = "pfrEp";
+        statname = "pfr_ep";
         statInfo = statInfoMother.getStatInfo();
         statInfo.setInfo(statname, pl);
         stats.add(statInfo);
 
-        statname = "pfrMp";
+        statname = "pfr_mp";
         statInfo = statInfoMother.getStatInfo();
         statInfo.setInfo(statname, pl);
         stats.add(statInfo);
 
-        statname = "pfrCo";
+        statname = "pfr_co";
         statInfo = statInfoMother.getStatInfo();
         statInfo.setInfo(statname, pl);
         stats.add(statInfo);
 
-        statname = "pfrBu";
+        statname = "pfr_bu";
         statInfo = statInfoMother.getStatInfo();
         statInfo.setInfo(statname, pl);
         stats.add(statInfo);
 
-        statname = "pfrSb";
+        statname = "pfr_sb";
         statInfo = statInfoMother.getStatInfo();
         statInfo.setInfo(statname, pl);
         stats.add(statInfo);

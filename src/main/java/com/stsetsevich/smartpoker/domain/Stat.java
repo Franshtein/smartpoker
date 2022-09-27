@@ -18,6 +18,8 @@ public class Stat {
     private double point4;
     @Column (name = "need_link")
     private  boolean needLink;
+    @Column (name = "need_image")
+    private  boolean needImage;
 
     @Column(name = "calc_variant")
     @Enumerated(EnumType.STRING)
@@ -100,6 +102,14 @@ public class Stat {
 
     public boolean isNeedLink() {
         return needLink;
+    }
+
+    public boolean isNeedImage() {
+        return needImage;
+    }
+
+    public void setNeedImage(boolean needImage) {
+        this.needImage = needImage;
     }
 
     public void setNeedLink(boolean needLink) {
