@@ -1,6 +1,5 @@
 package com.stsetsevich.smartpoker.controller;
 
-import com.stsetsevich.smartpoker.engine.parse.ParseYesOrNo;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +65,7 @@ public class MainController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username=auth.getName();
         model.put("name", username);
-        return "login";
+        return "login.html";
     }
 
 }
