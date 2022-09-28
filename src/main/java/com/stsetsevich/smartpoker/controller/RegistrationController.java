@@ -49,7 +49,6 @@ public class RegistrationController {
     public String activate(Model model, @PathVariable String code) {
         boolean isActivated = userService.activateUser(code);
 
-        System.out.println("WORKING");
         if (isActivated) {
             model.addAttribute("message", "User successfully activated");
         } else {
