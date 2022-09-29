@@ -3,6 +3,7 @@ package com.stsetsevich.smartpoker.engine;
 import com.stsetsevich.smartpoker.domain.CalcDiapVariant;
 import com.stsetsevich.smartpoker.domain.Player;
 import com.stsetsevich.smartpoker.domain.Stat;
+import com.stsetsevich.smartpoker.engine.hud.StatsCalc;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,9 @@ public class StatInfo {
     PlayerRepo playerRepo;
     @Autowired
     EntityManager entityManager;
+    @Autowired
+    StatInfoService statInfoService;
+
 
 
     private Player player;
@@ -51,6 +55,7 @@ public class StatInfo {
     private double dependOnStat = 0;
     private String address;
     private String statName;
+    private StatInfo primaryStat;
 
 
     @Lookup
@@ -76,7 +81,8 @@ public class StatInfo {
         if (!statName.equals("-")) {
             setStatValue();
             setPoints();
-            this.statColorDiap = checkDiap();
+            if(statTry.getDependOnStat().equals("-")) this.statColorDiap = checkDiap();
+            else this.statColorDiap=checkDependDiap();
             setStatColor();
             if (statTry.isNeedLink()) {
                 this.address = "extrastats?player=" + player.getNickname() + "&stat=" + statName;
@@ -144,6 +150,46 @@ public class StatInfo {
         return 0;
     }
 
+
+    protected int checkDependDiap() {
+        CalcDiapVariant variant = statTry.getCalcDiapVariant();
+
+        System.out.println("WORKING FOR "+statName);
+
+        int primaryValue = statInfoService.checkPrimaryDiap(statTry.getDependOnStat(), player);
+
+        System.out.println("WORKING FOR "+statName);
+        double weight=1;
+        if(primaryValue==4) weight=1.4;
+        if(primaryValue==3) weight=1.2;
+        if(primaryValue==1) weight=0.8;
+        if(primaryValue==0) weight=0.6;
+        if (variant == CalcDiapVariant.ONE) {
+            if (statValue <= points[0] * weight) return 0;
+            if (statValue <= points[1] * weight) return 1;
+            if (statValue <= points[2] * weight) return 2;
+            if (statValue <= points[3] * weight) return 3;
+            return 4;
+        }
+        if (variant == CalcDiapVariant.TWO) {
+            if (statValue <= points[0] * weight) return 0;
+            if (statValue <= points[1] * weight) return 1;
+            if (statValue <= points[2] * weight) return 3;
+            if (statValue <= points[3] * weight) return 2;
+            return 2;
+        }
+        if (variant == CalcDiapVariant.THREE) {
+            if (statValue >= points[3] * weight) return 0;
+            if (statValue >= points[2] * weight) return 1;
+            if (statValue >= points[1] * weight) return 2;
+            if (statValue >= points[0] * weight) return 3;
+            return 4;
+        }
+        return 0;
+    }
+
+
+
     public void setStatColor() {
         if (statColorDiap == 0) this.statColor = StatColor.INFINITY_TO_POINT1.getColor();
         else if (statColorDiap == 1) this.statColor = StatColor.POINT1_TO_POINT2.getColor();
@@ -156,7 +202,7 @@ public class StatInfo {
 
     public void setPicture() {
         String picture;
-        if (!stat.equals("-")) {
+        if (statTry.isNeedImage()) {
             if (dependOnStat == 0) {
                 double dstat = statValue;
                 // int istat = (int) dstat;

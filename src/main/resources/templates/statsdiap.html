@@ -91,6 +91,14 @@
                     <label><input type="checkbox" th:object="${stat}" th:checked="*{needImage}" name="needImage"></label>
                 </td>
                 <td>
+                    <select th:name="dependOnStat" th:class="choise">
+                        <option th:each="stat2 : ${stats}" th:type="text" th:selected="${stat2.statname == stat.getDependOnStat()}">
+                            <div th:value="${stat2.statname}" th:text="${stat2.statname}">
+                            </div>
+                        </option>
+                    </select>
+                </td>
+                <td>
                     <button type="submit">Add</button>
                 </td>
             </form>

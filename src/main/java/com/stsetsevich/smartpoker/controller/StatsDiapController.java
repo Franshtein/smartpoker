@@ -25,17 +25,18 @@ public class StatsDiapController {
         ArrayList<Stat> stats = statRepo.findAllByStatnameIsNotNullOrderById();
         Comparator<Stat> comparator = Comparator.comparing(obj -> obj.getStatname());
         Collections.sort(stats, comparator);
+        model1.addAttribute("needstat", "-");
         model1.addAttribute("stats", stats);
         return "statsdiap";
     }
 
     @PostMapping("/statsdiap")
-    public String add(String statname, double point1, double point2, double point3, double point4, boolean needLink, boolean needImage, CalcDiapVariant calcDiapVariant, Model model1) {
+    public String add(String statname, double point1, double point2, double point3, double point4, boolean needLink, boolean needImage, String dependOnStat, CalcDiapVariant calcDiapVariant, Model model1) {
 
-        System.out.println(statname + point1 + point2 + point3 + point4);
+        System.out.println("DEPEND ON STAT "+dependOnStat);
 
         statRepo.findStatByStatname(statname);
-        System.out.println(statRepo.findStatByStatname(statname).getId());
+
         Stat stat = statRepo.findStatByStatname(statname);
         stat.setPoint1(point1);
         stat.setPoint2(point2);
@@ -43,6 +44,7 @@ public class StatsDiapController {
         stat.setPoint4(point4);
         stat.setNeedLink(needLink);
         stat.setNeedImage(needImage);
+        stat.setDependOnStat(dependOnStat);
 
         stat.setCalcDiapVariant(calcDiapVariant);
         statRepo.save(stat);
@@ -51,6 +53,7 @@ public class StatsDiapController {
         ArrayList<Stat> stats = statRepo.findAllByStatnameIsNotNullOrderById();
         Comparator<Stat> comparator = Comparator.comparing(obj -> obj.getStatname());
         Collections.sort(stats, comparator);
+        model1.addAttribute("needstat", "-");
         model1.addAttribute("stats", stats);
 
         return "statsdiap";

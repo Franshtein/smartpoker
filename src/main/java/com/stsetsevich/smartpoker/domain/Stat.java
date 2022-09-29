@@ -20,6 +20,7 @@ public class Stat {
     private  boolean needLink;
     @Column (name = "need_image")
     private  boolean needImage;
+    private String dependOnStat;
 
     @Column(name = "calc_variant")
     @Enumerated(EnumType.STRING)
@@ -114,5 +115,13 @@ public class Stat {
 
     public void setNeedLink(boolean needLink) {
         this.needLink = needLink;
+    }
+
+    public String getDependOnStat() {
+        return dependOnStat;
+    }
+
+    public void setDependOnStat(String dependOnStat) {
+        this.dependOnStat = dependOnStat;
     }
 }
