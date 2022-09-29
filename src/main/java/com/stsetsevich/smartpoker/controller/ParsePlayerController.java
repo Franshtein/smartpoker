@@ -6,7 +6,7 @@ import com.stsetsevich.smartpoker.engine.parse.ParsePlayer;
 import com.stsetsevich.smartpoker.engine.parse.StatsParse;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import com.stsetsevich.smartpoker.repos.UserRepo;
-import com.stsetsevich.smartpoker.repos.UserSmarthandAccountAndCookiesRepo;
+import com.stsetsevich.smartpoker.repos.SmarthandCookiesRepo;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,7 +30,7 @@ public class ParsePlayerController {
     @Autowired
     UserRepo userRepo;
     @Autowired
-    UserSmarthandAccountAndCookiesRepo userSmarthandAccountAndCookiesRepo;
+    SmarthandCookiesRepo smarthandCookiesRepo;
     @Autowired
     SetPlayersAtTable setPlayersAtTable;
     @Autowired

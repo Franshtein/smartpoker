@@ -5,13 +5,11 @@ import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLIElement;
 import com.gargoylesoftware.htmlunit.util.Cookie;
-import com.stsetsevich.smartpoker.domain.SmarthandCookies;
 import com.stsetsevich.smartpoker.domain.User;
-import com.stsetsevich.smartpoker.domain.UserSmarthandAccountAndCookies;
+import com.stsetsevich.smartpoker.domain.SmarthandCookies;
 import com.stsetsevich.smartpoker.repos.UserRepo;
-import com.stsetsevich.smartpoker.repos.UserSmarthandAccountAndCookiesRepo;
+import com.stsetsevich.smartpoker.repos.SmarthandCookiesRepo;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -28,9 +26,10 @@ public class ParsePlayer {
     @Autowired
     UserRepo userRepo;
     @Autowired
-    UserSmarthandAccountAndCookiesRepo userSmarthandAccountAndCookiesRepo;
+    SmarthandCookiesRepo smarthandCookiesRepo;
     private static Connection.Response response;
     private static Map<String, String> cookie;
+    private long id=0L;
 
 
 
@@ -50,36 +49,27 @@ public class ParsePlayer {
                 .cookies(response.cookies())
                 .execute();
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        User user = userRepo.findByUsername(username);
-        UserSmarthandAccountAndCookies smarthandAccount = userSmarthandAccountAndCookiesRepo.findByUser(userRepo.findByUsername(username));
-        if(smarthandAccount==null) {
-            smarthandAccount = new UserSmarthandAccountAndCookies();
-            smarthandAccount.setUser(user);
-        }
+
+        SmarthandCookies smarthandAccount = smarthandCookiesRepo.findById(0);
+
 
         smarthandAccount.setSessionId(cookie.get("PHPSESSID"));
        try {
            System.out.println("1");
-           userSmarthandAccountAndCookiesRepo.save(smarthandAccount);
+           smarthandCookiesRepo.save(smarthandAccount);
            System.out.println("2");
        }
         catch (Exception exception)
         {
-            System.out.println("3");
-            userSmarthandAccountAndCookiesRepo.deleteById(user.getId());
-            System.out.println("4");
-            userSmarthandAccountAndCookiesRepo.save(smarthandAccount);
-            System.out.println("5");
+            System.out.println(exception.toString());
+
         }
       //  System.out.println(response.body());
     }
     private void getCookies(WebClient webClient) throws IOException {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
+
         System.out.println("001");
-        UserSmarthandAccountAndCookies smarthandAccountAndCookies = userSmarthandAccountAndCookiesRepo.findByUser(userRepo.findByUsername(username));
+        SmarthandCookies smarthandAccountAndCookies = smarthandCookiesRepo.findById(id);
         System.out.println("002");
      //   System.out.println(smarthandAccountAndCookies.getSessionId());
         if(smarthandAccountAndCookies==null || smarthandAccountAndCookies.getSessionId()==null || smarthandAccountAndCookies.getSessionId()=="")
@@ -87,7 +77,7 @@ public class ParsePlayer {
             System.out.println("003");
             setCookies();
             System.out.println("004");
-            smarthandAccountAndCookies = userSmarthandAccountAndCookiesRepo.findByUser(userRepo.findByUsername(username));
+            smarthandAccountAndCookies = smarthandCookiesRepo.findById(id);
             System.out.println("005");
             Cookie cookie1 = new Cookie("smarthand.pro", "lang", "en");
             Cookie cookie2 = new Cookie("smarthand.pro", "template", "default");

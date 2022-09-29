@@ -4,18 +4,22 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name="user_smarthand_acc_cookies")
-public class UserSmarthandAccountAndCookies {
+@Table(name="smarthand_cookies")
+public class SmarthandCookies {
     @Id
     private Long id;
     private String smarthandLogin;
     private String smarthandPassword;
     private String sessionId;
     private Date addCookiesDate;
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
-    @JoinColumn(name = "id")
-    private User user;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getSessionId() {
         return sessionId;
@@ -33,13 +37,6 @@ public class UserSmarthandAccountAndCookies {
         this.addCookiesDate = addCookiesDate;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public String getSmarthandLogin() {
         return smarthandLogin;

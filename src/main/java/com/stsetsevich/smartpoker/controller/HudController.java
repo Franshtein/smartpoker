@@ -6,14 +6,11 @@ import com.stsetsevich.smartpoker.engine.hud.FlopStatsCalc;
 import com.stsetsevich.smartpoker.engine.hud.PreflopStatsCalc;
 import com.stsetsevich.smartpoker.engine.hud.RiverStatsCalc;
 import com.stsetsevich.smartpoker.engine.hud.TurnStatsCalc;
-import com.stsetsevich.smartpoker.exceptions.PlayerNotFoundException;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import com.stsetsevich.smartpoker.repos.UserRepo;
-import com.stsetsevich.smartpoker.repos.UserSmarthandAccountAndCookiesRepo;
+import com.stsetsevich.smartpoker.repos.SmarthandCookiesRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,7 +38,7 @@ public class HudController {
     @Autowired
     UserRepo userRepo;
     @Autowired
-    UserSmarthandAccountAndCookiesRepo userSmarthandAccountAndCookiesRepo;
+    SmarthandCookiesRepo smarthandCookiesRepo;
     @Autowired
     SetPlayersAtTable setPlayersAtTable;
     // @Autowired

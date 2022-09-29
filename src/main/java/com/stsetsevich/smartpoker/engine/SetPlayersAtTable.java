@@ -2,13 +2,13 @@ package com.stsetsevich.smartpoker.engine;
 
 import com.stsetsevich.smartpoker.domain.Player;
 import com.stsetsevich.smartpoker.domain.RoundOfBidding;
-import com.stsetsevich.smartpoker.domain.UserSmarthandAccountAndCookies;
+import com.stsetsevich.smartpoker.domain.SmarthandCookies;
 import com.stsetsevich.smartpoker.engine.edithud.HudEdit;
 import com.stsetsevich.smartpoker.engine.parse.ParsePlayer;
 import com.stsetsevich.smartpoker.exceptions.PlayerNotFoundException;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import com.stsetsevich.smartpoker.repos.UserRepo;
-import com.stsetsevich.smartpoker.repos.UserSmarthandAccountAndCookiesRepo;
+import com.stsetsevich.smartpoker.repos.SmarthandCookiesRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +23,9 @@ public class SetPlayersAtTable {
     PlayerRepo playerRepo;
     @Autowired
     UserRepo userRepo;
-    UserSmarthandAccountAndCookies userSmarthandAccountAndCookies;
+    SmarthandCookies smarthandCookies;
     @Autowired
-    UserSmarthandAccountAndCookiesRepo userSmarthandAccountAndCookiesRepo;
+    SmarthandCookiesRepo smarthandCookiesRepo;
     @Autowired
     ParsePlayer parsePlayer;
     @Autowired
