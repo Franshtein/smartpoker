@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css}" rel="stylesheet"
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <div th:replace="header::frag">
+    <div th:replace="parts/header::frag">
     </div>
 </head>
 <body>
@@ -33,16 +33,16 @@
 <div class="container-fluid text-center">
     <table class="table table-striped" th:classappend="table-striped-empty" th:border="3" th:if="${numrows}">
         <div th:if="${statsTable}">
-        <tr th:each="numrow : ${statsTable}">
-            <td th:each="numcol : ${numrow}">
-                <select th:name="calcDiapVariant" th:class="choise">
-                    <option th:each="stat : ${stats}" th:type="text" th:selected="${stat.statname == numcol}">
-                        <div th:value="${stat.statname}" th:text="${stat.statname}">
-                        </div>
-                    </option>
-                </select>
-            </td>
-        </tr>
+            <tr th:each="numrow : ${statsTable}">
+                <td th:each="numcol : ${numrow}">
+                    <select th:name="calcDiapVariant" th:class="choise">
+                        <option th:each="stat : ${stats}" th:type="text" th:selected="${stat.statname == numcol}">
+                            <div th:value="${stat.statname}" th:text="${stat.statname}">
+                            </div>
+                        </option>
+                    </select>
+                </td>
+            </tr>
         </div>
         <div th:if="${numrowscount}">
             <tr th:each="numrow : ${numrowscount}">
@@ -71,7 +71,7 @@
 
     </form>
     <td>
-                <button th:onclick="rollback()">Rollback</button>
+        <button th:onclick="rollback()">Rollback</button>
 
     </td>
 
@@ -82,5 +82,5 @@
 <script type="text/javascript" src="../static/js/hud-edit.js" th:src="@{/js/hud-edit.js}"></script>
 
 </body>
-<div th:replace="footer::frag"></div>
+<div th:replace="parts/footer::frag"></div>
 </html>

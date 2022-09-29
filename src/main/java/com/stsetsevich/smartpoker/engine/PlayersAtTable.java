@@ -16,7 +16,7 @@ import java.util.*;
 
 
 @Service
-public class SetPlayersAtTable {
+public class PlayersAtTable {
 
     @Autowired
 
@@ -213,5 +213,13 @@ public class SetPlayersAtTable {
 
     public Map<Integer, StatInfo[][]> getRiverStats() {
         return riverStats;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 }

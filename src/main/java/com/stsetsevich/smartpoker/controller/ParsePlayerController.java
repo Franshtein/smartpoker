@@ -32,7 +32,7 @@ public class ParsePlayerController {
     @Autowired
     SmarthandCookiesRepo smarthandCookiesRepo;
     @Autowired
-    SetPlayersAtTable setPlayersAtTable;
+    PlayersAtTable playersAtTable;
     @Autowired
     ParsePlayer parsePlayer;
     @Autowired AddOrUpdatePlayer addOrUpdatePlayer;

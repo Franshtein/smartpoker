@@ -2,7 +2,7 @@ package com.stsetsevich.smartpoker.controller;
 
 import com.stsetsevich.smartpoker.domain.Player;
 import com.stsetsevich.smartpoker.engine.ExtraStatsCalc;
-import com.stsetsevich.smartpoker.engine.SetPlayersAtTable;
+import com.stsetsevich.smartpoker.engine.PlayersAtTable;
 import com.stsetsevich.smartpoker.engine.StatInfo;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import com.stsetsevich.smartpoker.repos.StatRepo;
@@ -26,7 +26,7 @@ public class ExtraStatsController {
     @Autowired
     ExtraStatsCalc extraStatsCalc;
     @Autowired
-    SetPlayersAtTable setPlayersAtTable;
+    PlayersAtTable playersAtTable;
 
     @GetMapping("/extrastats")
     public String threeBet(Map<String, Object> model, String player, String stat) {
@@ -34,7 +34,7 @@ public class ExtraStatsController {
         String username = auth.getName();
         model.put("name", username);
 
-        Player playerNick = setPlayersAtTable.checkPlayer(player);
+        Player playerNick = playersAtTable.checkPlayer(player);
         ArrayList<StatInfo> statInfos = extraStatsCalc.extraStatsCalc(playerNick, stat);
         model.put("statValues", statInfos);
 
@@ -49,7 +49,7 @@ public class ExtraStatsController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         model.put("name", username);
-        Player playerNick = setPlayersAtTable.checkPlayer(player);
+        Player playerNick = playersAtTable.checkPlayer(player);
         ArrayList<StatInfo> statInfos = extraStatsCalc.extraStatsCalc(playerNick, stat);
         model.put("statValues", statInfos);
 

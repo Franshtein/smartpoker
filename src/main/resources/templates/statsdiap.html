@@ -4,7 +4,7 @@
 <head>
     <link href="../static/css/hud.css" th:href="@{/css/hud.css}" rel="stylesheet"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <div th:replace="header::frag"></div>
+    <div th:replace="parts/header::frag"></div>
 </head>
 <body>
 
@@ -88,11 +88,13 @@
                     <label><input type="checkbox" th:object="${stat}" th:checked="*{needLink}" name="needLink"></label>
                 </td>
                 <td>
-                    <label><input type="checkbox" th:object="${stat}" th:checked="*{needImage}" name="needImage"></label>
+                    <label><input type="checkbox" th:object="${stat}" th:checked="*{needImage}"
+                                  name="needImage"></label>
                 </td>
                 <td>
                     <select th:name="dependOnStat" th:class="choise">
-                        <option th:each="stat2 : ${stats}" th:type="text" th:selected="${stat2.statname == stat.getDependOnStat()}">
+                        <option th:each="stat2 : ${stats}" th:type="text"
+                                th:selected="${stat2.statname == stat.getDependOnStat()}">
                             <div th:value="${stat2.statname}" th:text="${stat2.statname}">
                             </div>
                         </option>
@@ -108,5 +110,5 @@
 
 
 </body>
-<div th:replace="footer::frag"></div>
+<div th:replace="parts/footer::frag"></div>
 </html>

@@ -17,8 +17,8 @@ User editor
     <div th:each="role : ${roles}">
         <label><input type="checkbox" th:value="${role}" th:name="${role}" th:text="${role}"></label>
     </div>
-<input type="hidden" th:value="${user.id}" name="userId">
-<button type="submit">Save</button>
+    <input type="hidden" th:value="${user.id}" name="userId">
+    <button type="submit">Save</button>
 </form>
 </body>
 <div th:replace="footer::frag"></div>

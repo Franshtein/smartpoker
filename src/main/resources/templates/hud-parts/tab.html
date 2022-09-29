@@ -7,37 +7,40 @@
             <div class="row row-height-400">
                 <div class="col align-self-end">
                     <div th:if="${playerError}">
-                        <div th:if="${playerError.playerPosition==0}" th:class="error" th:text="${playerError.toString}"></div>
+                        <div th:if="${playerError.playerPosition==0}" th:class="error"
+                             th:text="${playerError.toString}"></div>
                     </div>
                     <a th:href="'extrastats?player='+${player.nickname}+'&stat=0'" target="_blank"
                        th:class="colorgreen" th:text="${player.nickname}"
                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"
                        id="liveToastBtn4"></a>
-                    <div th:replace="player-form::frag (1,${player},${player2},${player3},${player4},${player5})">
+                    <div th:replace="hud-parts/player-form::frag (1,${player},${player2},${player3},${player4},${player5})">
                     </div>
-                    <div th:replace="player-table::frag (${player},${plStats.get(0)},${seats.get(0)})">
+                    <div th:replace="hud-parts/player-table::frag (${player},${plStats.get(0)},${seats.get(0)})">
                     </div>
                 </div>
                 <div class="col  align-self-start">
                     <div th:if="${playerError}">
-                        <div th:if="${playerError.playerPosition==1}" th:class="error" th:text="${playerError.toString}"></div>
+                        <div th:if="${playerError.playerPosition==1}" th:class="error"
+                             th:text="${playerError.toString}"></div>
                     </div>
                     <a th:href="'3bet?player='+${player2.nickname}" target="_blank"
                        th:class="colorgreen" th:text="${player2.nickname}"></a>
-                    <div th:replace="player-form::frag (2,${player},${player2},${player3},${player4},${player5})">
+                    <div th:replace="hud-parts/player-form::frag (2,${player},${player2},${player3},${player4},${player5})">
                     </div>
-                    <div th:replace="player-table::frag (${player2},${plStats.get(1)},${seats.get(1)})">
+                    <div th:replace="hud-parts/player-table::frag (${player2},${plStats.get(1)},${seats.get(1)})">
                     </div>
                 </div>
                 <div class="col  align-self-end">
                     <div th:if="${playerError}">
-                        <div th:if="${playerError.playerPosition==2}" th:class="error" th:text="${playerError.toString}"></div>
+                        <div th:if="${playerError.playerPosition==2}" th:class="error"
+                             th:text="${playerError.toString}"></div>
                     </div>
                     <a th:href="'3bet?player='+${player3.nickname}" target="_blank"
                        th:class="colorgreen" th:text="${player3.nickname}"></a>
-                    <div th:replace="player-form::frag (3,${player},${player2},${player3},${player4},${player5})">
+                    <div th:replace="hud-parts/player-form::frag (3,${player},${player2},${player3},${player4},${player5})">
                     </div>
-                    <div th:replace="player-table::frag (${player3},${plStats.get(2)},${seats.get(2)})">
+                    <div th:replace="hud-parts/player-table::frag (${player3},${plStats.get(2)},${seats.get(2)})">
                     </div>
                 </div>
             </div>
@@ -47,27 +50,29 @@
             <div class="row justify-content-evenly">
                 <div class="col-4">
                     <div th:if="${playerError}">
-                        <div th:if="${playerError.playerPosition==3}" th:class="error" th:text="${playerError.toString}"></div>
+                        <div th:if="${playerError.playerPosition==3}" th:class="error"
+                             th:text="${playerError.toString}"></div>
                     </div>
                     <a th:href="'extrastats?player='+${player4.nickname}+'&stat=0'" target="_blank"
                        th:class="colorgreen" th:text="${player4.nickname}"
                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
-                    <div th:replace="player-form::frag (4,${player},${player2},${player3},${player4},${player5})">
+                    <div th:replace="hud-parts/player-form::frag (4,${player},${player2},${player3},${player4},${player5})">
                     </div>
-                    <div th:replace="player-table::frag (${player4},${plStats.get(3)},${seats.get(3)})">
+                    <div th:replace="hud-parts/player-table::frag (${player4},${plStats.get(3)},${seats.get(3)})">
                     </div>
                 </div>
 
                 <div class="col-4">
                     <div th:if="${playerError}">
-                        <div th:if="${playerError.playerPosition==4}" th:class="error" th:text="${playerError.toString}"></div>
+                        <div th:if="${playerError.playerPosition==4}" th:class="error"
+                             th:text="${playerError.toString}"></div>
                     </div>
                     <a th:href="'extrastats?player='+${player5.nickname}+'&stat=0'" target="_blank"
                        th:class="colorgreen" th:text="${player5.nickname}"
                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Подсказка вверху"></a>
-                    <div th:replace="player-form::frag (5,${player},${player2},${player3},${player4},${player5})">
+                    <div th:replace="hud-parts/player-form::frag (5,${player},${player2},${player3},${player4},${player5})">
                     </div>
-                    <div th:replace="player-table::frag (${player5},${plStats.get(4)},${seats.get(4)})">
+                    <div th:replace="hud-parts/player-table::frag (${player5},${plStats.get(4)},${seats.get(4)})">
                     </div>
                 </div>
             </div>

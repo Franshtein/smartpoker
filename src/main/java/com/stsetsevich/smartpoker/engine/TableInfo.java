@@ -1,6 +1,13 @@
 package com.stsetsevich.smartpoker.engine;
 
+import com.stsetsevich.smartpoker.domain.Player;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class TableInfo {
+
     private String stat;
     private double value;
     TableInfo(String stat, double value)
@@ -24,4 +31,5 @@ public class TableInfo {
     public void setValue(double value) {
         this.value = value;
     }
+
 }
