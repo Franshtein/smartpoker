@@ -30,12 +30,16 @@ public class MainController {
         String username=auth.getName();
         model.put("name", username);
 
-        return "greeting";
+        return "main";
     }
 
 
     @GetMapping("/main")
-    public String main(Model model1) {
+    public String main(Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username=auth.getName();
+        model.addAttribute("name", username);
         return "main";
     }
 
