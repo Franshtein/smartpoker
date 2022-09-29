@@ -23,19 +23,14 @@ import java.util.Scanner;
 
 @Controller
 public class ParsePlayerController {
-
-
     @Autowired
     private PlayerRepo playerRepo;
-    @Autowired
-    UserRepo userRepo;
-    @Autowired
-    SmarthandCookiesRepo smarthandCookiesRepo;
     @Autowired
     PlayersAtTable playersAtTable;
     @Autowired
     ParsePlayer parsePlayer;
-    @Autowired AddOrUpdatePlayer addOrUpdatePlayer;
+    @Autowired
+    AddOrUpdatePlayer addOrUpdatePlayer;
 
     @GetMapping("/search")
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -74,15 +69,6 @@ public class ParsePlayerController {
 
     @PostMapping("/addFile2")
     public String addPlayer2(@RequestParam String addFile2, Map<String, Object> model) {
-    /*    if (addFile != "") {
-            StatsParse statsParse = new StatsParse(addFile);
-            if (statsParse.getStats() != null) {
-                if (playerRepo.findByNickname(statsParse.searchNickname()) == null) {
-                    playerRepo.save(statsParse.getStats());
-                } else System.out.println("That player excists in the DataBase");
-            }
-        }
-    */
         try {
 
             Document document = parsePlayer.parsePlayer(addFile2);

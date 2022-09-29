@@ -17,59 +17,22 @@ import java.util.*;
 @Controller
 public class MainController {
 
-
-    @Autowired
-    private PlayerRepo playerRepo;
-    @Autowired
-    private StatRepo statRepo;
-
-
     @GetMapping("/")
-    public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Map<String, Object> model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username=auth.getName();
-        model.put("name", username);
+    public String greeting() {
 
         return "main";
     }
-
 
     @GetMapping("/main")
     public String main(Model model) {
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username=auth.getName();
-        model.addAttribute("name", username);
         return "main";
     }
 
-    @PostMapping("/main")
-    public String add(@RequestParam String text, @RequestParam String tag, Model model1) {
-
-
-
-
-
-
-
-
-        return "main";
-    }
-
-    @PostMapping("filter")
-    public String filter(@RequestParam String filter, Model model1) {
-        //можно только одной строкой, вот так, только будет фильтровать и при пустом поле
-      //  List<Message> messages = messageRepo.findByTag(filter);
-
-        return "main";
-
-    }
     @GetMapping("/login")
-    public String login(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Map<String, Object> model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username=auth.getName();
-        model.put("name", username);
-        return "login.html";
+    public String login() {
+
+        return "login";
     }
 
 }

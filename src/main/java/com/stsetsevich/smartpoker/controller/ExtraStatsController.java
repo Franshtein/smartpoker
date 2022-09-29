@@ -45,7 +45,6 @@ public class ExtraStatsController {
     @PostMapping("/extrastats")
     public String addThreeBet(Map<String, Object> model, String player, String stat) {
 
-
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         model.put("name", username);

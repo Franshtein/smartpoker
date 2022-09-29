@@ -50,12 +50,8 @@ public class HudEditController {
 
     @PostMapping("/sethud")
     public String add2(Model model1, int numcols, int numrows, String allstatsname, String roundOfBidding) {
-        System.out.println("working");
-        //System.out.println(allstatsname);
-        //allstatsname= allstatsname.replace("/", "\n");
-        //System.out.println(allstatsname);
-        allstatsname = hudEdit.parseStatFromStringToNumberView(allstatsname, numrows, numcols, roundOfBidding);
 
+        allstatsname = hudEdit.parseStatFromStringToNumberView(allstatsname, numrows, numcols, roundOfBidding);
 
         List<Stat> stats = statRepo.findAllByStatnameIsNotNullOrderById();
 
@@ -75,28 +71,22 @@ public class HudEditController {
     @PostMapping("/createhud")
     public String add3(Model model1, int numcols, int numrows, String allstatsname, String roundOfBidding) {
 
-        System.out.println(numcols + " " + numrows);
-        //System.out.println(allstatsname);
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         User user = userRepo.findByUsername(username);
         Hud hud = hudRepo.findByUserIdAndRoundOfBidding(user.getId(), RoundOfBidding.valueOf(roundOfBidding));
         if (hud != null) {
-            if (hud.getNumberOfRows()==numrows && hud.getNumberOfColums()==numcols){
+            if (hud.getNumberOfRows() == numrows && hud.getNumberOfColums() == numcols) {
                 String[][] statnames = hudEdit.parseStatFromNumberToStringView(RoundOfBidding.valueOf(roundOfBidding));
                 model1.addAttribute("statsTable", statnames);
-            }
-            else setTable(numrows, numcols, model1);
+            } else setTable(numrows, numcols, model1);
 
-        }
-        else setTable(numrows, numcols, model1);
-
+        } else setTable(numrows, numcols, model1);
 
         List<Stat> stats = statRepo.findAllByStatnameIsNotNullOrderById();
         Comparator<Stat> comparator = Comparator.comparing(obj -> obj.getStatname());
         Collections.sort(stats, comparator);
-
 
         model1.addAttribute("needstat", "-");
         model1.addAttribute("stats", stats);
@@ -106,8 +96,7 @@ public class HudEditController {
         return "hud-edit";
     }
 
-    private static void setTable(int numrows, int numcols, Model model1)
-    {
+    private static void setTable(int numrows, int numcols, Model model1) {
         int[] masrows = new int[numrows];
 
         for (int i = 0; i < numrows; i++) {
@@ -117,7 +106,6 @@ public class HudEditController {
         for (int i = 0; i < numcols; i++) {
             mascols[i] = i;
         }
-
 
         model1.addAttribute("numrowscount", masrows);
         model1.addAttribute("numcolscount", mascols);

@@ -22,10 +22,7 @@ public class HudController {
 
     @Autowired
     PlayersAtTable playersAtTable;
-    @Autowired
-    StatInfo statInfo;
-    @Autowired
-    PreflopStatsCalc preflopStatsCalc;
+
     @Autowired
     TableInfoCalc tableInfoCalc;
 

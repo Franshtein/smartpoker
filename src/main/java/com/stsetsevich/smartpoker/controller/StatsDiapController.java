@@ -33,8 +33,6 @@ public class StatsDiapController {
     @PostMapping("/statsdiap")
     public String add(String statname, double point1, double point2, double point3, double point4, boolean needLink, boolean needImage, String dependOnStat, CalcDiapVariant calcDiapVariant, Model model1) {
 
-        System.out.println("DEPEND ON STAT "+dependOnStat);
-
         statRepo.findStatByStatname(statname);
 
         Stat stat = statRepo.findStatByStatname(statname);
@@ -48,8 +46,7 @@ public class StatsDiapController {
 
         stat.setCalcDiapVariant(calcDiapVariant);
         statRepo.save(stat);
-        System.out.println(calcDiapVariant);
-        // Iterable<Stat> stats = statRepo.findAll();
+
         ArrayList<Stat> stats = statRepo.findAllByStatnameIsNotNullOrderById();
         Comparator<Stat> comparator = Comparator.comparing(obj -> obj.getStatname());
         Collections.sort(stats, comparator);
