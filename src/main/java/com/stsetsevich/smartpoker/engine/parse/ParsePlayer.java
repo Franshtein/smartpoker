@@ -2,24 +2,26 @@ package com.stsetsevich.smartpoker.engine.parse;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CookieManager;
+import com.gargoylesoftware.htmlunit.SilentCssErrorHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.SilentJavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.util.Cookie;
-import com.stsetsevich.smartpoker.domain.User;
 import com.stsetsevich.smartpoker.domain.SmarthandCookies;
-import com.stsetsevich.smartpoker.repos.UserRepo;
 import com.stsetsevich.smartpoker.repos.SmarthandCookiesRepo;
+import com.stsetsevich.smartpoker.repos.UserRepo;
+import org.apache.commons.logging.LogFactory;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 public class ParsePlayer {
@@ -48,9 +50,9 @@ public class ParsePlayer {
                 .connect("https://smarthand.pro/settings")
                 .cookies(response.cookies())
                 .execute();
+        System.out.println(response.body());
 
-
-        SmarthandCookies smarthandAccount = smarthandCookiesRepo.findById(0);
+        SmarthandCookies smarthandAccount = smarthandCookiesRepo.findById(id);
 
 
         smarthandAccount.setSessionId(cookie.get("PHPSESSID"));
@@ -64,6 +66,8 @@ public class ParsePlayer {
             System.out.println(exception.toString());
 
         }
+        System.out.println("AFTER UPDATE COOKIES SESSION, ID IS "+smarthandAccount.getSessionId());
+        System.out.println("ALL COOKIES IS "+cookie);
       //  System.out.println(response.body());
     }
     private void getCookies(WebClient webClient) throws IOException {
@@ -71,7 +75,7 @@ public class ParsePlayer {
         System.out.println("001");
         SmarthandCookies smarthandAccountAndCookies = smarthandCookiesRepo.findById(id);
         System.out.println("002");
-     //   System.out.println(smarthandAccountAndCookies.getSessionId());
+        System.out.println("NOW SESSION ID IS "+smarthandAccountAndCookies.getSessionId());
         if(smarthandAccountAndCookies==null || smarthandAccountAndCookies.getSessionId()==null || smarthandAccountAndCookies.getSessionId()=="")
         {
             System.out.println("003");
@@ -107,9 +111,13 @@ public class ParsePlayer {
 
         final WebClient webClient = new WebClient(BrowserVersion.BEST_SUPPORTED);
 
+        webClient.setCssErrorHandler(new SilentCssErrorHandler());
+        webClient.setJavaScriptErrorListener(new SilentJavaScriptErrorListener());
+
         webClient.getCookieManager().setCookiesEnabled(true);
         webClient.getOptions().setJavaScriptEnabled(true);
         webClient.getOptions().setThrowExceptionOnScriptError(false);
+        webClient.waitForBackgroundJavaScript(15000);
 
         CookieManager cookieManager = webClient.getCookieManager();
 
@@ -124,6 +132,7 @@ public class ParsePlayer {
         HtmlPage htmlPage;
         try {
              htmlPage = webClient.getPage(url);
+            System.out.println("TYT PROSHLI ");
         }
         catch (Exception e){
             System.out.println("Невозможно вставить такой ник в строку поиска");
@@ -136,25 +145,26 @@ public class ParsePlayer {
         element  = htmlPage.getElementById("error1");
         if (element!=null) return null;
         //Если со старыми куками все-таки что-то не то (перезаписались и т.п.)
-        try {
-            try {
-                htmlPage = webClient.getPage(url);
-            }
-            catch (Exception e){
-                System.out.println("Невозможно вставить такой ник в строку поиска");
-                return null;
-            }
+
            element  = htmlPage.getElementById("table_1");
-           htmlPage = element.click();
-        }
-        //Создаем новые куки
-        catch (Exception e)
-        {
+        if(element==null) {
+            cookieManager.clearCookies();
+            webClient.getCookieManager().clearCookies();
+            System.out.println("TYT COOKIE 1111"+webClient.getCookieManager().getCookies());
             setCookies();
             getCookies(webClient);
+            webClient.waitForBackgroundJavaScript(15000);
+            htmlPage = webClient.getPage(url);
+            webClient.waitForBackgroundJavaScript(15000);
             element  = htmlPage.getElementById("table_1");
-            htmlPage = element.click();
         }
+        if(element==null)
+        {
+            System.out.println("SOMESING GOES WRONG... :(");
+            return null;
+        }
+
+           htmlPage = element.click();
 
 
 

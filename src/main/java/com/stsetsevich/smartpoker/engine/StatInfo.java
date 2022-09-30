@@ -154,11 +154,9 @@ public class StatInfo {
     protected int checkDependDiap() {
         CalcDiapVariant variant = statTry.getCalcDiapVariant();
 
-        System.out.println("WORKING FOR "+statName);
 
         int primaryValue = statInfoService.checkPrimaryDiap(statTry.getDependOnStat(), player);
 
-        System.out.println("WORKING FOR "+statName);
         double weight=1;
         if(primaryValue==4) weight=1.4;
         if(primaryValue==3) weight=1.2;

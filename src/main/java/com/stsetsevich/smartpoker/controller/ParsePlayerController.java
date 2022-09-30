@@ -5,8 +5,6 @@ import com.stsetsevich.smartpoker.engine.*;
 import com.stsetsevich.smartpoker.engine.parse.ParsePlayer;
 import com.stsetsevich.smartpoker.engine.parse.StatsParse;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
-import com.stsetsevich.smartpoker.repos.UserRepo;
-import com.stsetsevich.smartpoker.repos.SmarthandCookiesRepo;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
