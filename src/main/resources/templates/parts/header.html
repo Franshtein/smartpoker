@@ -3,6 +3,22 @@
 
 <div th:fragment="frag">
     <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Smartpoker</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}" href="/">Home</a>
+                    <a class="nav-item nav-link" th:classappend="${#httpServletRequest.getRequestURI() == '/hud' ? 'active':''}" href="/hud">HUD</a>
+                    <a class="nav-item nav-link" th:classappend="${#httpServletRequest.getRequestURI() == '/statsdiap' ? 'active':''}" href="/statsdiap">Stats Diapason</a>
+                    <div sec:authorize="hasAuthority('ADMIN')">
+                    <a class="nav-item nav-link" th:classappend="${#httpServletRequest.getRequestURI() == '/user' ? 'active':''}" href="/user">Users</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
         <div th:text="'Hello, '+${#authentication.name}"></div>
         <div>
             <form th:action="@{/logout}" method="post">
