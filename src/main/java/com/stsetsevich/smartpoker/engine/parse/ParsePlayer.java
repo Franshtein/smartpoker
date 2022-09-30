@@ -50,7 +50,6 @@ public class ParsePlayer {
                 .connect("https://smarthand.pro/settings")
                 .cookies(response.cookies())
                 .execute();
-        System.out.println(response.body());
 
         SmarthandCookies smarthandAccount = smarthandCookiesRepo.findById(id);
 
@@ -66,8 +65,7 @@ public class ParsePlayer {
             System.out.println(exception.toString());
 
         }
-        System.out.println("AFTER UPDATE COOKIES SESSION, ID IS "+smarthandAccount.getSessionId());
-        System.out.println("ALL COOKIES IS "+cookie);
+
       //  System.out.println(response.body());
     }
     private void getCookies(WebClient webClient) throws IOException {
@@ -132,7 +130,6 @@ public class ParsePlayer {
         HtmlPage htmlPage;
         try {
              htmlPage = webClient.getPage(url);
-            System.out.println("TYT PROSHLI ");
         }
         catch (Exception e){
             System.out.println("Невозможно вставить такой ник в строку поиска");
@@ -150,7 +147,6 @@ public class ParsePlayer {
         if(element==null) {
             cookieManager.clearCookies();
             webClient.getCookieManager().clearCookies();
-            System.out.println("TYT COOKIE 1111"+webClient.getCookieManager().getCookies());
             setCookies();
             getCookies(webClient);
             webClient.waitForBackgroundJavaScript(15000);
