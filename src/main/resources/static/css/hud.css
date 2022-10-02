@@ -138,9 +138,7 @@ div.players-table{
 
 }
 
-button.btn{
-    background-color: blue;
-}
+
 
 .tooltipImg span{
     border-radius: 5px 5px 5px 5px;
@@ -159,18 +157,51 @@ button.btn{
 }
 .table-info{
     position: fixed;
-    top: 15px;
+    top: 85px;
     right: 15px;
 }
 .error{
     color: red;
 }
-/*
-button.btn:hover{
-    background-color: red;
+div.right{
+    margin-right: 20px;
+    margin-top: 10px;
 }
-цвет кнопки при наведении
-*/
+.nickname{
+    font-family: 'Montserrat', sans-serif;
+    color: #F9C941;
+    margin-right: 20px;
+}
+.logout-button {
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #F9C941;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    color: #F9C941;
+    transition: .2s ease-in-out;
+}
+.logout-button:before {
+    content: "";
+    background: linear-gradient(90deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .5));
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: -8px;
+    left: -75px;
+    transform: skewX(-45deg);
+}
+.logout-button:hover {
+    background: #56433D;
+    color: #F9C941;
+}
+.logout-button:hover:before {
+    left: 150px;
+    transition: .5s ease-in-out;
+}
+
 body{
 
     background-color: grey !important;
