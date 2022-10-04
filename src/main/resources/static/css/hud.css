@@ -202,6 +202,10 @@ div.right{
     transition: .5s ease-in-out;
 }
 
+a.edit-user{
+    color: #F9C941;;
+}
+
 body{
 
     background-color: grey !important;

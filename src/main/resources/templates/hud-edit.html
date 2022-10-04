@@ -58,25 +58,18 @@
         </div>
     </table>
 </div>
-<table class="table table-striped">
-    <form th:action="sethud" id="sethud" method="post">
-        <input type="hidden" name="numcols" th:value="${numcols}">
-        <input type="hidden" name="numrows" th:value="${numrows}">
-        <input type="hidden" name="roundOfBidding" th:value="${roundOfBidding}">
-        <input type="hidden" name="allstatsname"
-               value="">
-        <td>
-            <button th:onclick="save()" type="submit">Save</button>
-        </td>
-
-    </form>
-    <td>
+<form th:action="sethud" id="sethud" method="post">
+    <input type="hidden" name="numcols" th:value="${numcols}">
+    <input type="hidden" name="numrows" th:value="${numrows}">
+    <input type="hidden" name="roundOfBidding" th:value="${roundOfBidding}">
+    <input type="hidden" name="allstatsname"
+           value="">
+    <div align="center">
         <button th:onclick="rollback()">Rollback</button>
+        <button th:onclick="save()" type="submit">Save</button>
+    </div>
 
-    </td>
-
-    </tr>
-</table>
+</form>
 
 
 <script type="text/javascript" src="../static/js/hud-edit.js" th:src="@{/js/hud-edit.js}"></script>

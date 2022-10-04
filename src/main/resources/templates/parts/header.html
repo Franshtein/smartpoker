@@ -13,6 +13,9 @@
                        th:classappend="${#httpServletRequest.getRequestURI() == '/hud' ? 'active':''}"
                        href="/hud">HUD</a>
                     <a class="nav-item nav-link"
+                       th:classappend="${#httpServletRequest.getRequestURI() == '/hud-edit' ? 'active':''}"
+                       href="/hud-edit">Edit HUD</a>
+                    <a class="nav-item nav-link"
                        th:classappend="${#httpServletRequest.getRequestURI() == '/statsdiap' ? 'active':''}"
                        href="/statsdiap">Stats Diapason</a>
                     <div sec:authorize="hasAuthority('ADMIN')">
@@ -32,12 +35,6 @@
                 </form>
             </div>
         </nav>
-        <div th:text="'Hello, '+${#authentication.name}"></div>
-        <div>
-            <form th:action="@{/logout}" method="post">
-                <input type="submit" value="Sign Out"/>
-            </form>
-        </div>
     </header>
 </div>
 </html>

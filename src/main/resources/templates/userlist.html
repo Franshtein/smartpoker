@@ -27,7 +27,7 @@
         <td th:each="userrole : ${user.roles}">
             <span th:text="${userrole}"></span>
         </td>
-        <td><a th:href="'/user/'+${user.id}">edit</a></td>
+        <td><a class="edit-user" th:href="'/user/'+${user.id}">edit</a></td>
     </tr>
 
     </tbody>
