@@ -25,7 +25,6 @@ public class StatsDiapController {
         ArrayList<Stat> stats = statRepo.findAllByStatnameIsNotNullOrderById();
         Comparator<Stat> comparator = Comparator.comparing(obj -> obj.getStatname());
         Collections.sort(stats, comparator);
-        model1.addAttribute("needstat", "-");
         model1.addAttribute("stats", stats);
         return "statsdiap";
     }
@@ -50,7 +49,6 @@ public class StatsDiapController {
         ArrayList<Stat> stats = statRepo.findAllByStatnameIsNotNullOrderById();
         Comparator<Stat> comparator = Comparator.comparing(obj -> obj.getStatname());
         Collections.sort(stats, comparator);
-        model1.addAttribute("needstat", "-");
         model1.addAttribute("stats", stats);
 
         return "statsdiap";
