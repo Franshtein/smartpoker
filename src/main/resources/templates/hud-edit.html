@@ -12,23 +12,36 @@
 </head>
 <body>
 
-<form th:action="createhud" id="createhud" method="post">
-    <input type="number" name="numrows" th:value="${numrows}" value="5" size="2" min="1" max="5"/>
-    <input type="number" name="numcols" th:value="${numcols}" value="5" size="2" min="1" max="5"/>
-    <input type="hidden" name="numrowsOld" th:value="${numrows}" value="5" size="2" min="1" max="5"/>
-    <input type="hidden" name="numcolsOld" th:value="${numcols}" value="5" size="2" min="1" max="5"/>
-    <td>
-        <select th:name="roundOfBidding">
-            <option th:type="text" th:selected="${roundOfBidding}==PREFLOP">PREFLOP</option>
-            <option th:selected="${roundOfBidding}==FLOP">FLOP</option>
-            <option th:selected="${roundOfBidding}==TURN">TURN</option>
-            <option th:selected="${roundOfBidding}==RIVER">RIVER</option>
-        </select>
-    </td>
-    <button type="submit">Create</button>
-</form>
+<div align="center">
+    <form th:action="createhud" id="createhud" method="post">
+        <input type="hidden" name="numrowsOld" th:value="${numrows}" value="5" size="2" min="1" max="5"/>
+        <input type="hidden" name="numcolsOld" th:value="${numcols}" value="5" size="2" min="1" max="5"/>
+        <table class="table table-striped" th:classappend="table-striped-empty" th:border="3">
+            <th>Num rows</th>
+            <th>Num cols</th>
+            <th>Round of bidding</th>
+            <tr>
+                <td>
+                    <input type="number" name="numrows" th:value="${numrows}" value="5" size="2" min="1" max="5"/>
+                </td>
+                <td>
+                    <input type="number" name="numcols" th:value="${numcols}" value="5" size="2" min="1" max="5"/>
+                </td>
+                <td>
+                    <select th:name="roundOfBidding">
+                        <option th:type="text" th:selected="${roundOfBidding}==PREFLOP">PREFLOP</option>
+                        <option th:selected="${roundOfBidding}==FLOP">FLOP</option>
+                        <option th:selected="${roundOfBidding}==TURN">TURN</option>
+                        <option th:selected="${roundOfBidding}==RIVER">RIVER</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <button type="submit">Create</button>
+    </form>
+</div>
 
-<h2 th:text="${roundOfBidding}+' EDIT'"></h2>
+<h2 align="center" th:text="${roundOfBidding}+' EDIT'"></h2>
 
 <div class="container-fluid text-center">
     <table class="table table-striped" th:classappend="table-striped-empty" th:border="3" th:if="${numrows}">
@@ -48,7 +61,7 @@
             <tr th:each="numrow : ${numrowscount}">
                 <td th:each="numcol : ${numcolscount}">
                     <select th:name="calcDiapVariant" th:class="choise">
-                        <option th:each="stat : ${stats}" th:type="text" th:selected="${stat.statname == needstat}">
+                        <option th:each="stat : ${stats}" th:type="text" th:selected="${stat.statname == requiredstat}">
                             <div th:value="${stat.statname}" th:text="${stat.statname}">
                             </div>
                         </option>
