@@ -16,7 +16,7 @@
     <form th:action="createhud" id="createhud" method="post">
         <input type="hidden" name="numrowsOld" th:value="${numrows}" value="5" size="2" min="1" max="5"/>
         <input type="hidden" name="numcolsOld" th:value="${numcols}" value="5" size="2" min="1" max="5"/>
-        <table class="table table-striped" th:classappend="table-striped-empty" th:border="3">
+        <table th:class="table-striped-stats" th:border="3">
             <th>Num rows</th>
             <th>Num cols</th>
             <th>Round of bidding</th>
@@ -44,7 +44,7 @@
 <h2 align="center" th:text="${roundOfBidding}+' EDIT'"></h2>
 
 <div class="container-fluid text-center">
-    <table class="table table-striped" th:classappend="table-striped-empty" th:border="3" th:if="${numrows}">
+    <table align="center" th:class="table-striped-empty" th:border="3" th:if="${numrows}">
         <div th:if="${statsTable}">
             <tr th:each="numrow : ${statsTable}">
                 <td th:each="numcol : ${numrow}">

@@ -172,7 +172,7 @@ div.right{
     color: #F9C941;
     margin-right: 20px;
 }
-.logout-button {
+.submit-button {
     text-decoration: none;
     display: inline-block;
     position: relative;
@@ -183,7 +183,7 @@ div.right{
     color: #F9C941;
     transition: .2s ease-in-out;
 }
-.logout-button:before {
+.submit-button:before {
     content: "";
     background: linear-gradient(90deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .5));
     height: 50px;
@@ -193,11 +193,11 @@ div.right{
     left: -75px;
     transform: skewX(-45deg);
 }
-.logout-button:hover {
+.submit-button:hover {
     background: #56433D;
     color: #F9C941;
 }
-.logout-button:hover:before {
+.submit-button:hover:before {
     left: 150px;
     transition: .5s ease-in-out;
 }
