@@ -27,12 +27,22 @@
                 </div>
 
             </div>
-            <h4 class="nickname" th:text="${#authentication.name}"></h4>
+            <div sec:authorize="isAuthenticated()">
+                <h4 class="nickname" th:text="${#authentication.name}"></h4>
+            </div>
             <div class="right">
-
-                <form th:action="@{/logout}" method="post">
-                    <button class="submit-button" type="submit" value="Sign Out"/>Sign Out</button>
-                </form>
+                <div sec:authorize="isAnonymous()">
+                    <form action="/hud" method="get">
+                        <button class="submit-button" type="submit" value="Log In"/>
+                        Log In</button>
+                    </form>
+                </div>
+                <div sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" method="post">
+                        <button class="submit-button" type="submit" value="Sign Out"/>
+                        Sign Out</button>
+                    </form>
+                </div>
             </div>
         </nav>
     </header>
