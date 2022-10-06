@@ -17,8 +17,8 @@ About The Project
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]]
-![algs](img/screenshots.gif)
+![algs](/src/main/resources/static/img/screenshots.gif)
+![algs](/src/main/resources/static/img/smarthand.gif)
 
 
 ### Built With
