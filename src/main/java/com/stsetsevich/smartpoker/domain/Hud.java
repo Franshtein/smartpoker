@@ -21,6 +21,8 @@ public class Hud {
     public Hud(){
     }
 
+
+
     public Long getId() {
         return id;
     }

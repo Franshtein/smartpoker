@@ -13,10 +13,8 @@
 <body>
 
 <div align="center">
-    <form th:action="createhud" id="createhud" method="post">
-        <input type="hidden" name="numrowsOld" th:value="${numrows}" value="5" size="2" min="1" max="5"/>
-        <input type="hidden" name="numcolsOld" th:value="${numcols}" value="5" size="2" min="1" max="5"/>
-        <table th:class="table-striped-stats" th:border="3">
+    <form th:action="@{/hud-edit/createhud}" id="createhud" method="post">
+         <table th:class="table-striped-stats" th:border="3">
             <th>Num rows</th>
             <th>Num cols</th>
             <th>Round of bidding</th>
@@ -41,7 +39,7 @@
     </form>
 </div>
 
-<h2 align="center" th:text="${roundOfBidding}+' EDIT'"></h2>
+<h2 align="center" th:text="'EDIT HUD FOR '+${roundOfBidding}"></h2>
 
 <div class="container-fluid text-center">
     <table align="center" th:class="table-striped-empty" th:border="3" th:if="${numrows}">
@@ -71,15 +69,23 @@
         </div>
     </table>
 </div>
-<form th:action="sethud" id="sethud" method="post">
+<form th:action="@{/hud-edit/sethud}" id="sethud" method="post">
     <input type="hidden" name="numcols" th:value="${numcols}">
     <input type="hidden" name="numrows" th:value="${numrows}">
     <input type="hidden" name="roundOfBidding" th:value="${roundOfBidding}">
     <input type="hidden" name="allstatsname"
            value="">
+</form>
+<a type="hidden" href="/hud-edit" id="rollback"></a>
+<div align="center">
+    <button th:onclick="rollback()">Rollback</button>
+    <button th:onclick="save()" type="submit">Save</button>
+</div>
+
+<form th:action="@{/hud-edit/setdefaulthud}" onsubmit="confirm('действительно хотите отправить данные?')" method="post">
+    <input type="hidden" name="roundOfBidding" th:value="${roundOfBidding}">
     <div align="center">
-        <button th:onclick="rollback()">Rollback</button>
-        <button th:onclick="save()" type="submit">Save</button>
+        <button type="submit">Set default HUD</button>
     </div>
 
 </form>

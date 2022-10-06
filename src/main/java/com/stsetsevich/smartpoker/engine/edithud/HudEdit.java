@@ -107,5 +107,51 @@ public class HudEdit {
         return stats;
     }
 
+    public String[][] setDefaultHud(RoundOfBidding roundOfBidding) {
+
+        Hud defaultHud = hudRepo.findByUserIdAndRoundOfBidding(0L, roundOfBidding);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = userRepo.findByUsername(username);
+        Hud userHud = hudRepo.findByUserIdAndRoundOfBidding(user.getId(), roundOfBidding);
+        if (userHud == null) userHud = new Hud();
+        userHud.setUserId(user.getId());
+        userHud.setStatsId(defaultHud.getStatsId());
+        userHud.setRoundOfBidding(defaultHud.getRoundOfBidding());
+        userHud.setNumberOfRows(defaultHud.getNumberOfRows());
+        userHud.setNumberOfColums(defaultHud.getNumberOfColums());
+        hudRepo.save(userHud);
+
+
+        String numbers = defaultHud.getStatsId();
+        String statNames = "";
+        long number;
+        String[][] stats = new String[defaultHud.getNumberOfRows()][defaultHud.getNumberOfColums()];
+        int firstFound = 0;
+        int secondFound;
+        int i = 0;
+        int j = 0;
+        for (int ch = 0; ch < numbers.length(); ch++) {
+            if (numbers.charAt(ch) == '/') {
+                secondFound = ch;
+                number = Long.parseLong(numbers.substring(firstFound, secondFound));
+                Optional<Stat> stat = statRepo.findById(number);
+                statNames += stat.get().getStatname();
+                statNames += "/";
+                stats[i][j] = stat.get().getStatname();
+                firstFound = secondFound + 1;
+                j++;
+                if (j == defaultHud.getNumberOfColums()) {
+                    j = 0;
+                    i++;
+                }
+            }
+        }
+
+
+        return stats;
+    }
+
 
 }

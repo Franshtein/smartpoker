@@ -1,3 +1,24 @@
+var hook = true;
+window.onbeforeunload = function() {
+    if (hook) {
+        return "Did you save your stuff?"
+    }
+}
+function unhook() {
+    hook=false;
+}
+
+document.addEventListener('click', event => {
+    if (event.target.tagName.toLowerCase() === 'a') {
+        hook = false;
+    }
+});
+document.addEventListener('submit', event => {
+    hook = false;
+});
+
+
+
 function save() {
 
     var d = document,
@@ -9,10 +30,12 @@ function save() {
         str+='/';
     }
     document.forms["sethud"].elements["allstatsname"].value = str;
-    alert(str);
+    hook = false;
+    document.getElementById('sethud').submit();
 }
 function rollback() {
-    document.forms["createhud"].elements["numrows"].value = document.forms["createhud"].elements["numrowsOld"].value
-    document.forms["createhud"].elements["numcols"].value = document.forms["createhud"].elements["numcolsOld"].value
-    document.getElementById('createhud').submit();
+    document.getElementById('rollback').href="/hud-edit/"+document.forms["createhud"].elements["roundOfBidding"].value;
+    document.getElementById('rollback').click();
 }
+
+
