@@ -22,7 +22,7 @@ public class AddOrUpdatePlayer {
     @Autowired
     PlayerRepo playerRepo;
 
-    //Метод управляет добавлением нового игрока
+    //Управляет добавлением нового игрока
     public void tryAddNewPlayer(String playerName) {
         try {
             Document document = parsePlayer.parsePlayer(playerName);
@@ -45,7 +45,7 @@ public class AddOrUpdatePlayer {
         }
     }
 
-    //метод проверяет, нужно ли обновление данных для игрока в БД.
+    //Проверяет, нужно ли обновление данных для игрока в БД.
     //Если нужно - удаляет старую запись и вызывает метод добавления нового игрока
     public void updatePlayerIfNeed(Player player) {
         if (!player.getNickname().equals("Empty Seat")) {
