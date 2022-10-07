@@ -7,11 +7,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
+/**
+ * Класс, который заполняет для HUD таблицу с дополнительной статистикой.
+ * {@link com.stsetsevich.smartpoker.controller.HudController}
+ */
 @Service
 public class ExtraStatsCalc extends StatsCalc {
     @Autowired
     StatInfo statInfoMother;
-    //По инстансу игрока и id стата вычисляем, какими статами нужно заполнить таблицу и заполняем её.
+
+    //по игроку и id стата вычисляет, какими статами нужно заполнить таблицу и вызывает нужный метод для заполнения.
+    //возвращает заполненную таблицу с доп. статами.
     public ArrayList<StatInfo> extraStatsCalc(Player player, String statName) {
         ArrayList<StatInfo> stats = new ArrayList<>();
         if (statName != null) {
@@ -28,7 +34,7 @@ public class ExtraStatsCalc extends StatsCalc {
                     getFourBetStats(player, stats);
                     return stats;
                 case ("3"):
-                    System.out.println("not method exsist");
+                    System.out.println("method not exsist");
                     break;
 
             }
@@ -70,7 +76,8 @@ public class ExtraStatsCalc extends StatsCalc {
 
         statname = "total3bet_bb";
         statInfo = statInfoMother.getStatInfo();
-        statInfo.setInfo(statname, pl);;
+        statInfo.setInfo(statname, pl);
+        ;
         stats.add(statInfo);
 
         return stats;
