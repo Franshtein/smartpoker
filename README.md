@@ -18,12 +18,15 @@ About The Project
 ## About The Project
 This project improves the <a href="https://smarthand.pro" target="_blank"><strong>smarthand.pro</strong></a> service in many important things, such as quality viewing of statistics and simultaneous analysis of all competitors at the poker table.
 <h4 align="center">SmartPoker HUD Example</h4>
-![algs](src/main/resources/static/img/screenshots.gif)
+
+![algs](/src/main/resources/static/img/screenshots.gif)
 <h4 align="center">SmartHand HUD Example</h4>
-![algs](src/main/resources/static/img/smarthand.gif)
+
+![algs](/src/main/resources/static/img/smarthand.gif)
 
 <h4 align="center">SWOT Analysis</h4>
-![algs](src/main/resources/static/img/swot.png)
+
+![algs](/src/main/resources/static/img/swot.png)
 
 
 ### Built With
