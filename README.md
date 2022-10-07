@@ -28,6 +28,25 @@ This project improves the <a href="https://smarthand.pro" target="_blank"><stron
 
 ![screen](/src/main/resources/static/img/swot.png)
 
+<table> 
+<th>SmartPoker</th>
+<th>SmartHand</th>
+<tr>
+<td>5 players at time</td>
+<td>Only 1 player</td>
+<tr>
+<td>Stats are divided into 5 colors and can depend on each other</td>
+<td>Only 1 color grade</td>
+</tr>
+<tr>
+<td>Shows a picture of the opponent's range</td>
+<td>Shows dry numbers</td>
+</tr>
+<tr>
+<td>Easy access to additional statistics</td>
+<td>Important and additional statistics are mixed</td>
+</tr>
+</table>
 
 ### Built With
 
