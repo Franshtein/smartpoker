@@ -10,6 +10,11 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.sql.Date;
+
+/**
+ * Класс, который управляет добавлением игрока в БД.
+ * Если игрок есть в БД - проверяет, нужно ли актуализировать информацию.
+ */
 @Service
 public class AddOrUpdatePlayer {
     @Autowired
@@ -17,9 +22,8 @@ public class AddOrUpdatePlayer {
     @Autowired
     PlayerRepo playerRepo;
 
-
-    public void tryAddNewPlayer(String playerName)
-    {
+    //Метод управляет добавлением нового игрока
+    public void tryAddNewPlayer(String playerName) {
         try {
             Document document = parsePlayer.parsePlayer(playerName);
             if (document != null) {
@@ -28,9 +32,8 @@ public class AddOrUpdatePlayer {
                 if (statsParse.getStats() != null) {
                     if (player == null) {
                         playerRepo.save(statsParse.getStats());
-
-                    } else
-                    {
+                    //Заглушка на случай, если метод будет вызван при существующем игроке в БД.
+                    } else {
                         System.out.println("That player excists in the DataBase");
                         updatePlayerIfNeed(player);
                     }
@@ -40,9 +43,10 @@ public class AddOrUpdatePlayer {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
     }
+
+    //метод проверяет, нужно ли обновление данных для игрока в БД.
+    //Если нужно - удаляет старую запись и вызывает метод добавления нового игрока
     public void updatePlayerIfNeed(Player player) {
         if (!player.getNickname().equals("Empty Seat")) {
             java.util.Date lastUpdate = player.getDateUpdate();
@@ -55,7 +59,7 @@ public class AddOrUpdatePlayer {
             } catch (Exception exception) {
 
             }
-
+            //Если даты добавления нет, либо она устарела - удаляем игрока и добавляем его заново.
             if (updateOld < -99 ||
                     (updateOld >= 1 && totalHands <= 5000) ||
                     (updateOld >= 5 && totalHands <= 15000) ||
