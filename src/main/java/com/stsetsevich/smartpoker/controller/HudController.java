@@ -2,7 +2,6 @@ package com.stsetsevich.smartpoker.controller;
 
 import com.stsetsevich.smartpoker.domain.Player;
 import com.stsetsevich.smartpoker.engine.*;
-import com.stsetsevich.smartpoker.engine.hud.PreflopStatsCalc;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,9 +29,9 @@ public class HudController {
     @GetMapping("/hud")
     public String hud(String nickname, Map<String, Object> model, String addPlayer, String addPlayer2, String addPlayer3
             , String addPlayer4, String addPlayer5) {
+        playersAtTable.initPlayers();
+        List<Player> pl = playersAtTable.getAllPlayers();
 
-        List<Player> pl = new ArrayList<>(Arrays.asList(playerRepo.findByNickname("Empty Seat"), playerRepo.findByNickname("Empty Seat"), playerRepo.findByNickname("Empty Seat"), playerRepo.findByNickname("Empty Seat"), playerRepo.findByNickname("Empty Seat")));
-        playersAtTable.playersInit(pl);
 
 
         modelPutGeneralInfo(model, pl);
@@ -40,18 +39,6 @@ public class HudController {
         return "hud";
     }
 
-
-    @PostMapping("/hud")
-    public String addHud(Map<String, Object> model, String addPlayer, String addPlayer2, String addPlayer3
-            , String addPlayer4, String addPlayer5) {
-
-
-        List<Player> pl = playersAtTable.getAllPlayers(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
-        modelPutGeneralInfo(model, pl);
-
-
-        return "hud";
-    }
 
     @PostMapping("addPlayer")
     public String addPlayer(@RequestParam String addPlayer, String addPlayer2, String addPlayer3
@@ -74,11 +61,10 @@ public class HudController {
         //  List<Message> messages = messageRepo.findByTag(filter);
 
 
-        List<Player> pl = playersAtTable.getAllPlayers(addPlayer, addPlayer2, addPlayer3, addPlayer4, addPlayer5);
+        List<Player> pl = playersAtTable.getAllPlayers();
         modelPutGeneralInfo(model, pl);
 
-        Player playerNick = playersAtTable.checkPlayer(player);
-        ArrayList<StatInfo> statInfos = extraStatsCalc.extraStatsCalc(playerNick, addStat);
+        ArrayList<StatInfo> statInfos = extraStatsCalc.extraStatsCalc(playerRepo.findByNickname(player), addStat);
 
         //Информация для всплывающих сообщений с доп. статами
         model.put("statExtra", addStat);
