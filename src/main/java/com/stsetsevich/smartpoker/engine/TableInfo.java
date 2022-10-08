@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Хранит назвние стата и его значение. Используется классом @{@link TableInfoCalc}
+ */
 public class TableInfo {
 
     private String stat;

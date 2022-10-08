@@ -8,12 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.DoubleStream;
 
+/**
+ * Рассчитывает цвет HUD игрока.
+ * Рассчитывает общую информацию о столе для {@link com.stsetsevich.smartpoker.controller.HudController}
+ * Она выводится в правом верхнем углу
+ */
 @Component
 public class TableInfoCalc {
     @Autowired
     StatInfo statInfoMother;
     @Autowired
     StatInfoService statInfoService;
+
+    //Рассчитывает общую информацию о столе. Она выводится в правом верхнем углу hud.html
     public List<TableInfo> generalStatsCalc(List<Player> players) {
         List<Player> subPlayers = new ArrayList<>(players);
         subPlayers.removeIf(n -> (n.getNickname().equals("Empty Seat") || n.getTotalHands()<3000));
@@ -27,11 +34,6 @@ public class TableInfoCalc {
 
     private static double calcAvgEvBb100(List<Player> players) {
 
-     /*  double avg=0;
-        for (Player player : players) {
-            avg += player.getAvgBb100();
-        }
-        return avg/players.size(); */
         try {
          return  players.stream().flatMapToDouble(player -> DoubleStream.of(player.getAvgBb100())).average().orElse(0);
         }
@@ -40,7 +42,7 @@ public class TableInfoCalc {
             return 0;
         }
     }
-
+    //Рассчитывает цвет HUD игрока.
     public List<String> hudSeatsColor(List<Player> players) {
         List<String> seats = new ArrayList<>();
         String seat;
