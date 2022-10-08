@@ -3,11 +3,8 @@ package com.stsetsevich.smartpoker.engine;
 import com.stsetsevich.smartpoker.domain.Player;
 import com.stsetsevich.smartpoker.domain.RoundOfBidding;
 import com.stsetsevich.smartpoker.engine.edithud.HudEdit;
-import com.stsetsevich.smartpoker.engine.parse.ParsePlayer;
 import com.stsetsevich.smartpoker.exceptions.PlayerNotFoundException;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
-import com.stsetsevich.smartpoker.repos.UserRepo;
-import com.stsetsevich.smartpoker.repos.SmarthandCookiesRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,14 +18,7 @@ import java.util.*;
 public class PlayersAtTable {
 
     @Autowired
-
     PlayerRepo playerRepo;
-    @Autowired
-    UserRepo userRepo;
-    @Autowired
-    SmarthandCookiesRepo smarthandCookiesRepo;
-    @Autowired
-    ParsePlayer parsePlayer;
     @Autowired
     AddOrUpdatePlayer addOrUpdatePlayer;
     @Autowired
