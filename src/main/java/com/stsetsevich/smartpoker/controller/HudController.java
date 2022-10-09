@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
 @Controller
+@RequestMapping("/hud")
 public class HudController {
 
     @Autowired
@@ -23,7 +25,7 @@ public class HudController {
     @Autowired
     TableInfoCalc tableInfoCalc;
 
-    @GetMapping("/hud")
+    @GetMapping
     public String hud(Map<String, Object> model) {
         //первичная инициализация пустых таблиц
         playersAtTable.initPlayers();
@@ -36,7 +38,7 @@ public class HudController {
     }
 
     //добавляет нового игрока за стол
-    @PostMapping("addPlayer")
+    @PostMapping("/addPlayer")
     public String addPlayer(@RequestParam String addPlayer, String addPlayer2, String addPlayer3
             , String addPlayer4, String addPlayer5, Map<String, Object> model) {
 
@@ -47,7 +49,7 @@ public class HudController {
     }
 
     //Выводит всплывающее окно с дополнительными статами
-    @PostMapping("addStat")
+    @PostMapping("/extraStats")
     public String extraStats(String addStat, String player, Map<String, Object> model) {
 
         List<Player> pl = playersAtTable.getAllPlayers();
@@ -92,6 +94,4 @@ public class HudController {
             playersAtTable.setPlayerNotFoundException(null);
         }
     }
-
-
 }
