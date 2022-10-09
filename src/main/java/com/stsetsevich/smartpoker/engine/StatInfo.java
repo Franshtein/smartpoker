@@ -16,6 +16,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Заполняет и хранит всю необходимую инфу о стате игрока. Используется для создания таблиц статов в
+ * {@link PlayersAtTable}
+ */
 @Component
 @Scope("prototype")
 public class StatInfo {
