@@ -13,6 +13,11 @@ import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * 1.Рассчитывает для {@link StatInfo} диапазон главного стата.
+ * 2.Рассчитывает цвета таблиц игроков для {@link TableInfoCalc}
+ */
 @Component
 public class StatInfoService {
 
@@ -24,14 +29,12 @@ public class StatInfoService {
     private double statValue;
     private double points[];
 
-    StatInfoService()
-    {
+    StatInfoService() {
 
     }
 
-    public int checkPrimaryDiap(String stat, Player player)
-    {
-       this.stat= statRepo.findStatByStatname(stat);
+    public int checkPrimaryDiap(String stat, Player player) {
+        this.stat = statRepo.findStatByStatname(stat);
         Query query = entityManager.createNativeQuery("SELECT " + stat + " FROM player where nickname='" + player.getNickname() + "'");
         List<String> list = query.getResultList();
         List<Object> list2 = new ArrayList<>(list);
@@ -41,6 +44,7 @@ public class StatInfoService {
         return checkDiap();
 
     }
+
     private int checkDiap() {
         CalcDiapVariant variant = stat.getCalcDiapVariant();
         if (variant == CalcDiapVariant.ONE) {
@@ -66,6 +70,7 @@ public class StatInfoService {
         }
         return 0;
     }
+
     private void setPoints() {
         this.points = stat.getPoints();
     }
