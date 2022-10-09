@@ -1,7 +1,6 @@
 package com.stsetsevich.smartpoker.engine.parse;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.SilentCssErrorHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -10,8 +9,6 @@ import com.gargoylesoftware.htmlunit.javascript.SilentJavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.stsetsevich.smartpoker.domain.SmarthandCookies;
 import com.stsetsevich.smartpoker.repos.SmarthandCookiesRepo;
-import com.stsetsevich.smartpoker.repos.UserRepo;
-import org.apache.commons.logging.LogFactory;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -20,24 +17,33 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+/**
+ * Подключается к сайту smarthand.pro
+ * Парсит страницу с заданным игроком
+ * return Document if player exist
+ * return null if user player exist
+ * <p>
+ * !!!Может возникнуть проблема с авторизацией на smarthand.pro в течение 15 минут,
+ * !!!если кто-то зашел c другого места на сайт под этим логином.
+ * !!!Блокировка снимается сайтом через 15 минут.
+ * <p>
+ * !!!Может быть решено регистрацией нескольких аккаунтов и авторизацией через них в случае провала первого.
+ */
 @Service
 public class ParsePlayer {
-    @Autowired
-    UserRepo userRepo;
+
     @Autowired
     SmarthandCookiesRepo smarthandCookiesRepo;
-    private static Connection.Response response;
-    private static Map<String, String> cookie;
-    private long id=0L;
+    private final long id = 0L; //id кукис в БД
 
 
-
-
+    /**
+     * Получает куки smarthand.pro и сохраняет их в БД {@link SmarthandCookies}
+     */
     private void setCookies() throws IOException {
-        response = Jsoup
+        //получаем куки через библиотеку Jsoup
+        Connection.Response response = Jsoup
                 .connect("https://smarthand.pro/handler")
                 .method(Connection.Method.POST)
                 .data("login", "LixPSx")
@@ -45,68 +51,62 @@ public class ParsePlayer {
                 .data("doLogin", "Войти")
                 .execute();
 
-        cookie = response.cookies();
-        response = Jsoup
+        Map<String, String> cookie = response.cookies();
+        /*response = Jsoup
                 .connect("https://smarthand.pro/settings")
                 .cookies(response.cookies())
                 .execute();
+         */
 
         SmarthandCookies smarthandAccount = smarthandCookiesRepo.findById(id);
 
-
+        //сохраняем в бд идентификатор сессии
         smarthandAccount.setSessionId(cookie.get("PHPSESSID"));
-       try {
-           System.out.println("1");
-           smarthandCookiesRepo.save(smarthandAccount);
-           System.out.println("2");
-       }
-        catch (Exception exception)
-        {
+        try {
+            System.out.println("1");
+            smarthandCookiesRepo.save(smarthandAccount);
+            System.out.println("2");
+        } catch (Exception exception) {
             System.out.println(exception.toString());
 
         }
 
-      //  System.out.println(response.body());
     }
+
+    //получает куки для smarthand.pro из БД
     private void getCookies(WebClient webClient) throws IOException {
 
-        System.out.println("001");
         SmarthandCookies smarthandAccountAndCookies = smarthandCookiesRepo.findById(id);
-        System.out.println("002");
-        System.out.println("NOW SESSION ID IS "+smarthandAccountAndCookies.getSessionId());
-        if(smarthandAccountAndCookies==null || smarthandAccountAndCookies.getSessionId()==null || smarthandAccountAndCookies.getSessionId()=="")
-        {
-            System.out.println("003");
+
+        //Если кукис нет, создаем новые
+        if (smarthandAccountAndCookies == null || smarthandAccountAndCookies.getSessionId() == null || smarthandAccountAndCookies.getSessionId() == "") {
             setCookies();
-            System.out.println("004");
             smarthandAccountAndCookies = smarthandCookiesRepo.findById(id);
-            System.out.println("005");
-            Cookie cookie1 = new Cookie("smarthand.pro", "lang", "en");
-            Cookie cookie2 = new Cookie("smarthand.pro", "template", "default");
-            Cookie cookie3 = new Cookie("smarthand.pro", "PHPSESSID", smarthandAccountAndCookies.getSessionId());
-            webClient.getCookieManager().addCookie(cookie1);
-            webClient.getCookieManager().addCookie(cookie2);
-            webClient.getCookieManager().addCookie(cookie3);
-            System.out.println("006");
+
         }
-        else {
-            System.out.println("007");
-            Cookie cookie1 = new Cookie("smarthand.pro", "lang", "en");
-            Cookie cookie2 = new Cookie("smarthand.pro", "template", "default");
-            Cookie cookie3 = new Cookie("smarthand.pro", "PHPSESSID", smarthandAccountAndCookies.getSessionId());
-            webClient.getCookieManager().addCookie(cookie1);
-            webClient.getCookieManager().addCookie(cookie2);
-            webClient.getCookieManager().addCookie(cookie3);
-            System.out.println("008");
-        }
+        Cookie cookie1 = new Cookie("smarthand.pro", "lang", "en");
+        Cookie cookie2 = new Cookie("smarthand.pro", "template", "default");
+        Cookie cookie3 = new Cookie("smarthand.pro", "PHPSESSID", smarthandAccountAndCookies.getSessionId());
+        webClient.getCookieManager().addCookie(cookie1);
+        webClient.getCookieManager().addCookie(cookie2);
+        webClient.getCookieManager().addCookie(cookie3);
+
     }
 
 
+    /**
+     * Parse player information from smarthand.pro
+     *
+     * @param nickname
+     * @return Document with xml if player exist and null otherwise
+     * @throws IOException
+     */
     public Document parsePlayer(String nickname) throws IOException {
 
         nickname = nickname.split(" \\(PS\\)")[0];
-        String url = "https://smarthand.pro/ps/#"+nickname;
+        String url = "https://smarthand.pro/ps/#" + nickname;
 
+        //настройка вебклиента HTMLUnit
         final WebClient webClient = new WebClient(BrowserVersion.BEST_SUPPORTED);
 
         webClient.setCssErrorHandler(new SilentCssErrorHandler());
@@ -117,71 +117,66 @@ public class ParsePlayer {
         webClient.getOptions().setThrowExceptionOnScriptError(false);
         webClient.waitForBackgroundJavaScript(15000);
 
-        CookieManager cookieManager = webClient.getCookieManager();
-
-        System.out.println(cookieManager.getCookies().toString());
-        cookieManager.clearCookies();
         getCookies(webClient);
 
-
-
-
-        System.out.println(cookieManager.getCookies().toString());
         HtmlPage htmlPage;
         try {
-             htmlPage = webClient.getPage(url);
+            htmlPage = webClient.getPage(url);
+            webClient.waitForBackgroundJavaScript(15000);
         }
-        catch (Exception e){
+        //Ни разу не выбрасывалось, заглушка на всякий случай
+        catch (Exception e) {
             System.out.println("Невозможно вставить такой ник в строку поиска");
             return null;
         }
 
-
-        webClient.waitForBackgroundJavaScript(15000);
         DomElement element;
-        element  = htmlPage.getElementById("error1");
-        if (element!=null) return null;
-        //Если со старыми куками все-таки что-то не то (перезаписались и т.п.)
 
-           element  = htmlPage.getElementById("table_1");
-        if(element==null) {
-            cookieManager.clearCookies();
+        //Существует на странице только если есть какие-то проблемы на стороне smarthand.pro
+        //С куками все в порядке, авторизация на сайте есть.
+        element = htmlPage.getElementById("error1");
+        if (element != null) return null;
+
+        element = htmlPage.getElementById("table_1");
+        webClient.waitForBackgroundJavaScript(15000);
+
+        //Если со старыми куками все-таки что-то не то (удалились, перезаписались и т.п.)
+        //создадим новые куки и попробуем еще раз
+        if (element == null) {
             webClient.getCookieManager().clearCookies();
             setCookies();
             getCookies(webClient);
-            webClient.waitForBackgroundJavaScript(15000);
+
             htmlPage = webClient.getPage(url);
             webClient.waitForBackgroundJavaScript(15000);
-            element  = htmlPage.getElementById("table_1");
+
+            element = htmlPage.getElementById("table_1");
+            webClient.waitForBackgroundJavaScript(15000);
         }
-        if(element==null)
-        {
+        if (element == null) {
             System.out.println("SOMESING GOES WRONG... :(");
             return null;
         }
 
-           htmlPage = element.click();
-
-
-
-
+        //Если дошли сюда, значит все ок и нужно подгрузить заскриптованные данные
+        //Для этого поочередно кликаем на нужные нам таблицы
+        htmlPage = element.click();
         webClient.waitForBackgroundJavaScript(15000);
+
         element = htmlPage.getElementById("table_3");
-
+        webClient.waitForBackgroundJavaScript(15000);
         htmlPage = element.click();
 
-        webClient.waitForBackgroundJavaScript(15000);
         element = htmlPage.getElementById("table_4");
-
+        webClient.waitForBackgroundJavaScript(15000);
         htmlPage = element.click();
 
-        webClient.waitForBackgroundJavaScript(15000);
         element = htmlPage.getElementById("table_5");
-
-        htmlPage = element.click();
-
         webClient.waitForBackgroundJavaScript(15000);
-      //  System.out.println(htmlPage.asXml());
+        htmlPage = element.click();
+        webClient.waitForBackgroundJavaScript(15000);
+
+        //Парсим итоговую страницу с подгруженными данными
         Document document = Jsoup.parse(htmlPage.asXml());
         webClient.close();
         return document;
