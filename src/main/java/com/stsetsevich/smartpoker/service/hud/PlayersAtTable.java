@@ -1,8 +1,9 @@
-package com.stsetsevich.smartpoker.engine;
+package com.stsetsevich.smartpoker.service.hud;
 
 import com.stsetsevich.smartpoker.domain.Player;
 import com.stsetsevich.smartpoker.domain.RoundOfBidding;
-import com.stsetsevich.smartpoker.engine.edithud.HudEdit;
+import com.stsetsevich.smartpoker.service.parse.AddOrUpdatePlayer;
+import com.stsetsevich.smartpoker.service.edithud.HudEdit;
 import com.stsetsevich.smartpoker.exceptions.PlayerNotFoundException;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,10 +1,4 @@
-package com.stsetsevich.smartpoker.engine;
-
-import com.stsetsevich.smartpoker.domain.Player;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.stsetsevich.smartpoker.service.hud;
 
 /**
  * Хранит назвние стата и его значение. Используется классом @{@link TableInfoCalc}

@@ -1,8 +1,8 @@
-package com.stsetsevich.smartpoker.engine;
+package com.stsetsevich.smartpoker.service.hud;
 
 import com.stsetsevich.smartpoker.domain.Player;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.stream.DoubleStream;
  * Рассчитывает общую информацию о столе для {@link com.stsetsevich.smartpoker.controller.HudController}
  * Она выводится в правом верхнем углу
  */
-@Component
+@Service
 public class TableInfoCalc {
     @Autowired
     StatInfo statInfoMother;

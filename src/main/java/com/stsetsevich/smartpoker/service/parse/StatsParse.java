@@ -1,4 +1,4 @@
-package com.stsetsevich.smartpoker.engine.parse;
+package com.stsetsevich.smartpoker.service.parse;
 
 import com.stsetsevich.smartpoker.domain.Player;
 import org.jsoup.Jsoup;
@@ -8,37 +8,13 @@ import org.jsoup.select.Elements;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
-import java.sql.SQLOutput;
+
 
 public class StatsParse {
 
-    File file;
+
     Document doc;
     Player player;
-
-    public StatsParse(String filepath) {
-
-        // Document doc = Jsoup.connect("E:/test2.html").get();
-        try {
-           // this.file = new File("E:/poker_nicks/" + filepath);
-          //  this.doc = Jsoup.parse(file, StandardCharsets.UTF_8.name());
-            this.doc = Jsoup.parse(filepath, StandardCharsets.UTF_8.name());
-            this.player = new Player(searchNickname());
-        } catch (Exception exception) {
-            System.out.println("Ошибка при создании экземпляра класса");
-        }
-
-
-        //Достаем и присваиваем ник игрока
-        System.out.println("1");
-       // Player player = new Player(searchNickname());
-    }
-
-    private String text;
-
-    public void setText(String text) {
-        this.text = text;
-    }
 
 
     public StatsParse(Document doc) {
@@ -60,7 +36,6 @@ public class StatsParse {
     public Player getStats() {
 
         try {
-
 
             //Достаем и присваиваем ник игрока
             System.out.println("1");

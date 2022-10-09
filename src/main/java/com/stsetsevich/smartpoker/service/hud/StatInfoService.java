@@ -1,12 +1,13 @@
-package com.stsetsevich.smartpoker.engine;
+package com.stsetsevich.smartpoker.service.hud;
 
 import com.stsetsevich.smartpoker.domain.CalcDiapVariant;
 import com.stsetsevich.smartpoker.domain.Player;
 import com.stsetsevich.smartpoker.domain.Stat;
 import com.stsetsevich.smartpoker.repos.StatRepo;
+import com.stsetsevich.smartpoker.service.hud.StatInfo;
+import com.stsetsevich.smartpoker.service.hud.TableInfoCalc;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -18,7 +19,7 @@ import java.util.List;
  * 1.Рассчитывает для {@link StatInfo} диапазон главного стата.
  * 2.Рассчитывает цвета таблиц игроков для {@link TableInfoCalc}
  */
-@Component
+@Service
 public class StatInfoService {
 
     @Autowired

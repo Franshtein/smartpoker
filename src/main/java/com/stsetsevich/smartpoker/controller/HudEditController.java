@@ -1,7 +1,7 @@
 package com.stsetsevich.smartpoker.controller;
 
 import com.stsetsevich.smartpoker.domain.*;
-import com.stsetsevich.smartpoker.engine.edithud.HudEdit;
+import com.stsetsevich.smartpoker.service.edithud.HudEdit;
 import com.stsetsevich.smartpoker.repos.HudRepo;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import com.stsetsevich.smartpoker.repos.UserRepo;

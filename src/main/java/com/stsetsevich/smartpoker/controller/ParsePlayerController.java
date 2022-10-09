@@ -1,9 +1,10 @@
 package com.stsetsevich.smartpoker.controller;
 
 
-import com.stsetsevich.smartpoker.engine.*;
-import com.stsetsevich.smartpoker.engine.parse.ParsePlayer;
-import com.stsetsevich.smartpoker.engine.parse.StatsParse;
+import com.stsetsevich.smartpoker.service.hud.PlayersAtTable;
+import com.stsetsevich.smartpoker.service.parse.AddOrUpdatePlayer;
+import com.stsetsevich.smartpoker.service.parse.ParsePlayer;
+import com.stsetsevich.smartpoker.service.parse.StatsParse;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.stsetsevich.smartpoker.engine.parse;
+package com.stsetsevich.smartpoker.service.parse;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SilentCssErrorHandler;

@@ -1,4 +1,4 @@
-package com.stsetsevich.smartpoker.engine.edithud;
+package com.stsetsevich.smartpoker.service.edithud;
 
 import com.stsetsevich.smartpoker.domain.*;
 import com.stsetsevich.smartpoker.repos.HudRepo;
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import java.util.Optional;
@@ -21,7 +22,7 @@ import java.util.Optional;
  * 2.Проводит обратные манипуляции и отдает таблицу с названиями статов для {@link com.stsetsevich.smartpoker.controller.HudEditController}
  * 3.Устанавливает пользователю HUD по умолчанию.
  */
-@Component
+@Service
 public class HudEdit {
     @Autowired
     StatRepo statRepo;
@@ -105,7 +106,7 @@ public class HudEdit {
                 j++;
                 if (j == hud.getNumberOfColums()) {
                     j = 0;
-                    i++;
+                   i++;
                 }
             }
         }

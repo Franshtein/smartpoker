@@ -1,8 +1,11 @@
 package com.stsetsevich.smartpoker.controller;
 
 import com.stsetsevich.smartpoker.domain.Player;
-import com.stsetsevich.smartpoker.engine.*;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
+import com.stsetsevich.smartpoker.service.hud.ExtraStatsCalc;
+import com.stsetsevich.smartpoker.service.hud.PlayersAtTable;
+import com.stsetsevich.smartpoker.service.hud.StatInfo;
+import com.stsetsevich.smartpoker.service.hud.TableInfoCalc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

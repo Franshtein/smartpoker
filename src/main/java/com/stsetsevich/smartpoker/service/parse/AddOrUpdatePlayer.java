@@ -1,8 +1,8 @@
-package com.stsetsevich.smartpoker.engine;
+package com.stsetsevich.smartpoker.service.parse;
 
 import com.stsetsevich.smartpoker.domain.Player;
-import com.stsetsevich.smartpoker.engine.parse.ParsePlayer;
-import com.stsetsevich.smartpoker.engine.parse.StatsParse;
+import com.stsetsevich.smartpoker.service.parse.ParsePlayer;
+import com.stsetsevich.smartpoker.service.parse.StatsParse;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;

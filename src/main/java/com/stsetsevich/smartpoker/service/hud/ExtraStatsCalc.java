@@ -1,4 +1,4 @@
-package com.stsetsevich.smartpoker.engine;
+package com.stsetsevich.smartpoker.service.hud;
 
 import com.stsetsevich.smartpoker.domain.Player;
 import org.springframework.beans.factory.annotation.Autowired;
