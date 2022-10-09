@@ -3,7 +3,6 @@ package com.stsetsevich.smartpoker.engine;
 import com.stsetsevich.smartpoker.domain.CalcDiapVariant;
 import com.stsetsevich.smartpoker.domain.Player;
 import com.stsetsevich.smartpoker.domain.Stat;
-import com.stsetsevich.smartpoker.engine.hud.StatsCalc;
 import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,21 +41,16 @@ public class StatInfo {
     @Autowired
     StatInfoService statInfoService;
 
-
-
     private Player player;
-    private Stat statTry;
-    private String stat;
-    private double statValue;
-    private double[] points;
-    private int statColorDiap;
-    private String statColor;
-    private String picture;
-    private double dependOnStat = 0;
-    private String address;
-    private String statName;
-    private StatInfo primaryStat;
-
+    private Stat statObject;
+    private String statName; //хранит название стата
+    private double statValue; //хранит значение стата
+    private String statValueStr = "-"; //Если стат не "-", примет значение StatValue. Нужен для вывода в худ.
+    private double[] points; //точки для вычисления диапазона, в который попадает значение стата
+    private int statColorDiap; //хранит диапазон, в который попадает значение стата. Нужен для опр. цвета
+    private String statColor; //вычисленное название css-селектора с цветом стата.
+    private String picture; //адрес картинки с диапазоном
+    private double dependOnStat = 0; //от какого стата зависит это стат. По умолчанию 0 - это "-". То есть зависимостей нет
 
     @Lookup
     public StatInfo getStatInfo() {
@@ -67,65 +61,43 @@ public class StatInfo {
 
     }
 
-    public void setInfo(String stat) {
-        this.statName = stat;
-        this.stat = stat;
-        this.address = "#";
-    }
-
+    //"Фасад", рассчитывает всю необходимую инфу для класса.
     public void setInfo(String stat, Player player) {
         this.player = player;
         this.statName = stat;
-        this.stat = stat;
-        this.statTry = statRepo.findStatByStatname(stat);
+        this.statObject = statRepo.findStatByStatname(stat);
         if (!statName.equals("-")) {
             setStatValue();
+            statValueStr = String.valueOf(statValue);
             setPoints();
-            if(statTry.getDependOnStat().equals("-")) this.statColorDiap = checkDiap();
-            else this.statColorDiap=checkDependDiap();
+            //Если стат не зависит от другого - рассчитываем обычный диапазон для цвета
+            if (statObject.getDependOnStat().equals("-")) this.statColorDiap = checkDiap();
+                //рассчитываем зависимый диапазон
+            else this.statColorDiap = checkDependentDiap();
             setStatColor();
-            if (statTry.isNeedLink()) {
-                this.address = "extrastats?player=" + player.getNickname() + "&stat=" + statName;
-            }
-            else this.address = "#";
             setPicture();
         } else {
-            this.statColorDiap = 5;
+            this.statColorDiap = 5; //черный цвет для пустого стата '-'
             setStatColor();
-            this.address = "#";
         }
 
     }
 
-    public void setInfo(String stat, Player player, boolean needHref) {
-        this.player = player;
-        this.statName = stat;
-        this.stat = stat;
-        this.statTry = statRepo.findStatByStatname(stat);
-        setStatValue();
-        setPoints();
-        this.statColorDiap = checkDiap();
-        setStatColor();
-        if (needHref == true) {
-            this.address = "extrastats?player=" + player.getNickname() + "&stat=" + statName;
-        } else this.address = "#";
-        setPicture();
-    }
-
     private void setStatValue() {
-        Query query = entityManager.createNativeQuery("SELECT " + statTry.getStatname() + " FROM player where nickname='" + player.getNickname() + "'");
+        Query query = entityManager.createNativeQuery("SELECT " + statObject.getStatname() + " FROM player where nickname='" + player.getNickname() + "'");
         List<String> list = query.getResultList();
         List<Object> list2 = new ArrayList<>(list);
-        stat = list2.get(0).toString();
+        String stat = list2.get(0).toString();
         this.statValue = Double.parseDouble(stat);
     }
 
     private void setPoints() {
-        this.points = statTry.getPoints();
+        this.points = statObject.getPoints();
     }
 
     private int checkDiap() {
-        CalcDiapVariant variant = statTry.getCalcDiapVariant();
+        //у каждого стата свой вариант расчета диапазона для цвета
+        CalcDiapVariant variant = statObject.getCalcDiapVariant();
         if (variant == CalcDiapVariant.ONE) {
             if (statValue <= points[0]) return 0;
             if (statValue <= points[1]) return 1;
@@ -150,18 +122,19 @@ public class StatInfo {
         return 0;
     }
 
+    //сначала рассчитывается диапазон основного стата. Потом он влияет на это, зависимый, стат.
+    protected int checkDependentDiap() {
+        CalcDiapVariant variant = statObject.getCalcDiapVariant();
 
-    protected int checkDependDiap() {
-        CalcDiapVariant variant = statTry.getCalcDiapVariant();
+        int primaryValue = statInfoService.checkPrimaryDiap(statObject.getDependOnStat(), player);
 
-
-        int primaryValue = statInfoService.checkPrimaryDiap(statTry.getDependOnStat(), player);
-
-        double weight=1;
-        if(primaryValue==4) weight=1.4;
-        if(primaryValue==3) weight=1.2;
-        if(primaryValue==1) weight=0.8;
-        if(primaryValue==0) weight=0.6;
+        //Если значение (цвет) основного стата красный (оптимально), то он не влияет на зависимый стат
+        double weight = 1;
+        //Если значение не оптимальное - назначается вес стата (в обе стороны).
+        if (primaryValue == 4) weight = 1.4;
+        if (primaryValue == 3) weight = 1.2;
+        if (primaryValue == 1) weight = 0.8;
+        if (primaryValue == 0) weight = 0.6;
         if (variant == CalcDiapVariant.ONE) {
             if (statValue <= points[0] * weight) return 0;
             if (statValue <= points[1] * weight) return 1;
@@ -186,8 +159,7 @@ public class StatInfo {
         return 0;
     }
 
-
-
+    //Определяет название css-селектора с цветом стата.
     public void setStatColor() {
         if (statColorDiap == 0) this.statColor = StatColor.INFINITY_TO_POINT1.getColor();
         else if (statColorDiap == 1) this.statColor = StatColor.POINT1_TO_POINT2.getColor();
@@ -198,39 +170,25 @@ public class StatInfo {
 
     }
 
+    //Задает адрес картинки с диапазоном. Если для стата картинки нет, то будет null.
     public void setPicture() {
         String picture;
-        if (statTry.isNeedImage()) {
+        if (statObject.isNeedImage()) {
+            //Если стат не зависит от другого
             if (dependOnStat == 0) {
                 double dstat = statValue;
-                // int istat = (int) dstat;
                 int istat = Math.round((int) dstat);
-                // System.out.println(istat);
-                //picture = "/img/" + statName + "/" + istat + ".png";
                 picture = "/img/diap/" + istat + ".png";
-                // System.out.println(picture);
-            } else {
+            }
+            //Если стат зависит от другого. Пока не реализовано (нет картинок и структуры папок)
+            else {
                 double dstat = statValue;
                 int istat = Math.round((int) dstat);
                 int depIStat = Math.round((int) dependOnStat);
-                // System.out.println(istat);
-                picture = "/img/" + statTry.getStatname() + "/" + depIStat + "-" + istat + ".png";
-                // System.out.println(picture);
+                picture = "/img/" + statObject.getStatname() + "/" + depIStat + "-" + istat + ".png";
             }
-            File f = new File("E:/idea_projects/smartpoker/src/main/resources/static" + picture);
-            if (f.exists() && !f.isDirectory()) {
-                //  System.out.println("FILE EXSIST");
-            } else picture = null;
         } else picture = null;
         this.picture = picture;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public Player getPlayer() {
@@ -241,11 +199,12 @@ public class StatInfo {
         this.player = player;
     }
 
-    public Stat getStatTry() {
-        return statTry;
+    public Stat getStatObject() {
+        return statObject;
     }
-    public void setStatTry(Stat statTry) {
-        this.statTry = statTry;
+
+    public void setStatObject(Stat statObject) {
+        this.statObject = statObject;
     }
 
     public double getStatValue() {
@@ -304,11 +263,11 @@ public class StatInfo {
         this.statName = statName;
     }
 
-    public String getStat() {
-        return stat;
+    public String getStatValueStr() {
+        return statValueStr;
     }
 
-    public void setStat(String stat) {
-        this.stat = stat;
+    public void setStatValueStr(String statValueStr) {
+        this.statValueStr = statValueStr;
     }
 }
