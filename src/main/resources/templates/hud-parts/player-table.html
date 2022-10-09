@@ -14,26 +14,25 @@
             <tr th:each="i : ${plStats}">
                 <td th:each="stat : ${i}">
                     <div th:each="stat2 : ${stat}">
-                        <div th:switch="${stat2.address}">
-                            <div class="tooltipImg" th:case="'#'">
+                            <div class="tooltipImg" th:if="${!stat2.statObject.isNeedLink()}">
                                 <div th:class="${stat2.statColor}"
-                                     th:text="${stat2.stat}"
+                                     th:text="${stat2.statValueStr}"
                                      th:title="${stat2.statName}">
                                 </div>
                                 <span><img th:if="${stat2.picture}"
                                            th:src="${stat2.picture}" src="/img/vpip20.png"/></span>
                             </div>
-                            <div th:case="*">
-                                <div class="tooltipImg"><a
+
+                                <div class="tooltipImg" th:if="${stat2.statObject.isNeedLink()}"><a
                                         th:onclick="getStatId([[${stat2.statName}]],[[${player.nickname}]])"
-                                        th:text="${stat2.stat}"
+                                        th:text="${stat2.statValueStr}"
                                         th:title="${stat2.statName}" th:class="${stat2.statColor}"
                                         href="#"></a>
                                     <span><img th:if="${stat2.picture}"
                                                th:src="${stat2.picture}" src="/img/vpip20.png"/></span>
                                 </div>
-                            </div>
-                        </div>
+
+
                     </div>
                 </td>
             </tr>

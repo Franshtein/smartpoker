@@ -1,7 +1,6 @@
 package com.stsetsevich.smartpoker.engine;
 
 import com.stsetsevich.smartpoker.domain.Player;
-import com.stsetsevich.smartpoker.engine.hud.StatsCalc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +11,7 @@ import java.util.ArrayList;
  * {@link com.stsetsevich.smartpoker.controller.HudController}
  */
 @Service
-public class ExtraStatsCalc extends StatsCalc {
+public class ExtraStatsCalc{
     @Autowired
     StatInfo statInfoMother;
 
