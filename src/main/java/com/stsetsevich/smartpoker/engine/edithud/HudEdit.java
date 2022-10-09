@@ -6,19 +6,21 @@ import com.stsetsevich.smartpoker.repos.PlayerRepo;
 import com.stsetsevich.smartpoker.repos.StatRepo;
 import com.stsetsevich.smartpoker.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Lookup;
-import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
+/**
+ * Обслуживает {@link com.stsetsevich.smartpoker.controller.HudEditController}
+ * 1.Конвертирует названия стата в число (на основе его ID).
+ * Записывает последовательность конвертированных чисел в строку.
+ * Сохраняет строку в БД {@link Hud}
+ * 2.Проводит обратные манипуляции и отдает таблицу с названиями статов для {@link com.stsetsevich.smartpoker.controller.HudEditController}
+ * 3.Устанавливает пользователю HUD по умолчанию.
+ */
 @Component
 public class HudEdit {
     @Autowired
@@ -35,8 +37,13 @@ public class HudEdit {
     public HudEdit() {
     }
 
-    public String parseStatFromStringToNumberView(String stats, int numrows, int numcols, String roundOfBidding) {
-        //stats= stats.replace("/", "\n");
+    /**
+     * Конвертирует названия стата в число (на основе его ID).
+     * * Записывает последовательность конвертированных чисел в строку.
+     * * Сохраняет строку в БД {@link Hud}
+     */
+    public void convertStatFromStringToNumberView(String stats, int numrows, int numcols, String roundOfBidding) {
+
         String statNumbers = "";
         long number;
         int firstFound = 0;
@@ -49,14 +56,13 @@ public class HudEdit {
                 statNumbers += "/";
                 firstFound = secondFound + 1;
 
-
             }
         }
-        /////////////////////////
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         User user = userRepo.findByUsername(username);
-       // Hud hud = hudRepo.findByUserId(user.getId());
+
         Hud hud = hudRepo.findByUserIdAndRoundOfBidding(user.getId(), RoundOfBidding.valueOf(roundOfBidding));
         if (hud == null) hud = new Hud();
         hud.setUserId(user.getId());
@@ -65,13 +71,16 @@ public class HudEdit {
         hud.setStatsId(statNumbers);
         hud.setRoundOfBidding(RoundOfBidding.valueOf(roundOfBidding));
         hudRepo.save(hud);
-       // parseStatFromNumberToStringView();
-        return statNumbers;
+
     }
 
-    public String[][] parseStatFromNumberToStringView(RoundOfBidding roundOfBidding) {
+    /**
+     * Конвертирует числа из БД в название стата (на основе его ID).
+     * Записывает последовательность конвертированных строк в таблицу (двумерный массив).
+     * отдает таблицу с названиями статов для {@link com.stsetsevich.smartpoker.controller.HudEditController}
+     */
+    public String[][] convertStatFromNumberToStringView(RoundOfBidding roundOfBidding) {
 
-        ////////////////////////////
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         User user = userRepo.findByUsername(username);
@@ -79,7 +88,6 @@ public class HudEdit {
         if (hud == null) hud = hudRepo.findByUserIdAndRoundOfBidding(0L, roundOfBidding);
 
         String numbers = hud.getStatsId();
-        String statNames = "";
         long number;
         String[][] stats = new String[hud.getNumberOfRows()][hud.getNumberOfColums()];
         int firstFound = 0;
@@ -91,8 +99,7 @@ public class HudEdit {
                 secondFound = ch;
                 number = Long.parseLong(numbers.substring(firstFound, secondFound));
                 Optional<Stat> stat = statRepo.findById(number);
-                statNames += stat.get().getStatname();
-                statNames += "/";
+
                 stats[i][j] = stat.get().getStatname();
                 firstFound = secondFound + 1;
                 j++;
@@ -103,18 +110,19 @@ public class HudEdit {
             }
         }
 
-
         return stats;
     }
 
-    public String[][] setDefaultHud(RoundOfBidding roundOfBidding) {
-
-        Hud defaultHud = hudRepo.findByUserIdAndRoundOfBidding(0L, roundOfBidding);
+    //устанавливает для пользователь HUD по умолчанию.
+    public void setDefaultHud(RoundOfBidding roundOfBidding) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         User user = userRepo.findByUsername(username);
+
+        Hud defaultHud = hudRepo.findByUserIdAndRoundOfBidding(0L, roundOfBidding);
         Hud userHud = hudRepo.findByUserIdAndRoundOfBidding(user.getId(), roundOfBidding);
+
         if (userHud == null) userHud = new Hud();
         userHud.setUserId(user.getId());
         userHud.setStatsId(defaultHud.getStatsId());
@@ -123,34 +131,6 @@ public class HudEdit {
         userHud.setNumberOfColums(defaultHud.getNumberOfColums());
         hudRepo.save(userHud);
 
-
-        String numbers = defaultHud.getStatsId();
-        String statNames = "";
-        long number;
-        String[][] stats = new String[defaultHud.getNumberOfRows()][defaultHud.getNumberOfColums()];
-        int firstFound = 0;
-        int secondFound;
-        int i = 0;
-        int j = 0;
-        for (int ch = 0; ch < numbers.length(); ch++) {
-            if (numbers.charAt(ch) == '/') {
-                secondFound = ch;
-                number = Long.parseLong(numbers.substring(firstFound, secondFound));
-                Optional<Stat> stat = statRepo.findById(number);
-                statNames += stat.get().getStatname();
-                statNames += "/";
-                stats[i][j] = stat.get().getStatname();
-                firstFound = secondFound + 1;
-                j++;
-                if (j == defaultHud.getNumberOfColums()) {
-                    j = 0;
-                    i++;
-                }
-            }
-        }
-
-
-        return stats;
     }
 
 

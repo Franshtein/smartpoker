@@ -141,7 +141,7 @@ public class PlayersAtTable {
 
         StatInfo statInfo;
         //Получает двумерный массив с названиями статов, которые предустановлены в HUD пользователя.
-        String[][] statnames = hudEdit.parseStatFromNumberToStringView(RoundOfBidding.valueOf(table));
+        String[][] statnames = hudEdit.convertStatFromNumberToStringView(RoundOfBidding.valueOf(table));
         //Будет хранить объекты с подробной информацией о стате
         StatInfo[][] stats = new StatInfo[statnames.length][statnames[0].length];
 
