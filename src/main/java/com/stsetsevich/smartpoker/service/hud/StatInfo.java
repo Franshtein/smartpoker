@@ -1,4 +1,4 @@
-package com.stsetsevich.smartpoker.engine;
+package com.stsetsevich.smartpoker.service.hud;
 
 import com.stsetsevich.smartpoker.domain.CalcDiapVariant;
 import com.stsetsevich.smartpoker.domain.Player;
@@ -8,11 +8,10 @@ import com.stsetsevich.smartpoker.repos.StatRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +19,7 @@ import java.util.List;
  * Заполняет и хранит всю необходимую инфу о стате игрока. Используется для создания таблиц статов в
  * {@link PlayersAtTable}
  */
-@Component
+@Service
 @Scope("prototype")
 public class StatInfo {
     enum StatColor {
@@ -73,6 +72,11 @@ public class StatInfo {
         if (!statName.equals("-")) {
             setStatValue();
             statValueStr = String.valueOf(statValue);
+            if(statName.equals("total_hands"))
+            {
+                int totalHands=(int) statValue;
+                statValueStr = String.valueOf(totalHands);
+            }
             setPoints();
             //Если стат не зависит от другого - рассчитываем обычный диапазон для цвета
             if (statObject.getDependOnStat().equals("-")) this.statColorDiap = checkDiap();
