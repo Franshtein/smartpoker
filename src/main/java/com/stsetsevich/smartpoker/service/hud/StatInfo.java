@@ -186,14 +186,14 @@ public class StatInfo {
             if (dependOnStat == 0) {
                 double dstat = statValue;
                 int istat = Math.round((int) dstat);
-                picture = "/img/diap/" + istat + ".png";
+                picture = "/images/diap/" + istat + ".png";
             }
             //Если стат зависит от другого. Пока не реализовано (нет картинок и структуры папок)
             else {
                 double dstat = statValue;
                 int istat = Math.round((int) dstat);
                 int depIStat = Math.round((int) dependOnStat);
-                picture = "/img/" + statObject.getStatname() + "/" + depIStat + "-" + istat + ".png";
+                picture = "/images/" + statObject.getStatname() + "/" + depIStat + "-" + istat + ".png";
             }
         } else picture = null;
         this.picture = picture;

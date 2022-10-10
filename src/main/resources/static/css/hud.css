@@ -128,7 +128,7 @@ div.container{
    /* zoom: 0.5; показывает правильно при минимальном р-ре экрана, но коряво н среднем */
 }
 div.players-table{
-    background-image: url("/img/bg-image-hud.png") !important;
+    background-image: url("/images/bg-image-hud.png") !important;
     background-position: center;
     background-size: 70%;
     width: auto;

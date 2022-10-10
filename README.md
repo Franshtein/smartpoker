@@ -1,32 +1,26 @@
-## smartpoker
-About The Project
 <br />
 <div align="center">
 
-  <h3 align="center">SmartPoker</h3>
+  <h1 align="center">SmartPoker</h1>
 
   <p align="center">
     Handy tool for consumers of Gambling industry.
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://smartpoker.herokuapp.com/" target="_blank">View Demo</a>
   </p>
+<a href="https://smartpoker.herokuapp.com/" target="_blank">View Demo</a>
 </div>
 
 ## About The Project
 This project improves the <a href="https://smarthand.pro" target="_blank"><strong>smarthand.pro</strong></a> service in many important things, such as quality viewing of statistics and simultaneous analysis of all competitors at the poker table.
 <h4 align="center">SmartPoker HUD Example</h4>
 
-![screen](/src/main/resources/static/img/screenshots.gif)
+![screen](/static/images/screenshots.gif)
 <h4 align="center">SmartHand HUD Example</h4>
 
-![screen](/src/main/resources/static/img/smarthand.gif)
+![screen](/static/images/smarthand.gif)
 
 <h4 align="center">SWOT Analysis</h4>
 
-![screen](/src/main/resources/static/img/swot.png)
+![screen](/static/images/swot.png)
 
 <table> 
 <th>SmartPoker</th>
@@ -62,20 +56,6 @@ This project improves the <a href="https://smarthand.pro" target="_blank"><stron
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: img/screenshots.gif
 
 
 
