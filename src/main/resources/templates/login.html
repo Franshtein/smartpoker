@@ -24,6 +24,7 @@
         <div th:if="${param.error}" class="alert alert-warning">
             Invalid username and/or password.
         </div>
+        <div th:if="${message}" class="alert alert-warning" th:text="${message}"></div>
 
     </div>
 </form>

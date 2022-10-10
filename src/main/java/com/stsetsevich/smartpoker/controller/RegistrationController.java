@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -25,9 +26,9 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(@Valid User user, BindingResult bindingResult, Model model) {
+    public String addUser(@Valid User user, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if (user.getPassword() != null && !user.getPassword().equals(user.getPassword2())) {
-            model.addAttribute("passwordError", "Passwords are different!");
+            model.addAttribute("message", "Passwords are different!");
             return "registration";
         }
         if (bindingResult.hasErrors()) {
@@ -35,10 +36,12 @@ public class RegistrationController {
         }
 
         if (!userService.addUser(user)) {
-            model.addAttribute("usernameError", "User exists!");
+            model.addAttribute("message", "User exists!");
             return "registration";
         }
+        model.addAttribute("message", "activation code sent to your email "+user.getEmail());
 
+        redirectAttributes.addFlashAttribute("message", "activation code sent to your email "+user.getEmail());
         return "redirect:/login";
     }
 
