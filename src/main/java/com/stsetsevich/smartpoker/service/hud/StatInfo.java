@@ -36,13 +36,13 @@ public class StatInfo {
     }
 
     @Autowired
-    StatRepo statRepo;
+    private StatRepo statRepo;
     @Autowired
-    PlayerRepo playerRepo;
+    private PlayerRepo playerRepo;
     @Autowired
-    EntityManager entityManager;
+    private EntityManager entityManager;
     @Autowired
-    StatInfoService statInfoService;
+    private StatInfoService statInfoService;
 
     private Player player;
     private Stat statObject;

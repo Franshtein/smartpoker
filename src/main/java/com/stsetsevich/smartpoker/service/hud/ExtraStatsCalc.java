@@ -13,7 +13,7 @@ import java.util.ArrayList;
 @Service
 public class ExtraStatsCalc{
     @Autowired
-    StatInfo statInfoMother;
+    private StatInfo statInfoMother;
 
     //по игроку и id стата вычисляет, какими статами нужно заполнить таблицу и вызывает нужный метод для заполнения.
     //возвращает заполненную таблицу с доп. статами.

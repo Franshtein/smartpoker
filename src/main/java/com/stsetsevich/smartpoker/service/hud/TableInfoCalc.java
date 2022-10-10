@@ -16,9 +16,9 @@ import java.util.stream.DoubleStream;
 @Service
 public class TableInfoCalc {
     @Autowired
-    StatInfo statInfoMother;
+    private StatInfo statInfoMother;
     @Autowired
-    StatInfoService statInfoService;
+    private StatInfoService statInfoService;
 
     //Рассчитывает общую информацию о столе. Она выводится в правом верхнем углу hud.html
     public List<TableInfo> generalStatsCalc(List<Player> players) {

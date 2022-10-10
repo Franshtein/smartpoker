@@ -19,21 +19,21 @@ import java.util.*;
 public class PlayersAtTable {
 
     @Autowired
-    PlayerRepo playerRepo;
+    private PlayerRepo playerRepo;
     @Autowired
-    AddOrUpdatePlayer addOrUpdatePlayer;
+    private AddOrUpdatePlayer addOrUpdatePlayer;
     @Autowired
-    StatInfo statInfoMother;
+    private StatInfo statInfoMother;
     @Autowired
-    HudEdit hudEdit;
+    private HudEdit hudEdit;
 
     private PlayerNotFoundException playerNotFoundException;
 
     private List<Player> players;
-    Map<Integer, StatInfo[][]> preflopStats;
-    Map<Integer, StatInfo[][]> flopStats;
-    Map<Integer, StatInfo[][]> turnStats;
-    Map<Integer, StatInfo[][]> riverStats;
+    private Map<Integer, StatInfo[][]> preflopStats;
+    private Map<Integer, StatInfo[][]> flopStats;
+    private Map<Integer, StatInfo[][]> turnStats;
+    private Map<Integer, StatInfo[][]> riverStats;
 
     //Первичная инициализация пустых таблиц (Empty Seat) для HUD
     public void initPlayers() {

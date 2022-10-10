@@ -20,13 +20,13 @@ import java.util.*;
 public class HudController {
 
     @Autowired
-    PlayerRepo playerRepo;
+    private PlayerRepo playerRepo;
     @Autowired
-    ExtraStatsCalc extraStatsCalc;
+    private ExtraStatsCalc extraStatsCalc;
     @Autowired
-    PlayersAtTable playersAtTable;
+    private PlayersAtTable playersAtTable;
     @Autowired
-    TableInfoCalc tableInfoCalc;
+    private TableInfoCalc tableInfoCalc;
 
     @GetMapping
     public String hud(Map<String, Object> model) {

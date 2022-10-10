@@ -23,9 +23,9 @@ import java.util.List;
 public class StatInfoService {
 
     @Autowired
-    StatRepo statRepo;
+    private StatRepo statRepo;
     @Autowired
-    EntityManager entityManager;
+    private EntityManager entityManager;
     private Stat stat;
     private double statValue;
     private double points[];

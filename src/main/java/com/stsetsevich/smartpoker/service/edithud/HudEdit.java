@@ -25,15 +25,15 @@ import java.util.Optional;
 @Service
 public class HudEdit {
     @Autowired
-    StatRepo statRepo;
+    private StatRepo statRepo;
     @Autowired
-    PlayerRepo playerRepo;
+    private  PlayerRepo playerRepo;
     @Autowired
-    EntityManager entityManager;
+    private EntityManager entityManager;
     @Autowired
-    UserRepo userRepo;
+    private UserRepo userRepo;
     @Autowired
-    HudRepo hudRepo;
+    private HudRepo hudRepo;
 
     public HudEdit() {
     }

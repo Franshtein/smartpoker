@@ -20,13 +20,13 @@ import java.util.List;
 @RequestMapping("/hud-edit")
 public class HudEditController {
     @Autowired
-    StatRepo statRepo;
+    private StatRepo statRepo;
     @Autowired
-    HudEdit hudEdit;
+    private HudEdit hudEdit;
     @Autowired
-    HudRepo hudRepo;
+    private HudRepo hudRepo;
     @Autowired
-    UserRepo userRepo;
+    private UserRepo userRepo;
 
     @GetMapping
     public String editHud(Model model1) {

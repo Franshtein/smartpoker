@@ -25,11 +25,11 @@ public class ParsePlayerController {
     @Autowired
     private PlayerRepo playerRepo;
     @Autowired
-    PlayersAtTable playersAtTable;
+    private PlayersAtTable playersAtTable;
     @Autowired
-    ParsePlayer parsePlayer;
+    private ParsePlayer parsePlayer;
     @Autowired
-    AddOrUpdatePlayer addOrUpdatePlayer;
+    private AddOrUpdatePlayer addOrUpdatePlayer;
 
     @GetMapping("/search")
     @PreAuthorize("hasAuthority('ADMIN')")

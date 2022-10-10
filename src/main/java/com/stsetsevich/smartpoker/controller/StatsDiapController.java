@@ -16,7 +16,7 @@ import java.util.Comparator;
 @Controller
 public class StatsDiapController {
     @Autowired
-    StatRepo statRepo;
+    private StatRepo statRepo;
 
     @GetMapping("/statsdiap")
     public String main(Model model1) {
