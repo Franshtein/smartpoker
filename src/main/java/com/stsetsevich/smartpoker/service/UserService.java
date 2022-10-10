@@ -58,7 +58,7 @@ public class UserService implements UserDetailsService {
         if (!StringUtils.isEmpty(user.getEmail())) {
             String message = String.format(
                     "Hello, %s! \n" +
-                            "Welcome to SmartPoker. Please, visit next link: http://localhost:8080/activate/%s",
+                            "Welcome to SmartPoker. Please, visit next link: https://smartpoker.herokuapp.com/activate/%s",
                     user.getUsername(),
                     user.getActivationCode()
             );
