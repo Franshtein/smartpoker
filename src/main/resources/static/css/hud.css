@@ -2,53 +2,64 @@
 .colorred {
     color: red; /* Красный цвет выделения */
 }
+
 .colorgreen {
     color: green;
 }
+
 .colorblue {
     color: blue;
 }
+
 .colorpink {
     color: deeppink;
 }
+
 .coloryellow {
     color: yellow;
 }
+
 .colorblack {
     color: black;
 }
 
-label.btn-outline-primary{
+label.btn-outline-primary {
     background-color: cadetblue;
 }
-label.btn-outline-primary:hover{
+
+label.btn-outline-primary:hover {
     background-color: cornflowerblue;
 }
+
 .row {
 
 }
+
 .row-height-400 {
     height: 400px;
 }
 
-table.table-striped{
+table.table-striped {
     border-color: red;
 }
-table.table-striped-red{
+
+table.table-striped-red {
     border-color: red;
     background-color: darksalmon;
     font-size: large;
     font-weight: bold;
     /*  transform: scale(0.5); */
 }
-table.table-striped-green{
+
+table.table-striped-green {
     border-color: green;
     background-color: darkseagreen;
     font-size: large;
     font-weight: bold;
-  /*  transform: scale(0.5); */
+    /*  transform: scale(0.5); */
 }
-table.table-striped-empty{
+
+table.table-striped-empty {
     border-color: black;
     background-color: slategray;
     font-size: large;
@@ -56,21 +67,24 @@ table.table-striped-empty{
     opacity: 70%;
     /*  transform: scale(0.5); */
 }
-table.table-striped-blue{
+
+table.table-striped-blue {
     border-color: blue;
     background-color: cornflowerblue;
     font-size: large;
     font-weight: bold;
     /*  transform: scale(0.5); */
 }
-table.table-striped-pink{
+
+table.table-striped-pink {
     border-color: deeppink;
     background-color: hotpink;
     font-size: large;
     font-weight: bold;
     /*  transform: scale(0.5); */
 }
-table.table-striped-yellow{
+
+table.table-striped-yellow {
     border-color: yellow;
     background-color: sandybrown;
     font-size: large;
@@ -78,7 +92,7 @@ table.table-striped-yellow{
     /*  transform: scale(0.5); */
 }
 
-table.table-striped-stats{
+table.table-striped-stats {
     border-spacing: 0 10px;
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
@@ -105,42 +119,47 @@ table.table-striped-stats td {
     border-bottom: 2px solid #56433D;
     border-right: 2px solid #56433D;
 }
+
 table.table-striped-stats td:first-child {
     border-left: 2px solid #56433D;
     width: 200px;
 }
+
 table.table-striped-stats td div {
     overflow: hidden; /* Добавляем полосы прокрутки */
     width: 100%; /* Ширина элемента */
 }
+
 #needcenter {
     width: 80%;
     margin: auto;
 }
 
 
-.table-green{
+.table-green {
     border-color: green;
 }
-div.container{
+
+div.container {
     position: relative;
 
-   /* zoom: 0.5; показывает правильно при минимальном р-ре экрана, но коряво н среднем */
+    /* zoom: 0.5; показывает правильно при минимальном р-ре экрана, но коряво н среднем */
 }
-div.players-table{
+
+div.players-table {
     background-image: url("/images/bg-image-hud.png") !important;
     background-position: center;
     background-size: 70%;
     width: auto;
     background-repeat: no-repeat;
 }
-.container.text-center{
+
+.container.text-center {
 
 }
 
 
-
-.tooltipImg span{
+.tooltipImg span {
     border-radius: 5px 5px 5px 5px;
     visibility: hidden;
     position: fixed;
@@ -152,26 +171,31 @@ div.players-table{
     z-index: 5;
 }
 
-.tooltipImg:hover span{
+.tooltipImg:hover span {
     visibility: visible;
 }
-.table-info{
+
+.table-info {
     position: fixed;
     top: 85px;
     right: 15px;
 }
-.error{
+
+.error {
     color: red;
 }
-div.right{
+
+div.right {
     margin-right: 20px;
     margin-top: 10px;
 }
-.nickname{
+
+.nickname {
     font-family: 'Montserrat', sans-serif;
     color: #F9C941;
     margin-right: 20px;
 }
+
 .submit-button {
     text-decoration: none;
     display: inline-block;
@@ -183,6 +207,7 @@ div.right{
     color: #F9C941;
     transition: .2s ease-in-out;
 }
+
 .submit-button:before {
     content: "";
     background: linear-gradient(90deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .5));
@@ -193,16 +218,18 @@ div.right{
     left: -75px;
     transform: skewX(-45deg);
 }
+
 .submit-button:hover {
     background: #56433D;
     color: #F9C941;
 }
+
 .submit-button:hover:before {
     left: 150px;
     transition: .5s ease-in-out;
 }
 
-a.edit-user{
+a.edit-user {
     color: #F9C941;
 }
 
@@ -212,6 +239,7 @@ a.edit-user{
     opacity: 0;
 
 }
+
 .checkbox + label {
     position: relative;
     margin-bottom: 5px;
@@ -219,6 +247,7 @@ a.edit-user{
     padding: 0 0 0 60px;
     cursor: pointer;
 }
+
 .checkbox + label:before {
     content: '';
     position: absolute;
@@ -228,9 +257,10 @@ a.edit-user{
     height: 13px;
     border-radius: 13px;
     background: #CDD1DA;
-    box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
+    box-shadow: inset 0 2px 3px rgba(0, 0, 0, .2);
     transition: .2s;
 }
+
 .checkbox + label:after {
     content: '';
     position: absolute;
@@ -240,19 +270,21 @@ a.edit-user{
     height: 11px;
     border-radius: 5px;
     background: #FFF;
-    box-shadow: 0 2px 5px rgba(0,0,0,.3);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
     transition: .2s;
 }
+
 .checkbox:checked + label:before {
     background: #56433D;
-    box-shadow: inset 0 2px 3px rgba(0,0,0,.2), 0 0 0 3px #F9C941;
+    box-shadow: inset 0 2px 3px rgba(0, 0, 0, .2), 0 0 0 3px #F9C941;
 }
+
 .checkbox:checked + label:after {
     left: 14px;
 }
 
 
-body{
+body {
 
     background-color: grey !important;
     background-position: center;
