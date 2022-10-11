@@ -42,12 +42,14 @@ public class ParsePlayer {
      * Получает куки smarthand.pro и сохраняет их в БД {@link SmarthandCookies}
      */
     private void setCookies() throws IOException {
+
+        SmarthandCookies smarthandAccount = smarthandCookiesRepo.findById(id);
         //получаем куки через библиотеку Jsoup
         Connection.Response response = Jsoup
                 .connect("https://smarthand.pro/handler")
                 .method(Connection.Method.POST)
-                .data("login", "LixPSx")
-                .data("pass", "2809390")
+                .data("login", smarthandAccount.getSmarthandLogin())
+                .data("pass", smarthandAccount.getSmarthandPassword())
                 .data("doLogin", "Войти")
                 .execute();
 
@@ -58,7 +60,7 @@ public class ParsePlayer {
                 .execute();
          */
 
-        SmarthandCookies smarthandAccount = smarthandCookiesRepo.findById(id);
+
 
         //сохраняем в бд идентификатор сессии
         smarthandAccount.setSessionId(cookie.get("PHPSESSID"));
