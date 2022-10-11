@@ -6,7 +6,13 @@
   <p align="center">
     Handy tool for consumers of Gambling industry.
   </p>
+<p>**************************************</p>
 <a href="https://smartpoker.herokuapp.com/" target="_blank">View Demo</a>
+<p>User with Admin rights to test full functionality:</p>
+<p>Nickname: abc</p>
+<p>Password: 123</p>
+Please, don't crush the data:)
+<p>**************************************</p>
 </div>
 
 ## About The Project
